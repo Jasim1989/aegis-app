@@ -924,17 +924,7 @@ function requestWithdrawal() {
     });
 }
 
-function promptForUserName() {
-    showPrompt("تسجيل اسم المشترك 👤", "الرجاء إدخال اسمك الخاص:", "✍️", (enteredName) => {
-        if (enteredName && enteredName.trim() !== "") {
-            appData.userName = enteredName.trim();
-            updateUI();
-            showAlert("مرحباً بك! 👋", `تم حفظ اسمك: ${appData.userName}`, "✅");
-        } else {
-            showAlert("تنبيه", "يجب إدخال اسم صحيح للمتابعة.", "⚠️");
-        }
-    });
-}
+
 // طلب الاسم من المشترك تلقائياً إذا لم يكن مخزناً
 window.addEventListener('DOMContentLoaded', () => {
     let savedName = localStorage.getItem('userName');
