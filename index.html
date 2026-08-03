@@ -3,69 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aegis Cash - المنصة الذكية</title>
+    <title>Aegis Cash - المحفظة المالية الذكية</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
         body {
-            background-color: #0b0f19;
-            color: #ffffff;
-            padding-bottom: 70px;
+            background-color: #030712;
+            color: #f9fafb;
+            padding-bottom: 80px;
         }
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 20px;
-            background: #111827;
-            border-bottom: 1px solid #1f2937;
+            padding: 18px 20px;
+            background: rgba(17, 24, 39, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         .logo {
             font-size: 18px;
-            font-weight: bold;
-            color: #f59e0b;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fbbf24, #d97706);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 0.5px;
         }
         .logout-btn {
-            background: #7f1d1d;
-            color: #fca5a5;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 6px;
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 6px 14px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 12px;
+            font-weight: 600;
         }
         .container {
-            padding: 15px;
+            padding: 20px;
+            max-width: 500px;
+            margin: 0 auto;
         }
         .card {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
+            background: linear-gradient(145deg, #111827, #0f172a);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 18px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+        .security-banner {
+            background: linear-gradient(135deg, rgba(6, 78, 59, 0.4), rgba(4, 47, 46, 0.6));
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            border-radius: 14px;
+            padding: 14px;
             text-align: center;
+            font-size: 13px;
+            color: #34d399;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        .balance-title {
+            color: #9ca3af;
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         .balance-box {
-            font-size: 28px;
-            font-weight: bold;
-            color: #f59e0b;
-            margin: 10px 0;
+            font-size: 30px;
+            font-weight: 800;
+            color: #fbbf24;
+            margin: 6px 0;
+            text-shadow: 0 2px 10px rgba(251, 191, 36, 0.2);
+        }
+        .currencies-row {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+            margin-bottom: 12px;
+        }
+        .currency-badge {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+        .usd-value {
+            color: #34d399;
+            background: rgba(52, 211, 153, 0.1);
+        }
+        .diamond-value {
+            color: #38bdf8;
+            background: rgba(56, 189, 248, 0.1);
         }
         .btn-primary {
             background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: #fff;
+            color: #030712;
+            border: none;
+            padding: 14px;
+            width: 100%;
+            font-size: 15px;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+            transition: 0.2s;
+        }
+        .btn-secondary {
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            color: #ffffff;
             border: none;
             padding: 12px;
             width: 100%;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            border-radius: 12px;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 8px;
+            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+        }
+        .btn-primary:active, .btn-secondary:active {
+            transform: scale(0.98);
         }
         /* التنقل السفلي */
         .nav-bar {
@@ -73,8 +143,9 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background: #111827;
-            border-top: 1px solid #1f2937;
+            background: rgba(17, 24, 39, 0.9);
+            backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
             justify-content: space-around;
             padding: 10px 0;
@@ -83,14 +154,15 @@
         .nav-item {
             background: none;
             border: none;
-            color: #94a3b8;
-            font-size: 12px;
+            color: #6b7280;
+            font-size: 11px;
+            font-weight: 600;
             cursor: pointer;
             text-align: center;
         }
         .nav-item.active {
-            color: #f59e0b;
-            font-weight: bold;
+            color: #fbbf24;
+            transform: translateY(-2px);
         }
         .section {
             display: none;
@@ -98,99 +170,158 @@
         .section.active {
             display: block;
         }
-        /* عجلة الحظ */
-        .wheel-container {
+        
+        /* عجلة الحظ المطورة والفاخرة جداً */
+        .wheel-outer-wrapper {
             position: relative;
-            width: 260px;
-            height: 260px;
-            margin: 0 auto 15px auto;
+            width: 290px;
+            height: 290px;
+            margin: 0 auto 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .wheel-border-glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(#fbbf24, #d97706, #1f2937, #fbbf24);
+            padding: 4px;
+            box-shadow: 0 0 25px rgba(251, 191, 36, 0.3);
+        }
+        .wheel-inner-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #0b0f19;
+            overflow: hidden;
         }
         #wheelPointer {
             position: absolute;
-            top: -10px;
+            top: -16px;
             left: 50%;
             transform: translateX(-50%);
             width: 0;
             height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-bottom: 22px solid #f59e0b;
-            z-index: 10;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-bottom: 28px solid #ef4444;
+            z-index: 20;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6));
         }
         #luckyWheel {
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
-            box-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
+        }
+        .wheel-center-hub {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, #fbbf24, #b45309);
+            border-radius: 50%;
+            border: 3px solid #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 10px;
+            color: #030712;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">🛡️ Aegis Cash</div>
-        <button class="logout-btn" onclick="alert('تم تسجيل الخروج')">خروج</button>
+        <div class="logo">🛡️ AEGIS CASH</div>
+        <button class="logout-btn" onclick="alert('تم تسجيل الخروج بأمان')">خروج</button>
     </header>
 
     <div class="container">
         
-        <!-- قسم المحفظة واللوحة الرئيسية -->
+        <!-- قسم المحفظة -->
         <div id="wallet-section" class="section active">
-            <div class="card" style="background: #064e3b; border-color: #065f46;">
-                <p style="font-size: 13px; color: #6ee7b7;">درع الخصوصية نشطة: حساب آمن ومحفظة مشفرة 100%</p>
+            <div class="security-banner">
+                🔒 درع الخصوصية نشط: حساب مشفر ومحمي بالكامل
             </div>
 
-            <div class="card">
-                <p style="color: #94a3b8; font-size: 14px;">رصيد المحفظة الدائم 🔒</p>
-                <div class="balance-box" id="userBalance">pt 565</div>
-                <p style="font-size: 12px; color: #38bdf8;">المستوى الحالي: <span id="userLevel" style="font-weight: bold; color: #f59e0b;">مبتدئ</span></p>
-            </div>
-
-            <div class="card">
-                <h3 style="font-size: 15px; margin-bottom: 8px;">🎁 مكافأة التسجيل اليومي</h3>
-                <p style="font-size: 12px; color: #94a3b8; margin-bottom: 10px;">احصل على 20 نقطة مجانية متجددة كل 24 ساعة.</p>
-                <button class="btn-primary" onclick="claimDaily()">استلام 20 نقطة مجاناً ⭐</button>
-            </div>
-        </div>
-
-        <!-- قسم العجلة المطورة -->
-        <div id="wheel-section" class="section">
-            <div class="card">
-                <h2 style="color: #f59e0b; margin-bottom: 5px; font-size: 18px;">🎡 عجلة الحظ الذكية</h2>
-                <p style="font-size: 12px; color: #94a3b8; margin-bottom: 15px;">كل لفّة تكلف 5 نقاط (أرباح متوازنة ومقننة)</p>
+            <div class="card" style="text-align: center;">
+                <p class="balance-title">رصيد المحفظة الدائم</p>
+                <div class="balance-box" id="userBalance">565 pt</div>
                 
-                <div class="wheel-container">
-                    <div id="wheelPointer"></div>
-                    <canvas id="luckyWheel" width="260" height="260"></canvas>
+                <div class="currencies-row">
+                    <span class="currency-badge usd-value" id="userUsd">$0.11 USD</span>
+                    <span class="currency-badge diamond-value" id="userDiamonds">💎 5 جواهـر</span>
                 </div>
 
-                <button class="btn-primary" onclick="spinWheel()">لف العجلة (تکلفة 5 نقاط)</button>
-                <p id="wheelResult" style="margin-top: 12px; font-size: 14px; font-weight: bold; color: #38bdf8;"></p>
+                <button class="btn-secondary" onclick="convertDiamonds()">تحويل الجواهر إلى نقاط (10 جواهر = 100 pt)</button>
+
+                <div style="margin-top: 15px; font-size: 13px; color: #9ca3af;">
+                    المستوى الحالي: <span id="userLevel" style="color: #fbbf24; font-weight: 700;">مبتدئ</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="font-size: 15px; margin-bottom: 6px; color: #fbbf24;">🎁 مكافأة التسجيل اليومي</h3>
+                <p style="font-size: 12px; color: #9ca3af; margin-bottom: 12px;">احصل على 50 نقطة و 2 جوهرة مجاناً كل 24 ساعة.</p>
+                <button class="btn-primary" onclick="claimDaily()">استلام المكافأة اليومية ⭐</button>
             </div>
         </div>
 
-        <!-- قسم مشاهدة الفيديوهات أو المهام -->
+        <!-- قسم العجلة المطورة والفاخرة -->
+        <div id="wheel-section" class="section">
+            <div class="card" style="text-align: center;">
+                <h2 style="color: #fbbf24; margin-bottom: 5px; font-size: 18px;">🎡 عجلة الحظ الملكية</h2>
+                <p style="font-size: 12px; color: #9ca3af; margin-bottom: 15px;">تكلفة اللفة: 10 نقاط | اربح نقاط وجواهر!</p>
+                
+                <div class="wheel-outer-wrapper">
+                    <div class="wheel-border-glow">
+                        <div class="wheel-inner-container">
+                            <div id="wheelPointer"></div>
+                            <canvas id="luckyWheel" width="280" height="280"></canvas>
+                            <div class="wheel-center-hub">AEGIS</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn-primary" onclick="spinWheel()" style="margin-top: 10px;">لف العجلة الآن</button>
+                <p id="wheelResult" style="margin-top: 12px; font-size: 14px; font-weight: 700; color: #38bdf8;"></p>
+            </div>
+        </div>
+
+        <!-- قسم المشاهدة -->
         <div id="watch-section" class="section">
-            <div class="card">
-                <h3>📺 مشاهدة الإعلانات</h3>
-                <p style="font-size: 12px; color: #94a3b8; margin: 10px 0;">اهدِف لجمع المزيد من النقاط اليومية.</p>
-                <button class="btn-primary" onclick="watchAd()">شاهد واكسب 10 نقاط</button>
+            <div class="card" style="text-align: center;">
+                <h3 style="color: #fbbf24; margin-bottom: 8px;">📺 مشاهدة الإعلانات</h3>
+                <p style="font-size: 12px; color: #9ca3af; margin-bottom: 15px;">شاهد الفيديوهات واكسب نقاط وجواهر إضافية.</p>
+                <button class="btn-primary" onclick="watchAd()">شاهد واكسب (25 نقطة + 1 جوهرة)</button>
             </div>
         </div>
 
         <!-- قسم الدعوات -->
         <div id="referral-section" class="section">
-            <div class="card">
-                <h3>👥 الأصدقاء المدعوون</h3>
-                <p style="font-size: 13px; color: #94a3b8; margin: 10px 0;">شارك رابطك وربح 50 نقطة عن كل صديق.</p>
-                <div style="background: #1f2937; padding: 10px; border-radius: 6px; font-size: 12px; color: #f59e0b;">aegis-app.vercel.app/?ref=user</div>
+            <div class="card" style="text-align: center;">
+                <h3 style="color: #fbbf24; margin-bottom: 8px;">👥 نظام الدعوات</h3>
+                <p style="font-size: 12px; color: #9ca3af; margin-bottom: 15px;">ادع أصدقاءك واحصل على 100 نقطة و 5 جواهر.</p>
+                <div style="background: #030712; padding: 12px; border-radius: 10px; font-size: 12px; color: #34d399; border: 1px dashed rgba(52,211,153,0.3);">
+                    https://aegis-app.vercel.app/?ref=jasim
+                </div>
             </div>
         </div>
 
         <!-- قسم السحب -->
         <div id="withdraw-section" class="section">
-            <div class="card">
-                <h3>💸 سحب الأرباح</h3>
-                <p style="font-size: 12px; color: #94a3b8; margin: 10px 0;">الحد الأدنى للسحب هو 1000 نقطة.</p>
-                <button class="btn-primary" style="background: #374151; cursor: not-allowed;">طلب سحب الأرباح</button>
+            <div class="card" style="text-align: center;">
+                <h3 style="color: #fbbf24; margin-bottom: 8px;">💸 سحب الأرباح</h3>
+                <p style="font-size: 12px; color: #9ca3af; margin-bottom: 15px;">الحد الأدنى للسحب هو 5000 نقطة (1.00$)</p>
+                <button class="btn-primary" style="background: #1f2937; color: #9ca3af; cursor: not-allowed;" disabled>طلب السحب (الرصيد غير كافي)</button>
             </div>
         </div>
 
@@ -206,22 +337,27 @@
     </div>
 
     <script>
-        // نظام النقاط والمستويات الأساسي
         let balance = 565;
+        let diamonds = 5;
+        const conversionRate = 5000; // 5000 نقطة = 1 دولار
 
         function updateUI() {
-            document.getElementById('userBalance').innerText = `pt ${balance}`;
+            document.getElementById('userBalance').innerText = `${balance} pt`;
+            document.getElementById('userDiamonds').innerText = `💎 ${diamonds} جواهـر`;
+            
+            let usdValue = (balance / conversionRate).toFixed(2);
+            document.getElementById('userUsd').innerText = `$${usdValue} USD`;
+
             const levelElem = document.getElementById('userLevel');
-            if (balance >= 1000) {
-                levelElem.innerText = "محترف ⭐";
-            } else if (balance >= 500) {
-                levelElem.innerText = "نشط 🚀";
+            if (balance >= 10000) {
+                levelElem.innerText = "محترف متميز 👑";
+            } else if (balance >= 2000) {
+                levelElem.innerText = "نشط متقدم 🚀";
             } else {
                 levelElem.innerText = "مبتدئ 🌱";
             }
         }
 
-        // التنقل بين الأقسام
         function switchTab(tabName, btnElement) {
             document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
@@ -234,33 +370,45 @@
             }
         }
 
-        // مكافأة التسجيل اليومي
+        // تحويل الجواهر إلى نقاط
+        function convertDiamonds() {
+            if (diamonds < 10) {
+                alert("عذراً، يجب أن تمتلك 10 جواهر على الأقل لتحويلها.");
+                return;
+            }
+            diamonds -= 10;
+            balance += 100;
+            updateUI();
+            alert("✨ تم تحويل 10 جواهر إلى 100 نقطة بنجاح!");
+        }
+
         function claimDaily() {
-            balance += 20;
+            balance += 50;
+            diamonds += 2;
             updateUI();
-            alert("تهانينا! تم إضافة 20 نقطة إلى محفظتك بنجاح.");
+            alert("✨ تهانينا! تمت إضافة 50 نقطة و 2 جوهرة إلى محفظتك.");
         }
 
-        // مشاهدة إعلان وهمية
         function watchAd() {
-            balance += 10;
+            balance += 25;
+            diamonds += 1;
             updateUI();
-            alert("ممتاز! تمت إضافة 10 نقاط لرصيدك.");
+            alert("🎉 ممتاز! تمت إضافة 25 نقطة و 1 جوهرة إلى رصيدك.");
         }
 
-        // إعدادات عجلة الحظ المحدثة (أرباح مخفضة وعادلة)
+        // رسم العجلة الاحترافية
         const canvas = document.getElementById('luckyWheel');
         const ctx = canvas.getContext('2d');
 
         const slices = [
-            { text: "1 نقطة", value: 1, color: "#1e293b" },
-            { text: "3 نقاط", value: 3, color: "#334155" },
-            { text: "0 نقطة", value: 0, color: "#1e293b" },
-            { text: "5 نقاط", value: 5, color: "#334155" },
-            { text: "1 نقطة", value: 1, color: "#1e293b" },
-            { text: "10 نقاط", value: 10, color: "#f59e0b" },
-            { text: "2 نقطة", value: 2, color: "#334155" },
-            { text: "0 نقطة", value: 0, color: "#1e293b" }
+            { text: "10 pt", type: "pts", value: 10, color: "#1e293b" },
+            { text: "2 💎", type: "dm", value: 2, color: "#0f172a" },
+            { text: "0 pt", type: "pts", value: 0, color: "#1e293b" },
+            { text: "50 pt", type: "pts", value: 50, color: "#0f172a" },
+            { text: "5 💎", type: "dm", value: 5, color: "#1e293b" },
+            { text: "100 pt", type: "pts", value: 100, color: "#b45309" },
+            { text: "15 pt", type: "pts", value: 15, color: "#0f172a" },
+            { text: "0 pt", type: "pts", value: 0, color: "#1e293b" }
         ];
 
         const arc = Math.PI / (slices.length / 2);
@@ -269,28 +417,27 @@
         let currentAngle = 0;
 
         function drawWheel() {
-            const outsideRadius = 110;
-            const textRadius = 75;
-            const insideRadius = 15;
-
+            const radius = 140;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.strokeStyle = '#f59e0b';
-            ctx.lineWidth = 2;
 
             for (let i = 0; i < slices.length; i++) {
                 const angle = startAngle + i * arc;
+                
                 ctx.fillStyle = slices[i].color;
                 ctx.beginPath();
-                ctx.arc(130, 130, outsideRadius, angle, angle + arc, false);
-                ctx.arc(130, 130, insideRadius, angle + arc, angle, true);
-                ctx.stroke();
+                ctx.arc(140, 140, radius, angle, angle + arc, false);
+                ctx.arc(140, 140, 25, angle + arc, angle, true);
                 ctx.fill();
+                
+                ctx.strokeStyle = '#fbbf24';
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
 
                 ctx.save();
                 ctx.fillStyle = "#ffffff";
-                ctx.translate(130 + Math.cos(angle + arc / 2) * textRadius, 130 + Math.sin(angle + arc / 2) * textRadius);
+                ctx.translate(140 + Math.cos(angle + arc / 2) * 90, 140 + Math.sin(angle + arc / 2) * 90);
                 ctx.rotate(angle + arc / 2 + Math.PI / 2);
-                ctx.font = "bold 11px Arial";
+                ctx.font = "bold 13px Arial";
                 ctx.fillText(slices[i].text, -ctx.measureText(slices[i].text).width / 2, 0);
                 ctx.restore();
             }
@@ -299,23 +446,21 @@
         function spinWheel() {
             if (spinning) return;
 
-            // التحقق من وجود رصيد كافي لخصم رسوم اللف (5 نقاط)
-            if (balance < 5) {
-                alert("عذراً، ليس لديك نقاط كافية للّف (تكلفة اللف 5 نقاط).");
+            if (balance < 10) {
+                alert("عذراً، رصيدك غير كافي (تكلفة اللفة 10 نقاط).");
                 return;
             }
 
-            // خصم رسوم اللف
-            balance -= 5;
+            balance -= 10;
             updateUI();
 
             spinning = true;
-            document.getElementById('wheelResult').innerText = "جاري الدوران...";
+            document.getElementById('wheelResult').innerText = "✨ جاري تدوير العجلة الملكية...";
             
-            const randomSpin = Math.floor(Math.random() * 360) + 1800;
+            const randomSpin = Math.floor(Math.random() * 360) + 2520;
             currentAngle += randomSpin;
             
-            canvas.style.transition = "transform 4s cubic-bezier(0.15, 0.85, 0.15, 1)";
+            canvas.style.transition = "transform 4.5s cubic-bezier(0.15, 0.85, 0.15, 1)";
             canvas.style.transform = `rotate(${currentAngle}deg)`;
 
             setTimeout(() => {
@@ -324,12 +469,16 @@
                 const sliceDegree = 360 / slices.length;
                 const winningIndex = Math.floor((360 - (actualDegree % 360)) / sliceDegree) % slices.length;
                 
-                const wonValue = slices[winningIndex].value;
-                balance += wonValue; // إضافة الجائزة للرصيد
+                const winItem = slices[winningIndex];
+                if (winItem.type === "pts") {
+                    balance += winItem.value;
+                    document.getElementById('wheelResult').innerText = `🎉 مبروك! ربحت ${winItem.value} نقطة`;
+                } else {
+                    diamonds += winItem.value;
+                    document.getElementById('wheelResult').innerText = `💎 مبروك! ربحت ${winItem.value} جوهرة`;
+                }
                 updateUI();
-                
-                document.getElementById('wheelResult').innerText = `تهانينا! ربحت ${wonValue} نقطة`;
-            }, 4000);
+            }, 4500);
         }
 
         drawWheel();
