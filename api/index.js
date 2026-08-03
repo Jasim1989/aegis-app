@@ -25,13 +25,32 @@ module.exports = (req, res) => {
     nav button.active { color: var(--primary); font-weight: bold; border-top: 2px solid var(--primary); }
     table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; font-size: 0.85rem; }
     th, td { padding: 0.5rem; border-bottom: 1px solid var(--border); text-align: right; }
+    <style>
+    :root { --bg: #0b0f19; --card: #151c2c; --text: #f8fafc; --muted: #94a3b8; --border: #26334d; --primary: #38bdf8; --green: #10b981; }
+    .light { --bg: #f1f5f9; --card: #ffffff; --text: #0f172a; --muted: #64748b; --border: #cbd5e1; --primary: #0284c7; --green: #059669; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, sans-serif; }
+    html, body { height: 100vh; overflow: hidden; background: var(--bg); color: var(--text); }
+    
+    /* جعل الصفحة مقسمة تلقائياً: رأس + محتوى + شريط سفلي مثبت */
+    body { display: flex; flex-direction: column; justify-content: space-between; }
+    
+    header { background: var(--card); padding: 1rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
+    main { flex: 1; overflow-y: auto; padding: 1rem; width: 100%; max-width: 600px; margin: 0 auto; }
+    .tab { display: none; }
+    .tab.active { display: block; }
+    .card { background: var(--card); border: 1px solid var(--border); padding: 1rem; border-radius: 0.75rem; margin-bottom: 1rem; }
+    .val { font-size: 1.5rem; font-weight: bold; margin-top: 0.5rem; }
+    input, select, button { width: 100%; padding: 0.75rem; margin-top: 0.5rem; background: var(--bg); border: 1px solid var(--border); color: var(--text); border-radius: 0.5rem; }
+    button.btn-primary { background: var(--primary); color: #000; font-weight: bold; border: none; cursor: pointer; }
+    
+    /* تثبيت القائمة السفليّة في مكانها بشكل دائم */
+    nav { background: var(--card); display: flex; border-top: 1px solid var(--border); position: sticky; bottom: 0; left: 0; right: 0; z-index: 999; }
+    nav button { flex: 1; background: none; border: none; padding: 0.85rem 0.5rem; color: var(--muted); cursor: pointer; border-radius: 0; font-size: 0.9rem; }
+    nav button.active { color: var(--primary); font-weight: bold; border-top: 3px solid var(--primary); background: rgba(56, 189, 248, 0.05); }
+    table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; font-size: 0.85rem; }
+    th, td { padding: 0.5rem; border-bottom: 1px solid var(--border); text-align: right; }
   </style>
-</head>
-<body>
-  <header>
-    <div style="font-weight: bold; color: var(--primary);">🛡️ Aegis Mobile</div>
-    <button style="width: auto; padding: 0.3rem 0.6rem;" onclick="document.body.classList.toggle('light')">🌗 المظهر</button>
-  </header>
+
 
   <main>
     <!-- TAB 1 -->
