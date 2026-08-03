@@ -983,6 +983,24 @@ window.addEventListener('DOMContentLoaded', () => {
         promptForUserName();
     }
 });
+// حفظ واسترجاع بيانات التطبيق والنقاط
+function saveAppData() {
+    localStorage.setItem('aegisAppData', JSON.stringify(appData));
+}
+
+// دالة لتحميل البيانات الشاملة عند فتح التطبيق
+window.addEventListener('load', () => {
+    let savedAppData = localStorage.getItem('aegisAppData');
+    if (savedAppData) {
+        try {
+            let parsed = JSON.parse(savedAppData);
+            Object.assign(appData, parsed);
+            updateUI();
+        } catch (e) {
+            console.error("خطأ في قراءة بيانات التطبيق", e);
+        }
+    }
+});
 
         </script>
 </body>
