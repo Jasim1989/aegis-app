@@ -894,6 +894,20 @@
         drawWheel();
         initInviteLink();
         updateUI();
-    </script>
+function requestWithdrawal() {
+    if (appData.balance < minWithdrawPoints) {
+        showAlert("تنبيه", "رصيدك قليل", "⚠️");
+        return;
+    }
+    showPrompt("سحب الأرباح", "أدخل الحساب:", "🏧", (accountInfo) => {
+        if (accountInfo) {
+            appData.balance = 0;
+            updateUI();
+            showAlert("تم", "تم بنجاح", "✅");
+        }
+    });
+}
+
+        </script>
 </body>
 </html>
