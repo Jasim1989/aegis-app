@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" id="htmlRoot">
 <head>
@@ -175,6 +176,14 @@
         .store-price { font-size: 12px; color: #be185d; font-weight: 700; margin-bottom: 10px; background: #fdf2f8; padding: 4px; border-radius: 6px; }
         .buy-btn { background: #fdf2f8; color: #be185d; border: 1px solid #fbcfe8; padding: 6px; width: 100%; border-radius: 8px; font-size: 12px; font-weight: 800; cursor: pointer; }
 
+        /* Videos Section Styles */
+        .video-card { background: #fff; border: 1px solid #fce7f3; border-radius: 16px; overflow: hidden; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(236,72,153,0.05); }
+        .video-container { position: relative; width: 100%; padding-top: 56.25%; background: #000; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        .video-info { padding: 12px; display: flex; justify-content: space-between; align-items: center; }
+        .video-title { font-size: 13px; font-weight: 800; color: #1f2937; }
+        .watch-reward-btn { background: #10b981; color: #fff; border: none; padding: 6px 12px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer; }
+
         /* Chat Rooms & Support */
         .chat-container { display: flex; flex-direction: column; height: 350px; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 16px; overflow: hidden; margin-top: 15px; }
         .chat-tabs { display: flex; background: #f3f4f6; border-bottom: 1px solid #e5e7eb; }
@@ -216,17 +225,17 @@
             display: flex;
             justify-content: space-around;
             align-items: center;
-            padding: 8px 6px;
+            padding: 8px 4px;
             border-radius: 24px;
             box-shadow: 0 15px 35px rgba(236, 72, 153, 0.15);
             max-width: 480px;
             margin: 0 auto;
         }
         .nav-item {
-            background: none; border: none; color: #9ca3af; font-size: 10px; font-weight: 700; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 3px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); width: 14%; position: relative; padding: 4px 0;
+            background: none; border: none; color: #9ca3af; font-size: 9px; font-weight: 700; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); width: 12.5%; position: relative; padding: 4px 0;
         }
         .nav-item span.icon { 
-            font-size: 18px; 
+            font-size: 17px; 
             transition: transform 0.3s;
         }
         .nav-item.active { 
@@ -239,7 +248,7 @@
             content: '';
             position: absolute;
             bottom: 0;
-            width: 16px;
+            width: 14px;
             height: 3px;
             background: #be185d;
             border-radius: 3px;
@@ -247,8 +256,8 @@
         .nav-item.special span.icon {
             background: linear-gradient(135deg, #ec4899, #be185d);
             color: #fff;
-            width: 34px;
-            height: 34px;
+            width: 32px;
+            height: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -280,7 +289,7 @@
     <!-- شريط الإعلانات المتحرك -->
     <div class="ticker-wrap">
         <div class="ticker-content" id="tickerTextDisplay">
-            🌸 أهلاً بكم في Aegis Cash! | فريق الدعم الفني جاهز للرد على استفساراتكم | احصل على لفة مجانية يومية في عجلة الحظ 🎡
+            🌸 أهلاً بكم في Aegis Cash! | شاهد الفيديوهات واكسب النقاط الفورية | فريق الدعم جاهز للرد
         </div>
     </div>
 
@@ -348,6 +357,40 @@
             </div>
         </div>
 
+        <!-- قسم مشاهدة الفيديوهات الجديد -->
+        <div id="videos-section" class="section">
+            <div class="card" style="padding: 16px;">
+                <h3 style="color: #be185d; font-size: 17px; font-weight: 800; text-align: center; margin-bottom: 6px;">🎬 قسم مشاهدة الفيديوهات</h3>
+                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;">شاهد الفيديوهات واكسب النقاط الفورية لحسابك 🎁</p>
+
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <div>
+                            <div class="video-title">مقدمة في تطوير التطبيقات السحابية</div>
+                            <div style="font-size: 11px; color: #10b981; font-weight: 700; margin-top: 2px;">المكافأة: +30 نقطة 🎁</div>
+                        </div>
+                        <button class="watch-reward-btn" onclick="claimVideoReward(30)">استلام المكافأة</button>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/3JZ_D3ELwOQ" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <div>
+                            <div class="video-title">أسرار النجاح في إدارة المنصات الرقمية</div>
+                            <div style="font-size: 11px; color: #10b981; font-weight: 700; margin-top: 2px;">المكافأة: +50 نقطة 🎁</div>
+                        </div>
+                        <button class="watch-reward-btn" onclick="claimVideoReward(50)">استلام المكافأة</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- المتجر -->
         <div id="store-section" class="section">
             <div class="card">
@@ -359,29 +402,29 @@
                         <div class="store-icon">💎</div>
                         <div class="store-title">50 جوهرة</div>
                         <div class="store-price">500 نقطة</div>
-                        <button class="buy-btn" onclick="buyItem('50 جوهرة', 500)" id="buyBtn1">شراء</button>
+                        <button class="buy-btn" onclick="buyItem('50 جوهرة', 500)">شراء</button>
                     </div>
 
                     <div class="store-item">
-                        <div class="badge-hot" id="badgeHotTxt">مميز 🔥</div>
+                        <div class="badge-hot">مميز 🔥</div>
                         <div class="store-icon">💎</div>
                         <div class="store-title">200 جوهرة</div>
                         <div class="store-price">1,800 نقطة</div>
-                        <button class="buy-btn" onclick="buyItem('200 جوهرة', 1800)" id="buyBtn2">شراء</button>
+                        <button class="buy-btn" onclick="buyItem('200 جوهرة', 1800)">شراء</button>
                     </div>
 
                     <div class="store-item">
                         <div class="store-icon">🌐</div>
                         <div class="store-title">نت 5GB</div>
                         <div class="store-price">2,500 نقطة</div>
-                        <button class="buy-btn" onclick="buyItem('بطاقة إنترنت 5GB', 2500)" id="buyBtn3">شراء</button>
+                        <button class="buy-btn" onclick="buyItem('بطاقة إنترنت 5GB', 2500)">شراء</button>
                     </div>
 
                     <div class="store-item">
                         <div class="store-icon">💳</div>
                         <div class="store-title">رصيد 5$</div>
                         <div class="store-price">5,000 نقطة</div>
-                        <button class="buy-btn" onclick="buyItem('بطاقة رصيد 5$', 5000)" id="buyBtn4">شراء</button>
+                        <button class="buy-btn" onclick="buyItem('بطاقة رصيد 5$', 5000)">شراء</button>
                     </div>
                 </div>
             </div>
@@ -395,9 +438,9 @@
                 
                 <div class="chat-container">
                     <div class="chat-tabs">
-                        <button class="chat-tab active" onclick="switchChatRoom('general', this)" id="tabGen">العامة 🌸</button>
-                        <button class="chat-tab" onclick="switchChatRoom('vip', this)" id="tabVip">VIP 👑</button>
-                        <button class="chat-tab" onclick="switchChatRoom('support', this)" id="tabSup">الدعم الفني 🛠️</button>
+                        <button class="chat-tab active" onclick="switchChatRoom('general', this)">العامة 🌸</button>
+                        <button class="chat-tab" onclick="switchChatRoom('vip', this)">VIP 👑</button>
+                        <button class="chat-tab" onclick="switchChatRoom('support', this)">الدعم الفني 🛠️</button>
                     </div>
                     
                     <div class="chat-messages" id="chatMessages">
@@ -407,7 +450,7 @@
                     
                     <div class="chat-input-area">
                         <input type="text" id="chatInput" class="chat-input" placeholder="اكتب استفسارك هنا..." onkeypress="handleChatKey(event)">
-                        <button class="chat-send-btn" onclick="sendChatMessage()" id="btnSendChat">إرسال</button>
+                        <button class="chat-send-btn" onclick="sendChatMessage()">إرسال</button>
                     </div>
                 </div>
             </div>
@@ -434,7 +477,7 @@
             </div>
         </div>
 
-        <!-- لوحة تحكم الإدارة مع الإحصائيات الحقيقية وإدارة الإعلانات -->
+        <!-- لوحة تحكم الإدارة -->
         <div id="admin-section" class="section">
             <div class="card">
                 <h3 style="color: #7c3aed; font-size: 18px; font-weight: 800; text-align: center; margin-bottom: 6px;">⚙️ لوحة إدارة التطبيق والإعلانات</h3>
@@ -462,14 +505,13 @@
 
                 <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 20px 0;">
 
-                <!-- لوحة التحكم بالرعايات والإعلانات الحقيقية المدفوعة -->
                 <div class="admin-form-group">
                     <label>💎 استضافة إعلان مدفوع جديد (العنوان)</label>
                     <input type="text" id="adminAdTitleInput" class="admin-input" placeholder="مثال: خصم 30% على خدمات الاستضافة السحابية">
                 </div>
                 <div class="admin-form-group">
                     <label>📝 نص الإعلان التفصيلي</label>
-                    <input type="text" id="adminAdDescInput" class="admin-input" placeholder="مثال: استخدم الكود AEGIS للانضمام الآن والحصول على رصيد إضافي">
+                    <input type="text" id="adminAdDescInput" class="admin-input" placeholder="مثال: استخدم الكود AEGIS للانضمام الآن">
                 </div>
                 <div class="admin-form-group">
                     <label>🔗 رابط وجهة الإعلان (URL)</label>
@@ -481,7 +523,7 @@
 
                 <div class="admin-form-group">
                     <label>📢 نص شريط الإعلانات الفوري</label>
-                    <input type="text" id="adminTickerInput" class="admin-input" value="🌸 أهلاً بكم في Aegis Cash! | فريق الدعم الفني جاهز للرد على استفساراتكم">
+                    <input type="text" id="adminTickerInput" class="admin-input" value="🌸 أهلاً بكم في Aegis Cash! | شاهد الفيديوهات واكسب النقاط">
                     <button class="btn btn-success" style="margin-top: 8px; font-size: 13px; padding: 10px;" onclick="updateAdminTicker()">تحديث شريط الإعلانات ✨</button>
                 </div>
             </div>
@@ -495,24 +537,24 @@
                 <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;">jasim@aegis-app.com</p>
 
                 <div class="profile-info-group">
-                    <span style="color: #6b7280;" id="lblIdText">معرف الحساب (ID)</span>
+                    <span style="color: #6b7280;">معرف الحساب (ID)</span>
                     <span style="font-weight: 800;">#AEG-84920</span>
                 </div>
                 
                 <div class="profile-info-group">
-                    <span style="color: #6b7280;" id="lblStatusText">حالة التوثيق</span>
+                    <span style="color: #6b7280;">حالة التوثيق</span>
                     <span style="color: #047857; font-weight: 800;">موثق 🛡️</span>
                 </div>
 
-                <button class="btn btn-secondary" style="margin-top: 20px; background: #f3f4f6; color: #374151; box-shadow: none;" onclick="openNameChangeModal()" id="btnEditName">✏️ تعديل الاسم الشخصي</button>
+                <button class="btn btn-secondary" style="margin-top: 20px; background: #f3f4f6; color: #374151; box-shadow: none;" onclick="openNameChangeModal()">✏️ تعديل الاسم الشخصي</button>
             </div>
         </div>
 
         <!-- سحب الأرباح -->
         <div id="withdraw-section" class="section">
             <div class="card" style="text-align: center;">
-                <h3 style="color: #be185d; margin-bottom: 8px; font-size: 17px; font-weight: 800;" id="lblWithdrawTitle">💸 بوابة السحب</h3>
-                <p style="font-size: 13px; color: #6b7280; margin-bottom: 15px;" id="lblWithdrawDesc">الحد الأدنى للسحب هو <strong style="color:#be185d;">10,000 نقطة</strong></p>
+                <h3 style="color: #be185d; margin-bottom: 8px; font-size: 17px; font-weight: 800;">💸 بوابة السحب</h3>
+                <p style="font-size: 13px; color: #6b7280; margin-bottom: 15px;">الحد الأدنى للسحب هو <strong style="color:#be185d;">10,000 نقطة</strong></p>
                 
                 <div style="background: #f9fafb; padding: 15px; border-radius: 14px; margin-bottom: 15px; border: 1px dashed #d1d5db;">
                     <div style="font-size: 20px; font-weight: 800;" id="progressText">565 / 10,000</div>
@@ -527,32 +569,32 @@
 
     </div>
 
-    <!-- شريط التنقل السفلي المحترف -->
+    <!-- شريط التنقل السفلي المحترف (تم إضافة زر الفيديوهات هنا) -->
     <div class="nav-bar-wrapper">
         <div class="nav-bar">
             <button class="nav-item active" onclick="switchTab('wallet', this)">
-                <span class="icon">💰</span> <span id="navWallet">محفظتي</span>
+                <span class="icon">💰</span> <span>محفظتي</span>
+            </button>
+            <button class="nav-item" onclick="switchTab('videos', this)">
+                <span class="icon">🎬</span> <span>فيديوهات</span>
             </button>
             <button class="nav-item" onclick="switchTab('store', this)">
-                <span class="icon">🛍️</span> <span id="navStore">المتجر</span>
+                <span class="icon">🛍️</span> <span>المتجر</span>
             </button>
             <button class="nav-item" onclick="switchTab('chat', this)">
-                <span class="icon">💬</span> <span id="navChat">الدعم</span>
+                <span class="icon">💬</span> <span>الدعم</span>
             </button>
             <button class="nav-item" onclick="switchTab('wheel', this)">
-                <span class="icon">🎡</span> <span id="navWheel">العجلة</span>
-            </button>
-            <button class="nav-item special" onclick="showAlert('المميزات السريعة ⚡', 'مرحباً بك في القائمة السريعة. يمكنك استخدام أقسام التطبيق بكل سلسة!', '🚀')">
-                <span class="icon">⚡</span> <span id="navQuick">سريع</span>
+                <span class="icon">🎡</span> <span>العجلة</span>
             </button>
             <button class="nav-item" onclick="switchTab('admin', this)">
-                <span class="icon">⚙️</span> <span id="navAdmin">الإدارة</span>
+                <span class="icon">⚙️</span> <span>الإدارة</span>
             </button>
             <button class="nav-item" onclick="switchTab('profile', this)">
-                <span class="icon">👤</span> <span id="navProfile">حسابي</span>
+                <span class="icon">👤</span> <span>حسابي</span>
             </button>
             <button class="nav-item" onclick="switchTab('withdraw', this)">
-                <span class="icon">💸</span> <span id="navWithdraw">السحب</span>
+                <span class="icon">💸</span> <span>السحب</span>
             </button>
         </div>
     </div>
@@ -562,12 +604,10 @@
         let diamonds = 5;
         let userName = "جاسم العراقي";
         let hasFreeSpinToday = true;
-        let currentLang = 'ar';
         const diamondConversionRate = 10000;
         const minWithdrawPoints = 10000;
         let supportAgents = ["أحمد (الدعم الفني)", "ساره (خدمة المشتركين)"];
 
-        // إحصائيات النظام الحقيقية
         let systemStats = {
             totalUsers: 1420,
             onlineNow: 184,
@@ -575,76 +615,14 @@
             females: 511
         };
 
-        const translations = {
-            ar: {
-                totalBal: "إجمالي الرصيد", rank: "التصنيف", dailyTitle: "🎁 مكافأة الدخول اليومي", dailyDesc: "50 نقطة + 2 جوهرة مجاناً كل 24 ساعة",
-                dailyBtn: "استلام المكافأة ⭐", storeTitle: "🛍️ المتجر الرقمي", storeDesc: "اشترِ الجواهر وبطاقات الإنترنت برصيدك",
-                buy: "شراء", chatTitle: "💬 غرف الدردشة ودعم الأعضاء", wheelTitle: "🎡 عجلة الحظ اليومية", wheelSub: "لديك لفة مجانية اليوم! (بعدها التكلفة 100 جوهرة)",
-                spinBtn: "تدوير العجلة 🌀", profileTitle: "✏️ تعديل الاسم الشخصي", withdrawTitle: "💸 بوابة السحب", withdrawDesc: "الحد الأدنى للسحب هو",
-                navW: "محفظتي", navS: "المتجر", navC: "الدعم", navWh: "العجلة", navQu: "سريع", navAd: "الإدارة", navP: "حسابي", navWi: "السحب",
-                convBtn: "🔄 تحويل الجواهر (100💎 = 10pt)", depBtn: "➕ شحن الرصيد الخارجي"
-            },
-            en: {
-                totalBal: "Total Balance", rank: "Rank", dailyTitle: "🎁 Daily Login Bonus", dailyDesc: "50 pts + 2 diamonds free every 24h",
-                dailyBtn: "Claim Bonus ⭐", storeTitle: "🛍️ Digital Store", storeDesc: "Buy diamonds and internet cards with your balance",
-                buy: "Buy", chatTitle: "💬 Chat Rooms & Support", wheelTitle: "🎡 Daily Lucky Wheel", wheelSub: "You have 1 free spin today! (Then 100 diamonds)",
-                spinBtn: "Spin Wheel 🌀", profileTitle: "✏️ Edit Profile Name", withdrawTitle: "💸 Withdrawal Portal", withdrawDesc: "Minimum withdrawal is",
-                navW: "Wallet", navS: "Store", navC: "Support", navWh: "Wheel", navQu: "Quick", navAd: "Admin", navP: "Profile", navWi: "Withdraw",
-                convBtn: "🔄 Convert Diamonds (100💎 = 10pt)", depBtn: "➕ External Deposit"
-            },
-            ku: {
-                totalBal: "کۆی گشتی باڵانس", rank: "پلە", dailyTitle: "🎁 پادشتی ڕۆژانە", dailyDesc: "٥٠ خاڵ + ٢ الماس بەخۆڕایی هەر ٢٤ کاتژمێرێک",
-                dailyBtn: "وەرگرتنی پاداشت ⭐", storeTitle: "🛍️ فرۆشگای دیجیتاڵی", storeDesc: "الماس و کارتی ئینتەرنێت بکڕە بە باڵانست",
-                buy: "کڕین", chatTitle: "💬 ژوورەکانی چات و پشتگیری", wheelTitle: "🎡 سووڕانی بەخت", wheelSub: "یەک سووڕانی خۆڕائیت هەیە ئەمڕۆ! (دواتر ١٠٠ الماس)",
-                spinBtn: "سووڕاندنی چەرخ 🌀", profileTitle: "✏️ گۆڕینی ناوی کەسی", withdrawTitle: "💸 دەروازەی پاشەکشە", withdrawDesc: "کەمترین بڕی پاشەکشە بریتییە لە",
-                navW: "باڵانس", navS: "فرۆشگا", navC: "پشتگیری", navWh: "سووڕان", navQu: "خێرا", navAd: "بەڕێوەبردن", navP: "هەژمار", navWi: "کێشانەوە",
-                convBtn: "🔄 گۆڕینەوەی الماس (١٠٠💎 = ١٠خاڵ)", depBtn: "➕ پڕکردنەوەی باڵانس"
-            }
-        };
-
-        function changeLanguage(lang) {
-            currentLang = lang;
-            const t = translations[lang];
-            const root = document.getElementById('htmlRoot');
-            root.dir = (lang === 'en') ? 'ltr' : 'rtl';
-
-            document.getElementById('lblTotalBalance').innerText = t.totalBal;
-            document.getElementById('lblRankTitle').innerText = t.rank;
-            document.getElementById('lblDailyTitle').innerText = t.dailyTitle;
-            document.getElementById('lblDailyDesc').innerText = t.dailyDesc;
-            document.getElementById('btnDaily').innerText = t.dailyBtn;
-            document.getElementById('lblStoreTitle').innerText = t.storeTitle;
-            document.getElementById('lblStoreDesc').innerText = t.storeDesc;
-            document.getElementById('lblChatTitle').innerText = t.chatTitle;
-            document.getElementById('lblWheelTitle').innerText = t.wheelTitle;
-            document.getElementById('wheelSubtitle').innerText = t.wheelSub;
-            document.getElementById('btnSpinWheel').innerText = t.spinBtn;
-            document.getElementById('btnEditName').innerText = t.profileTitle;
-            document.getElementById('lblWithdrawTitle').innerText = t.withdrawTitle;
-            document.getElementById('btnConv').innerText = t.convBtn;
-            document.getElementById('btnDep').innerText = t.depBtn;
-
-            document.getElementById('navWallet').innerText = t.navW;
-            document.getElementById('navStore').innerText = t.navS;
-            document.getElementById('navChat').innerText = t.navC;
-            document.getElementById('navWheel').innerText = t.navWh;
-            document.getElementById('navQuick').innerText = t.navQu;
-            document.getElementById('navAdmin').innerText = t.navAd;
-            document.getElementById('navProfile').innerText = t.navP;
-            document.getElementById('navWithdraw').innerText = t.navWi;
-
-            document.querySelectorAll('.buy-btn').forEach(btn => btn.innerText = t.buy);
-        }
-
         function updateAdminTicker() {
             let newText = document.getElementById('adminTickerInput').value;
             if (newText.trim() !== "") {
                 document.getElementById('tickerTextDisplay').innerText = newText;
-                showAlert("نجاح الإدارة", "تم تحديث شريط الإعلانات بنجاح وظهر للمشتركين فوراُ!", "📢");
+                showAlert("نجاح الإدارة", "تم تحديث شريط الإعلانات بنجاح!", "📢");
             }
         }
 
-        // نشر إعلان مدفوع حقيقي للجمهور
         function publishPaidAd() {
             let title = document.getElementById('adminAdTitleInput').value.trim();
             let desc = document.getElementById('adminAdDescInput').value.trim();
@@ -655,9 +633,9 @@
                 document.getElementById('displayAdDesc').innerText = desc;
                 let linkBtn = document.getElementById('displayAdLinkBtn');
                 linkBtn.href = link !== "" ? link : "#";
-                showAlert("نجاح الرعاية", "تم إطلاق الإعلان المدفوع بنجاح وأصبح ظاهراً لجميع المستخدمين في الواجهة الرئيسية!", "💎");
+                showAlert("نجاح الرعاية", "تم إطلاق الإعلان المدفوع بنجاح وأصبح ظاهراً للمستخدمين!", "💎");
             } else {
-                showAlert("تنبيه", "يرجى ملء حقول العنوان ووصف الإعلان المدفوع.", "⚠️");
+                showAlert("تنبيه", "يرجى ملء حقول العنوان ووصف الإعلان.", "⚠️");
             }
         }
 
@@ -705,7 +683,6 @@
             else if (balance >= 5000) levelElem.innerText = "نشط متقدم 🚀";
             else levelElem.innerText = "مبتدئ 🌱";
 
-            // تحديث الإحصائيات الحقيقية في لوحة الإدارة
             document.getElementById('statTotalUsers').innerText = systemStats.totalUsers.toLocaleString();
             document.getElementById('statOnlineUsers').innerText = systemStats.onlineNow.toLocaleString();
             let malePercent = Math.round((systemStats.males / systemStats.totalUsers) * 100);
@@ -728,7 +705,7 @@
                 withdrawBtn.disabled = true;
                 withdrawBtn.style.background = "#e5e7eb";
                 withdrawBtn.style.color = "#9ca3af";
-                withdrawBtn.style.cursor = "not-allowed";
+                withdrawBtn.style.cursor = not-allowed;
                 withdrawBtn.innerText = "الرصيد غير كافي 🔒";
             }
         }
@@ -739,6 +716,13 @@
             document.getElementById(tabName + '-section').classList.add('active');
             btnElement.classList.add('active');
             if(tabName === 'wheel') drawWheel();
+        }
+
+        // استلام مكافأة مشاهدة الفيديو
+        function claimVideoReward(points) {
+            balance += points;
+            updateUI();
+            showAlert("مبروك! 🎉", `تمت إضافة ${points} نقطة بنجاح إلى رصيدك بعد إتمام المشاهدة!`, "🎬");
         }
 
         function openDepositModal() {
@@ -787,7 +771,7 @@
         function claimDaily() {
             balance += 50;
             diamonds += 2;
-            systemStats.totalUsers += 1; // محاكاة انضمام مشترك جديد مع المكافأة
+            systemStats.totalUsers += 1;
             updateUI();
             showAlert("مكافأة", "تمت إضافة 50 نقطة و 2 جوهرة إلى رصيدك!", "🎁");
         }
@@ -797,7 +781,7 @@
             btn.classList.add('active');
             let msgs = document.getElementById('chatMessages');
             let roomName = room === 'general' ? 'العامة' : room === 'vip' ? 'VIP' : 'الدعم الفني';
-            msgs.innerHTML = `<div class="chat-msg"><b>النظام:</b> أهلاً بك في غرفة (${roomName}) 🌸 فريق الدعم المتاح حالياً: ${supportAgents.join(', ')}</div>`;
+            msgs.innerHTML = `<div class="chat-msg"><b>النظام:</b> أهلاً بك في غرفة (${roomName}) 🌸 فريق الدعم المتاح: ${supportAgents.join(', ')}</div>`;
         }
 
         function sendChatMessage() {
@@ -870,7 +854,7 @@
 
             if (hasFreeSpinToday) {
                 hasFreeSpinToday = false;
-                document.getElementById('wheelSubtitle').innerText = "تم استهلاك اللفة المجانية (التكلفة الحالية: 100 جوهرة)";
+                document.getElementById('wheelSubtitle').innerText = "تم استهلاك اللفة المجانية (التكلفة: 100 جوهرة)";
             } else {
                 if (diamonds < 100) {
                     showAlert("جواهر غير كافية", "تكلفة تدوير العجلة الإضافية هي 100 جوهرة.", "💎");
