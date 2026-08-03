@@ -956,6 +956,33 @@ function promptForUserName() {
         }
     });
 }
+// حفظ واسترجاع الاسم بشكل دائم
+function promptForUserName() {
+    showPrompt("تسجيل اسم المشترك 👤", "الرجاء إدخال اسمك الخاص للمتابعة", "✍️", (enteredName) => {
+        if (enteredName && enteredName.trim() !== "") {
+            appData.userName = enteredName.trim();
+            // حفظ الاسم في الذاكرة الدائمة للمتصفح
+            localStorage.setItem('userName', appData.userName);
+            updateUI();
+            showAlert("تم حفظ اسمك!", `مرحباً بك! 👋 ${appData.userName}`, "✅");
+        } else {
+            showAlert("تنبيه", "يجب إدخال اسم صحيح للمتابعة", "⚠️");
+        }
+    });
+}
+
+// استرجاع الاسم عند فتح التطبيق تلقائياً
+window.addEventListener('DOMContentLoaded', () => {
+    let savedName = localStorage.getItem('userName');
+    if (savedName) {
+        appData.userName = savedName;
+        let nameElement = document.getElementById('profileName');
+        if (nameElement) nameElement.innerText = savedName;
+    } else {
+        // إذا لم يكن هناك اسم مخزن، نطلب إدخاله
+        promptForUserName();
+    }
+});
 
         </script>
 </body>
