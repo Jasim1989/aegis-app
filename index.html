@@ -3,377 +3,585 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aegis Cash - المحفظة الوردية الذكية</title>
+    <title>Aegis Cash - المنصة الوردية الاحترافية</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Tajawal', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
         body {
-            background-color: #fdf2f8; /* خلفية زهرية فاتحة ومبهجة جداً */
+            background-color: #fdf2f8;
             color: #1f2937;
-            padding-bottom: 80px;
+            padding-bottom: 90px;
         }
+        /* Header Glassmorphism */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 18px 20px;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid #fbcfe8;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(251, 207, 232, 0.5);
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(236, 72, 153, 0.05);
         }
         .logo {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 800;
-            background: linear-gradient(135deg, #ec4899, #db2777);
+            background: linear-gradient(135deg, #ec4899, #be185d);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
         .logout-btn {
-            background: #fee2e2;
-            color: #ef4444;
-            border: 1px solid #fca5a5;
-            padding: 6px 14px;
-            border-radius: 8px;
+            background: #fff1f2;
+            color: #e11d48;
+            border: 1px solid #fecdd3;
+            padding: 6px 16px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 12px;
-            font-weight: 600;
+            font-size: 13px;
+            font-weight: 700;
+            transition: all 0.2s;
         }
+        .logout-btn:active { transform: scale(0.95); }
+
         .container {
             padding: 20px;
-            max-width: 500px;
+            max-width: 480px;
             margin: 0 auto;
         }
+        
+        /* Cards */
         .card {
             background: #ffffff;
-            border: 1px solid #fce7f3;
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 18px;
-            box-shadow: 0 10px 25px -5px rgba(236, 72, 153, 0.08);
+            border: 1px solid rgba(252, 231, 243, 0.8);
+            border-radius: 24px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px -5px rgba(236, 72, 153, 0.1);
+            position: relative;
+            overflow: hidden;
         }
+        
         .security-banner {
-            background: #f0fdf4;
+            background: linear-gradient(to left, #f0fdf4, #dcfce7);
             border: 1px solid #bbf7d0;
-            border-radius: 14px;
-            padding: 14px;
+            border-radius: 16px;
+            padding: 12px;
             text-align: center;
             font-size: 13px;
-            color: #16a34a;
-            font-weight: 500;
-            margin-bottom: 15px;
+            color: #15803d;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
+        
+        /* Typography & Values */
         .balance-title {
             color: #6b7280;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
         .balance-box {
-            font-size: 30px;
+            font-size: 36px;
             font-weight: 800;
-            color: #db2777;
-            margin: 6px 0;
+            color: #be185d;
+            margin: 8px 0;
+            letter-spacing: -0.5px;
         }
         .currencies-row {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-top: 10px;
-            margin-bottom: 12px;
+            gap: 12px;
+            margin-bottom: 16px;
         }
         .currency-badge {
-            background: #fdf2f8;
-            border: 1px solid #fbcfe8;
-            padding: 6px 12px;
+            padding: 8px 16px;
             border-radius: 12px;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
         .usd-value {
-            color: #059669;
-            background: #ecfdf5;
-            border-color: #a7f3d0;
+            color: #047857;
+            background: #d1fae5;
+            border: 1px solid #a7f3d0;
         }
         .diamond-value {
-            color: #0284c7;
-            background: #f0f9ff;
-            border-color: #bae6fd;
+            color: #0369a1;
+            background: #e0f2fe;
+            border: 1px solid #bae6fd;
         }
-        .btn-primary {
-            background: linear-gradient(135deg, #ec4899, #db2777);
-            color: #ffffff;
+
+        /* Buttons */
+        .btn {
             border: none;
             padding: 14px;
             width: 100%;
             font-size: 15px;
             font-weight: 700;
-            border-radius: 12px;
+            border-radius: 14px;
             cursor: pointer;
-            margin-top: 10px;
-            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
-            transition: 0.2s;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn:active { transform: scale(0.97); }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #ec4899, #be185d);
+            color: #ffffff;
+            box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3);
+            margin-top: 12px;
         }
         .btn-secondary {
             background: linear-gradient(135deg, #0284c7, #0369a1);
             color: #ffffff;
-            border: none;
-            padding: 12px;
+            box-shadow: 0 8px 20px rgba(2, 132, 199, 0.2);
+            margin-top: 12px;
+        }
+        .btn-success {
+            background: linear-gradient(135deg, #10b981, #047857);
+            color: #ffffff;
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2);
+            margin-top: 12px;
+        }
+
+        /* Store Pro Grid */
+        .store-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .store-item {
+            background: #ffffff;
+            border: 2px solid #fce7f3;
+            border-radius: 20px;
+            padding: 16px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+        .store-item:hover {
+            border-color: #ec4899;
+            transform: translateY(-3px);
+        }
+        .badge-hot {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ef4444;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 4px 8px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
+        }
+        .store-icon { font-size: 36px; margin-bottom: 10px; }
+        .store-title { font-size: 14px; font-weight: 800; color: #1f2937; margin-bottom: 6px; }
+        .store-price { font-size: 13px; color: #be185d; font-weight: 700; margin-bottom: 12px; background: #fdf2f8; padding: 4px; border-radius: 6px; }
+        .buy-btn {
+            background: #fdf2f8;
+            color: #be185d;
+            border: 1px solid #fbcfe8;
+            padding: 8px;
             width: 100%;
-            font-size: 14px;
-            font-weight: 700;
-            border-radius: 12px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 800;
             cursor: pointer;
-            margin-top: 8px;
-            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.2);
+            transition: 0.2s;
         }
-        .btn-primary:active, .btn-secondary:active {
-            transform: scale(0.98);
+        .buy-btn:active { background: #be185d; color: #fff; }
+
+        /* Profile Pro */
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #ffffff;
+            box-shadow: 0 0 0 3px #ec4899, 0 10px 20px rgba(236, 72, 153, 0.3);
+            margin: 0 auto 16px auto;
+            display: block;
         }
-        /* التنقل السفلي الفاتح */
+        .profile-info-group {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 14px 18px;
+            margin-top: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Nav Bar Glassmorphism */
         .nav-bar {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(15px);
-            border-top: 1px solid #fbcfe8;
+            -webkit-backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(251, 207, 232, 0.6);
             display: flex;
             justify-content: space-around;
-            padding: 10px 0;
+            padding: 12px 0 20px 0;
             z-index: 100;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.03);
         }
         .nav-item {
             background: none;
             border: none;
             color: #9ca3af;
             font-size: 11px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 16%;
         }
-        .nav-item.active {
-            color: #db2777;
-            transform: translateY(-2px);
-        }
-        .section {
-            display: none;
-        }
-        .section.active {
-            display: block;
-        }
+        .nav-item span { font-size: 20px; transition: 0.3s; filter: grayscale(100%); opacity: 0.6; }
+        .nav-item.active { color: #be185d; }
+        .nav-item.active span { filter: grayscale(0%); opacity: 1; transform: translateY(-4px) scale(1.1); }
         
-        /* العجلة الزهرية الفاتحة والمبهجة */
-        .wheel-outer-wrapper {
-            position: relative;
-            width: 290px;
-            height: 290px;
-            margin: 0 auto 20px auto;
-            display: flex;
+        .section { display: none; animation: fadeIn 0.4s ease; }
+        .section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Custom Pro Modal (بديل الـ Alert/Prompt) */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(17, 24, 39, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            display: none;
             justify-content: center;
             align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
         }
-        .wheel-border-glow {
-            position: absolute;
+        .modal-box {
+            background: #fff;
+            width: 90%;
+            max-width: 360px;
+            border-radius: 24px;
+            padding: 24px;
+            text-align: center;
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .modal-overlay.show { display: flex; opacity: 1; }
+        .modal-overlay.show .modal-box { transform: scale(1); }
+        .modal-icon { font-size: 40px; margin-bottom: 12px; }
+        .modal-title { font-size: 18px; font-weight: 800; color: #1f2937; margin-bottom: 8px; }
+        .modal-text { font-size: 14px; color: #6b7280; margin-bottom: 20px; line-height: 1.5; }
+        .modal-input {
             width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: conic-gradient(#f472b6, #db2777, #fbcfe8, #f472b6);
-            padding: 4px;
-            box-shadow: 0 0 25px rgba(236, 72, 153, 0.2);
+            padding: 12px;
+            border: 2px solid #fce7f3;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 15px;
+            text-align: center;
+            outline: none;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 700;
         }
-        .wheel-inner-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: #ffffff;
-            overflow: hidden;
-        }
-        #wheelPointer {
-            position: absolute;
-            top: -16px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 12px solid transparent;
-            border-right: 12px solid transparent;
-            border-bottom: 28px solid #ef4444;
-            z-index: 20;
-            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.2));
-        }
-        #luckyWheel {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-        }
-        .wheel-center-hub {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 50px;
-            height: 50px;
-            background: radial-gradient(circle, #f472b6, #db2777);
-            border-radius: 50%;
-            border: 3px solid #fff;
-            box-shadow: 0 0 10px rgba(0,0,0,0.15);
-            z-index: 10;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-            font-size: 10px;
-            color: #ffffff;
-        }
+        .modal-input:focus { border-color: #ec4899; }
+        .modal-buttons { display: flex; gap: 10px; }
+        .modal-btn { flex: 1; padding: 12px; border-radius: 12px; font-weight: 700; border: none; cursor: pointer; }
+        .modal-btn-cancel { background: #f3f4f6; color: #4b5563; }
+        .modal-btn-confirm { background: #ec4899; color: #fff; }
+
+        /* عجلة الحظ */
+        .wheel-outer-wrapper { position: relative; width: 280px; height: 280px; margin: 0 auto 20px auto; display: flex; justify-content: center; align-items: center; }
+        .wheel-border-glow { position: absolute; width: 100%; height: 100%; border-radius: 50%; background: conic-gradient(#f472b6, #db2777, #fbcfe8, #f472b6); padding: 4px; box-shadow: 0 0 30px rgba(236, 72, 153, 0.3); }
+        .wheel-inner-container { position: relative; width: 100%; height: 100%; border-radius: 50%; background: #ffffff; overflow: hidden; }
+        #wheelPointer { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 14px solid transparent; border-right: 14px solid transparent; border-bottom: 30px solid #be185d; z-index: 20; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); }
+        #luckyWheel { width: 100%; height: 100%; border-radius: 50%; }
+        .wheel-center-hub { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 56px; height: 56px; background: radial-gradient(circle, #f472b6, #be185d); border-radius: 50%; border: 4px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 10; display: flex; justify-content: center; align-items: center; font-weight: 800; font-size: 11px; color: #ffffff; }
     </style>
 </head>
 <body>
 
+    <!-- نافذة منبثقة مخصصة (Custom Modal) -->
+    <div class="modal-overlay" id="customModal">
+        <div class="modal-box">
+            <div class="modal-icon" id="modalIcon">✨</div>
+            <h3 class="modal-title" id="modalTitle">تنبيه</h3>
+            <p class="modal-text" id="modalText">نص الرسالة هنا</p>
+            <input type="text" id="modalInput" class="modal-input" style="display: none;">
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-cancel" id="modalCancelBtn" style="display: none;">إلغاء</button>
+                <button class="modal-btn modal-btn-confirm" id="modalConfirmBtn">حسناً</button>
+            </div>
+        </div>
+    </div>
+
     <header>
-        <div class="logo">🌸 AEGIS CASH</div>
-        <button class="logout-btn" onclick="alert('تم تسجيل الخروج بأمان')">خروج</button>
+        <div class="logo">🌸 Aegis Cash</div>
+        <button class="logout-btn" onclick="showCustomModal('تسجيل الخروج', 'هل أنت متأكد من رغبتك في تسجيل الخروج من حسابك الآمن؟', '🚪', true)">خروج</button>
     </header>
 
     <div class="container">
         
-        <!-- قسم المحفظة -->
+        <!-- قسم المحفظة الرئيسي -->
         <div id="wallet-section" class="section active">
             <div class="security-banner">
-                🔒 درع الخصوصية نشط: حساب مشفر ومحمي بالكامل
+                <span>🛡️</span> درع الخصوصية نشط: حساب مشفر ومحمي
             </div>
 
             <div class="card" style="text-align: center;">
-                <p class="balance-title">رصيد المحفظة الدائم</p>
+                <p class="balance-title">إجمالي الرصيد</p>
                 <div class="balance-box" id="userBalance">565 pt</div>
                 
                 <div class="currencies-row">
-                    <span class="currency-badge usd-value" id="userUsd">$0.11 USD</span>
+                    <span class="currency-badge usd-value" id="userUsd">💵 $0.00 USD</span>
                     <span class="currency-badge diamond-value" id="userDiamonds">💎 5 جواهر</span>
                 </div>
 
-                <button class="btn-secondary" onclick="convertDiamonds()">تحويل الجواهر إلى نقاط (100 جوهر = 10 pt)</button>
+                <button class="btn btn-secondary" onclick="convertDiamonds()">🔄 تحويل الجواهر (100💎 = 10pt)</button>
+                <button class="btn btn-success" onclick="openDepositModal()">➕ شحن المحفظة (فيزا / ماستر كارد)</button>
 
-                <div style="margin-top: 15px; font-size: 13px; color: #4b5563;">
-                    المستوى الحالي: <span id="userLevel" style="color: #db2777; font-weight: 700;">مبتدئ</span>
+                <div style="margin-top: 18px; font-size: 14px; font-weight: 700; color: #4b5563;">
+                    التصنيف: <span id="userLevel" style="color: #be185d;">مبتدئ 🌱</span>
                 </div>
             </div>
 
             <div class="card">
-                <h3 style="font-size: 15px; margin-bottom: 6px; color: #db2777;">🎁 مكافأة التسجيل اليومي</h3>
-                <p style="font-size: 12px; color: #6b7280; margin-bottom: 12px;">احصل على 50 نقطة و 2 جوهرة مجاناً كل 24 ساعة.</p>
-                <button class="btn-primary" onclick="claimDaily()">استلام المكافأة اليومية ⭐</button>
+                <h3 style="font-size: 16px; margin-bottom: 8px; color: #be185d; font-weight: 800;">🎁 مكافأة الدخول اليومي</h3>
+                <p style="font-size: 13px; color: #6b7280; margin-bottom: 16px;">متاحة كل 24 ساعة (50 نقطة + 2 جوهرة)</p>
+                <button class="btn btn-primary" onclick="claimDaily()">استلام المكافأة الآن ⭐</button>
             </div>
         </div>
 
-        <!-- قسم العجلة المبهجة -->
+        <!-- قسم المتجر الاحترافي -->
+        <div id="store-section" class="section">
+            <div class="card">
+                <h3 style="color: #be185d; margin-bottom: 6px; font-size: 18px; text-align: center; font-weight: 800;">🛍️ المتجر الرقمي</h3>
+                <p style="font-size: 13px; color: #6b7280; text-align: center; margin-bottom: 20px;">استخدم نقاطك لشراء المنتجات الرقمية فوراً</p>
+                
+                <div class="store-grid">
+                    <div class="store-item">
+                        <div class="store-icon">💎</div>
+                        <div class="store-title">حزمة 50 جوهرة</div>
+                        <div class="store-price">500 نقطة</div>
+                        <button class="buy-btn" onclick="buyItem('50 جوهرة', 500)">شراء سريع</button>
+                    </div>
+
+                    <div class="store-item">
+                        <div class="badge-hot">الأكثر طلباً 🔥</div>
+                        <div class="store-icon">💎</div>
+                        <div class="store-title">حزمة 200 جوهرة</div>
+                        <div class="store-price">1,800 نقطة</div>
+                        <button class="buy-btn" onclick="buyItem('200 جوهرة', 1800)">شراء سريع</button>
+                    </div>
+
+                    <div class="store-item">
+                        <div class="store-icon">🌐</div>
+                        <div class="store-title">بطاقة إنترنت 5GB</div>
+                        <div class="store-price">2,500 نقطة</div>
+                        <button class="buy-btn" onclick="buyItem('بطاقة إنترنت 5GB', 2500)">شراء سريع</button>
+                    </div>
+
+                    <div class="store-item">
+                        <div class="store-icon">💳</div>
+                        <div class="store-title">رصيد مباشر 5$</div>
+                        <div class="store-price">5,000 نقطة</div>
+                        <button class="buy-btn" onclick="buyItem('بطاقة رصيد 5$', 5000)">شراء سريع</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ملف المستخدم الاحترافي -->
+        <div id="profile-section" class="section">
+            <div class="card">
+                <div style="text-align: center; margin-bottom: 24px;">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="صورة المستخدم" class="profile-avatar">
+                    <h2 style="font-size: 22px; font-weight: 800; color: #1f2937;" id="profileNameDisplay">جاسم العراقي</h2>
+                    <p style="font-size: 13px; color: #6b7280; margin-top: 4px;">jasim@aegis-app.com</p>
+                </div>
+
+                <h4 style="font-size: 15px; color: #be185d; margin-bottom: 12px; font-weight: 800;">معلومات الحساب الأمنية</h4>
+                
+                <div class="profile-info-group">
+                    <span style="color: #6b7280; font-weight: 700; font-size: 13px;">معرف الحساب (ID)</span>
+                    <span style="color: #1f2937; font-weight: 800; font-size: 14px;">#AEG-84920</span>
+                </div>
+                
+                <div class="profile-info-group">
+                    <span style="color: #6b7280; font-weight: 700; font-size: 13px;">تاريخ التوثيق</span>
+                    <span style="color: #1f2937; font-weight: 800; font-size: 14px;">أغسطس 2026</span>
+                </div>
+
+                <div class="profile-info-group" style="background: #ecfdf5; border-color: #a7f3d0;">
+                    <span style="color: #047857; font-weight: 700; font-size: 13px;">حالة الحساب</span>
+                    <span style="color: #047857; font-weight: 800; font-size: 14px;">موثق 🛡️</span>
+                </div>
+
+                <button class="btn btn-secondary" style="margin-top: 24px; background: #f3f4f6; color: #374151; box-shadow: none;" onclick="openNameChangeModal()">✏️ تعديل الاسم الشخصي</button>
+            </div>
+        </div>
+
+        <!-- عجلة الحظ -->
         <div id="wheel-section" class="section">
             <div class="card" style="text-align: center;">
-                <h2 style="color: #db2777; margin-bottom: 5px; font-size: 18px;">🎡 عجلة الحظ الوردية المبهجة</h2>
-                <p style="font-size: 12px; color: #6b7280; margin-bottom: 15px;">تكلفة اللفة: 10 نقاط | اربح نقاط وجواهر مبهجة!</p>
+                <h2 style="color: #be185d; margin-bottom: 8px; font-size: 20px; font-weight: 800;">🎡 عجلة الحظ الكبرى</h2>
+                <p style="font-size: 13px; color: #6b7280; margin-bottom: 24px;">تكلفة اللفة 10 نقاط - الجوائز فورية!</p>
                 
                 <div class="wheel-outer-wrapper">
                     <div class="wheel-border-glow">
                         <div class="wheel-inner-container">
                             <div id="wheelPointer"></div>
-                            <canvas id="luckyWheel" width="280" height="280"></canvas>
-                            <div class="wheel-center-hub">AEGIS</div>
+                            <canvas id="luckyWheel" width="270" height="270"></canvas>
+                            <div class="wheel-center-hub">PLAY</div>
                         </div>
                     </div>
                 </div>
 
-                <button class="btn-primary" onclick="spinWheel()" style="margin-top: 10px;">لف العجلة الآن</button>
-                <p id="wheelResult" style="margin-top: 12px; font-size: 14px; font-weight: 700; color: #db2777;"></p>
+                <button class="btn btn-primary" onclick="spinWheel()" style="margin-top: 16px;">تدوير العجلة الآن 🌀</button>
+                <p id="wheelResult" style="margin-top: 16px; font-size: 16px; font-weight: 800; color: #be185d;"></p>
             </div>
         </div>
 
-        <!-- قسم المشاهدة -->
-        <div id="watch-section" class="section">
-            <div class="card" style="text-align: center;">
-                <h3 style="color: #db2777; margin-bottom: 8px;">📺 مشاهدة الإعلانات</h3>
-                <p style="font-size: 12px; color: #6b7280; margin-bottom: 15px;">شاهد الفيديوهات واكسب نقاط وجواهر إضافية.</p>
-                <button class="btn-primary" onclick="watchAd()">شاهد واكسب (25 نقطة + 1 جوهرة)</button>
-            </div>
-        </div>
-
-        <!-- قسم الدعوات -->
-        <div id="referral-section" class="section">
-            <div class="card" style="text-align: center;">
-                <h3 style="color: #db2777; margin-bottom: 8px;">👥 نظام الدعوات</h3>
-                <p style="font-size: 12px; color: #6b7280; margin-bottom: 15px;">ادع أصدقاءك واحصل على 100 نقطة و 5 جواهر.</p>
-                <div style="background: #fdf2f8; padding: 12px; border-radius: 10px; font-size: 12px; color: #db2777; border: 1px dashed #fbcfe8;">
-                    https://aegis-app.vercel.app/?ref=jasim
-                </div>
-            </div>
-        </div>
-
-        <!-- قسم السحب -->
+        <!-- سحب الأرباح -->
         <div id="withdraw-section" class="section">
             <div class="card" style="text-align: center;">
-                <h3 style="color: #db2777; margin-bottom: 8px;">💸 سحب الأرباح</h3>
-                <p style="font-size: 12px; color: #6b7280; margin-bottom: 15px;">الحد الأدنى للسحب هو 10,000 نقطة</p>
-                <button class="btn-primary" id="withdrawBtn" style="background: #e5e7eb; color: #9ca3af; cursor: not-allowed;" disabled>طلب السحب (الرصيد غير كافي)</button>
+                <h3 style="color: #be185d; margin-bottom: 12px; font-size: 18px; font-weight: 800;">💸 بوابة السحب الآمن</h3>
+                <p style="font-size: 14px; color: #6b7280; margin-bottom: 20px;">الحد الأدنى لفتح بوابة السحب هو <strong style="color:#be185d;">10,000 نقطة</strong></p>
+                
+                <div style="background: #f9fafb; padding: 20px; border-radius: 16px; margin-bottom: 20px; border: 1px dashed #d1d5db;">
+                    <div style="font-size: 24px; font-weight: 800; color: #1f2937;" id="progressText">565 / 10,000</div>
+                    <div style="width: 100%; background: #e5e7eb; height: 10px; border-radius: 10px; margin-top: 10px; overflow: hidden;">
+                        <div id="progressBar" style="width: 5%; background: linear-gradient(90deg, #ec4899, #be185d); height: 100%; border-radius: 10px; transition: width 0.5s;"></div>
+                    </div>
+                </div>
+
+                <button class="btn" id="withdrawBtn" style="background: #e5e7eb; color: #9ca3af; cursor: not-allowed;" disabled>الرصيد غير كافي للسحب 🔒</button>
             </div>
         </div>
 
     </div>
 
-    <!-- شريط التنقل السفلي -->
+    <!-- شريط التنقل السفلي الاحترافي -->
     <div class="nav-bar">
-        <button class="nav-item active" onclick="switchTab('wallet', this)">💰 المحفظة</button>
-        <button class="nav-item" onclick="switchTab('watch', this)">📺 مشاهدة</button>
-        <button class="nav-item" onclick="switchTab('wheel', this)">🎡 العجلة</button>
-        <button class="nav-item" onclick="switchTab('referral', this)">👥 الدعوات</button>
-        <button class="nav-item" onclick="switchTab('withdraw', this)">💸 السحب</button>
+        <button class="nav-item active" onclick="switchTab('wallet', this)"><span>💰</span> محفظتي</button>
+        <button class="nav-item" onclick="switchTab('store', this)"><span>🛍️</span> المتجر</button>
+        <button class="nav-item" onclick="switchTab('wheel', this)"><span>🎡</span> العجلة</button>
+        <button class="nav-item" onclick="switchTab('profile', this)"><span>👤</span> حسابي</button>
+        <button class="nav-item" onclick="switchTab('withdraw', this)"><span>💸</span> السحب</button>
     </div>
 
     <script>
         let balance = 565;
         let diamonds = 5;
-        const diamondConversionRate = 10000; // 10,000 جوهرة = 1 دولار
-        const minWithdrawPoints = 10000; // أدنى مستوى للسحب هو 10,000 نقطة
+        let userName = "جاسم العراقي";
+        const diamondConversionRate = 10000;
+        const minWithdrawPoints = 10000;
 
-        function updateUI() {
-            document.getElementById('userBalance').innerText = `${balance} pt`;
-            document.getElementById('userDiamonds').innerText = `💎 ${diamonds} جواهر`;
+        // Custom Modal Logic
+        const modalOverlay = document.getElementById('customModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalText = document.getElementById('modalText');
+        const modalIcon = document.getElementById('modalIcon');
+        const modalInput = document.getElementById('modalInput');
+        const modalCancelBtn = document.getElementById('modalCancelBtn');
+        const modalConfirmBtn = document.getElementById('modalConfirmBtn');
+        let currentModalCallback = null;
+
+        function showCustomModal(title, text, icon, showInput = false, callback = null) {
+            modalTitle.innerText = title;
+            modalText.innerText = text;
+            modalIcon.innerText = icon;
             
-            // حساب الدولار بناءً على الجواهر (كل 10,000 جوهرة = 1 دولار)
-            let usdValue = (diamonds / diamondConversionRate).toFixed(2);
-            document.getElementById('userUsd').innerText = `$${usdValue} USD`;
-
-            const levelElem = document.getElementById('userLevel');
-            if (balance >= 15000) {
-                levelElem.innerText = "محترف متميز 👑";
-            } else if (balance >= 5000) {
-                levelElem.innerText = "نشط متقدم 🚀";
+            if (showInput) {
+                modalInput.style.display = 'block';
+                modalInput.value = '';
+                modalCancelBtn.style.display = 'block';
             } else {
-                levelElem.innerText = "مبتدئ 🌱";
+                modalInput.style.display = 'none';
+                modalCancelBtn.style.display = 'none';
             }
 
-            // التحقق من حد السحب
+            if (callback) {
+                modalCancelBtn.style.display = 'block';
+            }
+
+            currentModalCallback = callback;
+            modalOverlay.classList.add('show');
+        }
+
+        modalCancelBtn.onclick = () => modalOverlay.classList.remove('show');
+        modalConfirmBtn.onclick = () => {
+            modalOverlay.classList.remove('show');
+            if (currentModalCallback) currentModalCallback(modalInput.value);
+        };
+
+        function updateUI() {
+            // تنسيق الأرقام بفواصل
+            document.getElementById('userBalance').innerText = balance.toLocaleString() + ' pt';
+            document.getElementById('userDiamonds').innerText = `💎 ${diamonds.toLocaleString()} جواهر`;
+            
+            let usdValue = (diamonds / diamondConversionRate).toFixed(2);
+            document.getElementById('userUsd').innerText = `💵 $${usdValue} USD`;
+
+            const levelElem = document.getElementById('userLevel');
+            if (balance >= 15000) levelElem.innerText = "محترف متميز 👑";
+            else if (balance >= 5000) levelElem.innerText = "نشط متقدم 🚀";
+            else levelElem.innerText = "مبتدئ 🌱";
+
+            // تحديث شريط التقدم للسحب
+            document.getElementById('progressText').innerText = `${balance.toLocaleString()} / 10,000`;
+            let progressPercentage = Math.min((balance / minWithdrawPoints) * 100, 100);
+            document.getElementById('progressBar').style.width = `${progressPercentage}%`;
+
             const withdrawBtn = document.getElementById('withdrawBtn');
-            if (balance >= minWithdrawPoints) {
-                withdrawBtn.disabled = false;
-                withdrawBtn.style.background = "linear-gradient(135deg, #ec4899, #db2777)";
-                withdrawBtn.style.color = "#ffffff";
-                withdrawBtn.style.cursor = "pointer";
-                withdrawBtn.innerText = "تقديم طلب سحب الأرباح ✨";
-            } else {
-                withdrawBtn.disabled = true;
-                withdrawBtn.style.background = "#e5e7eb";
-                withdrawBtn.style.color = "#9ca3af";
-                withdrawBtn.style.cursor = "not-allowed";
-                withdrawBtn.innerText = "طلب السحب (الحد الأدنى 10,000 نقطة)";
+            if (withdrawBtn) {
+                if (balance >= minWithdrawPoints) {
+                    withdrawBtn.disabled = false;
+                    withdrawBtn.style.background = "linear-gradient(135deg, #ec4899, #be185d)";
+                    withdrawBtn.style.color = "#ffffff";
+                    withdrawBtn.style.cursor = "pointer";
+                    withdrawBtn.innerText = "تقديم طلب سحب الأرباح الآن ✨";
+                } else {
+                    withdrawBtn.disabled = true;
+                    withdrawBtn.style.background = "#e5e7eb";
+                    withdrawBtn.style.color = "#9ca3af";
+                    withdrawBtn.style.cursor = "not-allowed";
+                    withdrawBtn.innerText = "الرصيد غير كافي للسحب 🔒";
+                }
             }
         }
 
@@ -384,48 +592,74 @@
             document.getElementById(tabName + '-section').classList.add('active');
             btnElement.classList.add('active');
             
-            if(tabName === 'wheel') {
-                drawWheel();
-            }
+            if(tabName === 'wheel') drawWheel();
         }
 
-        // تحويل الجواهر
+        function openDepositModal() {
+            showCustomModal("شحن المحفظة 💳", "أدخل عدد النقاط التي ترغب بشرائها عبر بطاقتك البنكية:", "💳", true, (val) => {
+                let amount = Number(val);
+                if (amount > 0) {
+                    balance += amount;
+                    updateUI();
+                    showCustomModal("عملية ناجحة!", `تم إضافة ${amount.toLocaleString()} نقطة إلى محفظتك بنجاح.`, "✅", false);
+                }
+            });
+        }
+
+        function buyItem(itemName, cost) {
+            showCustomModal("تأكيد الشراء", `هل أنت متأكد من شراء "${itemName}" مقابل ${cost.toLocaleString()} نقطة؟`, "🛍️", false, () => {
+                if (balance < cost) {
+                    showCustomModal("رصيد غير كافي", "عذراً، نقاطك لا تكفي لإتمام هذه العملية.", "❌", false);
+                    return;
+                }
+                balance -= cost;
+                if (itemName.includes("جوهرة")) {
+                    diamonds += itemName.includes("50") ? 50 : 200;
+                }
+                updateUI();
+                showCustomModal("مبروك!", `تم استلام "${itemName}" بنجاح في حسابك!`, "🎉", false);
+            });
+        }
+
+        function openNameChangeModal() {
+            modalInput.value = userName;
+            showCustomModal("تعديل الملف الشخصي", "الرجاء إدخال اسمك الجديد:", "✏️", true, (val) => {
+                if (val && val.trim() !== "") {
+                    userName = val.trim();
+                    document.getElementById('profileNameDisplay').innerText = userName;
+                    showCustomModal("تم التحديث", "تم تغيير اسمك الشخصي بنجاح.", "✅", false);
+                }
+            });
+        }
+
         function convertDiamonds() {
             if (diamonds < 100) {
-                alert("عذراً، يجب أن تمتلك 100 جوهرة على الأقل للتحويل.");
+                showCustomModal("تنبيه", "يجب أن تمتلك 100 جوهرة على الأقل لإتمام التحويل.", "⚠️", false);
                 return;
             }
             diamonds -= 100;
             balance += 10;
             updateUI();
-            alert("🌸 تم تحويل 100 جوهرة إلى 10 نقاط بنجاح!");
+            showCustomModal("نجاح", "تم تحويل 100 جوهرة إلى 10 نقاط بنجاح!", "💎", false);
         }
 
         function claimDaily() {
             balance += 50;
             diamonds += 2;
             updateUI();
-            alert("🌸 تهانينا! تمت إضافة 50 نقطة و 2 جوهرة إلى محفظتك.");
+            showCustomModal("مكافأة يومية", "تمت إضافة 50 نقطة و 2 جوهرة إلى محفظتك!", "🎁", false);
         }
 
-        function watchAd() {
-            balance += 25;
-            diamonds += 1;
-            updateUI();
-            alert("✨ ممتاز! تمت إضافة 25 نقطة و 1 جوهرة إلى رصيدك.");
-        }
-
-        // رسم العجلة الزهرية الفاتحة المبهجة
+        // إعدادات العجلة
         const canvas = document.getElementById('luckyWheel');
         const ctx = canvas.getContext('2d');
-
         const slices = [
             { text: "10 pt", type: "pts", value: 10, color: "#fbcfe8" },
             { text: "2 💎", type: "dm", value: 2, color: "#f472b6" },
             { text: "0 pt", type: "pts", value: 0, color: "#fbcfe8" },
             { text: "50 pt", type: "pts", value: 50, color: "#f472b6" },
             { text: "5 💎", type: "dm", value: 5, color: "#fbcfe8" },
-            { text: "100 pt", type: "pts", value: 100, color: "#db2777" }, // الجائزة الكبرى
+            { text: "100 pt", type: "pts", value: 100, color: "#be185d" },
             { text: "15 pt", type: "pts", value: 15, color: "#f472b6" },
             { text: "0 pt", type: "pts", value: 0, color: "#fbcfe8" }
         ];
@@ -436,27 +670,28 @@
         let currentAngle = 0;
 
         function drawWheel() {
-            const radius = 140;
+            const radius = 135;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const center = canvas.width / 2;
 
             for (let i = 0; i < slices.length; i++) {
                 const angle = startAngle + i * arc;
                 
                 ctx.fillStyle = slices[i].color;
                 ctx.beginPath();
-                ctx.arc(140, 140, radius, angle, angle + arc, false);
-                ctx.arc(140, 140, 25, angle + arc, angle, true);
+                ctx.arc(center, center, radius, angle, angle + arc, false);
+                ctx.arc(center, center, 20, angle + arc, angle, true);
                 ctx.fill();
                 
                 ctx.strokeStyle = '#ffffff';
-                ctx.lineWidth = 2;
+                ctx.lineWidth = 3;
                 ctx.stroke();
 
                 ctx.save();
-                ctx.fillStyle = "#ffffff";
-                ctx.translate(140 + Math.cos(angle + arc / 2) * 90, 140 + Math.sin(angle + arc / 2) * 90);
+                ctx.fillStyle = slices[i].color === "#be185d" ? "#ffffff" : "#1f2937";
+                ctx.translate(center + Math.cos(angle + arc / 2) * 85, center + Math.sin(angle + arc / 2) * 85);
                 ctx.rotate(angle + arc / 2 + Math.PI / 2);
-                ctx.font = "bold 13px Arial";
+                ctx.font = "bold 14px Tajawal, Arial";
                 ctx.fillText(slices[i].text, -ctx.measureText(slices[i].text).width / 2, 0);
                 ctx.restore();
             }
@@ -464,9 +699,8 @@
 
         function spinWheel() {
             if (spinning) return;
-
             if (balance < 10) {
-                alert("عذراً، رصيدك غير كافي (تكلفة اللفة 10 نقاط).");
+                showCustomModal("رصيد غير كافي", "تحتاج إلى 10 نقاط على الأقل لتدوير العجلة.", "⚠️", false);
                 return;
             }
 
@@ -474,12 +708,12 @@
             updateUI();
 
             spinning = true;
-            document.getElementById('wheelResult').innerText = "🌸 جاري تدوير العجلة الوردية...";
+            document.getElementById('wheelResult').innerText = "🌀 جاري السحب...";
             
-            const randomSpin = Math.floor(Math.random() * 360) + 2520;
+            const randomSpin = Math.floor(Math.random() * 360) + 2880; // 8 لفات على الأقل
             currentAngle += randomSpin;
             
-            canvas.style.transition = "transform 4.5s cubic-bezier(0.15, 0.85, 0.15, 1)";
+            canvas.style.transition = "transform 5s cubic-bezier(0.2, 0.9, 0.1, 1)";
             canvas.style.transform = `rotate(${currentAngle}deg)`;
 
             setTimeout(() => {
@@ -491,15 +725,21 @@
                 const winItem = slices[winningIndex];
                 if (winItem.type === "pts") {
                     balance += winItem.value;
-                    document.getElementById('wheelResult').innerText = `🎉 مبروك! ربحت ${winItem.value} نقطة`;
+                    document.getElementById('wheelResult').innerText = `🎉 ربحت ${winItem.value} نقطة!`;
                 } else {
                     diamonds += winItem.value;
-                    document.getElementById('wheelResult').innerText = `💎 مبروك! ربحت ${winItem.value} جوهرة`;
+                    document.getElementById('wheelResult').innerText = `💎 ربحت ${winItem.value} جوهرة!`;
                 }
                 updateUI();
-            }, 4500);
+                
+                // إضافة تأثير اهتزاز بسيط عند الفوز
+                document.getElementById('wheelResult').style.transform = "scale(1.1)";
+                setTimeout(() => document.getElementById('wheelResult').style.transform = "scale(1)", 300);
+
+            }, 5000);
         }
 
+        // تهيئة مبدئية
         drawWheel();
         updateUI();
     </script>
