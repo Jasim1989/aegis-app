@@ -6,7 +6,7 @@ module.exports = (req, res) => {
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-      <title>تطبيق Aegis App</title>
+      <title>تطبيق Aegis Mobile</title>
       <style>
         :root {
           --bg-color: #0b0f19;
@@ -163,42 +163,44 @@ module.exports = (req, res) => {
       </div>
       <div id="toast">تمت العملية بنجاح!</div>
       <script>
-        let count = 0;
-        let transactions = [];
+        var count = 0;
+        var transactions = [];
         function switchTab(tabId, btn) {
-          document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-          document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+          var tabs = document.querySelectorAll('.tab-content');
+          for (var i = 0; i < tabs.length; i++) { tabs[i].classList.remove('active'); }
+          var btns = document.querySelectorAll('.nav-item');
+          for (var j = 0; j < btns.length; j++) { btns[j].classList.remove('active'); }
           document.getElementById(tabId).classList.add('active');
           btn.classList.add('active');
         }
         function showToast(msg) {
-          const toast = document.getElementById("toast");
+          var toast = document.getElementById("toast");
           toast.innerText = msg;
           toast.className = "show";
-          setTimeout(() => { toast.className = ""; }, 2500);
+          setTimeout(function() { toast.className = ""; }, 2500);
         }
         function toggleTheme() {
-          const body = document.body;
-          const themeBtn = document.getElementById('themeBtn');
+          var body = document.body;
+          var themeBtn = document.getElementById('themeBtn');
           body.classList.toggle('light-mode');
           themeBtn.innerText = body.classList.contains('light-mode') ? '🌙 داكن' : '☀️ فاتح';
         }
         function generateKey() {
-          const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_!';
-          let key = 'aegis_app_';
-          for (let i = 0; i < 20; i++) {
+          var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_!';
+          var key = 'aegis_app_';
+          for (var i = 0; i < 20; i++) {
             key += chars.charAt(Math.floor(Math.random() * chars.length));
           }
-          const display = document.getElementById('keyDisplay');
+          var display = document.getElementById('keyDisplay');
           display.style.display = 'block';
           display.innerText = key;
           showToast("تم إنشاء المفتاح بنجاح! 🔑");
         }
         function checkStrength() {
-          const val = document.getElementById('passInput').value;
-          const fill = document.getElementById('meterFill');
-          const txt = document.getElementById('passScore');
-          let score = 0;
+          var val = document.getElementById('passInput').value;
+          var fill = document.getElementById('meterFill');
+          var txt = document.getElementById('passScore');
+          var score = 0;
           if (val.length > 5) score += 25;
           if (val.length > 10) score += 25;
           if (/[A-Z]/.test(val)) score += 25;
@@ -211,22 +213,17 @@ module.exports = (req, res) => {
         }
         function handleFormSubmit(e) {
           e.preventDefault();
-          const user = document.getElementById('username').value;
-          const service = document.getElementById('service').value;
-          const time = new Date().toLocaleTimeString('ar-EG');
+          var user = document.getElementById('username').value;
+          var service = document.getElementById('service').value;
+          var time = new Date().toLocaleTimeString('ar-EG');
           count++;
           document.getElementById('totalCount').innerText = count;
-          const emptyRow = document.getElementById('emptyRow');
+          var emptyRow = document.getElementById('emptyRow');
           if (emptyRow) emptyRow.remove();
-          transactions.push({ id: count, user, service, time });
-          const tableBody = document.getElementById('tableBody');
-          const newRow = document.createElement('tr');
-          newRow.innerHTML = `
-            <td>\${count}</td>
-            <td><b>\${user}</b></td>
-            <td>\${service}</td>
-            <td>\${time}</td>
-          `;
+          transactions.push({ id: count, user: user, service: service, time: time });
+          var tableBody = document.getElementById('tableBody');
+          var newRow = document.createElement('tr');
+          newRow.innerHTML = '<td>' + count + '</td><td><b>' + user + '</b></td><td>' + service + '</td><td>' + time + '</td>';
           tableBody.prepend(newRow);
           document.getElementById('username').value = '';
           showToast("تم تنفيذ الطلب بنجاح! 🚀");
@@ -236,18 +233,18 @@ module.exports = (req, res) => {
             showToast("لا توجد بيانات للسجل!");
             return;
           }
-          let csv = "ID,User,Service,Time\\n";
-          transactions.forEach(t => { csv += `\${t.id},\${t.user},\${t.service},\${t.time}\\n`; });
-          const blob = new Blob([csv], { type: 'text/csv' });
-          const url = window.URL.createObjectURL(blob);
-          const a = document.createElement('a');
+          var csv = "ID,User,Service,Time\\n";
+          transactions.forEach(function(t) { csv += t.id + "," + t.user + "," + t.service + "," + t.time + "\\n"; });
+          var blob = new Blob([csv], { type: 'text/csv' });
+          var url = window.URL.createObjectURL(blob);
+          var a = document.createElement('a');
           a.setAttribute('href', url);
           a.setAttribute('download', 'aegis_logs.csv');
           a.click();
           showToast("تم تحميل الملف! 📥");
         }
-        setInterval(() => {
-          const ping = Math.floor(Math.random() * (35 - 18 + 1)) + 18;
+        setInterval(function() {
+          var ping = Math.floor(Math.random() * (35 - 18 + 1)) + 18;
           document.getElementById('pingValue').innerText = ping + ' ms';
         }, 3000);
       </script>
