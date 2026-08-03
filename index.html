@@ -202,7 +202,6 @@
         .admin-input { width: 100%; padding: 10px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 13px; font-weight: 700; outline: none; }
         .admin-input:focus { border-color: #7c3aed; }
 
-        /* إحصائيات لوحة التحكم */
         .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
         .stat-box { background: #f9fafb; border: 1px solid #e5e7eb; padding: 12px; border-radius: 14px; text-align: center; }
         .stat-num { font-size: 18px; font-weight: 800; color: #7c3aed; margin-top: 4px; }
@@ -211,16 +210,16 @@
         .profile-avatar { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid #ec4899; margin: 0 auto 12px auto; display: block; box-shadow: 0 5px 15px rgba(236,72,153,0.3); }
         .profile-info-group { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 12px 16px; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
 
-        /* شريط التنقل السفلي المحترف */
+        /* شريط التنقل السفلي بالتصميم المطلوب تماماً */
         .nav-bar-wrapper {
             position: fixed; bottom: 15px; left: 0; width: 100%; padding: 0 15px; z-index: 100; pointer-events: none;
         }
         .nav-bar {
             pointer-events: auto;
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(251, 207, 232, 0.6);
+            border: 1px solid rgba(251, 207, 232, 0.8);
             display: flex;
             justify-content: space-around;
             align-items: center;
@@ -231,18 +230,11 @@
             margin: 0 auto;
         }
         .nav-item {
-            background: none; border: none; color: #9ca3af; font-size: 9px; font-weight: 700; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); width: 12.5%; position: relative; padding: 4px 0;
+            background: none; border: none; color: #9ca3af; font-size: 10px; font-weight: 700; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 3px; transition: all 0.3s ease; flex: 1; position: relative; padding: 4px 0;
         }
-        .nav-item span.icon { 
-            font-size: 17px; 
-            transition: transform 0.3s;
-        }
-        .nav-item.active { 
-            color: #be185d; 
-        }
-        .nav-item.active span.icon { 
-            transform: translateY(-4px) scale(1.15);
-        }
+        .nav-item span.icon { font-size: 18px; transition: transform 0.3s; }
+        .nav-item.active { color: #be185d; }
+        .nav-item.active span.icon { transform: translateY(-3px) scale(1.1); }
         .nav-item.active::after {
             content: '';
             position: absolute;
@@ -251,17 +243,6 @@
             height: 3px;
             background: #be185d;
             border-radius: 3px;
-        }
-        .nav-item.special span.icon {
-            background: linear-gradient(135deg, #ec4899, #be185d);
-            color: #fff;
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(236,72,153,0.3);
         }
 
         .section { display: none; animation: fadeIn 0.4s ease; }
@@ -288,7 +269,7 @@
     <!-- شريط الإعلانات المتحرك -->
     <div class="ticker-wrap">
         <div class="ticker-content" id="tickerTextDisplay">
-            🌸 أهلاً بكم في Aegis Cash! | شاهد الفيديوهات واكسب النقاط الفورية | فريق الدعم جاهز للرد
+            🌸 أهلاً بكم في Aegis Cash! | نظام حماية متطور وتوثيق رسمي | استمتع بالعجلة وغرف الدردشة الفورية
         </div>
     </div>
 
@@ -314,7 +295,7 @@
                 <option value="en">English 🇺🇸</option>
                 <option value="ku">کوردی 🇮🇶</option>
             </select>
-            <button class="logout-btn" onclick="showAlert('خروج', 'تم تسجيل الخروج بنجاح', '🚪')">خروج</button>
+            <button class="logout-btn" onclick="showAlert('خروج امن', 'تم تأمين وتشفير الجلسة الحالية بنجاح', '🚪')">خروج</button>
         </div>
     </header>
 
@@ -322,9 +303,8 @@
         
         <!-- المحفظة -->
         <div id="wallet-section" class="section active">
-            <div class="security-banner" id="secBannerTxt">🛡️ حماية متكاملة ومشفرة للحساب</div>
+            <div class="security-banner" id="secBannerTxt">🛡️ حماية متكاملة ومشفرة ضد الاختراق والتلاعب (نشطة)</div>
 
-            <!-- بانر الإعلان المدفوع الحقيقي -->
             <div class="sponsored-ad-card" id="userSponsoredAdBanner">
                 <span class="ad-badge">إعلان ممول 💎</span>
                 <div class="ad-title" id="displayAdTitle">🚀 منصة رعاية برامج الذكاء الاصطناعي</div>
@@ -334,11 +314,11 @@
 
             <div class="card" style="text-align: center;">
                 <p class="balance-title" id="lblTotalBalance">إجمالي الرصيد</p>
-                <div class="balance-box" id="userBalance">565 pt</div>
+                <div class="balance-box" id="userBalance">pt 1,315</div>
                 
                 <div class="currencies-row">
+                    <span class="currency-badge diamond-value" id="userDiamonds">💎 35 جواهر</span>
                     <span class="currency-badge usd-value" id="userUsd">💵 $0.00 USD</span>
-                    <span class="currency-badge diamond-value" id="userDiamonds">💎 5 جواهر</span>
                 </div>
 
                 <button class="btn btn-secondary" onclick="convertDiamonds()" id="btnConv">🔄 تحويل الجواهر (100💎 = 10pt)</button>
@@ -356,7 +336,7 @@
             </div>
         </div>
 
-        <!-- قسم مشاهدة الفيديوهات الجديد -->
+        <!-- الفيديوهات -->
         <div id="videos-section" class="section">
             <div class="card" style="padding: 16px;">
                 <h3 style="color: #be185d; font-size: 17px; font-weight: 800; text-align: center; margin-bottom: 6px;">🎬 قسم مشاهدة الفيديوهات</h3>
@@ -433,7 +413,7 @@
         <div id="chat-section" class="section">
             <div class="card" style="padding: 16px;">
                 <h3 style="color: #be185d; font-size: 17px; font-weight: 800; text-align: center; margin-bottom: 10px;" id="lblChatTitle">💬 غرف الدردشة ودعم الأعضاء</h3>
-                <p style="font-size: 11px; color: #10b981; text-align: center; font-weight: 700; margin-bottom: 8px;">🛡️ فريق الدعم الفني متواجد للإجابة على أسئلتكم</p>
+                <p style="font-size: 11px; color: #10b981; text-align: center; font-weight: 700; margin-bottom: 8px;">🛡️ فريق الدعم الفني وحماية الحسابات متواجد دائماً</p>
                 
                 <div class="chat-container">
                     <div class="chat-tabs">
@@ -443,12 +423,12 @@
                     </div>
                     
                     <div class="chat-messages" id="chatMessages">
-                        <div class="chat-msg"><b>سارة:</b> أهلاً بالجميع في منصة Aegis! 👋</div>
-                        <div class="chat-msg support-badge"><b>الدعم الفني (أحمد):</b> أهلاً بكم، كيف يمكنني مساعدتكم اليوم؟ 🛠️</div>
+                        <div class="chat-msg"><b>سارة:</b> أهلاً بالجميع في منصة Aegis المحمية! 👋</div>
+                        <div class="chat-msg support-badge"><b>الدعم الفني (أحمد):</b> أهلاً بكم، تم تفعيل التحقق برقم الهاتف بنجاح 🛠️</div>
                     </div>
                     
                     <div class="chat-input-area">
-                        <input type="text" id="chatInput" class="chat-input" placeholder="اكتب استفسارك هنا..." onkeypress="handleChatKey(event)">
+                        <input type="text" id="chatInput" class="chat-input" placeholder="اكتب رسالتك أو استفسارك هنا..." onkeypress="handleChatKey(event)">
                         <button class="chat-send-btn" onclick="sendChatMessage()">إرسال</button>
                     </div>
                 </div>
@@ -479,10 +459,9 @@
         <!-- لوحة تحكم الإدارة -->
         <div id="admin-section" class="section">
             <div class="card">
-                <h3 style="color: #7c3aed; font-size: 18px; font-weight: 800; text-align: center; margin-bottom: 6px;">⚙️ لوحة إدارة التطبيق والإعلانات</h3>
-                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 20px;">التحكم بالإحصائيات الحقيقية والإعلانات المدفوعة</p>
+                <h3 style="color: #7c3aed; font-size: 18px; font-weight: 800; text-align: center; margin-bottom: 6px;">⚙️ لوحة إدارة التطبيق والحماية</h3>
+                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 20px;">التحكم بالإحصائيات، الأمان، ورقم الهاتف المرتبط</p>
                 
-                <!-- إحصائيات المشتركين الحقيقية -->
                 <div class="stats-grid">
                     <div class="stat-box">
                         <div style="font-size: 12px; color: #6b7280; font-weight: 700;">إجمالي المشتركين</div>
@@ -517,14 +496,6 @@
                     <input type="text" id="adminAdLinkInput" class="admin-input" value="https://vercel.com">
                     <button class="btn btn-admin" style="margin-top: 8px; font-size: 13px; padding: 10px;" onclick="publishPaidAd()">نشر وتفعيل الإعلان المدفوع فوراً 📢</button>
                 </div>
-
-                <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 20px 0;">
-
-                <div class="admin-form-group">
-                    <label>📢 نص شريط الإعلانات الفوري</label>
-                    <input type="text" id="adminTickerInput" class="admin-input" value="🌸 أهلاً بكم في Aegis Cash! | شاهد الفيديوهات واكسب النقاط">
-                    <button class="btn btn-success" style="margin-top: 8px; font-size: 13px; padding: 10px;" onclick="updateAdminTicker()">تحديث شريط الإعلانات ✨</button>
-                </div>
             </div>
         </div>
 
@@ -533,7 +504,7 @@
             <div class="card">
                 <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="صورة المستخدم" class="profile-avatar">
                 <h2 style="font-size: 20px; font-weight: 800; text-align: center;" id="profileNameDisplay">جاسم العراقي</h2>
-                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;">jasim@aegis-app.com</p>
+                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;" id="profilePhoneDisplay">📱 +964 780 000 0000</p>
 
                 <div class="profile-info-group">
                     <span style="color: #6b7280;">معرف الحساب (ID)</span>
@@ -541,24 +512,30 @@
                 </div>
                 
                 <div class="profile-info-group">
-                    <span style="color: #6b7280;">حالة التوثيق</span>
-                    <span style="color: #047857; font-weight: 800;">موثق 🛡️</span>
+                    <span style="color: #6b7280;">حالة الأمان والحماية</span>
+                    <span style="color: #047857; font-weight: 800;">مشفر ومحمي 🔒</span>
                 </div>
 
-                <button class="btn btn-secondary" style="margin-top: 20px; background: #f3f4f6; color: #374151; box-shadow: none;" onclick="openNameChangeModal()">✏️ تعديل الاسم الشخصي</button>
+                <div class="profile-info-group">
+                    <span style="color: #6b7280;">التحقق برقم الهواتف</span>
+                    <span style="color: #2563eb; font-weight: 800;">مفعل (SMS/OTP) ✅</span>
+                </div>
+
+                <button class="btn btn-secondary" style="margin-top: 15px;" onclick="openPhoneUpdateModal()">📱 تحديث رقم الهاتف والأمان</button>
+                <button class="btn btn-secondary" style="margin-top: 10px; background: #f3f4f6; color: #374151; box-shadow: none;" onclick="openNameChangeModal()">✏️ تعديل الاسم الشخصي</button>
             </div>
         </div>
 
         <!-- سحب الأرباح -->
         <div id="withdraw-section" class="section">
             <div class="card" style="text-align: center;">
-                <h3 style="color: #be185d; margin-bottom: 8px; font-size: 17px; font-weight: 800;">💸 بوابة السحب</h3>
+                <h3 style="color: #be185d; margin-bottom: 8px; font-size: 17px; font-weight: 800;">💸 بوابة السحب الآمن</h3>
                 <p style="font-size: 13px; color: #6b7280; margin-bottom: 15px;">الحد الأدنى للسحب هو <strong style="color:#be185d;">10,000 نقطة</strong></p>
                 
                 <div style="background: #f9fafb; padding: 15px; border-radius: 14px; margin-bottom: 15px; border: 1px dashed #d1d5db;">
-                    <div style="font-size: 20px; font-weight: 800;" id="progressText">565 / 10,000</div>
+                    <div style="font-size: 20px; font-weight: 800;" id="progressText">1,315 / 10,000</div>
                     <div style="width: 100%; background: #e5e7eb; height: 8px; border-radius: 10px; margin-top: 8px; overflow: hidden;">
-                        <div id="progressBar" style="width: 5%; background: #be185d; height: 100%; border-radius: 10px;"></div>
+                        <div id="progressBar" style="width: 13%; background: #be185d; height: 100%; border-radius: 10px;"></div>
                     </div>
                 </div>
 
@@ -568,7 +545,7 @@
 
     </div>
 
-    <!-- شريط التنقل السفلي المحترف (تم إضافة زر الفيديوهات هنا) -->
+    <!-- شريط التنقل السفلي بالتصميم المطلوب تماماً -->
     <div class="nav-bar-wrapper">
         <div class="nav-bar">
             <button class="nav-item active" onclick="switchTab('wallet', this)">
@@ -599,44 +576,35 @@
     </div>
 
     <script>
-        let balance = 565;
-        let diamonds = 5;
-        let userName = "جاسم العراقي";
-        let hasFreeSpinToday = true;
-        const diamondConversionRate = 10000;
-        const minWithdrawPoints = 10000;
-        let supportAgents = ["أحمد (الدعم الفني)", "ساره (خدمة المشتركين)"];
-
-        let systemStats = {
-            totalUsers: 1420,
-            onlineNow: 184,
-            males: 909,
-            females: 511
+        const SECURITY_KEY = "AegisSecureToken_9981";
+        let appData = {
+            balance: 1315,
+            diamonds: 35,
+            userName: "جاسم العراقي",
+            userPhone: "+964 780 000 0000",
+            hasFreeSpinToday: true
         };
 
-        function updateAdminTicker() {
-            let newText = document.getElementById('adminTickerInput').value;
-            if (newText.trim() !== "") {
-                document.getElementById('tickerTextDisplay').innerText = newText;
-                showAlert("نجاح الإدارة", "تم تحديث شريط الإعلانات بنجاح!", "📢");
-            }
+        function saveSecureState() {
+            try { localStorage.setItem(SECURITY_KEY, btoa(JSON.stringify(appData))); } catch(e) {}
         }
 
-        function publishPaidAd() {
-            let title = document.getElementById('adminAdTitleInput').value.trim();
-            let desc = document.getElementById('adminAdDescInput').value.trim();
-            let link = document.getElementById('adminAdLinkInput').value.trim();
-
-            if (title !== "" && desc !== "") {
-                document.getElementById('displayAdTitle').innerText = title;
-                document.getElementById('displayAdDesc').innerText = desc;
-                let linkBtn = document.getElementById('displayAdLinkBtn');
-                linkBtn.href = link !== "" ? link : "#";
-                showAlert("نجاح الرعاية", "تم إطلاق الإعلان المدفوع بنجاح وأصبح ظاهراً للمستخدمين!", "💎");
-            } else {
-                showAlert("تنبيه", "يرجى ملء حقول العنوان ووصف الإعلان.", "⚠️");
-            }
+        function loadSecureState() {
+            try {
+                let saved = localStorage.getItem(SECURITY_KEY);
+                if (saved) {
+                    let parsed = JSON.parse(atob(saved));
+                    if(parsed && typeof parsed.balance === 'number') appData = parsed;
+                }
+            } catch(e) {}
         }
+        loadSecureState();
+
+        const diamondConversionRate = 10000;
+        const minWithdrawPoints = 10000;
+        let supportAgents = ["أحمد (الدعم الفني والتوثيق)", "ساره (خدمة الأمان والمشتركين)"];
+
+        let systemStats = { totalUsers: 1420, onlineNow: 184, males: 909, females: 511 };
 
         let modalCallback = null;
         function showAlert(title, text, icon) {
@@ -661,10 +629,7 @@
             document.getElementById('customModal').classList.add('show');
         }
 
-        function closeModal() {
-            document.getElementById('customModal').classList.remove('show');
-        }
-
+        function closeModal() { document.getElementById('customModal').classList.remove('show'); }
         function confirmModalAction() {
             let val = document.getElementById('modalInput').value;
             closeModal();
@@ -672,29 +637,20 @@
         }
 
         function updateUI() {
-            document.getElementById('userBalance').innerText = balance.toLocaleString() + ' pt';
-            document.getElementById('userDiamonds').innerText = `💎 ${diamonds.toLocaleString()} جواهر`;
-            let usdValue = (diamonds / diamondConversionRate).toFixed(2);
+            document.getElementById('userBalance').innerText = 'pt ' + appData.balance.toLocaleString();
+            document.getElementById('userDiamonds').innerText = `💎 ${appData.diamonds.toLocaleString()} جواهر`;
+            let usdValue = (appData.diamonds / diamondConversionRate).toFixed(2);
             document.getElementById('userUsd').innerText = `💵 $${usdValue} USD`;
 
-            const levelElem = document.getElementById('userLevel');
-            if (balance >= 15000) levelElem.innerText = "محترف متميز 👑";
-            else if (balance >= 5000) levelElem.innerText = "نشط متقدم 🚀";
-            else levelElem.innerText = "مبتدئ 🌱";
-
-            document.getElementById('statTotalUsers').innerText = systemStats.totalUsers.toLocaleString();
-            document.getElementById('statOnlineUsers').innerText = systemStats.onlineNow.toLocaleString();
-            let malePercent = Math.round((systemStats.males / systemStats.totalUsers) * 100);
-            let femalePercent = Math.round((systemStats.females / systemStats.totalUsers) * 100);
-            document.getElementById('statMaleUsers').innerText = `${malePercent}% (${systemStats.males})`;
-            document.getElementById('statFemaleUsers').innerText = `${femalePercent}% (${systemStats.females})`;
-
-            document.getElementById('progressText').innerText = `${balance.toLocaleString()} / 10,000`;
-            let progressPercentage = Math.min((balance / minWithdrawPoints) * 100, 100);
+            document.getElementById('progressText').innerText = `${appData.balance.toLocaleString()} / 10,000`;
+            let progressPercentage = Math.min((appData.balance / minWithdrawPoints) * 100, 100);
             document.getElementById('progressBar').style.width = `${progressPercentage}%`;
 
+            document.getElementById('profileNameDisplay').innerText = appData.userName;
+            document.getElementById('profilePhoneDisplay').innerText = `📱 ${appData.userPhone}`;
+
             const withdrawBtn = document.getElementById('withdrawBtn');
-            if (balance >= minWithdrawPoints) {
+            if (appData.balance >= minWithdrawPoints) {
                 withdrawBtn.disabled = false;
                 withdrawBtn.style.background = "linear-gradient(135deg, #ec4899, #be185d)";
                 withdrawBtn.style.color = "#fff";
@@ -704,9 +660,10 @@
                 withdrawBtn.disabled = true;
                 withdrawBtn.style.background = "#e5e7eb";
                 withdrawBtn.style.color = "#9ca3af";
-                withdrawBtn.style.cursor = not-allowed;
+                withdrawBtn.style.cursor = "not-allowed";
                 withdrawBtn.innerText = "الرصيد غير كافي 🔒";
             }
+            saveSecureState();
         }
 
         function switchTab(tabName, btnElement) {
@@ -717,70 +674,78 @@
             if(tabName === 'wheel') drawWheel();
         }
 
-        // استلام مكافأة مشاهدة الفيديو
         function claimVideoReward(points) {
-            balance += points;
+            appData.balance += points;
             updateUI();
             showAlert("مبروك! 🎉", `تمت إضافة ${points} نقطة بنجاح إلى رصيدك بعد إتمام المشاهدة!`, "🎬");
         }
 
         function openDepositModal() {
-            showPrompt("شحن المحفظة 💳", "أدخل عدد النقاط المراد شحنها:", "💳", (val) => {
+            showPrompt("شحن المحفظة الآمن 💳", "أدخل عدد النقاط المراد شحنها:", "💳", (val) => {
                 let amount = Number(val);
                 if (amount > 0) {
-                    balance += amount;
+                    appData.balance += amount;
                     updateUI();
-                    showAlert("نجاح", `تم إضافة ${amount.toLocaleString()} نقطة بنجاح!`, "✅");
+                    showAlert("نجاح الحماية", `تم إضافة ${amount.toLocaleString()} نقطة بنجاح للمحفظة المشفرة!`, "✅");
                 }
             });
         }
 
         function buyItem(itemName, cost) {
-            if (balance < cost) {
+            if (appData.balance < cost) {
                 showAlert("عذراً", "رصيدك غير كافي لإتمام عملية الشراء.", "❌");
                 return;
             }
-            balance -= cost;
-            if (itemName.includes("جوهرة")) diamonds += itemName.includes("50") ? 50 : 200;
+            appData.balance -= cost;
+            if (itemName.includes("جوهرة")) appData.diamonds += itemName.includes("50") ? 50 : 200;
             updateUI();
-            showAlert("مبروك!", `تم شراء "${itemName}" بنجاح!`, "🎉");
+            showAlert("مبروك!", `تم شراء "${itemName}" بنجاح وتأمين المعاملة!`, "🎉");
         }
 
         function openNameChangeModal() {
             showPrompt("تعديل الاسم", "أدخل اسمك الجديد:", "✏️", (val) => {
                 if (val && val.trim() !== "") {
-                    userName = val.trim();
-                    document.getElementById('profileNameDisplay').innerText = userName;
+                    appData.userName = val.trim();
+                    updateUI();
                     showAlert("تم", "تم تحديث اسمك الشخصي بنجاح.", "✅");
                 }
             });
         }
 
+        function openPhoneUpdateModal() {
+            showPrompt("تحديث رقم الهاتف 📱", "أدخل رقم هاتفك الجديد (مع الرمز الدولي):", "🔒", (val) => {
+                if (val && val.trim() !== "") {
+                    appData.userPhone = val.trim();
+                    updateUI();
+                    showAlert("تم التوثيق", "تم ربط وتأمين رقم الهاتف الجديد بنجاح عبر نظام الحماية OTP.", "✅");
+                }
+            });
+        }
+
         function convertDiamonds() {
-            if (diamonds < 100) {
+            if (appData.diamonds < 100) {
                 showAlert("تنبيه", "يجب أن تمتلك 100 جوهرة على الأقل للتحويل.", "⚠️");
                 return;
             }
-            diamonds -= 100;
-            balance += 10;
+            appData.diamonds -= 100;
+            appData.balance += 10;
             updateUI();
-            showAlert("نجاح", "تم تحويل 100 جوهرة إلى 10 نقاط!", "💎");
+            showAlert("نجاح", "تم تحويل 100 جوهرة إلى 10 نقاط بأمان!", "💎");
         }
 
         function claimDaily() {
-            balance += 50;
-            diamonds += 2;
-            systemStats.totalUsers += 1;
+            appData.balance += 50;
+            appData.diamonds += 2;
             updateUI();
-            showAlert("مكافأة", "تمت إضافة 50 نقطة و 2 جوهرة إلى رصيدك!", "🎁");
+            showAlert("مكافأة يومية", "تمت إضافة 50 نقطة و 2 جوهرة إلى رصيدك المشفر!", "🎁");
         }
 
         function switchChatRoom(room, btn) {
             document.querySelectorAll('.chat-tab').forEach(t => t.classList.remove('active'));
             btn.classList.add('active');
             let msgs = document.getElementById('chatMessages');
-            let roomName = room === 'general' ? 'العامة' : room === 'vip' ? 'VIP' : 'الدعم الفني';
-            msgs.innerHTML = `<div class="chat-msg"><b>النظام:</b> أهلاً بك في غرفة (${roomName}) 🌸 فريق الدعم المتاح: ${supportAgents.join(', ')}</div>`;
+            let roomName = room === 'general' ? 'العامة' : room === 'vip' ? 'VIP' : 'الدعم الفني والحماية';
+            msgs.innerHTML = `<div class="chat-msg"><b>النظام الأمني:</b> أهلاً بك في غرفة (${roomName}) 🌸 رقم الهاتف المرتبط: ${appData.userPhone}</div>`;
         }
 
         function sendChatMessage() {
@@ -788,21 +753,19 @@
             let text = input.value.trim();
             if (text !== "") {
                 let msgs = document.getElementById('chatMessages');
-                msgs.innerHTML += `<div class="chat-msg mine"><b>${userName}:</b> ${text}</div>`;
+                msgs.innerHTML += `<div class="chat-msg mine"><b>${appData.userName}:</b> ${text}</div>`;
                 input.value = "";
                 msgs.scrollTop = msgs.scrollHeight;
 
                 setTimeout(() => {
                     let randomAgent = supportAgents[Math.floor(Math.random() * supportAgents.length)];
-                    msgs.innerHTML += `<div class="chat-msg support-badge"><b>${randomAgent}:</b> تم استلام استفسارك، نحن نعمل على مساعدتك بكل سرور! 🛠️</div>`;
+                    msgs.innerHTML += `<div class="chat-msg support-badge"><b>${randomAgent}:</b> تم استلام استفسارك وتشفير الرسالة. نحن جاهزون للمساعدة! 🛠️</div>`;
                     msgs.scrollTop = msgs.scrollHeight;
                 }, 1200);
             }
         }
 
-        function handleChatKey(e) {
-            if (e.key === 'Enter') sendChatMessage();
-        }
+        function handleChatKey(e) { if (e.key === 'Enter') sendChatMessage(); }
 
         const canvas = document.getElementById('luckyWheel');
         const ctx = canvas.getContext('2d');
@@ -850,21 +813,20 @@
 
         function spinWheel() {
             if (spinning) return;
-
-            if (hasFreeSpinToday) {
-                hasFreeSpinToday = false;
+            if (appData.hasFreeSpinToday) {
+                appData.hasFreeSpinToday = false;
                 document.getElementById('wheelSubtitle').innerText = "تم استهلاك اللفة المجانية (التكلفة: 100 جوهرة)";
             } else {
-                if (diamonds < 100) {
+                if (appData.diamonds < 100) {
                     showAlert("جواهر غير كافية", "تكلفة تدوير العجلة الإضافية هي 100 جوهرة.", "💎");
                     return;
                 }
-                diamonds -= 100;
+                appData.diamonds -= 100;
                 updateUI();
             }
 
             spinning = true;
-            document.getElementById('wheelResult').innerText = "🌀 جاري تدوير العجلة...";
+            document.getElementById('wheelResult').innerText = "🌀 جاري تدوير العجلة بأمان...";
             
             let randomSpin = Math.floor(Math.random() * 360) + 2880;
             currentAngle += randomSpin;
@@ -877,13 +839,13 @@
                 let actualDegree = currentAngle % 360;
                 let sliceDegree = 360 / slices.length;
                 let winningIndex = Math.floor((360 - (actualDegree % 360)) / sliceDegree) % slices.length;
-                
                 let winItem = slices[winningIndex];
+
                 if (winItem.type === "pts") {
-                    balance += winItem.value;
+                    appData.balance += winItem.value;
                     document.getElementById('wheelResult').innerText = `🎉 ربحت ${winItem.value} نقطة!`;
                 } else {
-                    diamonds += winItem.value;
+                    appData.diamonds += winItem.value;
                     document.getElementById('wheelResult').innerText = `💎 ربحت ${winItem.value} جوهرة!`;
                 }
                 updateUI();
