@@ -907,6 +907,34 @@ function requestWithdrawal() {
         }
     });
 }
+function requestWithdrawal() {
+    if (appData.balance < minWithdrawPoints) {
+        showAlert("تنبيه", "عذراً، رصيدك الحالي أقل من الحد الأدنى للسحب (10,000 نقطة).", "⚠️");
+        return;
+    }
+
+    showPrompt("تأكيد طلب السحب 💸", "أدخل رقم الحساب أو المحفظة المراد التحويل إليها:", "🏧", (accountInfo) => {
+        if (accountInfo && accountInfo.trim() !== "") {
+            appData.balance = 0;
+            updateUI();
+            showAlert("تم تقديم الطلب بنجاح! 🎉", `تم بنجاح تسجيل طلب سحب رصيدك إلى الحساب (${accountInfo}). سيتم التحويل قريباً.`, "✅");
+        } else {
+            showAlert("خطأ في البيانات", "يرجى إدخال معلومات صحيحة لإتمام السحب.", "❌");
+        }
+    });
+}
+
+function promptForUserName() {
+    showPrompt("تسجيل اسم المشترك 👤", "الرجاء إدخال اسمك الخاص:", "✍️", (enteredName) => {
+        if (enteredName && enteredName.trim() !== "") {
+            appData.userName = enteredName.trim();
+            updateUI();
+            showAlert("مرحباً بك! 👋", `تم حفظ اسمك: ${appData.userName}`, "✅");
+        } else {
+            showAlert("تنبيه", "يجب إدخال اسم صحيح للمتابعة.", "⚠️");
+        }
+    });
+}
 
         </script>
 </body>
