@@ -935,6 +935,25 @@ function promptForUserName() {
         }
     });
 }
+// طلب الاسم من المشترك تلقائياً إذا لم يكن مخزناً
+window.addEventListener('DOMContentLoaded', () => {
+    let savedName = localStorage.getItem('userName');
+    if (!savedName) {
+        showPrompt("تسجيل الدخول 👤", "الرجاء إدخال اسمك الخاص للمتابعة:", "✍️", (enteredName) => {
+            if (enteredName && enteredName.trim() !== "") {
+                localStorage.setItem('userName', enteredName.trim());
+                let nameElement = document.getElementById('profileName');
+                if (nameElement) nameElement.innerText = enteredName.trim();
+                showAlert("مرحباً بك! 👋", `تم حفظ باسمك: ${enteredName.trim()}`, "✅");
+            } else {
+                localStorage.setItem('userName', 'مشترك جديد');
+            }
+        });
+    } else {
+        let nameElement = document.getElementById('profileName');
+        if (nameElement) nameElement.innerText = savedName;
+    }
+});
 
         </script>
 </body>
