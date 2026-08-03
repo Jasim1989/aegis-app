@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aegis - المنصة المتكاملة</title>
     
-    <!-- كود الحماية المتقدمة وتشفير البيانات والتحقق -->
+    <!-- كود الحماية المتقدمة وتشفير البيانات -->
     <script>
+        // دالة تنظيف وتأمين المدخلات ضد الأكواد الخبيثة
         function sanitizeInput(input) {
             if (typeof input !== 'string') return input;
             return input
@@ -17,6 +18,7 @@
                 .replace(/'/g, "&#039;");
         }
 
+        // نظام تشفير وحماية الرصيد والجواهر من التعديل اليدوي في المتصفح
         window.secureVault = {
             _balance: 565,
             _diamonds: 5,
@@ -27,23 +29,17 @@
                     return;
                 }
                 this._balance = Math.max(0, val);
-                updateUI();
+                if (typeof updateUI === 'function') updateUI();
             },
             get diamonds() { return this._diamonds; },
             set diamonds(val) {
                 if (typeof val !== 'number' || isNaN(val)) return;
                 this._diamonds = Math.max(0, val);
-                updateUI();
+                if (typeof updateUI === 'function') updateUI();
             }
         };
 
-        function updateUI() {
-            if(document.getElementById('userBalance')) {
-                document.getElementById('userBalance').innerText = window.secureVault.balance;
-                document.getElementById('userDiamonds').innerText = window.secureVault.diamonds;
-            }
-        }
-
+        // نظام التحقق من رقم الهاتف وحساب واحد لكل شخص
         const registeredUsers = JSON.parse(localStorage.getItem('aegis_users') || '[]');
 
         function registerWithPhone(phoneNumber, userName) {
@@ -74,7 +70,6 @@
             localStorage.setItem('aegis_current_user', JSON.stringify(newUser));
 
             alert("✅ تم تسجيل الحساب بنجاح برقم الهاتف!");
-            updateUI();
             return true;
         }
     </script>
@@ -90,60 +85,50 @@
             -webkit-tap-highlight-color: transparent;
         }
         body {
-            background-color: #fdf2f8; /* خلفية وردية مبهجة */
+            background-color: #fdf2f8; /* خلفية وردية مبهجة وخفيفة */
             color: #1f2937;
-            padding-bottom: 90px;
+            padding-bottom: 110px;
         }
         .header-banner {
             background: linear-gradient(135deg, #ec4899, #db2777);
             color: #fff;
             padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            text-align: center;
+            font-weight: 700;
+            font-size: 18px;
             box-shadow: 0 2px 10px rgba(236,72,153,0.2);
         }
-        .wallet-badge {
-            background: rgba(255,255,255,0.2);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: bold;
-        }
         .main-container {
-            padding: 15px;
+            padding: 20px;
             max-width: 500px;
             margin: 0 auto;
         }
-        .card-box {
+        .auth-box {
             background: #ffffff;
-            padding: 18px;
+            padding: 20px;
             border-radius: 16px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 15px rgba(236,72,153,0.06);
-            border: 1px solid #fce7f3;
+            margin-top: 20px;
             text-align: right;
-            display: none;
+            box-shadow: 0 4px 15px rgba(236,72,153,0.08);
+            border: 1px solid #fce7f3;
         }
-        .card-box.active {
-            display: block;
-        }
-        .card-box h3 {
-            color: #be185d;
-            font-size: 18px;
+        .auth-box h3 {
             margin-bottom: 8px;
+            color: #be185d;
+            font-size: 20px;
         }
-        .card-box p {
+        .auth-box p {
             font-size: 13px;
             color: #6b7280;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
         }
         .input-field {
             width: 100%;
-            padding: 11px;
-            margin-bottom: 10px;
+            padding: 12px;
+            margin-bottom: 12px;
             border: 1px solid #f472b6;
             border-radius: 10px;
+            font-family: inherit;
             background: #fff5f8;
             color: #1f2937;
             outline: none;
@@ -152,231 +137,49 @@
             border-color: #db2777;
             box-shadow: 0 0 0 3px rgba(236,72,153,0.15);
         }
-        .btn-main {
+        .btn-submit {
             width: 100%;
-            padding: 11px;
+            padding: 12px;
             background: #ec4899;
             color: #fff;
             border: none;
             border-radius: 10px;
             font-weight: bold;
-            font-size: 15px;
+            font-size: 16px;
             cursor: pointer;
             transition: background 0.2s;
         }
-        .btn-main:hover {
+        .btn-submit:hover {
             background: #db2777;
-        }
-        
-        /* عجلة الحظ */
-        .wheel-container {
-            text-align: center;
-        }
-        .wheel {
-            width: 150px;
-            height: 150px;
-            border: 8px solid #ec4899;
-            border-radius: 50%;
-            margin: 15px auto;
-            background: conic-gradient(#f472b6 0deg 90deg, #fbcfe8 90deg 180deg, #f472b6 180deg 270deg, #fbcfe8 270deg 360deg);
-            transition: transform 3s cubic-bezier(0.15, 0.9, 0.2, 1);
-        }
-        
-        /* الدردشة */
-        .chat-messages {
-            height: 130px;
-            overflow-y: auto;
-            background: #fff5f8;
-            border: 1px solid #fce7f3;
-            border-radius: 10px;
-            padding: 10px;
-            margin-bottom: 10px;
-            font-size: 13px;
-        }
-        .chat-msg {
-            margin-bottom: 6px;
-            border-bottom: 1px solid #fbcfe8;
-            padding-bottom: 4px;
-        }
-
-        /* شريط التنقل السفلي الثابت */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: #ffffff;
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            border-top: 1px solid #fce7f3;
-            box-shadow: 0 -4px 15px rgba(236,72,153,0.08);
-            z-index: 1000;
-        }
-        .nav-item {
-            background: none;
-            border: none;
-            font-size: 11px;
-            color: #6b7280;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 3px;
-        }
-        .nav-item.active {
-            color: #ec4899;
-        }
-        .nav-item span.icon {
-            font-size: 16px;
         }
     </style>
 </head>
 <body>
 
     <div class="header-banner">
-        <span>Aegis المنصة المتكاملة</span>
-        <div>
-            <span class="wallet-badge">💰 <span id="userBalance">565</span></span>
-            <span class="wallet-badge">💎 <span id="userDiamonds">5</span></span>
-        </div>
+        منصة Aegis الذكية
     </div>
 
     <div class="main-container">
-        <!-- 1. قسم تسجيل الحساب برقم الهاتف -->
-        <div class="card-box active" id="sec-register">
-            <h3>تسجيل الحساب برقم الهاتف</h3>
+        <!-- نموذج تسجيل الحساب برقم الهاتف -->
+        <div class="auth-box">
+            <h3>إنشاء حساب جديد</h3>
             <p>حساب واحد لكل شخص - يرجى إدخال رقم الهاتف الرسمي بدقة</p>
+            
             <input type="text" id="uiName" class="input-field" placeholder="الاسم الكريم">
             <input type="tel" id="uiPhone" class="input-field" placeholder="رقم الهاتف (مثال: 07XXXXXXXX)">
-            <button onclick="registerWithPhone(document.getElementById('uiPhone').value, document.getElementById('uiName').value)" class="btn-main">تأكيد التسجيل وإنشاء الحساب</button>
+            
+            <button onclick="onRegisterClick()" class="btn-submit">تأكيد التسجيل وإنشاء الحساب</button>
         </div>
-
-        <!-- 2. مركز مشاهدة الفيديوهات والأرباح -->
-        <div class="card-box" id="sec-videos">
-            <h3>🎬 مركز مشاهدة الفيديوهات والأرباح</h3>
-            <p>شاهد الفيديو للنهاية لتحصيل المكافأة الفورية!</p>
-            <div style="background: #000; height: 140px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; margin-bottom: 12px;">
-                <span>▶ محاكاة فيديو ترويجي تفاعلي</span>
-            </div>
-            <button onclick="watchVideoReward()" class="btn-main">بدء مشاهدة الفيديو واكسب +10 رصيد</button>
-        </div>
-
-        <!-- 3. عجلة الحظ اليومية -->
-        <div class="card-box wheel-container" id="sec-wheel">
-            <h3>🎡 عجلة الحظ اليومية</h3>
-            <p>جرب حظك واحصل على جوائز إضافية كل يوم</p>
-            <div class="wheel" id="luckyWheel"></div>
-            <button onclick="spinWheel()" class="btn-main">تدوير العجلة الآن</button>
-        </div>
-
-        <!-- 4. قسم سحب الأرباح -->
-        <div class="card-box" id="sec-withdraw">
-            <h3>💸 سحب الأرباح والمكافآت</h3>
-            <p>قم بتقديم طلب تحويل أرباحك وجواهرك بسهولة</p>
-            <input type="text" class="input-field" placeholder="رقم المحفظة (زين كاش / شبكة تحويل)">
-            <input type="number" class="input-field" placeholder="المبلغ المراد سحبه">
-            <button onclick="requestWithdraw()" class="btn-main">إرسال طلب السحب</button>
-        </div>
-
-        <!-- 5. غرف دردشة الأعضاء -->
-        <div class="card-box" id="sec-chat">
-            <h3>💬 غرفة دردشة الأعضاء</h3>
-            <p>تواصل وتفاعل مع بقية أعضاء المنصة النشطين</p>
-            <div class="chat-messages" id="chatBox">
-                <div class="chat-msg"><b>النظام:</b> أهلاً بك في غرف دردشة Aegis النشطة.</div>
-            </div>
-            <input type="text" id="chatInput" class="input-field" placeholder="اكتب رسالتك..." style="margin-bottom: 8px;">
-            <button onclick="sendChatMessage()" class="btn-main" style="padding: 8px;">إرسال الرسالة</button>
-        </div>
-
-        <!-- 6. إعدادات الحساب والأمان -->
-        <div class="card-box" id="sec-settings">
-            <h3>⚙️ إعدادات المنصة والحساب</h3>
-            <p>إدارة تفضيلات الأمان وحالة الحساب والبيانات</p>
-            <div style="background: #fff5f8; padding: 12px; border-radius: 10px; margin-bottom: 12px; font-size: 13px; border: 1px solid #fce7f3;">
-                <b>حالة الحساب:</b> محمي ومؤمن بواسطة نظام Aegis Vault 🛡️
-            </div>
-            <button onclick="alert('تم حفظ إعدادات التطبيق وتحديثها بنجاح!')" class="btn-main">حفظ التغييرات</button>
-        </div>
-    </div>
-
-    <!-- شريط التنقل السفلي الشامل -->
-    <div class="bottom-nav">
-        <button class="nav-item active" onclick="switchTab('register', this)">
-            <span class="icon">👤</span> الحساب
-        </button>
-        <button class="nav-item" onclick="switchTab('videos', this)">
-            <span class="icon">🎬</span> الفيديوهات
-        </button>
-        <button class="nav-item" onclick="switchTab('wheel', this)">
-            <span class="icon">🎡</span> العجلة
-        </button>
-        <button class="nav-item" onclick="switchTab('withdraw', this)">
-            <span class="icon">💸</span> السحب
-        </button>
-        <button class="nav-item" onclick="switchTab('chat', this)">
-            <span class="icon">💬</span> الدردشة
-        </button>
-        <button class="nav-item" onclick="switchTab('settings', this)">
-            <span class="icon">⚙️</span> الإعدادات
-        </button>
     </div>
 
     <script>
-        // التنقل التفاعلي بين الأقسام
-        function switchTab(tabId, btnElement) {
-            document.querySelectorAll('.card-box').forEach(box => box.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-            
-            document.getElementById('sec-' + tabId).classList.add('active');
-            btnElement.classList.add('active');
-        }
-
-        // مكافأة الفيديوهات مع نافذة تنبيه مبهجة
-        function watchVideoReward() {
-            alert("⏳ جاري مشاهدة الفيديو... يرجى الانتظار 3 ثوانٍ.");
-            setTimeout(() => {
-                window.secureVault.balance += 10;
-                window.secureVault.diamonds += 1;
-                alert("🎉 مبروك! لقد أتممت مشاهدة الفيديو وحصلت على +10 رصيد و +1 جوهرة!");
-            }, 3000);
-        }
-
-        // دوال عجلة الحظ
-        let currentDegree = 0;
-        function spinWheel() {
-            const wheel = document.getElementById('luckyWheel');
-            const randomDegree = Math.floor(Math.random() * 360) + 1440;
-            currentDegree += randomDegree;
-            wheel.style.transform = `rotate(${currentDegree}deg)`;
-            
-            setTimeout(() => {
-                window.secureVault.balance += 25;
-                alert("✨ مبروك! ربحت 25 نقطة إضافية من عجلة الحظ!");
-            }, 3000);
-        }
-
-        // طلب السحب
-        function requestWithdraw() {
-            alert("📤 تم تقديم طلب سحب الأرباح بنجاح، وسيتم معالجته وتحويله قريباً.");
-        }
-
-        // دردشة الأعضاء الحية
-        function sendChatMessage() {
-            const input = document.getElementById('chatInput');
-            const chatBox = document.getElementById('chatBox');
-            if(!input.value.trim()) return;
-            
-            const cleanText = sanitizeInput(input.value);
-            const userMsg = document.createElement('div');
-            userMsg.className = 'chat-msg';
-            userMsg.innerHTML = `<b>أنت:</b> ${cleanText}`;
-            chatBox.appendChild(userMsg);
-            input.value = '';
-            chatBox.scrollTop = chatBox.scrollHeight;
+        function onRegisterClick() {
+            const name = document.getElementById('uiName').value;
+            const phone = document.getElementById('uiPhone').value;
+            registerWithPhone(phone, name);
         }
     </script>
+
 </body>
 </html>
