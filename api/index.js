@@ -5,8 +5,8 @@ module.exports = (req, res) => {
     <html lang="ar" dir="rtl">
     <head>
       <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>تطبيق Aegis | منصة الخدمات الأمنية المتقدمة</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+      <title>تطبيق Aegis App</title>
       <style>
         :root {
           --bg-color: #0b0f19;
@@ -17,7 +17,6 @@ module.exports = (req, res) => {
           --primary-color: #38bdf8;
           --accent-green: #10b981;
           --btn-bg: #0284c7;
-          --btn-hover: #0369a1;
           --input-bg: #0b0f19;
         }
 
@@ -30,196 +29,216 @@ module.exports = (req, res) => {
           --primary-color: #0284c7;
           --accent-green: #059669;
           --btn-bg: #0284c7;
-          --btn-hover: #0369a1;
           --input-bg: #e2e8f0;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; transition: all 0.25s ease; }
-        body { background-color: var(--bg-color); color: var(--text-color); min-height: 100vh; padding: 1.5rem; }
-        .container { max-width: 1000px; margin: 0 auto; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; -webkit-tap-highlight-color: transparent; }
         
-        /* Navigation */
-        nav { display: flex; justify-content: space-between; align-items: center; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); margin-bottom: 2rem; }
-        .logo { font-size: 1.6rem; font-weight: 800; color: var(--primary-color); display: flex; align-items: center; gap: 0.5rem; }
-        .nav-controls { display: flex; align-items: center; gap: 0.8rem; }
-        .status-badge { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border: 1px solid var(--accent-green); padding: 0.4rem 0.9rem; border-radius: 9999px; font-size: 0.85rem; font-weight: bold; }
-        .theme-btn { background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 0.4rem 0.9rem; border-radius: 0.5rem; cursor: pointer; font-weight: bold; }
+        /* App Frame Setup (No Scroll Body) */
+        html, body { height: 100vh; overflow: hidden; background-color: var(--bg-color); color: var(--text-color); }
+        .app-viewport { display: flex; flex-direction: column; height: 100vh; max-width: 600px; margin: 0 auto; border-left: 1px solid var(--border-color); border-right: 1px solid var(--border-color); background-color: var(--bg-color); }
+        
+        /* Top App Bar */
+        header { display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: var(--card-bg); border-bottom: 1px solid var(--border-color); }
+        .logo { font-size: 1.25rem; font-weight: 800; color: var(--primary-color); }
+        .theme-btn { background: transparent; border: 1px solid var(--border-color); color: var(--text-color); padding: 0.3rem 0.6rem; border-radius: 0.5rem; cursor: pointer; font-size: 0.8rem; }
 
-        /* Stats Grid */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.2rem; margin-bottom: 2rem; }
-        .card { background: var(--card-bg); border: 1px solid var(--border-color); padding: 1.25rem; border-radius: 0.75rem; position: relative; overflow: hidden; }
-        .card h3 { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.5rem; }
-        .card .value { font-size: 1.75rem; font-weight: bold; }
+        /* Main Screen Container */
+        main { flex: 1; overflow-y: auto; padding: 1rem; position: relative; }
+        
+        /* Tab Views */
+        .tab-content { display: none; animation: fadeIn 0.25s ease-in-out; }
+        .tab-content.active { display: block; }
 
-        /* Content Layout */
-        .main-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
-        
-        .section-box { background: var(--card-bg); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 0.75rem; }
-        .section-box h2 { font-size: 1.15rem; color: var(--primary-color); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
-        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Cards & Components */
+        .card { background: var(--card-bg); border: 1px solid var(--border-color); padding: 1.25rem; border-radius: 0.85rem; margin-bottom: 1rem; }
+        .card h3 { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.4rem; }
+        .card .value { font-size: 1.6rem; font-weight: bold; }
+
+        /* Forms & Inputs */
         .form-group { margin-bottom: 1rem; }
         label { display: block; margin-bottom: 0.4rem; color: var(--text-muted); font-size: 0.85rem; }
-        input, select { width: 100%; padding: 0.75rem; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 0.5rem; color: var(--text-color); font-size: 0.95rem; }
-        input:focus { outline: 1px solid var(--primary-color); }
+        input, select { width: 100%; padding: 0.8rem; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 0.6rem; color: var(--text-color); font-size: 0.95rem; }
+        .btn { width: 100%; background: var(--btn-bg); color: white; border: none; padding: 0.8rem; border-radius: 0.6rem; font-size: 0.95rem; font-weight: bold; cursor: pointer; }
         
-        .btn { width: 100%; background: var(--btn-bg); color: white; border: none; padding: 0.75rem; border-radius: 0.5rem; font-size: 0.95rem; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 0.5rem; }
-        .btn:hover { background: var(--btn-hover); transform: translateY(-1px); }
-
-        /* Password Checker Bar */
+        /* Meter */
         .meter { height: 8px; background: var(--input-bg); border-radius: 4px; margin-top: 0.5rem; overflow: hidden; }
-        .meter-fill { height: 100%; width: 0%; transition: width 0.3s, background-color 0.3s; }
+        .meter-fill { height: 100%; width: 0%; transition: all 0.3s; }
 
-        /* Key Display */
+        /* Key Display Box */
         .key-output { background: var(--input-bg); border: 1px dashed var(--primary-color); padding: 0.75rem; border-radius: 0.5rem; font-family: monospace; font-size: 0.85rem; word-break: break-all; margin-top: 1rem; text-align: center; color: var(--primary-color); display: none; }
 
-        /* Table Area */
-        .table-section { background: var(--card-bg); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 0.75rem; overflow-x: auto; }
-        .table-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-        table { width: 100%; border-collapse: collapse; text-align: right; }
-        th, td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border-color); font-size: 0.875rem; }
-        th { color: var(--text-muted); font-weight: 600; }
-        .no-data { text-align: center; color: var(--text-muted); padding: 1.5rem 0; }
+        /* Bottom Tab Navigation Bar */
+        nav.bottom-nav { display: flex; justify-content: space-around; background: var(--card-bg); border-top: 1px solid var(--border-color); padding: 0.6rem 0; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; background: none; border: none; color: var(--text-muted); font-size: 0.75rem; cursor: pointer; width: 25%; }
+        .nav-item.active { color: var(--primary-color); font-weight: bold; }
+        .nav-icon { font-size: 1.2rem; }
 
-        /* Notification Toast */
-        #toast { visibility: hidden; min-width: 250px; background-color: var(--card-bg); color: var(--text-color); border: 1px solid var(--primary-color); text-align: center; border-radius: 0.5rem; padding: 1rem; position: fixed; z-index: 1000; left: 50%; bottom: 30px; transform: translateX(-50%); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
-        #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
-        @keyframes fadein { from { bottom: 0; opacity: 0; } to { bottom: 30px; opacity: 1; } }
-        @keyframes fadeout { from { bottom: 30px; opacity: 1; } to { bottom: 0; opacity: 0; } }
+        /* Toast */
+        #toast { visibility: hidden; min-width: 200px; background-color: var(--card-bg); color: var(--text-color); border: 1px solid var(--primary-color); text-align: center; border-radius: 0.5rem; padding: 0.75rem; position: fixed; z-index: 1000; left: 50%; top: 70px; transform: translateX(-50%); box-shadow: 0 10px 20px rgba(0,0,0,0.3); font-size: 0.85rem; }
+        #toast.show { visibility: visible; animation: fadein 0.4s, fadeout 0.4s 2.2s; }
+        @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeout { from { opacity: 1; } to { opacity: 0; } }
+
+        /* Table */
+        table { width: 100%; border-collapse: collapse; text-align: right; }
+        th, td { padding: 0.6rem; border-bottom: 1px solid var(--border-color); font-size: 0.8rem; }
       </style>
     </head>
     <body>
-      <div class="container">
-        <!-- Navigation -->
-        <nav>
-          <div class="logo">🛡️ Aegis Security Hub</div>
-          <div class="nav-controls">
-            <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">☀️ الوضع الفاتح</button>
-            <div class="status-badge">● الخدمة نشطة</div>
-          </div>
-        </nav>
 
-        <!-- Stats Grid -->
-        <div class="grid">
-          <div class="card">
-            <h3>حالة الخادم</h3>
-            <div class="value" style="color:var(--accent-green);">نشط 100%</div>
-          </div>
-          <div class="card">
-            <h3>الطلبات المنفذة</h3>
-            <div class="value" id="totalCount">0</div>
-          </div>
-          <div class="card">
-            <h3>مستوى التهديدات</h3>
-            <div class="value" style="color:#f59e0b;">منخفض جداً</div>
-          </div>
-          <div class="card">
-            <h3>زمن الاستجابة</h3>
-            <div class="value" id="pingValue">32 ms</div>
-          </div>
-        </div>
+      <div class="app-viewport">
+        <!-- Top App Header -->
+        <header>
+          <div class="logo">🛡️ Aegis Mobile</div>
+          <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">☀️ فاتح</button>
+        </header>
 
-        <!-- Main Layout -->
-        <div class="main-layout">
-          <!-- Form Section -->
-          <div class="section-box">
-            <h2>📝 تقديم طلب خدمة</h2>
-            <form id="actionForm" onsubmit="handleFormSubmit(event)">
-              <div class="form-group">
-                <label>اسم المشترك / المعرف</label>
-                <input type="text" id="username" placeholder="أدخل اسمك..." required>
-              </div>
-              <div class="form-group">
-                <label>نوع الخدمة المطلوبة</label>
-                <select id="service">
-                  <option value="فحص أمني شامل">فحص أمني شامل (Security Audit)</option>
-                  <option value="توليد مفتاح API">توليد مفتاح API مشفر</option>
-                  <option value="حماية ضد الهجمات">حماية DDoS & Shield</option>
-                </select>
-              </div>
-              <button type="submit" class="btn">إرسال واستجابة فورية 🚀</button>
-            </form>
-          </div>
-
-          <!-- Password Checker Tool -->
-          <div class="section-box">
-            <h2>🔒 فحص قوة الحماية</h2>
-            <div class="form-group">
-              <label>جرب قوة كلمة المرور الخاص بك:</label>
-              <input type="text" id="passInput" oninput="checkStrength()" placeholder="اكتب كلمة مرور لتجربتها...">
-              <div class="meter"><div class="meter-fill" id="meterFill"></div></div>
-              <p id="passScore" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">اكتب شيئاً لفحصه...</p>
+        <!-- Dynamic Main Pages -->
+        <main>
+          <!-- Tab 1: Dashboard -->
+          <div id="tab-dashboard" class="tab-content active">
+            <h2 style="font-size: 1.2rem; margin-bottom: 1rem; color: var(--primary-color);">الرئيسية | حالة المنظومة</h2>
+            <div class="card">
+              <h3>حالة الخادم الفوري</h3>
+              <div class="value" style="color:var(--accent-green);">نشط 100%</div>
+            </div>
+            <div class="card">
+              <h3>إجمالي العمليات المنفذة</h3>
+              <div class="value" id="totalCount">0</div>
+            </div>
+            <div class="card">
+              <h3>معدل الاستجابة (Ping)</h3>
+              <div class="value" id="pingValue">28 ms</div>
             </div>
           </div>
 
-          <!-- Key Generator Tool -->
-          <div class="section-box">
-            <h2>🔑 توليد مفتاح تشفير</h2>
-            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">إنشاء مفاتيح مشفرة عالية الأمان بضغطة واحدة.</p>
-            <button class="btn" style="background: var(--accent-green);" onclick="generateKey()">توليد مفتاح رصين ⚡</button>
-            <div class="key-output" id="keyDisplay"></div>
+          <!-- Tab 2: Service Request Form -->
+          <div id="tab-services" class="tab-content">
+            <h2 style="font-size: 1.2rem; margin-bottom: 1rem; color: var(--primary-color);">إرسال طلب جديد</h2>
+            <div class="card">
+              <form onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                  <label>اسم المشترك / المعرف</label>
+                  <input type="text" id="username" placeholder="أدخل الاسم..." required>
+                </div>
+                <div class="form-group">
+                  <label>نوع الخدمة</label>
+                  <select id="service">
+                    <option value="فحص أمني شامل">فحص أمني شامل</option>
+                    <option value="توليد مفتاح API">توليد مفتاح API مشفر</option>
+                    <option value="حماية الشبكة">حماية وسيرفر Shield</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn">تنفيذ الطلب 🚀</button>
+              </form>
+            </div>
           </div>
-        </div>
 
-        <!-- Transactions History Table -->
-        <div class="table-section">
-          <div class="table-header">
-            <h2 style="font-size: 1.15rem; color: var(--primary-color);">📋 سجل الطلبات المباشر</h2>
-            <button class="theme-btn" style="font-size:0.8rem;" onclick="exportCSV()">تصدير السجل (CSV) 📥</button>
+          <!-- Tab 3: Security Tools -->
+          <div id="tab-tools" class="tab-content">
+            <h2 style="font-size: 1.2rem; margin-bottom: 1rem; color: var(--primary-color);">أدوات الأمان والحماية</h2>
+            <div class="card">
+              <h3 style="color:var(--text-color); margin-bottom:0.8rem;">🔒 فحص قوة كلمة المرور</h3>
+              <input type="text" id="passInput" oninput="checkStrength()" placeholder="اكتب كلمة مرور لفحصها...">
+              <div class="meter"><div class="meter-fill" id="meterFill"></div></div>
+              <p id="passScore" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">ادخل نصاً للتجربة...</p>
+            </div>
+
+            <div class="card">
+              <h3 style="color:var(--text-color); margin-bottom:0.8rem;">🔑 توليد مفاتيح مشفرة</h3>
+              <button class="btn" style="background: var(--accent-green);" onclick="generateKey()">توليد مفتاح جديد ⚡</button>
+              <div class="key-output" id="keyDisplay"></div>
+            </div>
           </div>
-          <table>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>المشترك</th>
-                <th>نوع الخدمة</th>
-                <th>الوقت</th>
-                <th>الحالة</th>
-              </tr>
-            </thead>
-            <tbody id="tableBody">
-              <tr id="emptyRow">
-                <td colspan="5" class="no-data">لا توجد طلبات مسجلة حالياً. قم بإرسال طلبك ليظهر فوراً!</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+
+          <!-- Tab 4: Logs & History -->
+          <div id="tab-logs" class="tab-content">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+              <h2 style="font-size: 1.1rem; color: var(--primary-color);">📋 سجل الطلبات</h2>
+              <button class="theme-btn" onclick="exportCSV()">تحميل CSV 📥</button>
+            </div>
+            <div class="card" style="padding:0.5rem; overflow-x:auto;">
+              <table>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>المشترك</th>
+                    <th>الخدمة</th>
+                    <th>الوقت</th>
+                  </tr>
+                </thead>
+                <tbody id="tableBody">
+                  <tr id="emptyRow">
+                    <td colspan="4" style="text-align:center; color:var(--text-muted); padding:1rem;">لا توجد سجلات.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </main>
+
+        <!-- Bottom Tab Navigation -->
+        <nav class="bottom-nav">
+          <button class="nav-item active" onclick="switchTab('tab-dashboard', this)">
+            <span class="nav-icon">📊</span>
+            <span>الرئيسية</span>
+          </button>
+          <button class="nav-item" onclick="switchTab('tab-services', this)">
+            <span class="nav-icon">📝</span>
+            <span>الطلبات</span>
+          </button>
+          <button class="nav-item" onclick="switchTab('tab-tools', this)">
+            <span class="nav-icon">⚡</span>
+            <span>الأدوات</span>
+          </button>
+          <button class="nav-item" onclick="switchTab('tab-logs', this)">
+            <span class="nav-icon">📋</span>
+            <span>السجل</span>
+          </button>
+        </nav>
       </div>
 
-      <!-- Toast Notification Box -->
+      <!-- Toast Notification -->
       <div id="toast">تمت العملية بنجاح!</div>
 
       <script>
         let count = 0;
         let transactions = [];
 
-        function showToast(message) {
+        function switchTab(tabId, btn) {
+          document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+          document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+          document.getElementById(tabId).classList.add('active');
+          btn.classList.add('active');
+        }
+
+        function showToast(msg) {
           const toast = document.getElementById("toast");
-          toast.innerText = message;
+          toast.innerText = msg;
           toast.className = "show";
-          setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+          setTimeout(() => { toast.className = ""; }, 2500);
         }
 
         function toggleTheme() {
           const body = document.body;
           const themeBtn = document.getElementById('themeBtn');
           body.classList.toggle('light-mode');
-          if (body.classList.contains('light-mode')) {
-            themeBtn.innerText = '🌙 الوضع الداكن';
-          } else {
-            themeBtn.innerText = '☀️ الوضع الفاتح';
-          }
+          themeBtn.innerText = body.classList.contains('light-mode') ? '🌙 داكن' : '☀️ فاتح';
         }
 
         function generateKey() {
-          const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_!@#';
-          let key = 'aegis_sec_';
-          for (let i = 0; i < 28; i++) {
+          const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_!';
+          let key = 'aegis_app_';
+          for (let i = 0; i < 20; i++) {
             key += chars.charAt(Math.floor(Math.random() * chars.length));
           }
           const display = document.getElementById('keyDisplay');
           display.style.display = 'block';
           display.innerText = key;
-          showToast("تم توليد مفتاح الأمان بنجاح! 🔑");
+          showToast("تم إنشاء المفتاح بنجاح! 🔑");
         }
 
         function checkStrength() {
@@ -234,10 +253,10 @@ module.exports = (req, res) => {
           if (/[0-9!@#$%^&*]/.test(val)) score += 25;
 
           fill.style.width = score + '%';
-          if (score <= 25) { fill.style.backgroundColor = '#ef4444'; txt.innerText = 'ضعيفة جداً ❌'; }
+          if (score <= 25) { fill.style.backgroundColor = '#ef4444'; txt.innerText = 'ضعيفة ❌'; }
           else if (score <= 50) { fill.style.backgroundColor = '#f97316'; txt.innerText = 'متوسطة ⚠️'; }
           else if (score <= 75) { fill.style.backgroundColor = '#eab308'; txt.innerText = 'جيدة 👍'; }
-          else { fill.style.backgroundColor = '#10b981'; txt.innerText = 'قوية جداً ومحمية 🛡️'; }
+          else { fill.style.backgroundColor = '#10b981'; txt.innerText = 'قوية ومحمية 🛡️'; }
         }
 
         function handleFormSubmit(e) {
@@ -261,35 +280,31 @@ module.exports = (req, res) => {
             <td><b>\${user}</b></td>
             <td>\${service}</td>
             <td>\${time}</td>
-            <td><span style="color:var(--accent-green); font-weight:bold;">مكتمل ✅</span></td>
           \`;
           tableBody.prepend(newRow);
 
           document.getElementById('username').value = '';
-          showToast("تم إرسال الطلب وإضافته للسجل! 🚀");
+          showToast("تم تنفيذ الطلب بنجاح! 🚀");
         }
 
         function exportCSV() {
           if (transactions.length === 0) {
-            showToast("لا توجد بيانات لتصديرها!");
+            showToast("لا توجد بيانات للسجل!");
             return;
           }
           let csv = "ID,User,Service,Time\\n";
-          transactions.forEach(t => {
-            csv += \`\${t.id},\${t.user},\${t.service},\${t.time}\\n\`;
-          });
+          transactions.forEach(t => { csv += \`\${t.id},\${t.user},\${t.service},\${t.time}\\n\`; });
           const blob = new Blob([csv], { type: 'text/csv' });
           const url = window.URL.createObjectURL(blob);
           const a = document.createElement('a');
           a.setAttribute('href', url);
-          a.setAttribute('download', 'aegis_transactions.csv');
+          a.setAttribute('download', 'aegis_logs.csv');
           a.click();
-          showToast("تم تحميل ملف السجل CSV! 📥");
+          showToast("تم تحميل الملف! 📥");
         }
 
-        // Live Ping Simulation
         setInterval(() => {
-          const ping = Math.floor(Math.random() * (45 - 20 + 1)) + 20;
+          const ping = Math.floor(Math.random() * (35 - 18 + 1)) + 18;
           document.getElementById('pingValue').innerText = ping + ' ms';
         }, 3000);
       </script>
