@@ -113,7 +113,7 @@
             margin-bottom: 20px;
         }
 
-        /* تصميم الإعلان المدفوع الحقيقي */
+        /* تصميم الإعلان المدفوع */
         .sponsored-ad-card {
             background: linear-gradient(135deg, #fffbeb, #fef3c7);
             border: 1.5px solid #f59e0b;
@@ -175,7 +175,7 @@
         .store-price { font-size: 12px; color: #be185d; font-weight: 700; margin-bottom: 10px; background: #fdf2f8; padding: 4px; border-radius: 6px; }
         .buy-btn { background: #fdf2f8; color: #be185d; border: 1px solid #fbcfe8; padding: 6px; width: 100%; border-radius: 8px; font-size: 12px; font-weight: 800; cursor: pointer; }
 
-        /* Videos Section Styles */
+        /* Videos Section */
         .video-card { background: #fff; border: 1px solid #fce7f3; border-radius: 16px; overflow: hidden; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(236,72,153,0.05); }
         .video-container { position: relative; width: 100%; padding-top: 56.25%; background: #000; }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
@@ -183,7 +183,7 @@
         .video-title { font-size: 13px; font-weight: 800; color: #1f2937; }
         .watch-reward-btn { background: #10b981; color: #fff; border: none; padding: 6px 12px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer; }
 
-        /* Chat Rooms & Support */
+        /* Chat Rooms */
         .chat-container { display: flex; flex-direction: column; height: 350px; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 16px; overflow: hidden; margin-top: 15px; }
         .chat-tabs { display: flex; background: #f3f4f6; border-bottom: 1px solid #e5e7eb; }
         .chat-tab { flex: 1; padding: 10px; text-align: center; font-size: 12px; font-weight: 700; background: none; border: none; cursor: pointer; color: #6b7280; }
@@ -196,12 +196,10 @@
         .chat-input { flex: 1; padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 10px; outline: none; font-size: 13px; }
         .chat-send-btn { background: #be185d; color: #fff; border: none; padding: 0 16px; border-radius: 10px; font-weight: 700; cursor: pointer; }
 
-        /* Admin Controls */
+        /* Admin */
         .admin-form-group { margin-bottom: 14px; text-align: right; }
         .admin-form-group label { display: block; font-size: 13px; font-weight: 700; color: #4b5563; margin-bottom: 6px; }
         .admin-input { width: 100%; padding: 10px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 13px; font-weight: 700; outline: none; }
-        .admin-input:focus { border-color: #7c3aed; }
-
         .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
         .stat-box { background: #f9fafb; border: 1px solid #e5e7eb; padding: 12px; border-radius: 14px; text-align: center; }
         .stat-num { font-size: 18px; font-weight: 800; color: #7c3aed; margin-top: 4px; }
@@ -210,9 +208,9 @@
         .profile-avatar { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid #ec4899; margin: 0 auto 12px auto; display: block; box-shadow: 0 5px 15px rgba(236,72,153,0.3); }
         .profile-info-group { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 12px 16px; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
 
-        /* شريط التنقل السفلي بالتصميم المطلوب تماماً */
+        /* شريط التنقل السفلي المعدل ليحتوي على الأيقونات الـ 9 بدقة */
         .nav-bar-wrapper {
-            position: fixed; bottom: 15px; left: 0; width: 100%; padding: 0 15px; z-index: 100; pointer-events: none;
+            position: fixed; bottom: 15px; left: 0; width: 100%; padding: 0 10px; z-index: 100; pointer-events: none;
         }
         .nav-bar {
             pointer-events: auto;
@@ -223,23 +221,23 @@
             display: flex;
             justify-content: space-around;
             align-items: center;
-            padding: 8px 4px;
+            padding: 8px 2px;
             border-radius: 24px;
             box-shadow: 0 15px 35px rgba(236, 72, 153, 0.15);
             max-width: 480px;
             margin: 0 auto;
         }
         .nav-item {
-            background: none; border: none; color: #9ca3af; font-size: 10px; font-weight: 700; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 3px; transition: all 0.3s ease; flex: 1; position: relative; padding: 4px 0;
+            background: none; border: none; color: #9ca3af; font-size: 9px; font-weight: 700; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px; transition: all 0.3s ease; flex: 1; position: relative; padding: 4px 0;
         }
-        .nav-item span.icon { font-size: 18px; transition: transform 0.3s; }
+        .nav-item span.icon { font-size: 16px; transition: transform 0.3s; }
         .nav-item.active { color: #be185d; }
         .nav-item.active span.icon { transform: translateY(-3px) scale(1.1); }
         .nav-item.active::after {
             content: '';
             position: absolute;
             bottom: 0;
-            width: 14px;
+            width: 12px;
             height: 3px;
             background: #be185d;
             border-radius: 3px;
@@ -268,8 +266,8 @@
 
     <!-- شريط الإعلانات المتحرك -->
     <div class="ticker-wrap">
-        <div class="ticker-content" id="tickerTextDisplay">
-            🌸 أهلاً بكم في Aegis Cash! | نظام حماية متطور وتوثيق رسمي | استمتع بالعجلة وغرف الدردشة الفورية
+        <div class="ticker-content">
+            🌸 أهلاً بكم في Aegis Cash! | نظام حماية متطور وتوثيق رسمي | استمتع بالعجلة وغرف الدردشة الفورية ودعوة الأصدقاء
         </div>
     </div>
 
@@ -303,17 +301,17 @@
         
         <!-- المحفظة -->
         <div id="wallet-section" class="section active">
-            <div class="security-banner" id="secBannerTxt">🛡️ حماية متكاملة ومشفرة ضد الاختراق والتلاعب (نشطة)</div>
+            <div class="security-banner">🛡️ حماية متكاملة ومشفرة ضد الاختراق والتلاعب (نشطة)</div>
 
-            <div class="sponsored-ad-card" id="userSponsoredAdBanner">
+            <div class="sponsored-ad-card">
                 <span class="ad-badge">إعلان ممول 💎</span>
-                <div class="ad-title" id="displayAdTitle">🚀 منصة رعاية برامج الذكاء الاصطناعي</div>
-                <div class="ad-desc" id="displayAdDesc">ابدأ تطوير تطبيقاتك السحابية اليوم مع دعم تقني متكامل وحصري لمشتركي Aegis.</div>
-                <a href="https://vercel.com" target="_blank" class="ad-action-btn" id="displayAdLinkBtn">زيارة الموقع الرسمي ✨</a>
+                <div class="ad-title">🚀 منصة رعاية برامج الذكاء الاصطناعي</div>
+                <div class="ad-desc">ابدأ تطوير تطبيقاتك السحابية اليوم مع دعم تقني متكامل وحصري لمشتركي Aegis.</div>
+                <a href="https://vercel.com" target="_blank" class="ad-action-btn">زيارة الموقع الرسمي ✨</a>
             </div>
 
             <div class="card" style="text-align: center;">
-                <p class="balance-title" id="lblTotalBalance">إجمالي الرصيد</p>
+                <p class="balance-title">إجمالي الرصيد</p>
                 <div class="balance-box" id="userBalance">pt 1,315</div>
                 
                 <div class="currencies-row">
@@ -321,18 +319,47 @@
                     <span class="currency-badge usd-value" id="userUsd">💵 $0.00 USD</span>
                 </div>
 
-                <button class="btn btn-secondary" onclick="convertDiamonds()" id="btnConv">🔄 تحويل الجواهر (100💎 = 10pt)</button>
-                <button class="btn btn-success" onclick="openDepositModal()" id="btnDep">➕ شحن الرصيد الخارجي</button>
+                <button class="btn btn-secondary" onclick="convertDiamonds()">🔄 تحويل الجواهر (100💎 = 10pt)</button>
+                <button class="btn btn-success" onclick="openDepositModal()">➕ شحن الرصيد الخارجي</button>
 
                 <div style="margin-top: 15px; font-size: 13px; font-weight: 700; color: #4b5563;">
-                    <span id="lblRankTitle">التصنيف</span>: <span id="userLevel" style="color: #be185d;">مبتدئ 🌱</span>
+                    التصنيف: <span id="userLevel" style="color: #be185d;">مبتدئ 🌱</span>
                 </div>
             </div>
 
             <div class="card">
-                <h3 style="font-size: 15px; margin-bottom: 6px; color: #be185d; font-weight: 800;" id="lblDailyTitle">🎁 مكافأة الدخول اليومي</h3>
-                <p style="font-size: 12px; color: #6b7280; margin-bottom: 12px;" id="lblDailyDesc">50 نقطة + 2 جوهرة مجاناً كل 24 ساعة</p>
-                <button class="btn btn-primary" onclick="claimDaily()" id="btnDaily">استلام المكافأة ⭐</button>
+                <h3 style="font-size: 15px; margin-bottom: 6px; color: #be185d; font-weight: 800;">🎁 مكافأة الدخول اليومي</h3>
+                <p style="font-size: 12px; color: #6b7280; margin-bottom: 12px;">50 نقطة + 2 جوهرة مجاناً كل 24 ساعة</p>
+                <button class="btn btn-primary" onclick="claimDaily()">استلام المكافأة ⭐</button>
+            </div>
+        </div>
+
+        <!-- رابط الدعوة (القسم الجديد كلياً) -->
+        <div id="invite-section" class="section">
+            <div class="card" style="text-align: center;">
+                <div style="font-size: 40px; margin-bottom: 8px;">🔗</div>
+                <h3 style="color: #be185d; font-size: 18px; font-weight: 800; margin-bottom: 6px;">دعوة الأصدقاء والأرباح</h3>
+                <p style="font-size: 12px; color: #6b7280; margin-bottom: 20px; line-height: 1.5;">
+                    شارك رابط الدعوة الخاص بك مع أصدقائك، واكسب <strong style="color: #be185d;">100 نقطة + 5 جواهر</strong> عن كل شخص يسجل من خلالك! 🚀
+                </p>
+
+                <div style="background: #f9fafb; border: 2px dashed #fbcfe8; border-radius: 14px; padding: 12px; margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+                    <input type="text" id="inviteLinkInput" value="https://aegiscash.app/ref?id=AEG-84920" readonly style="background: transparent; border: none; font-size: 11px; font-weight: 700; color: #4b5563; width: 100%; text-align: center; outline: none;">
+                </div>
+
+                <button class="btn btn-primary" onclick="copyInviteLink()">📋 نسخ رابط الدعوة</button>
+                <button class="btn btn-secondary" style="margin-top: 10px;" onclick="shareOnWhatsApp()">💬 مشاركة عبر واتساب</button>
+
+                <div style="margin-top: 20px; background: #fdf2f8; border-radius: 14px; padding: 12px; display: flex; justify-content: space-around;">
+                    <div>
+                        <div style="font-size: 11px; color: #6b7280; font-weight: 700;">الأصدقاء المدعوون</div>
+                        <div id="invitedCount" style="font-size: 18px; font-weight: 800; color: #be185d; margin-top: 4px;">4 أشخاص</div>
+                    </div>
+                    <div style="border-left: 1px solid #fbcfe8; padding-left: 20px;">
+                        <div style="font-size: 11px; color: #6b7280; font-weight: 700;">أرباح الدعوات</div>
+                        <div id="invitedEarnings" style="font-size: 18px; font-weight: 800; color: #10b981; margin-top: 4px;">400 pt</div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -354,27 +381,14 @@
                         <button class="watch-reward-btn" onclick="claimVideoReward(30)">استلام المكافأة</button>
                     </div>
                 </div>
-
-                <div class="video-card">
-                    <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/3JZ_D3ELwOQ" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-info">
-                        <div>
-                            <div class="video-title">أسرار النجاح في إدارة المنصات الرقمية</div>
-                            <div style="font-size: 11px; color: #10b981; font-weight: 700; margin-top: 2px;">المكافأة: +50 نقطة 🎁</div>
-                        </div>
-                        <button class="watch-reward-btn" onclick="claimVideoReward(50)">استلام المكافأة</button>
-                    </div>
-                </div>
             </div>
         </div>
 
         <!-- المتجر -->
         <div id="store-section" class="section">
             <div class="card">
-                <h3 style="color: #be185d; margin-bottom: 4px; font-size: 17px; text-align: center; font-weight: 800;" id="lblStoreTitle">🛍️ المتجر الرقمي</h3>
-                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;" id="lblStoreDesc">اشترِ الجواهر وبطاقات الإنترنت برصيدك</p>
+                <h3 style="color: #be185d; margin-bottom: 4px; font-size: 17px; text-align: center; font-weight: 800;">🛍️ المتجر الرقمي</h3>
+                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;">اشترِ الجواهر وبطاقات الإنترنت برصيدك</p>
                 
                 <div class="store-grid">
                     <div class="store-item">
@@ -383,7 +397,6 @@
                         <div class="store-price">500 نقطة</div>
                         <button class="buy-btn" onclick="buyItem('50 جوهرة', 500)">شراء</button>
                     </div>
-
                     <div class="store-item">
                         <div class="badge-hot">مميز 🔥</div>
                         <div class="store-icon">💎</div>
@@ -391,35 +404,21 @@
                         <div class="store-price">1,800 نقطة</div>
                         <button class="buy-btn" onclick="buyItem('200 جوهرة', 1800)">شراء</button>
                     </div>
-
-                    <div class="store-item">
-                        <div class="store-icon">🌐</div>
-                        <div class="store-title">نت 5GB</div>
-                        <div class="store-price">2,500 نقطة</div>
-                        <button class="buy-btn" onclick="buyItem('بطاقة إنترنت 5GB', 2500)">شراء</button>
-                    </div>
-
-                    <div class="store-item">
-                        <div class="store-icon">💳</div>
-                        <div class="store-title">رصيد 5$</div>
-                        <div class="store-price">5,000 نقطة</div>
-                        <button class="buy-btn" onclick="buyItem('بطاقة رصيد 5$', 5000)">شراء</button>
-                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- غرف الدردشة ودعم الأعضاء -->
+        <!-- غرف الدردشة والدعم -->
         <div id="chat-section" class="section">
             <div class="card" style="padding: 16px;">
-                <h3 style="color: #be185d; font-size: 17px; font-weight: 800; text-align: center; margin-bottom: 10px;" id="lblChatTitle">💬 غرف الدردشة ودعم الأعضاء</h3>
+                <h3 style="color: #be185d; font-size: 17px; font-weight: 800; text-align: center; margin-bottom: 10px;">💬 غرف الدردشة ودعم الأعضاء</h3>
                 <p style="font-size: 11px; color: #10b981; text-align: center; font-weight: 700; margin-bottom: 8px;">🛡️ فريق الدعم الفني وحماية الحسابات متواجد دائماً</p>
                 
                 <div class="chat-container">
                     <div class="chat-tabs">
                         <button class="chat-tab active" onclick="switchChatRoom('general', this)">العامة 🌸</button>
                         <button class="chat-tab" onclick="switchChatRoom('vip', this)">VIP 👑</button>
-                        <button class="chat-tab" onclick="switchChatRoom('support', this)">الدعم الفني 🛠️</button>
+                        <button class="chat-tab" onclick="switchChatRoom('support', this)">الدعم 🛠️</button>
                     </div>
                     
                     <div class="chat-messages" id="chatMessages">
@@ -428,7 +427,7 @@
                     </div>
                     
                     <div class="chat-input-area">
-                        <input type="text" id="chatInput" class="chat-input" placeholder="اكتب رسالتك أو استفسارك هنا..." onkeypress="handleChatKey(event)">
+                        <input type="text" id="chatInput" class="chat-input" placeholder="اكتب رسالتك هنا..." onkeypress="handleChatKey(event)">
                         <button class="chat-send-btn" onclick="sendChatMessage()">إرسال</button>
                     </div>
                 </div>
@@ -438,7 +437,7 @@
         <!-- عجلة الحظ -->
         <div id="wheel-section" class="section">
             <div class="card" style="text-align: center;">
-                <h2 style="color: #be185d; margin-bottom: 4px; font-size: 18px; font-weight: 800;" id="lblWheelTitle">🎡 عجلة الحظ اليومية</h2>
+                <h2 style="color: #be185d; margin-bottom: 4px; font-size: 18px; font-weight: 800;">🎡 عجلة الحظ اليومية</h2>
                 <p style="font-size: 12px; color: #6b7280; margin-bottom: 15px;" id="wheelSubtitle">لديك لفة مجانية اليوم! (بعدها التكلفة 100 جوهرة)</p>
                 
                 <div class="wheel-outer-wrapper">
@@ -451,7 +450,7 @@
                     </div>
                 </div>
 
-                <button class="btn btn-primary" onclick="spinWheel()" style="margin-top: 10px;" id="btnSpinWheel">تدوير العجلة 🌀</button>
+                <button class="btn btn-primary" onclick="spinWheel()" style="margin-top: 10px;">تدوير العجلة 🌀</button>
                 <p id="wheelResult" style="margin-top: 12px; font-size: 14px; font-weight: 800; color: #be185d;"></p>
             </div>
         </div>
@@ -465,36 +464,12 @@
                 <div class="stats-grid">
                     <div class="stat-box">
                         <div style="font-size: 12px; color: #6b7280; font-weight: 700;">إجمالي المشتركين</div>
-                        <div class="stat-num" id="statTotalUsers">1,420</div>
+                        <div class="stat-num">1,420</div>
                     </div>
                     <div class="stat-box">
                         <div style="font-size: 12px; color: #6b7280; font-weight: 700;">المتواجدون الآن 🟢</div>
-                        <div class="stat-num" id="statOnlineUsers">184</div>
+                        <div class="stat-num">184</div>
                     </div>
-                    <div class="stat-box">
-                        <div style="font-size: 12px; color: #6b7280; font-weight: 700;">ذكور 👨</div>
-                        <div class="stat-num" id="statMaleUsers">64% (909)</div>
-                    </div>
-                    <div class="stat-box">
-                        <div style="font-size: 12px; color: #6b7280; font-weight: 700;">إناث 👩</div>
-                        <div class="stat-num" id="statFemaleUsers">36% (511)</div>
-                    </div>
-                </div>
-
-                <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 20px 0;">
-
-                <div class="admin-form-group">
-                    <label>💎 استضافة إعلان مدفوع جديد (العنوان)</label>
-                    <input type="text" id="adminAdTitleInput" class="admin-input" placeholder="مثال: خصم 30% على خدمات الاستضافة السحابية">
-                </div>
-                <div class="admin-form-group">
-                    <label>📝 نص الإعلان التفصيلي</label>
-                    <input type="text" id="adminAdDescInput" class="admin-input" placeholder="مثال: استخدم الكود AEGIS للانضمام الآن">
-                </div>
-                <div class="admin-form-group">
-                    <label>🔗 رابط وجهة الإعلان (URL)</label>
-                    <input type="text" id="adminAdLinkInput" class="admin-input" value="https://vercel.com">
-                    <button class="btn btn-admin" style="margin-top: 8px; font-size: 13px; padding: 10px;" onclick="publishPaidAd()">نشر وتفعيل الإعلان المدفوع فوراً 📢</button>
                 </div>
             </div>
         </div>
@@ -511,18 +486,7 @@
                     <span style="font-weight: 800;">#AEG-84920</span>
                 </div>
                 
-                <div class="profile-info-group">
-                    <span style="color: #6b7280;">حالة الأمان والحماية</span>
-                    <span style="color: #047857; font-weight: 800;">مشفر ومحمي 🔒</span>
-                </div>
-
-                <div class="profile-info-group">
-                    <span style="color: #6b7280;">التحقق برقم الهواتف</span>
-                    <span style="color: #2563eb; font-weight: 800;">مفعل (SMS/OTP) ✅</span>
-                </div>
-
                 <button class="btn btn-secondary" style="margin-top: 15px;" onclick="openPhoneUpdateModal()">📱 تحديث رقم الهاتف والأمان</button>
-                <button class="btn btn-secondary" style="margin-top: 10px; background: #f3f4f6; color: #374151; box-shadow: none;" onclick="openNameChangeModal()">✏️ تعديل الاسم الشخصي</button>
             </div>
         </div>
 
@@ -545,11 +509,14 @@
 
     </div>
 
-    <!-- شريط التنقل السفلي بالتصميم المطلوب تماماً -->
+    <!-- شريط التنقل السفلي المحدث ليشمل الأزرار الـ 9 بدقة وتناسق -->
     <div class="nav-bar-wrapper">
         <div class="nav-bar">
             <button class="nav-item active" onclick="switchTab('wallet', this)">
                 <span class="icon">💰</span> <span>محفظتي</span>
+            </button>
+            <button class="nav-item" onclick="switchTab('invite', this)">
+                <span class="icon">🔗</span> <span>الدعوة</span>
             </button>
             <button class="nav-item" onclick="switchTab('videos', this)">
                 <span class="icon">🎬</span> <span>فيديوهات</span>
@@ -603,8 +570,6 @@
         const diamondConversionRate = 10000;
         const minWithdrawPoints = 10000;
         let supportAgents = ["أحمد (الدعم الفني والتوثيق)", "ساره (خدمة الأمان والمشتركين)"];
-
-        let systemStats = { totalUsers: 1420, onlineNow: 184, males: 909, females: 511 };
 
         let modalCallback = null;
         function showAlert(title, text, icon) {
@@ -674,6 +639,19 @@
             if(tabName === 'wheel') drawWheel();
         }
 
+        function copyInviteLink() {
+            let linkInput = document.getElementById('inviteLinkInput');
+            linkInput.select();
+            navigator.clipboard.writeText(linkInput.value);
+            showAlert("تم النسخ بنجاح! 📋", "تم نسخ رابط الدعوة الخاص بك. شاركه الآن مع أصدقائك وابدأ بجمع الأرباح!", "🔗");
+        }
+
+        function shareOnWhatsApp() {
+            let link = document.getElementById('inviteLinkInput').value;
+            let text = encodeURIComponent(`انضم إلي الآن في منصة Aegis Cash واكسب النقاط والجواهر مجاناً عبر هذا الرابط: ${link}`);
+            window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+        }
+
         function claimVideoReward(points) {
             appData.balance += points;
             updateUI();
@@ -700,16 +678,6 @@
             if (itemName.includes("جوهرة")) appData.diamonds += itemName.includes("50") ? 50 : 200;
             updateUI();
             showAlert("مبروك!", `تم شراء "${itemName}" بنجاح وتأمين المعاملة!`, "🎉");
-        }
-
-        function openNameChangeModal() {
-            showPrompt("تعديل الاسم", "أدخل اسمك الجديد:", "✏️", (val) => {
-                if (val && val.trim() !== "") {
-                    appData.userName = val.trim();
-                    updateUI();
-                    showAlert("تم", "تم تحديث اسمك الشخصي بنجاح.", "✅");
-                }
-            });
         }
 
         function openPhoneUpdateModal() {
@@ -745,7 +713,7 @@
             btn.classList.add('active');
             let msgs = document.getElementById('chatMessages');
             let roomName = room === 'general' ? 'العامة' : room === 'vip' ? 'VIP' : 'الدعم الفني والحماية';
-            msgs.innerHTML = `<div class="chat-msg"><b>النظام الأمني:</b> أهلاً بك في غرفة (${roomName}) 🌸 رقم الهاتف المرتبط: ${appData.userPhone}</div>`;
+            msgs.innerHTML = `<div class="chat-msg"><b>النظام الأمني:</b> أهلاً بك في غرفة (${roomName}) 🌸</div>`;
         }
 
         function sendChatMessage() {
