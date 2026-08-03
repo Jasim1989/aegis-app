@@ -3,276 +3,631 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Aegis - مشاهدات، أرباح ودعوات</title>
+  <title>Aegis - منصة المشاهدات والأرباح الذكية</title>
   <style>
-    :root { --bg: #0b0f19; --card: #151c2c; --text: #f8fafc; --muted: #94a3b8; --border: #26334d; --primary: #38bdf8; --green: #10b981; --gold: #f59e0b; }
-    .light { --bg: #f1f5f9; --card: #ffffff; --text: #0f172a; --muted: #64748b; --border: #cbd5e1; --primary: #0284c7; --green: #059669; --gold: #d97706; }
+    :root { 
+      --bg: #07090e; 
+      --card: #111827; 
+      --card-hover: #1f2937;
+      --text: #f9fafb; 
+      --muted: #9ca3af; 
+      --border: #1f293d; 
+      --primary: #0ea5e9; 
+      --primary-glow: rgba(14, 165, 233, 0.2);
+      --green: #10b981; 
+      --green-glow: rgba(16, 185, 129, 0.2);
+      --gold: #f59e0b; 
+      --gold-glow: rgba(245, 158, 11, 0.2);
+      --danger: #ef4444;
+    }
+    .light { 
+      --bg: #f3f4f6; 
+      --card: #ffffff; 
+      --card-hover: #f9fafb;
+      --text: #111827; 
+      --muted: #6b7280; 
+      --border: #e5e7eb; 
+      --primary: #0284c7; 
+      --primary-glow: rgba(2, 132, 199, 0.15);
+      --green: #059669; 
+      --green-glow: rgba(5, 150, 105, 0.15);
+      --gold: #d97706; 
+      --gold-glow: rgba(217, 119, 6, 0.15);
+      --danger: #dc2626;
+    }
     
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; -webkit-tap-highlight-color: transparent; }
-    html, body { height: 100vh; width: 100vw; overflow: hidden; background: var(--bg); color: var(--text); }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
+    html, body { height: 100vh; width: 100vw; overflow: hidden; background: var(--bg); color: var(--text); transition: background 0.3s, color 0.3s; }
     
-    .app-viewport { display: flex; flex-direction: column; height: 100vh; max-width: 600px; margin: 0 auto; background: var(--bg); position: relative; }
+    .app-viewport { display: flex; flex-direction: column; height: 100vh; max-width: 480px; margin: 0 auto; background: var(--bg); position: relative; box-shadow: 0 0 40px rgba(0,0,0,0.5); }
     
-    header { background: var(--card); padding: 0.85rem 1rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+    header { background: var(--card); padding: 0.85rem 1.2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+    .logo-area { display: flex; align-items: center; gap: 8px; font-weight: 800; color: var(--gold); font-size: 1.1rem; letter-spacing: -0.5px; }
     
-    main { flex: 1; overflow-y: auto; padding: 1rem; padding-bottom: 80px; }
-    
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-    
-    .card { background: var(--card); border: 1px solid var(--border); padding: 1rem; border-radius: 0.75rem; margin-bottom: 1rem; }
-    .val { font-size: 1.5rem; font-weight: bold; margin-top: 0.3rem; }
-    
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
-    
-    input, select, button { width: 100%; padding: 0.75rem; margin-top: 0.5rem; background: var(--bg); border: 1px solid var(--border); color: var(--text); border-radius: 0.5rem; font-size: 0.85rem; }
-    button.btn-primary { background: var(--primary); color: #0b0f19; font-weight: bold; border: none; cursor: pointer; }
-    button.btn-gold { background: var(--gold); color: #000; font-weight: bold; border: none; cursor: pointer; }
-    
-    .video-box { background: #000; height: 180px; border-radius: 0.5rem; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid var(--border); margin-top: 0.5rem; position: relative; }
-    
-    .privacy-badge { background: rgba(16, 185, 129, 0.1); border: 1px solid var(--green); color: var(--green); font-size: 0.75rem; padding: 0.4rem 0.6rem; border-radius: 0.4rem; display: flex; align-items: center; gap: 5px; margin-bottom: 0.8rem; }
+    .header-actions { display: flex; gap: 8px; align-items: center; }
+    .theme-btn, .logout-btn { background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 0.4rem 0.6rem; border-radius: 0.5rem; font-size: 0.75rem; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 4px; }
+    .logout-btn { color: var(--danger); border-color: rgba(239, 68, 68, 0.3); }
 
-    nav.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 65px; background: var(--card); display: flex; justify-content: space-around; align-items: center; border-top: 1px solid var(--border); z-index: 9999; max-width: 600px; margin: 0 auto; }
-    nav button { flex: 1; height: 100%; background: none; border: none; padding: 0; color: var(--muted); cursor: pointer; border-radius: 0; font-size: 0.75rem; font-weight: bold; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; }
-    nav button.active { color: var(--gold); background: rgba(245, 158, 11, 0.08); border-top: 3px solid var(--gold); }
+    main { flex: 1; overflow-y: auto; padding: 1.2rem; padding-bottom: 90px; scroll-behavior: smooth; }
+    main::-webkit-scrollbar { width: 4px; }
+    main::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
     
-    table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; font-size: 0.8rem; }
-    th, td { padding: 0.5rem; border-bottom: 1px solid var(--border); text-align: right; }
+    .view-section { display: none; animation: fadeIn 0.3s ease-in-out; }
+    .view-section.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
     
-    #toast { visibility: hidden; min-width: 200px; background-color: var(--card); color: var(--text); border: 1px solid var(--gold); text-align: center; border-radius: 0.5rem; padding: 0.75rem; position: fixed; z-index: 10000; left: 50%; top: 20px; transform: translateX(-50%); box-shadow: 0 5px 15px rgba(0,0,0,0.3); font-size: 0.85rem; }
-    #toast.show { visibility: visible; animation: fadein 0.3s, fadeout 0.3s 2.2s; }
-    @keyframes fadein { from { top: 0; opacity: 0; } to { top: 20px; opacity: 1; } }
-    @keyframes fadeout { from { top: 20px; opacity: 1; } to { top: 0; opacity: 0; } }
+    .card { background: var(--card); border: 1px solid var(--border); padding: 1.2rem; border-radius: 1rem; margin-bottom: 1rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    
+    .wallet-card { background: linear-gradient(135deg, var(--card) 0%, var(--card-hover) 100%); border: 1px solid var(--gold); position: relative; overflow: hidden; }
+    .wallet-card::after { content: '💎'; position: absolute; left: -10px; bottom: -15px; font-size: 5rem; opacity: 0.07; transform: rotate(-15deg); }
+    
+    .val-container { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 0.6rem; }
+    .val { font-size: 2rem; font-weight: 900; color: var(--gold); letter-spacing: -1px; }
+    .val-sub { font-size: 0.95rem; font-weight: 700; color: var(--green); background: var(--green-glow); padding: 0.3rem 0.7rem; border-radius: 2rem; border: 1px solid rgba(16, 185, 129, 0.3); }
+    
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    
+    .stat-box { background: var(--card); border: 1px solid var(--border); padding: 1rem; border-radius: 0.85rem; text-align: center; }
+    .stat-val { font-size: 1.25rem; font-weight: 800; margin-top: 0.2rem; color: var(--primary); }
+    
+    input, select, button { width: 100%; padding: 0.85rem 1rem; margin-top: 0.6rem; background: var(--bg); border: 1px solid var(--border); color: var(--text); border-radius: 0.75rem; font-size: 0.9rem; outline: none; transition: border-color 0.2s; }
+    input:focus, select:focus { border-color: var(--primary); }
+    
+    button { cursor: pointer; font-weight: 700; display: flex; justify-content: center; align-items: center; gap: 6px; }
+    .btn-primary { background: var(--primary); color: #07090e; border: none; box-shadow: 0 4px 14px var(--primary-glow); }
+    .btn-gold { background: var(--gold); color: #07090e; border: none; box-shadow: 0 4px 14px var(--gold-glow); }
+    
+    .video-box { background: #000; height: 190px; border-radius: 0.85rem; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid var(--border); margin-top: 0.8rem; position: relative; overflow: hidden; }
+    .video-box::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle, rgba(14,165,233,0.1) 0%, transparent 70%); }
+    
+    .privacy-badge { background: var(--green-glow); border: 1px solid rgba(16, 185, 129, 0.3); color: var(--green); font-size: 0.75rem; padding: 0.6rem 0.9rem; border-radius: 0.75rem; display: flex; align-items: center; gap: 8px; margin-bottom: 1rem; font-weight: 600; }
+
+    /* تنسيق عجلة الحظ */
+    .wheel-container { display: flex; flex-direction: column; align-items: center; position: relative; margin: 1rem 0; }
+    .wheel-pointer { width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-bottom: 24px solid var(--gold); margin-bottom: -10px; z-index: 10; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
+    .wheel-outer { width: 260px; height: 260px; border-radius: 50%; border: 6px solid var(--gold); position: relative; overflow: hidden; box-shadow: 0 0 25px var(--gold-glow); transition: transform 4s cubic-bezier(0.15, 0.85, 0.15, 1); background: var(--card); }
+    .wheel-slice { position: absolute; width: 50%; height: 50%; transform-origin: 100% 100%; left: 0; top: 0; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 900; color: #fff; border: 1px solid rgba(0,0,0,0.15); }
+    .wheel-center-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: var(--gold); border-radius: 50%; border: 3px solid var(--bg); color: #07090e; font-weight: 900; font-size: 0.8rem; cursor: pointer; z-index: 20; box-shadow: 0 4px 10px rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; }
+
+    #authScreen { display: flex; flex-direction: column; justify-content: center; height: 100%; padding: 1rem; }
+
+    nav.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 70px; background: var(--card); display: flex; justify-content: space-around; align-items: center; border-top: 1px solid var(--border); z-index: 9999; max-width: 480px; margin: 0 auto; backdrop-filter: blur(10px); }
+    nav button { flex: 1; height: 100%; background: none; border: none; padding: 0; color: var(--muted); cursor: pointer; border-radius: 0; font-size: 0.75rem; font-weight: 700; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; }
+    nav button span:first-child { font-size: 1.25rem; }
+    nav button.active { color: var(--gold); background: var(--gold-glow); border-top: 3px solid var(--gold); }
+    
+    table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; font-size: 0.82rem; }
+    th { color: var(--muted); font-weight: 600; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); text-align: right; }
+    td { padding: 0.75rem 0.2rem; border-bottom: 1px solid var(--border); text-align: right; }
+    
+    #toast { visibility: hidden; min-width: 250px; background-color: var(--card); color: var(--text); border: 1px solid var(--gold); text-align: center; border-radius: 0.75rem; padding: 0.85rem 1rem; position: fixed; z-index: 10000; left: 50%; top: 25px; transform: translateX(-50%); box-shadow: 0 10px 25px rgba(0,0,0,0.4); font-size: 0.85rem; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; opacity: 0; transition: opacity 0.3s, top 0.3s; }
+    #toast.show { visibility: visible; opacity: 1; top: 30px; }
+
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 10001; display: none; justify-content: center; align-items: center; padding: 1.5rem; }
+    .modal-content { background: var(--card); border: 1px solid var(--gold); width: 100%; max-width: 360px; border-radius: 1.2rem; padding: 1.5rem; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
   </style>
 </head>
 <body>
   <div class="app-viewport">
     <header>
-      <div style="font-weight: bold; color: var(--gold); font-size: 1.05rem;">🛡️ Aegis Cash & Privacy</div>
-      <button style="width: auto; padding: 0.3rem 0.6rem; margin: 0;" onclick="toggleTheme()">🌗 المظهر</button>
+      <div class="logo-area">
+        <span>🛡️</span> Aegis Cash
+      </div>
+      <div class="header-actions" id="headerActions" style="display: none;">
+        <button class="theme-btn" onclick="toggleTheme()"><span>🌗</span></button>
+        <button class="logout-btn" onclick="logoutUser()"><span>🚪</span> خروج</button>
+      </div>
     </header>
 
-    <main>
-      <!-- Privacy Assurance Banner -->
-      <div class="privacy-badge">
-        🔒 <b>الخصوصية محمية:</b> بياناتك مشفرة ولا يتم تتبع موقعك أو هويتك الشخصية.
-      </div>
+    <main id="mainContainer">
+      <!-- شاشة تسجيل الدخول -->
+      <div id="authView" class="view-section active">
+        <div id="authScreen">
+          <div style="text-align: center; margin-bottom: 1.5rem;">
+            <div style="font-size: 3rem; margin-bottom: 0.5rem;">🛡️</div>
+            <h2 style="color: var(--gold); font-weight: 900;">مرحباً بك في Aegis</h2>
+            <p style="font-size: 0.85rem; color: var(--muted); margin-top: 0.3rem;">منصة المشاهدات الآمنة والربح الذكي بحماية تامة</p>
+          </div>
 
-      <!-- TAB 1: Wallet & Dashboard -->
-      <div id="t1" class="tab-content active">
-        <h3 style="color:var(--gold); margin-bottom: 0.8rem;">💰 محفظة الأرباح</h3>
-        
-        <div class="card" style="border-color:var(--gold);">
-          <div style="font-size:0.8rem; color:var(--muted);">إجمالي النقاط المكتسبة</div>
-          <div class="val" style="color:var(--gold);" id="userPoints">0 pt</div>
-          <div style="font-size:0.85rem; margin-top:0.3rem; color:var(--green);" id="userBalance">الرصيد: $0.00</div>
-        </div>
-
-        <div class="grid-2">
           <div class="card">
-            <div style="font-size:0.8rem; color:var(--muted);">المشاهدات اليومية</div>
-            <div class="val" id="todayViews" style="font-size:1.1rem;">0 / 20</div>
+            <form onsubmit="handleAuth(event)">
+              <label style="font-size: 0.75rem; color: var(--muted); font-weight: 600;">البريد الإلكتروني</label>
+              <input type="email" id="authEmail" required placeholder="name@example.com">
+
+              <label style="margin-top: 0.8rem; display: block; font-size: 0.75rem; color: var(--muted); font-weight: 600;">كلمة المرور</label>
+              <input type="password" id="authPass" required placeholder="••••••••">
+
+              <button type="submit" class="btn-primary" style="margin-top: 1.2rem;" id="authSubmitBtn">تسجيل الدخول / إنشاء حساب 🚀</button>
+            </form>
           </div>
+          <div style="text-align: center; font-size: 0.75rem; color: var(--muted); margin-top: 1rem;">
+            🔒 بياناتك مشفرة ولا يتم مشاركة أي معلومات شخصية أبداً.
+          </div>
+        </div>
+      </div>
+
+      <!-- واجهة التطبيق الرئيسية (الأقسام) -->
+      <div id="appTabsView" class="view-section" style="display:none;">
+        <div class="privacy-badge">
+          <span>🔒</span> درع الخصوصية نشطة: حساب آمن ومحفظة مشفرة 100%.
+        </div>
+
+        <!-- تبويب 1: المحفظة -->
+        <div id="t1" class="tab-content active">
+          <div class="card wallet-card">
+            <div style="font-size: 0.85rem; color: var(--muted); font-weight: 600;">رصيد المحفظة الدائم 🔒</div>
+            <div class="val-container">
+              <div class="val" id="userPoints">0 pt</div>
+              <div class="val-sub" id="userBalance">$0.00</div>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="stat-box">
+              <div style="font-size:0.75rem; color: var(--muted); font-weight:600;">مشاهدات اليوم</div>
+              <div class="stat-val" id="todayViews">0 / 20</div>
+            </div>
+            <div class="stat-box">
+              <div style="font-size:0.75rem; color: var(--muted); font-weight:600;">الأصدقاء المدعوون</div>
+              <div class="stat-val" id="refCount" style="color:var(--gold);">0</div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top: 1rem; border-color: var(--primary);">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <div style="font-weight: 800; font-size: 0.95rem;">🎁 صندوق الحظ اليومي</div>
+                <div style="font-size: 0.75rem; color: var(--muted); margin-top: 2px;">اضغط لاكتشاف جائزتك العشوائية الآن</div>
+              </div>
+              <button class="btn-primary" style="width: auto; padding: 0.6rem 1rem; margin: 0; font-size: 0.8rem;" onclick="openMysteryBox()">افتح 🎁</button>
+            </div>
+          </div>
+
           <div class="card">
-            <div style="font-size:0.8rem; color:var(--muted);">الأصدقاء المدعوون</div>
-            <div class="val" id="refCount" style="font-size:1.1rem; color:var(--primary);">0 صديق</div>
+            <div style="font-weight: 800; font-size: 0.95rem; margin-bottom: 0.3rem;">⚡ مكافأة التسجيل اليومي</div>
+            <div style="font-size: 0.75rem; color: var(--muted); margin-bottom: 0.6rem;">احصل على 50 نقطة مجانية متجددة كل 24 ساعة.</div>
+            <button class="btn-gold" onclick="claimDaily()">استلام 50 نقطة مجاناً 🌟</button>
           </div>
         </div>
 
-        <div class="card">
-          <div style="font-weight:bold; font-size:0.85rem;">🎁 مكافأة التسجيل اليومي</div>
-          <button class="btn-gold" id="dailyBtn" onclick="claimDaily()">استلام 50 نقطة مجاناً 🌟</button>
-        </div>
-      </div>
-
-      <!-- TAB 2: Watch & Earn -->
-      <div id="t2" class="tab-content">
-        <h3 style="color:var(--gold); margin-bottom: 0.8rem;">🎬 شاهد واكسب النقاط</h3>
-        <div class="card">
-          <div style="font-weight:bold; font-size:0.9rem;">إعلان مشفر وآمن (+15 نقطة)</div>
-          <div class="video-box">
-            <span id="videoStatus" style="font-size:1.2rem; color:var(--muted);">اضغط للبدء ▶️</span>
-            <div id="timer" style="font-weight:bold; color:var(--gold); margin-top:0.5rem; display:none;">15 ثانية</div>
+        <!-- تبويب 2: المشاهدة والربح -->
+        <div id="t2" class="tab-content" style="display:none;">
+          <h3 style="color: var(--gold); margin-bottom: 0.8rem; font-weight: 800;">🎬 مركز المشاهدة والربح</h3>
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div style="font-weight: 800; font-size: 0.95rem;">إعلان فيديو آمن (Adsterra / Monetag)</div>
+              <span style="background: var(--primary-glow); color: var(--primary); font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 700;">+15 نقطة</span>
+            </div>
+            
+            <div class="video-box">
+              <div id="videoStatus" style="font-size: 1.1rem; color: var(--muted); font-weight: 700; z-index: 2;">جاهز للمشاهدة ▶️</div>
+              <div id="timer" style="font-size: 1.5rem; font-weight: 900; color: var(--gold); margin-top: 0.4rem; display: none; z-index: 2;">15 ثانية</div>
+            </div>
+            
+            <button class="btn-primary" id="watchBtn" onclick="startWatch()" style="margin-top: 0.8rem;">بدء مشاهدة الإعلان الآن 🚀</button>
           </div>
-          <button class="btn-primary" id="watchBtn" onclick="startWatch()">مشاهدة الإعلان الآن 🚀</button>
         </div>
-      </div>
 
-      <!-- TAB 3: Referrals & Invite -->
-      <div id="t3" class="tab-content">
-        <h3 style="color:var(--gold); margin-bottom: 0.8rem;">👥 نظام الإحالة (ادعُ واربح)</h3>
-        <div class="card">
-          <div style="font-size:0.85rem; color:var(--muted); margin-bottom:0.5rem;">شارك رابطك الخاص مع أصدقائك، واربح <b>100 نقطة</b> عن كل صديق يسجل في التطبيق!</div>
-          <label style="font-size:0.8rem; color:var(--muted);">رابط الدعوة الخاص بك</label>
-          <input type="text" id="refLink" readonly style="font-family:monospace; color:var(--primary); text-align:center;">
-          <button class="btn-gold" style="margin-top:0.8rem;" onclick="copyRefLink()">نسخ رابط الدعوة 📋</button>
+        <!-- تبويب 3: عجلة الحظ الدوارة -->
+        <div id="t3" class="tab-content" style="display:none;">
+          <h3 style="color: var(--gold); margin-bottom: 0.5rem; font-weight: 800;">🎡 عجلة الحظ الدوارة</h3>
+          <div style="font-size: 0.78rem; color: var(--muted); margin-bottom: 1rem; text-align: center;">قم بتدوير العجلة واحصل على نقاط مجانية كل يوم!</div>
+          
+          <div class="card" style="display: flex; flex-direction: column; align-items: center; padding: 1.5rem 1rem;">
+            <div class="wheel-container">
+              <div class="wheel-pointer"></div>
+              <div class="wheel-outer" id="wheelOuter">
+                <!-- شرائح العجلة 6 شرائح -->
+                <div class="wheel-slice" style="background: #ef4444; transform: rotate(0deg) skewY(-30deg);"><span>50 pt</span></div>
+                <div class="wheel-slice" style="background: #f59e0b; transform: rotate(60deg) skewY(-30deg);"><span>100 pt</span></div>
+                <div class="wheel-slice" style="background: #10b981; transform: rotate(120deg) skewY(-30deg);"><span>25 pt</span></div>
+                <div class="wheel-slice" style="background: #0ea5e9; transform: rotate(180deg) skewY(-30deg);"><span>200 pt</span></div>
+                <div class="wheel-slice" style="background: #8b5cf6; transform: rotate(240deg) skewY(-30deg);"><span>10 pt</span></div>
+                <div class="wheel-slice" style="background: #ec4899; transform: rotate(300deg) skewY(-30deg);"><span>500 pt</span></div>
+              </div>
+              <button class="wheel-center-btn" id="spinBtn" onclick="spinWheel()">دِوْر</button>
+            </div>
+            <div id="wheelStatusMsg" style="font-size: 0.82rem; color: var(--gold); font-weight: 700; margin-top: 1rem; text-align: center;">متاح تدور مرة واحدة اليوم!</div>
+          </div>
         </div>
-        <div class="card">
-          <div style="font-weight:bold; font-size:0.9rem; margin-bottom:0.4rem;">💡 محاكاة الانضمام عبر دعوة</div>
-          <input type="text" id="simulateRef" placeholder="أدخل كود صديق إن وجد...">
-          <button class="btn-primary" style="margin-top:0.5rem;" onclick="applyRefCode()">تفعيل كود الدعوة 🎁</button>
-        </div>
-      </div>
 
-      <!-- TAB 4: Withdraw & Privacy -->
-      <div id="t4" class="tab-content">
-        <h3 style="color:var(--gold); margin-bottom: 0.8rem;">💸 سحب الأرباح الآمن</h3>
-        <div class="card">
-          <form onsubmit="requestWithdraw(event)">
-            <label style="font-size:0.8rem; color:var(--muted);">طريقة السحب</label>
-            <select id="payMethod">
-              <option>زين كاش (Zain Cash)</option>
-              <option>رصيد آسياحوال / أثير</option>
-              <option>بايبال (PayPal)</option>
-              <option>بطاقات Google Play</option>
-            </select>
-            <label style="margin-top:0.6rem; display:block; font-size:0.8rem; color:var(--muted);">رقم المحفظة (مشفر محلياً)</label>
-            <input type="text" id="payAcc" required placeholder="07XXXXXXXXX">
-            <label style="margin-top:0.6rem; display:block; font-size:0.8rem; color:var(--muted);">المبلغ المطلوب ($)</label>
-            <input type="number" id="payAmt" min="5" required placeholder="الحد الأدنى 5$">
-            <button type="submit" class="btn-gold" style="margin-top:1rem;">إرسال طلب السحب 💵</button>
-          </form>
+        <!-- تبويب 4: نظام الدعوات -->
+        <div id="t4" class="tab-content" style="display:none;">
+          <h3 style="color: var(--gold); margin-bottom: 0.8rem; font-weight: 800;">👥 نظام الدعوات الحقيقي</h3>
+          <div class="card">
+            <div style="font-size: 0.85rem; color: var(--muted); margin-bottom: 0.8rem; line-height: 1.5;">
+              شارك رابطك الخاص. كل صديق يسجل من خلاله يحصل على نقاط، وتحصل أنت أيضاً على <b>100 نقطة</b> فوراً!
+            </div>
+            <label style="font-size: 0.75rem; color: var(--muted); font-weight: 600;">رابط الدعوة الخاص بك</label>
+            <input type="text" id="refLink" readonly style="font-family: monospace; color: var(--primary); text-align: center; font-size: 0.8rem;">
+            <button class="btn-gold" style="margin-top: 0.8rem;" onclick="copyRefLink()">نسخ الرابط 📋</button>
+          </div>
+
+          <div class="card">
+            <div style="font-weight: 800; font-size: 0.95rem; margin-bottom: 0.3rem;">🔗 تفعيل كود دعوة صديق</div>
+            <input type="text" id="simulateRef" placeholder="مثال: AEGIS-XXXXXX">
+            <button class="btn-primary" style="margin-top: 0.6rem;" onclick="applyRefCode()">تفعيل الكود واربح 100 نقطة 🎁</button>
+          </div>
+        </div>
+
+        <!-- تبويب 5: السحب -->
+        <div id="t5" class="tab-content" style="display:none;">
+          <h3 style="color: var(--gold); margin-bottom: 0.8rem; font-weight: 800;">💸 سجل الأرباح والمحفظة</h3>
+          
+          <div class="card" style="margin-bottom: 1rem;">
+            <form onsubmit="requestWithdraw(event)">
+              <label style="font-size: 0.75rem; color: var(--muted); font-weight: 600;">طريقة السحب المتاحة</label>
+              <select id="payMethod">
+                <option>زين كاش (Zain Cash Iraq)</option>
+                <option>رصيد آسياسيل / أثير</option>
+                <option>تحويل بايبال (PayPal)</option>
+                <option>بطاقات جوجل بلاي (Google Play)</option>
+              </select>
+              
+              <label style="margin-top: 0.6rem; display: block; font-size: 0.75rem; color: var(--muted); font-weight: 600;">رقم الحساب / المحفظة</label>
+              <input type="text" id="payAcc" required placeholder="07XXXXXXXXX">
+              
+              <label style="margin-top: 0.6rem; display: block; font-size: 0.75rem; color: var(--muted); font-weight: 600;">المبلغ المطلوب سحبه ($)</label>
+              <input type="number" id="payAmt" min="5" step="1" required placeholder="الحد الأدنى للسحب 5$">
+              
+              <button type="submit" class="btn-gold" style="margin-top: 1rem;">إرسال طلب السحب الفوري 💵</button>
+            </form>
+          </div>
+
+          <div class="card" style="padding: 0.8rem;">
+            <div style="font-weight: 800; font-size: 0.9rem; margin-bottom: 0.4rem; padding: 0.4rem;">📋 سجل العمليات المشفرة</div>
+            <div style="overflow-x: auto;">
+              <table>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>النوع</th>
+                    <th>القيمة</th>
+                    <th>الوقت</th>
+                  </tr>
+                </thead>
+                <tbody id="logs">
+                  <tr><td colspan="4" style="text-align: center; color: var(--muted);">لا توجد عمليات مسجلة بعد.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </main>
 
-    <nav class="bottom-nav">
-      <button class="active" onclick="tab('t1', this)"><span>💰</span><span>المحفظة</span></button>
-      <button onclick="tab('t2', this)"><span>🎬</span><span>مشاهدة</span></button>
-      <button onclick="tab('t3', this)"><span>👥</span><span>الدعوات</span></button>
-      <button onclick="tab('t4', this)"><span>💸</span><span>السحب</span></button>
+    <!-- شريط التنقل السفلي -->
+    <nav class="bottom-nav" id="bottomNav" style="display: none;">
+      <button class="active" onclick="switchTab('t1', this)">
+        <span>💰</span>
+        <span>المحفظة</span>
+      </button>
+      <button onclick="switchTab('t2', this)">
+        <span>🎬</span>
+        <span>مشاهدة</span>
+      </button>
+      <button onclick="switchTab('t3', this)">
+        <span>🎡</span>
+        <span>العجلة</span>
+      </button>
+      <button onclick="switchTab('t4', this)">
+        <span>👥</span>
+        <span>الدعوات</span>
+      </button>
+      <button onclick="switchTab('t5', this)">
+        <span>💸</span>
+        <span>السحب</span>
+      </button>
     </nav>
   </div>
 
-  <div id="toast">تمت العملية بنجاح!</div>
+  <!-- نافذة صندوق الحظ المنبثقة -->
+  <div class="modal-overlay" id="boxModal">
+    <div class="modal-content">
+      <div style="font-size: 3rem; margin-bottom: 0.5rem;" id="boxIcon">🎁</div>
+      <h3 style="color: var(--gold); font-weight: 900; margin-bottom: 0.4rem;" id="boxTitle">صندوق الحظ اليومي</h3>
+      <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem;" id="boxDesc">لقد فتحت الصندوق وحصلت على هدية مجانية!</p>
+      <button class="btn-gold" onclick="closeMysteryBox()">رائع، شكراً! 🎉</button>
+    </div>
+  </div>
+
+  <div id="toast">
+    <span id="toastIcon">✨</span>
+    <span id="toastText">تمت العملية بنجاح!</span>
+  </div>
 
   <script>
-    var points = parseInt(localStorage.getItem('aegis_pts') || '0');
-    var views = parseInt(localStorage.getItem('aegis_views') || '0');
-    var refCount = parseInt(localStorage.getItem('aegis_ref_count') || '0');
-    
-    // توليد كود إحالة فريد للمستخدم إذا لم يكن موجوداً
-    var myRefCode = localStorage.getItem('aegis_my_code');
-    if(!myRefCode) {
-      myRefCode = 'AEGIS-' + Math.floor(100000 + Math.random() * 900000);
-      localStorage.setItem('aegis_my_code', myRefCode);
-    }
+    let currentUser = localStorage.getItem('aegis_logged_user');
+    let points = 0, views = 0, refCount = 0, logsData = [];
+    let myRefCode = '';
+    let currentDegree = 0;
 
     window.onload = function() {
-      updateUI();
-      document.getElementById('refLink').value = "https://aegis-app-iota.vercel.app/?ref=" + myRefCode;
+      if(currentUser) {
+        loadUserData(currentUser);
+        showAppInterface();
+      }
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const refParam = urlParams.get('ref');
+      if(refParam && currentUser && !localStorage.getItem('aegis_ref_applied_' + currentUser)) {
+        if(refParam !== myRefCode) {
+          points += 100;
+          refCount += 1;
+          saveUserData();
+          localStorage.setItem('aegis_ref_applied_' + currentUser, 'true');
+          addLog("مكافأة إحالة صديق", "+100 pt");
+          showToast("🎁 تم استخدام رابط دعوة وحصلت على 100 نقطة هدية!");
+        }
+      }
     };
 
-    function showToast(m) {
-      var t = document.getElementById("toast");
-      t.innerText = m;
+    function handleAuth(e) {
+      e.preventDefault();
+      const email = document.getElementById('authEmail').value.trim();
+      if(!email) return;
+
+      currentUser = email;
+      localStorage.setItem('aegis_logged_user', currentUser);
+      loadUserData(currentUser);
+      showAppInterface();
+      showToast("🚀 مرحباً بك! تم تسجيل الدخول بنجاح.");
+    }
+
+    function logoutUser() {
+      localStorage.removeItem('aegis_logged_user');
+      currentUser = null;
+      document.getElementById('authView').style.display = 'block';
+      document.getElementById('appTabsView').style.display = 'none';
+      document.getElementById('bottomNav').style.display = 'none';
+      document.getElementById('headerActions').style.display = 'none';
+      showToast("🚪 تم تسجيل الخروج بنجاح.");
+    }
+
+    function loadUserData(email) {
+      const prefix = 'aegis_' + email + '_';
+      points = parseInt(localStorage.getItem(prefix + 'pts') || '250');
+      views = parseInt(localStorage.getItem(prefix + 'views') || '0');
+      refCount = parseInt(localStorage.getItem(prefix + 'ref_count') || '0');
+      logsData = JSON.parse(localStorage.getItem(prefix + 'earn_logs') || '[]');
+
+      myRefCode = localStorage.getItem(prefix + 'my_code');
+      if(!myRefCode) {
+        myRefCode = 'AEGIS-' + Math.floor(100000 + Math.random() * 900000);
+        localStorage.setItem(prefix + 'my_code', myRefCode);
+      }
+      document.getElementById('refLink').value = window.location.origin + window.location.pathname + "?ref=" + myRefCode;
+      
+      checkWheelStatus();
+      updateUI();
+    }
+
+    function saveUserData() {
+      if(!currentUser) return;
+      const prefix = 'aegis_' + currentUser + '_';
+      localStorage.setItem(prefix + 'pts', points);
+      localStorage.setItem(prefix + 'views', views);
+      localStorage.setItem(prefix + 'ref_count', refCount);
+      localStorage.setItem(prefix + 'earn_logs', JSON.stringify(logsData));
+      updateUI();
+    }
+
+    function showAppInterface() {
+      document.getElementById('authView').style.display = 'none';
+      document.getElementById('appTabsView').style.display = 'block';
+      document.getElementById('bottomNav').style.display = 'flex';
+      document.getElementById('headerActions').style.display = 'flex';
+    }
+
+    function showToast(m, icon = "✨") {
+      const t = document.getElementById("toast");
+      document.getElementById("toastText").innerText = m;
+      document.getElementById("toastIcon").innerText = icon;
       t.className = "show";
-      setTimeout(function() { t.className = ""; }, 2200);
+      setTimeout(() => { t.className = ""; }, 2500);
     }
 
     function toggleTheme() {
       document.body.classList.toggle('light');
     }
 
-    function tab(id, b) {
-      var tabs = document.querySelectorAll('.tab-content');
-      for(var i=0; i<tabs.length; i++) tabs[i].classList.remove('active');
-      var btns = document.querySelectorAll('nav button');
-      for(var j=0; j<btns.length; j++) btns[j].classList.remove('active');
-      document.getElementById(id).classList.add('active');
-      b.classList.add('active');
+    function switchTab(id, btn) {
+      const tabs = document.querySelectorAll('#appTabsView .tab-content');
+      tabs.forEach(t => t.style.display = 'none');
+      const btns = document.querySelectorAll('nav.bottom-nav button');
+      btns.forEach(b => b.classList.remove('active'));
+      
+      document.getElementById(id).style.display = 'block';
+      btn.classList.add('active');
     }
 
     function updateUI() {
       document.getElementById('userPoints').innerText = points + ' pt';
-      var dollar = (points / 1000).toFixed(2);
-      document.getElementById('userBalance').innerText = 'الرصيد: $' + dollar;
+      const dollar = (points / 1000).toFixed(2);
+      document.getElementById('userBalance').innerText = '$' + dollar;
       document.getElementById('todayViews').innerText = views + ' / 20';
-      document.getElementById('refCount').innerText = refCount + ' صديق';
+      document.getElementById('refCount').innerText = refCount;
+
+      const logsEl = document.getElementById('logs');
+      if(logsData.length === 0) {
+        logsEl.innerHTML = '<tr><td colspan="4" style="text-align: center; color: var(--muted);">لا توجد عمليات مسجلة بعد.</td></tr>';
+        return;
+      }
+      let html = '';
+      logsData.slice(0, 10).forEach((item, idx) => {
+        html += `<tr><td>${idx + 1}</td><td><b>${item.type}</b></td><td style="color:${item.val.includes('-') ? 'var(--danger)' : 'var(--green)'};">${item.val}</td><td>${item.time}</td></tr>`;
+      });
+      logsEl.innerHTML = html;
+    }
+
+    function addLog(type, val) {
+      const timeStr = new Date().toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+      logsData.unshift({ type: type, val: val, time: timeStr });
+      saveUserData();
     }
 
     function claimDaily() {
-      if(localStorage.getItem('aegis_daily_claimed') === new Date().toDateString()) {
-        return showToast("استلمت المكافأة اليومية بالفعل!");
+      const prefix = 'aegis_' + currentUser + '_';
+      const lastClaim = localStorage.getItem(prefix + 'daily_claimed');
+      const today = new Date().toDateString();
+      if(lastClaim === today) {
+        return showToast("⚠️ استلمت المكافأة اليومية بالفعل. عُد غداً!", "⏳");
       }
       points += 50;
-      localStorage.setItem('aegis_pts', points);
-      localStorage.setItem('aegis_daily_claimed', new Date().toDateString());
+      localStorage.setItem(prefix + 'daily_claimed', today);
+      addLog("مكافأة يومية", "+50 pt");
+      showToast("🌟 مبروك! حصلت على 50 نقطة مجانية.");
+    }
+
+    function openMysteryBox() {
+      const prefix = 'aegis_' + currentUser + '_';
+      const lastBox = localStorage.getItem(prefix + 'box_claimed');
+      const today = new Date().toDateString();
+      if(lastBox === today) {
+        document.getElementById('boxTitle').innerText = "تم فتح الصندوق مسبقاً";
+        document.getElementById('boxDesc').innerText = "يمكنك فتح صندوق جديد غداً لمضاعفة نقاطك!";
+        document.getElementById('boxIcon').innerText = "🔒";
+        document.getElementById('boxModal').style.display = 'flex';
+        return;
+      }
+      
+      const rewards = [75, 100, 150, 200];
+      const randomReward = rewards[Math.floor(Math.random() * rewards.length)];
+      points += randomReward;
+      localStorage.setItem(prefix + 'box_claimed', today);
+      addLog("صندوق الحظ اليومي", `+${randomReward} pt`);
+      
+      document.getElementById('boxTitle').innerText = "🎉 ربحت جائزة كبرى!";
+      document.getElementById('boxDesc').innerText = `مبروك! وجدنا داخل الصندوق ${randomReward} نقطة أُضيفت لرصيدك الدائم.`;
+      document.getElementById('boxIcon').innerText = "💎";
+      document.getElementById('boxModal').style.display = 'flex';
+    }
+
+    function closeMysteryBox() {
+      document.getElementById('boxModal').style.display = 'none';
       updateUI();
-      showToast("مبروك! حصلت على 50 نقطة 🌟");
+    }
+
+    function checkWheelStatus() {
+      const prefix = 'aegis_' + currentUser + '_';
+      const lastSpin = localStorage.getItem(prefix + 'wheel_spun');
+      const today = new Date().toDateString();
+      if(lastSpin === today) {
+        document.getElementById('spinBtn').disabled = true;
+        document.getElementById('wheelStatusMsg').innerText = "لقد قمت بتدوير العجلة اليوم. عُد غداً لفوز جديد! ⏳";
+      } else {
+        document.getElementById('spinBtn').disabled = false;
+        document.getElementById('wheelStatusMsg').innerText = "متاح تدور العجلة مرة واحدة اليوم! 🎡";
+      }
+    }
+
+    function spinWheel() {
+      const prefix = 'aegis_' + currentUser + '_';
+      const lastSpin = localStorage.getItem(prefix + 'wheel_spun');
+      const today = new Date().toDateString();
+      if(lastSpin === today) return;
+
+      const spinBtn = document.getElementById('spinBtn');
+      spinBtn.disabled = true;
+
+      // جوائز العجلة بالترتيب: 50, 100, 25, 200, 10, 500
+      const rewardsList = [50, 100, 25, 200, 10, 500];
+      const randomIndex = Math.floor(Math.random() * rewardsList.length);
+      const wonPoints = rewardsList[randomIndex];
+
+      // كل شريحة تمثل 60 درجة (360 / 6)
+      const sliceDegree = 360 / rewardsList.length;
+      // حساب الزاوية المطلوبة لكي تستقر العجلة على الشريحة المختارة بدقة
+      const targetDegree = 360 * 5 + (360 - (randomIndex * sliceDegree + sliceDegree / 2));
+      
+      currentDegree += targetDegree;
+      const wheelOuter = document.getElementById('wheelOuter');
+      wheelOuter.style.transform = `rotate(${currentDegree}deg)`;
+
+      setTimeout(() => {
+        points += wonPoints;
+        localStorage.setItem(prefix + 'wheel_spun', today);
+        addLog("عجلة الحظ الدوارة", `+${wonPoints} pt`);
+        showToast(`🎉 مبروك! ربحت ${wonPoints} نقطة من العجلة!`);
+        checkWheelStatus();
+      }, 4000);
     }
 
     function startWatch() {
-      var btn = document.getElementById('watchBtn');
-      var status = document.getElementById('videoStatus');
-      var timer = document.getElementById('timer');
+      if(views >= 20) {
+        return showToast("⚠️ استنفذت الحد الأقصى للمشاهدات اليومية (20/20). عُد غداً!", "⏳");
+      }
+      
+      const btn = document.getElementById('watchBtn');
+      const status = document.getElementById('videoStatus');
+      const timer = document.getElementById('timer');
       
       btn.disabled = true;
-      status.innerText = "جاري المشاهدة بشكل آمن... 📺";
+      status.innerText = "جاري تشغيل الإعلان الآمن... 📺";
       timer.style.display = "block";
       
-      var sec = 15;
+      let sec = 15;
       timer.innerText = sec + " ثانية";
       
-      var interval = setInterval(function() {
+      const interval = setInterval(() => {
         sec--;
         timer.innerText = sec + " ثانية";
         if(sec <= 0) {
           clearInterval(interval);
           points += 15;
           views += 1;
-          localStorage.setItem('aegis_pts', points);
-          localStorage.setItem('aegis_views', views);
-          updateUI();
+          addLog("مشاهدة إعلان آمن", "+15 pt");
           
           status.innerText = "اكتملت المشاهدة بنجاح! ✅";
           timer.style.display = "none";
           btn.disabled = false;
-          showToast("تم إضافة 15 نقطة لرصيدك! 🎉");
+          showToast("🎉 تم إضافة 15 نقطة لرصيدك الدائم بنجاح!");
         }
       }, 1000);
     }
 
     function copyRefLink() {
-      var copyText = document.getElementById('refLink');
+      const copyText = document.getElementById('refLink');
       copyText.select();
       navigator.clipboard.writeText(copyText.value);
-      showToast("تم نسخ رابط الدعوة بنجاح! 📋");
+      showToast("📋 تم نسخ رابط الدعوة الخاص بك بنجاح!");
     }
 
     function applyRefCode() {
-      var codeInput = document.getElementById('simulateRef').value.trim();
-      if(!codeInput) return showToast("أدخل كود الدعوة أولاً!");
-      if(codeInput === myRefCode) return showToast("لا يمكنك استخدام كود الدعوة الخاص بك!");
-      if(localStorage.getItem('aegis_ref_used') === 'true') {
-        return showToast("لقد استخدمت كود إحالة مسبقاً!");
+      const codeInput = document.getElementById('simulateRef').value.trim();
+      if(!codeInput) return showToast("⚠️ أدخل كود دعوة أولاً!", "❌");
+      if(codeInput === myRefCode) return showToast("⚠️ لا يمكنك استخدام كود الدعوة الخاص بك!", "❌");
+      
+      const prefix = 'aegis_' + currentUser + '_';
+      if(localStorage.getItem(prefix + 'ref_used') === 'true') {
+        return showToast("⚠️ لقد استخدمت كود إحالة مسبقاً!", "❌");
       }
       
       points += 100;
       refCount += 1;
-      localStorage.setItem('aegis_pts', points);
-      localStorage.setItem('aegis_ref_count', refCount);
-      localStorage.setItem('aegis_ref_used', 'true');
-      updateUI();
-      showToast("تم تطبيق الكود بنجاح وحصلت على 100 نقطة هدية! 🎁");
+      localStorage.setItem(prefix + 'ref_used', 'true');
+      addLog("تفعيل كود إحالة", "+100 pt");
+      showToast("🎁 تم تطبيق الكود وحصلت على 100 نقطة هدية!");
       document.getElementById('simulateRef').value = '';
     }
 
     function requestWithdraw(e) {
       e.preventDefault();
-      var acc = document.getElementById('payAcc').value;
-      var amt = parseFloat(document.getElementById('payAmt').value);
-      var currentDollar = points / 1000;
+      const acc = document.getElementById('payAcc').value;
+      const amt = parseFloat(document.getElementById('payAmt').value);
+      const currentDollar = points / 1000;
+
+      if(amt < 5) {
+        return showToast("⚠️ الحد الأدنى للسحب هو 5$ دولار!", "❌");
+      }
 
       if(amt > currentDollar) {
-        return showToast("رصيدك الحالي غير كافٍ لسحب هذا المبلغ!");
+        return showToast("⚠️ رصيدك الحالي غير كافٍ لإتمام عملية السحب!", "❌");
       }
 
       points -= (amt * 1000);
-      localStorage.setItem('aegis_pts', points);
-      updateUI();
-      showToast("تم إرسال طلب السحب بنجاح وأمان! 💸");
+      addLog("طلب سحب أرباح", `-$${amt}`);
+      showToast("💵 تم إرسال طلب السحب بنجاح وأمان تام!");
       document.getElementById('payAcc').value = '';
       document.getElementById('payAmt').value = '';
     }
