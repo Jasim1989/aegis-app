@@ -76,7 +76,8 @@
         .header-banner { background: linear-gradient(135deg, #ec4899, #db2777); color: #fff; padding: 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(236,72,153,0.2); }
         .wallet-badge { background: rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 20px; font-size: 14px; font-weight: bold; }
         .main-container { padding: 15px; max-width: 500px; margin: 0 auto; }
-        .card-box { background: #ffffff; padding: 18px; border-radius: 16px; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(236,72,153,0.06); border: 1px solid #fce7f3; text-align: right; }
+        .card-box { background: #ffffff; padding: 18px; border-radius: 16px; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(236,72,153,0.06); border: 1px solid #fce7f3; text-align: right; display: none; }
+        .card-box.active { display: block; }
         .card-box h3 { color: #be185d; font-size: 18px; margin-bottom: 8px; }
         .input-field { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #f472b6; border-radius: 10px; background: #fff5f8; outline: none; }
         .btn-main { width: 100%; padding: 10px; background: #ec4899; color: #fff; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
@@ -89,6 +90,12 @@
         /* الدردشة */
         .chat-messages { height: 120px; overflow-y: auto; background: #fff5f8; border: 1px solid #fce7f3; border-radius: 8px; padding: 8px; margin-bottom: 8px; font-size: 13px; }
         .chat-msg { margin-bottom: 6px; border-bottom: 1px solid #fbcfe8; padding-bottom: 4px; }
+
+        /* شريط التنقل السفلي */
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: #ffffff; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #fce7f3; box-shadow: 0 -4px 15px rgba(236,72,153,0.08); z-index: 1000; }
+        .nav-item { background: none; border: none; font-size: 12px; color: #6b7280; font-weight: bold; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+        .nav-item.active { color: #ec4899; }
+        .nav-item span.icon { font-size: 18px; }
     </style>
 </head>
 <body>
@@ -102,33 +109,34 @@
     </div>
 
     <div class="main-container">
-        <!-- التسجيل -->
-        <div class="card-box">
+        <!-- قسم التسجيل -->
+        <div class="card-box active" id="sec-register">
             <h3>تسجيل الحساب (رقم الهاتف)</h3>
+            <p style="font-size: 13px; color: #6b7280; margin-bottom: 10px;">حساب واحد لكل شخص برقم الهاتف الرسمي</p>
             <input type="text" id="uiName" class="input-field" placeholder="الاسم الكريم">
             <input type="tel" id="uiPhone" class="input-field" placeholder="رقم الهاتف (07XXXXXXXX)">
             <button onclick="registerWithPhone(document.getElementById('uiPhone').value, document.getElementById('uiName').value)" class="btn-main">تسجيل وحفظ</button>
         </div>
 
-        <!-- مشاهدة الفيديوهات والأرباح -->
-        <div class="card-box">
+        <!-- قسم الفيديوهات والأرباح -->
+        <div class="card-box" id="sec-videos">
             <h3>🎬 مركز مشاهدة الفيديوهات والأرباح</h3>
             <p style="font-size: 13px; color: #6b7280; margin-bottom: 10px;">شاهد الفيديو للنهاية لتحصيل المكافأة الفورية!</p>
-            <div style="background: #000; height: 150px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #fff; margin-bottom: 10px; position: relative;">
+            <div style="background: #000; height: 150px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #fff; margin-bottom: 10px;">
                 <span>▶ محاكاة فيديو ترويجي</span>
             </div>
             <button onclick="watchVideoReward()" class="btn-main">مشاهدة واكسب +10 رصيد</button>
         </div>
 
-        <!-- عجلة الحظ -->
-        <div class="card-box wheel-container">
+        <!-- قسم عجلة الحظ -->
+        <div class="card-box wheel-container" id="sec-wheel">
             <h3>🎡 عجلة الحظ اليومية</h3>
             <div class="wheel" id="luckyWheel"></div>
             <button onclick="spinWheel()" class="btn-main">تدوير العجلة الآن</button>
         </div>
 
-        <!-- غرف دردشة الأعضاء -->
-        <div class="card-box">
+        <!-- قسم غرف الدردشة -->
+        <div class="card-box" id="sec-chat">
             <h3>💬 غرفة دردشة الأعضاء</h3>
             <div class="chat-messages" id="chatBox">
                 <div class="chat-msg"><b>النظام:</b> أهلاً بك في غرف دردشة Aegis النشطة.</div>
@@ -138,7 +146,32 @@
         </div>
     </div>
 
+    <!-- شريط التنقل السفلي -->
+    <div class="bottom-nav">
+        <button class="nav-item active" onclick="switchTab('register', this)">
+            <span class="icon">👤</span> الحساب
+        </button>
+        <button class="nav-item" onclick="switchTab('videos', this)">
+            <span class="icon">🎬</span> الفيديوهات
+        </button>
+        <button class="nav-item" onclick="switchTab('wheel', this)">
+            <span class="icon">🎡</span> العجلة
+        </button>
+        <button class="nav-item" onclick="switchTab('chat', this)">
+            <span class="icon">💬</span> الدردشة
+        </button>
+    </div>
+
     <script>
+        // التنقل بين الأقسام عبر الشريط السفلي
+        function switchTab(tabId, btnElement) {
+            document.querySelectorAll('.card-box').forEach(box => box.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+            
+            document.getElementById('sec-' + tabId).classList.add('active');
+            btnElement.classList.add('active');
+        }
+
         // مكافأة الفيديوهات مع نافذة تفاعلية مبهجة
         function watchVideoReward() {
             alert("⏳ جاري مشاهدة الفيديو... يرجى الانتظار 3 ثوانٍ.");
@@ -153,7 +186,7 @@
         let currentDegree = 0;
         function spinWheel() {
             const wheel = document.getElementById('luckyWheel');
-            const randomDegree = Math.floor(Math.random() * 360) + 1440; // عدة دورات كاملة
+            const randomDegree = Math.floor(Math.random() * 360) + 1440;
             currentDegree += randomDegree;
             wheel.style.transform = `rotate(${currentDegree}deg)`;
             
