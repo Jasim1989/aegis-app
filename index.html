@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Aegis Ultimate Suite</title>
+  <title>Aegis - مشاهدات وأرباح وآمان</title>
   <style>
-    :root { --bg: #0b0f19; --card: #151c2c; --text: #f8fafc; --muted: #94a3b8; --border: #26334d; --primary: #38bdf8; --green: #10b981; --danger: #ef4444; --warning: #f59e0b; }
-    .light { --bg: #f1f5f9; --card: #ffffff; --text: #0f172a; --muted: #64748b; --border: #cbd5e1; --primary: #0284c7; --green: #059669; --danger: #dc2626; --warning: #d97706; }
+    :root { --bg: #0b0f19; --card: #151c2c; --text: #f8fafc; --muted: #94a3b8; --border: #26334d; --primary: #38bdf8; --green: #10b981; --gold: #f59e0b; }
+    .light { --bg: #f1f5f9; --card: #ffffff; --text: #0f172a; --muted: #64748b; --border: #cbd5e1; --primary: #0284c7; --green: #059669; --gold: #d97706; }
     
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; -webkit-tap-highlight-color: transparent; }
     html, body { height: 100vh; width: 100vw; overflow: hidden; background: var(--bg); color: var(--text); }
@@ -21,25 +21,26 @@
     .tab-content.active { display: block; }
     
     .card { background: var(--card); border: 1px solid var(--border); padding: 1rem; border-radius: 0.75rem; margin-bottom: 1rem; }
-    .val { font-size: 1.4rem; font-weight: bold; margin-top: 0.3rem; }
+    .val { font-size: 1.5rem; font-weight: bold; margin-top: 0.3rem; }
     
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
     
-    input, select, textarea, button { width: 100%; padding: 0.75rem; margin-top: 0.5rem; background: var(--bg); border: 1px solid var(--border); color: var(--text); border-radius: 0.5rem; font-size: 0.85rem; }
+    input, select, button { width: 100%; padding: 0.75rem; margin-top: 0.5rem; background: var(--bg); border: 1px solid var(--border); color: var(--text); border-radius: 0.5rem; font-size: 0.85rem; }
     button.btn-primary { background: var(--primary); color: #0b0f19; font-weight: bold; border: none; cursor: pointer; }
-    button.btn-danger { background: var(--danger); color: #fff; font-weight: bold; border: none; cursor: pointer; }
+    button.btn-gold { background: var(--gold); color: #000; font-weight: bold; border: none; cursor: pointer; }
     
-    .progress-bar { height: 8px; background: var(--bg); border-radius: 4px; overflow: hidden; margin-top: 0.5rem; border: 1px solid var(--border); }
-    .progress-fill { height: 100%; width: 0%; background: var(--primary); transition: width 0.4s ease; }
+    .video-box { background: #000; height: 180px; border-radius: 0.5rem; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid var(--border); margin-top: 0.5rem; position: relative; }
     
+    .privacy-badge { background: rgba(16, 185, 129, 0.1); border: 1px solid var(--green); color: var(--green); font-size: 0.75rem; padding: 0.4rem 0.6rem; border-radius: 0.4rem; display: flex; align-items: center; gap: 5px; margin-bottom: 0.8rem; }
+
     nav.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 65px; background: var(--card); display: flex; justify-content: space-around; align-items: center; border-top: 1px solid var(--border); z-index: 9999; max-width: 600px; margin: 0 auto; }
     nav button { flex: 1; height: 100%; background: none; border: none; padding: 0; color: var(--muted); cursor: pointer; border-radius: 0; font-size: 0.75rem; font-weight: bold; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; }
-    nav button.active { color: var(--primary); background: rgba(56, 189, 248, 0.08); border-top: 3px solid var(--primary); }
+    nav button.active { color: var(--gold); background: rgba(245, 158, 11, 0.08); border-top: 3px solid var(--gold); }
     
     table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; font-size: 0.8rem; }
     th, td { padding: 0.5rem; border-bottom: 1px solid var(--border); text-align: right; }
     
-    #toast { visibility: hidden; min-width: 200px; background-color: var(--card); color: var(--text); border: 1px solid var(--primary); text-align: center; border-radius: 0.5rem; padding: 0.75rem; position: fixed; z-index: 10000; left: 50%; top: 20px; transform: translateX(-50%); box-shadow: 0 5px 15px rgba(0,0,0,0.3); font-size: 0.85rem; }
+    #toast { visibility: hidden; min-width: 200px; background-color: var(--card); color: var(--text); border: 1px solid var(--gold); text-align: center; border-radius: 0.5rem; padding: 0.75rem; position: fixed; z-index: 10000; left: 50%; top: 20px; transform: translateX(-50%); box-shadow: 0 5px 15px rgba(0,0,0,0.3); font-size: 0.85rem; }
     #toast.show { visibility: visible; animation: fadein 0.3s, fadeout 0.3s 2.2s; }
     @keyframes fadein { from { top: 0; opacity: 0; } to { top: 20px; opacity: 1; } }
     @keyframes fadeout { from { top: 20px; opacity: 1; } to { top: 0; opacity: 0; } }
@@ -48,117 +49,97 @@
 <body>
   <div class="app-viewport">
     <header>
-      <div style="font-weight: bold; color: var(--primary); font-size: 1.05rem;">🛡️ Aegis Ultimate</div>
+      <div style="font-weight: bold; color: var(--gold); font-size: 1.05rem;">🛡️ Aegis Cash & Privacy</div>
       <button style="width: auto; padding: 0.3rem 0.6rem; margin: 0;" onclick="toggleTheme()">🌗 المظهر</button>
     </header>
 
     <main>
-      <!-- TAB 1: Dashboard -->
+      <!-- Privacy Assurance Banner -->
+      <div class="privacy-badge">
+        🔒 <b>الخصوصية محمية:</b> لا يتم جمع بياناتك الشخصية أو تتبع موقعك الجغرافي.
+      </div>
+
+      <!-- TAB 1: Wallet & Dashboard -->
       <div id="t1" class="tab-content active">
-        <h3 style="color:var(--primary); margin-bottom: 0.8rem;">📊 لوحة مراقبة النظام</h3>
+        <h3 style="color:var(--gold); margin-bottom: 0.8rem;">💰 محفظة الأرباح</h3>
+        
+        <div class="card" style="border-color:var(--gold);">
+          <div style="font-size:0.8rem; color:var(--muted);">إجمالي النقاط المكتسبة</div>
+          <div class="val" style="color:var(--gold);" id="userPoints">0 pt</div>
+          <div style="font-size:0.85rem; margin-top:0.3rem; color:var(--green);" id="userBalance">الرصيد: $0.00</div>
+        </div>
+
         <div class="grid-2">
           <div class="card">
-            <div style="font-size:0.8rem; color:var(--muted);">حالة النظام</div>
-            <div class="val" style="color:var(--green); font-size:1.1rem;">نشط 100% 🟢</div>
+            <div style="font-size:0.8rem; color:var(--muted);">المشاهدات اليومية</div>
+            <div class="val" id="todayViews" style="font-size:1.1rem;">0 / 20</div>
           </div>
           <div class="card">
-            <div style="font-size:0.8rem; color:var(--muted);">الطلبات</div>
-            <div class="val" id="cnt">0</div>
+            <div style="font-size:0.8rem; color:var(--muted);">حالة التشفير</div>
+            <div class="val" style="color:var(--green); font-size:1.1rem;">آمن 100% 🛡️</div>
           </div>
-        </div>
-        
-        <div class="card">
-          <div style="display:flex; justify-content:space-between; font-size:0.85rem;">
-            <span>استهلاك المعالج (CPU)</span>
-            <span id="cpuVal" style="color:var(--primary);">12%</span>
-          </div>
-          <div class="progress-bar"><div class="progress-fill" id="cpuFill" style="width:12%;"></div></div>
         </div>
 
         <div class="card">
-          <div style="display:flex; justify-content:space-between; font-size:0.85rem;">
-            <span>استهلاك الذاكرة (RAM)</span>
-            <span id="ramVal" style="color:var(--warning);">44%</span>
-          </div>
-          <div class="progress-bar"><div class="progress-fill" id="ramFill" style="width:44%; background:var(--warning);"></div></div>
-        </div>
-
-        <div class="card">
-          <div>استجابة الشبكة (Ping)</div>
-          <div class="val" id="pingVal" style="color:var(--primary);">21 ms</div>
+          <div style="font-weight:bold; font-size:0.85rem;">🎁 مكافأة التسجيل اليومي</div>
+          <button class="btn-gold" id="dailyBtn" onclick="claimDaily()">استلام 50 نقطة مجاناً 🌟</button>
         </div>
       </div>
 
-      <!-- TAB 2: Requests -->
+      <!-- TAB 2: Watch & Earn -->
       <div id="t2" class="tab-content">
-        <h3 style="color:var(--primary); margin-bottom: 0.8rem;">📝 تسجيل طلب جديد</h3>
+        <h3 style="color:var(--gold); margin-bottom: 0.8rem;">🎬 شاهد واكسب النقاط</h3>
         <div class="card">
-          <form onsubmit="addReq(event)">
-            <label style="font-size:0.8rem; color:var(--muted);">اسم المشترك / النطاق</label>
-            <input type="text" id="usr" required placeholder="مثال: أحمد علي أو Server-01">
-            <label style="margin-top:0.6rem; display:block; font-size:0.8rem; color:var(--muted);">نوع الخدمة</label>
-            <select id="svc">
-              <option>فحص أمني وحماية الشبكة</option>
-              <option>توليد مفتاح API مشفر</option>
-              <option>نسخ احتياطي للبيانات</option>
-              <option>فحص الثغرات المفتوحة</option>
+          <div style="font-weight:bold; font-size:0.9rem;">إعلان مشفر وآمن (+15 نقطة)</div>
+          <div class="video-box">
+            <span id="videoStatus" style="font-size:1.2rem; color:var(--muted);">اضغط للبدء ▶️</span>
+            <div id="timer" style="font-weight:bold; color:var(--gold); margin-top:0.5rem; display:none;">15 ثانية</div>
+          </div>
+          <button class="btn-primary" id="watchBtn" onclick="startWatch()">مشاهدة الإعلان الآن 🚀</button>
+        </div>
+      </div>
+
+      <!-- TAB 3: Withdraw & Privacy -->
+      <div id="t3" class="tab-content">
+        <h3 style="color:var(--gold); margin-bottom: 0.8rem;">💸 سحب الأرباح المشفر</h3>
+        <div class="card">
+          <form onsubmit="requestWithdraw(event)">
+            <label style="font-size:0.8rem; color:var(--muted);">طريقة السحب</label>
+            <select id="payMethod">
+              <option>زين كاش (Zain Cash)</option>
+              <option>رصيد آسياحوال / أثير</option>
+              <option>بايبال (PayPal)</option>
+              <option>بطاقات Google Play</option>
             </select>
-            <button type="submit" class="btn-primary" style="margin-top:1rem;">إرسال ومعالجة الطلب 🚀</button>
+            <label style="margin-top:0.6rem; display:block; font-size:0.8rem; color:var(--muted);">رقم المحفظة (يتم تشفيره محلياً)</label>
+            <input type="text" id="payAcc" required placeholder="07XXXXXXXXX">
+            <label style="margin-top:0.6rem; display:block; font-size:0.8rem; color:var(--muted);">المبلغ المطلوب ($)</label>
+            <input type="number" id="payAmt" min="5" required placeholder="الحد الأدنى 5$">
+            <button type="submit" class="btn-gold" style="margin-top:1rem;">إرسال طلب السحب الآمن 💵</button>
           </form>
         </div>
       </div>
 
-      <!-- TAB 3: Security & Tools -->
-      <div id="t3" class="tab-content">
-        <h3 style="color:var(--primary); margin-bottom: 0.8rem;">🔍 فحص الأمان والأدوات</h3>
-        
-        <!-- Scanner Tool -->
-        <div class="card">
-          <div style="font-weight:bold; font-size:0.9rem;">🔎 فحص أمان الرابط / SSL</div>
-          <input type="text" id="scanUrl" placeholder="أدخل الرابط أو IP لمسحه...">
-          <button class="btn-primary" onclick="runScan()">بدء الفحص السريع 🛡️</button>
-          <div id="scanResult" style="margin-top:0.6rem; font-size:0.8rem; color:var(--muted); display:none;"></div>
-        </div>
-
-        <!-- Key Generator -->
-        <div class="card">
-          <div style="font-weight:bold; font-size:0.9rem;">🔑 مولّد المفاتيح المشفرة</div>
-          <button class="btn-primary" onclick="genKey()">توليد مفتاح جديد</button>
-          <input type="text" id="keyOut" readonly style="margin-top:0.5rem; text-align:center; font-family:monospace; color:var(--primary);">
-        </div>
-
-        <!-- Secure Notes -->
-        <div class="card">
-          <div style="font-weight:bold; font-size:0.9rem;">📝 ملاحظات أمنية سريعة</div>
-          <textarea id="secNote" rows="3" placeholder="اكتب ملاحظاتك المحمية هنا..." style="resize:none;" oninput="saveNote()"></textarea>
-        </div>
-      </div>
-
-      <!-- TAB 4: Logs -->
+      <!-- TAB 4: History -->
       <div id="t4" class="tab-content">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 0.6rem;">
-          <h3 style="color:var(--primary);">📋 سجل الطلبات</h3>
-          <button style="width:auto; padding:0.3rem 0.6rem; font-size:0.75rem;" class="btn-primary" onclick="exportCSV()">تحميل CSV 📥</button>
-        </div>
-        <input type="text" id="logSearch" placeholder="🔍 بحث في السجلات..." oninput="updateUI()" style="margin-bottom:0.8rem;">
+        <h3 style="color:var(--gold); margin-bottom: 0.8rem;">📋 سجل العمليات المشفر</h3>
         <div class="card" style="padding:0.4rem; overflow-x:auto;">
           <table>
             <thead>
-              <tr><th>#</th><th>الاسم</th><th>الخدمة</th><th>الوقت</th></tr>
+              <tr><th>#</th><th>النوع</th><th>النقاط/المبلغ</th><th>الوقت</th></tr>
             </thead>
             <tbody id="logs">
-              <tr><td colspan="4" style="text-align:center; color:var(--muted);">لا توجد سجلات.</td></tr>
+              <tr><td colspan="4" style="text-align:center; color:var(--muted);">لا توجد عمليات بعد.</td></tr>
             </tbody>
           </table>
         </div>
-        <button class="btn-danger" style="margin-top:0.5rem;" onclick="clearLogs()">مسح السجلات 🗑️</button>
       </div>
     </main>
 
     <nav class="bottom-nav">
-      <button class="active" onclick="tab('t1', this)"><span>📊</span><span>الرئيسية</span></button>
-      <button onclick="tab('t2', this)"><span>📝</span><span>الطلبات</span></button>
-      <button onclick="tab('t3', this)"><span>🔍</span><span>الأدوات</span></button>
+      <button class="active" onclick="tab('t1', this)"><span>💰</span><span>المحفظة</span></button>
+      <button onclick="tab('t2', this)"><span>🎬</span><span>مشاهدة</span></button>
+      <button onclick="tab('t3', this)"><span>💸</span><span>السحب</span></button>
       <button onclick="tab('t4', this)"><span>📋</span><span>السجل</span></button>
     </nav>
   </div>
@@ -166,27 +147,13 @@
   <div id="toast">تمت العملية بنجاح!</div>
 
   <script>
-    var transactions = JSON.parse(localStorage.getItem('aegis_logs') || '[]');
+    var points = parseInt(localStorage.getItem('aegis_pts') || '0');
+    var views = parseInt(localStorage.getItem('aegis_views') || '0');
+    var logsData = JSON.parse(localStorage.getItem('aegis_earn_logs') || '[]');
 
     window.onload = function() {
       updateUI();
-      document.getElementById('secNote').value = localStorage.getItem('aegis_note') || '';
-      setInterval(simulateStats, 2500);
     };
-
-    function simulateStats() {
-      var cpu = Math.floor(Math.random() * 35) + 10;
-      var ram = Math.floor(Math.random() * 20) + 40;
-      var ping = Math.floor(Math.random() * 15) + 15;
-      
-      document.getElementById('cpuVal').innerText = cpu + '%';
-      document.getElementById('cpuFill').style.width = cpu + '%';
-      
-      document.getElementById('ramVal').innerText = ram + '%';
-      document.getElementById('ramFill').style.width = ram + '%';
-      
-      document.getElementById('pingVal').innerText = ping + ' ms';
-    }
 
     function showToast(m) {
       var t = document.getElementById("toast");
@@ -197,7 +164,6 @@
 
     function toggleTheme() {
       document.body.classList.toggle('light');
-      showToast("تم تغيير المظهر");
     }
 
     function tab(id, b) {
@@ -209,83 +175,89 @@
       b.classList.add('active');
     }
 
-    function genKey() {
-      var str = 'aegis_' + Math.random().toString(36).substring(2, 9) + '_' + Date.now().toString().slice(-4);
-      document.getElementById('keyOut').value = str;
-      showToast("تم إنشاء المفتاح! 🔑");
-    }
-
-    function runScan() {
-      var url = document.getElementById('scanUrl').value;
-      if(!url) return showToast("أدخل رابطاً للفحص!");
-      var res = document.getElementById('scanResult');
-      res.style.display = 'block';
-      res.innerHTML = 'جاري تحليل الأمان... ⏳';
-      setTimeout(function() {
-        res.innerHTML = '✅ <b style="color:var(--green)">آمن:</b> تشفير SSL مفعل، لا توجد ثغرات معروفة.';
-        showToast("اكتمال الفحص بنجاح! 🟢");
-      }, 1500);
-    }
-
-    function saveNote() {
-      var val = document.getElementById('secNote').value;
-      localStorage.setItem('aegis_note', val);
-    }
-
-    function addReq(e) {
-      e.preventDefault();
-      var u = document.getElementById('usr').value;
-      var s = document.getElementById('svc').value;
-      var t = new Date().toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
-      
-      transactions.unshift({ id: transactions.length + 1, user: u, service: s, time: t });
-      localStorage.setItem('aegis_logs', JSON.stringify(transactions));
-      
-      document.getElementById('usr').value = '';
-      updateUI();
-      showToast("تمت إضافة الطلب بنجاح! 🚀");
-    }
-
     function updateUI() {
-      document.getElementById('cnt').innerText = transactions.length;
-      var filter = document.getElementById('logSearch').value.toLowerCase();
-      var logs = document.getElementById('logs');
-      
-      var filtered = transactions.filter(function(item) {
-        return item.user.toLowerCase().includes(filter) || item.service.toLowerCase().includes(filter);
-      });
+      document.getElementById('userPoints').innerText = points + ' pt';
+      var dollar = (points / 1000).toFixed(2);
+      document.getElementById('userBalance').innerText = 'الرصيد: $' + dollar;
+      document.getElementById('todayViews').innerText = views + ' / 20';
 
-      if(filtered.length === 0) {
-        logs.innerHTML = '<tr><td colspan="4" style="text-align:center; color:var(--muted);">لا توجد سجلات مطابقة.</td></tr>';
+      var logs = document.getElementById('logs');
+      if(logsData.length === 0) {
+        logs.innerHTML = '<tr><td colspan="4" style="text-align:center; color:var(--muted);">لا توجد عمليات بعد.</td></tr>';
         return;
       }
       var html = '';
-      filtered.forEach(function(item) {
-        html += '<tr><td>' + item.id + '</td><td><b>' + item.user + '</b></td><td>' + item.service + '</td><td>' + item.time + '</td></tr>';
+      logsData.forEach(function(item) {
+        html += '<tr><td>' + item.id + '</td><td><b>' + item.type + '</b></td><td>' + item.val + '</td><td>' + item.time + '</td></tr>';
       });
       logs.innerHTML = html;
     }
 
-    function clearLogs() {
-      if(confirm("مسح كافة السجلات؟")) {
-        transactions = [];
-        localStorage.removeItem('aegis_logs');
-        updateUI();
-        showToast("تم مسح السجلات 🗑️");
-      }
+    function addLog(type, val) {
+      var t = new Date().toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+      logsData.unshift({ id: logsData.length + 1, type: type, val: val, time: t });
+      localStorage.setItem('aegis_earn_logs', JSON.stringify(logsData));
+      updateUI();
     }
 
-    function exportCSV() {
-      if (transactions.length === 0) return showToast("لا توجد بيانات لتصديرها!");
-      var csv = "ID,User,Service,Time\n";
-      transactions.forEach(function(t) { csv += t.id + "," + t.user + "," + t.service + "," + t.time + "\n"; });
-      var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      var url = URL.createObjectURL(blob);
-      var a = document.createElement('a');
-      a.href = url;
-      a.download = 'aegis_logs.csv';
-      a.click();
-      showToast("تم تصدير ملف السجل 📥");
+    function claimDaily() {
+      if(localStorage.getItem('aegis_daily_claimed') === new Date().toDateString()) {
+        return showToast("استلمت المكافأة اليومية بالفعل!");
+      }
+      points += 50;
+      localStorage.setItem('aegis_pts', points);
+      localStorage.setItem('aegis_daily_claimed', new Date().toDateString());
+      addLog("مكافأة يومية", "+50 pt");
+      showToast("مبروك! حصلت على 50 نقطة 🌟");
+    }
+
+    function startWatch() {
+      var btn = document.getElementById('watchBtn');
+      var status = document.getElementById('videoStatus');
+      var timer = document.getElementById('timer');
+      
+      btn.disabled = true;
+      status.innerText = "جاري المشاهدة بطريقة آمنة... 📺";
+      timer.style.display = "block";
+      
+      var sec = 15;
+      timer.innerText = sec + " ثانية";
+      
+      var interval = setInterval(function() {
+        sec--;
+        timer.innerText = sec + " ثانية";
+        if(sec <= 0) {
+          clearInterval(interval);
+          points += 15;
+          views += 1;
+          localStorage.setItem('aegis_pts', points);
+          localStorage.setItem('aegis_views', views);
+          addLog("مشاهدة إعلان", "+15 pt");
+          
+          status.innerText = "اكتملت المشاهدة! ✅";
+          timer.style.display = "none";
+          btn.disabled = false;
+          showToast("تم إضافة 15 نقطة لرصيدك! 🎉");
+        }
+      }, 1000);
+    }
+
+    function requestWithdraw(e) {
+      e.preventDefault();
+      var acc = document.getElementById('payAcc').value;
+      var amt = parseFloat(document.getElementById('payAmt').value);
+      var currentDollar = points / 1000;
+
+      if(amt > currentDollar) {
+        return showToast("رصيدك الحالي غير كافٍ لسحب هذا المبلغ!");
+      }
+
+      points -= (amt * 1000);
+      localStorage.setItem('aegis_pts', points);
+      addLog("طلب سحب", "-$" + amt);
+      showToast("تم إرسال طلب السحب بنجاح وأمان! 💸");
+      document.getElementById('payAcc').value = '';
+      document.getElementById('payAmt').value = '';
     }
   </script>
 </body>
