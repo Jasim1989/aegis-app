@@ -164,7 +164,7 @@
         .btn-primary { background: linear-gradient(135deg, #ec4899, #be185d); color: #fff; box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3); margin-top: 10px; }
         .btn-secondary { background: linear-gradient(135deg, #0284c7, #0369a1); color: #fff; box-shadow: 0 8px 20px rgba(2, 132, 199, 0.2); margin-top: 10px; }
         .btn-success { background: linear-gradient(135deg, #10b981, #047857); color: #fff; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2); margin-top: 10px; }
-        .btn-admin { background: linear-gradient(135deg, #7c3aed, #4f46e5); color: #fff; box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3); margin-top: 10px; }
+        .btn-danger { background: linear-gradient(135deg, #ef4444, #dc2626); color: #fff; box-shadow: 0 8px 20px rgba(239, 68, 68, 0.2); margin-top: 10px; }
 
         /* Store */
         .store-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 15px; }
@@ -174,6 +174,7 @@
         .store-title { font-size: 13px; font-weight: 800; color: #1f2937; margin-bottom: 4px; }
         .store-price { font-size: 12px; color: #be185d; font-weight: 700; margin-bottom: 10px; background: #fdf2f8; padding: 4px; border-radius: 6px; }
         .buy-btn { background: #fdf2f8; color: #be185d; border: 1px solid #fbcfe8; padding: 6px; width: 100%; border-radius: 8px; font-size: 12px; font-weight: 800; cursor: pointer; }
+        .delete-prod-btn { background: #fee2e2; color: #dc2626; border: 1px solid #fecaca; padding: 4px; width: 100%; border-radius: 6px; font-size: 11px; font-weight: 700; margin-top: 6px; cursor: pointer; }
 
         /* Videos Section */
         .video-card { background: #fff; border: 1px solid #fce7f3; border-radius: 16px; overflow: hidden; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(236,72,153,0.05); }
@@ -197,18 +198,18 @@
         .chat-send-btn { background: #be185d; color: #fff; border: none; padding: 0 16px; border-radius: 10px; font-weight: 700; cursor: pointer; }
 
         /* Admin */
-        .admin-form-group { margin-bottom: 14px; text-align: right; }
-        .admin-form-group label { display: block; font-size: 13px; font-weight: 700; color: #4b5563; margin-bottom: 6px; }
-        .admin-input { width: 100%; padding: 10px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 13px; font-weight: 700; outline: none; }
+        .admin-form-group { margin-bottom: 12px; text-align: right; }
+        .admin-form-group label { display: block; font-size: 12px; font-weight: 700; color: #4b5563; margin-bottom: 4px; }
+        .admin-input { width: 100%; padding: 9px; border: 2px solid #fbcfe8; border-radius: 10px; font-size: 13px; font-weight: 700; outline: none; background: #fdf2f8; }
         .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
         .stat-box { background: #f9fafb; border: 1px solid #e5e7eb; padding: 12px; border-radius: 14px; text-align: center; }
-        .stat-num { font-size: 18px; font-weight: 800; color: #7c3aed; margin-top: 4px; }
+        .stat-num { font-size: 18px; font-weight: 800; color: #be185d; margin-top: 4px; }
 
         /* Profile */
         .profile-avatar { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid #ec4899; margin: 0 auto 12px auto; display: block; box-shadow: 0 5px 15px rgba(236,72,153,0.3); }
         .profile-info-group { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 12px 16px; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
 
-        /* شريط التنقل السفلي المعدل ليحتوي على الأيقونات الـ 9 بدقة */
+        /* شريط التنقل السفلي */
         .nav-bar-wrapper {
             position: fixed; bottom: 15px; left: 0; width: 100%; padding: 0 10px; z-index: 100; pointer-events: none;
         }
@@ -267,7 +268,7 @@
     <!-- شريط الإعلانات المتحرك -->
     <div class="ticker-wrap">
         <div class="ticker-content">
-            🌸 أهلاً بكم في Aegis Cash! | نظام حماية متطور وتوثيق رسمي | استمتع بالعجلة وغرف الدردشة الفورية ودعوة الأصدقاء
+            🌸 أهلاً بكم في Aegis Cash! | تحكم كامل بالمنتجات والأسعار | نظام حماية وتوثيق رسمي نشط
         </div>
     </div>
 
@@ -334,7 +335,7 @@
             </div>
         </div>
 
-        <!-- رابط الدعوة (القسم الجديد كلياً) -->
+        <!-- رابط الدعوة -->
         <div id="invite-section" class="section">
             <div class="card" style="text-align: center;">
                 <div style="font-size: 40px; margin-bottom: 8px;">🔗</div>
@@ -343,7 +344,7 @@
                     شارك رابط الدعوة الخاص بك مع أصدقائك، واكسب <strong style="color: #be185d;">100 نقطة + 5 جواهر</strong> عن كل شخص يسجل من خلالك! 🚀
                 </p>
 
-                <div style="background: #f9fafb; border: 2px dashed #fbcfe8; border-radius: 14px; padding: 12px; margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+                <div style="background: #f9fafb; border: 2px dashed #fbcfe8; border-radius: 14px; padding: 12px; margin-bottom: 15px;">
                     <input type="text" id="inviteLinkInput" value="https://aegiscash.app/ref?id=AEG-84920" readonly style="background: transparent; border: none; font-size: 11px; font-weight: 700; color: #4b5563; width: 100%; text-align: center; outline: none;">
                 </div>
 
@@ -384,26 +385,14 @@
             </div>
         </div>
 
-        <!-- المتجر -->
+        <!-- المتجر (مع التحكم الكامل والإضافة) -->
         <div id="store-section" class="section">
             <div class="card">
-                <h3 style="color: #be185d; margin-bottom: 4px; font-size: 17px; text-align: center; font-weight: 800;">🛍️ المتجر الرقمي</h3>
-                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;">اشترِ الجواهر وبطاقات الإنترنت برصيدك</p>
+                <h3 style="color: #be185d; margin-bottom: 4px; font-size: 17px; text-align: center; font-weight: 800;">🛍️ المتجر الرقمي الشامل</h3>
+                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;">استعرض المنتجات أو قم بإضافة وتعديل منتجات جديدة</p>
                 
-                <div class="store-grid">
-                    <div class="store-item">
-                        <div class="store-icon">💎</div>
-                        <div class="store-title">50 جوهرة</div>
-                        <div class="store-price">500 نقطة</div>
-                        <button class="buy-btn" onclick="buyItem('50 جوهرة', 500)">شراء</button>
-                    </div>
-                    <div class="store-item">
-                        <div class="badge-hot">مميز 🔥</div>
-                        <div class="store-icon">💎</div>
-                        <div class="store-title">200 جوهرة</div>
-                        <div class="store-price">1,800 نقطة</div>
-                        <button class="buy-btn" onclick="buyItem('200 جوهرة', 1800)">شراء</button>
-                    </div>
+                <div class="store-grid" id="storeItemsGrid">
+                    <!-- يتم تعبئة المنتجات تلقائياً عبر البرمجة -->
                 </div>
             </div>
         </div>
@@ -455,12 +444,30 @@
             </div>
         </div>
 
-        <!-- لوحة تحكم الإدارة -->
+        <!-- لوحة تحكم الإدارة (تتضمن إضافة منتجات للمتجر) -->
         <div id="admin-section" class="section">
             <div class="card">
-                <h3 style="color: #7c3aed; font-size: 18px; font-weight: 800; text-align: center; margin-bottom: 6px;">⚙️ لوحة إدارة التطبيق والحماية</h3>
-                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 20px;">التحكم بالإحصائيات، الأمان، ورقم الهاتف المرتبط</p>
+                <h3 style="color: #be185d; font-size: 18px; font-weight: 800; text-align: center; margin-bottom: 6px;">⚙️ لوحة إدارة المتجر والتطبيق</h3>
+                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 20px;">أضف منتجات جديدة، وحدد أسعارها بكل سهولة</p>
                 
+                <div style="background: #fdf2f8; border: 1px solid #fbcfe8; border-radius: 16px; padding: 16px; margin-bottom: 20px;">
+                    <h4 style="color: #be185d; font-size: 14px; font-weight: 800; margin-bottom: 12px;">➕ إضافة منتج جديد للمتجر</h4>
+                    
+                    <div class="admin-form-group">
+                        <label>اسم المنتج (مثال: 500 جوهرة أو بطاقة شحن)</label>
+                        <input type="text" id="newProdName" class="admin-input" placeholder="اسم المنتج...">
+                    </div>
+                    <div class="admin-form-group">
+                        <label>السعر (بالنقاط pt)</label>
+                        <input type="number" id="newProdPrice" class="admin-input" placeholder="مثال: 1500">
+                    </div>
+                    <div class="admin-form-group">
+                        <label>رمز الإيموجي أو الأيقونة</label>
+                        <input type="text" id="newProdIcon" class="admin-input" value="💎">
+                    </div>
+                    <button class="btn btn-primary" onclick="addNewProductFromAdmin()">إضافة المنتج إلى المتجر 🚀</button>
+                </div>
+
                 <div class="stats-grid">
                     <div class="stat-box">
                         <div style="font-size: 12px; color: #6b7280; font-weight: 700;">إجمالي المشتركين</div>
@@ -509,7 +516,7 @@
 
     </div>
 
-    <!-- شريط التنقل السفلي المحدث ليشمل الأزرار الـ 9 بدقة وتناسق -->
+    <!-- شريط التنقل السفلي المحدث -->
     <div class="nav-bar-wrapper">
         <div class="nav-bar">
             <button class="nav-item active" onclick="switchTab('wallet', this)">
@@ -543,13 +550,19 @@
     </div>
 
     <script>
-        const SECURITY_KEY = "AegisSecureToken_9981";
+        const SECURITY_KEY = "AegisSecureToken_Store_999";
         let appData = {
             balance: 1315,
             diamonds: 35,
             userName: "جاسم العراقي",
             userPhone: "+964 780 000 0000",
-            hasFreeSpinToday: true
+            hasFreeSpinToday: true,
+            storeProducts: [
+                { id: 1, name: "50 جوهرة", price: 500, icon: "💎", hot: false },
+                { id: 2, name: "200 جوهرة", price: 1800, icon: "💎", hot: true },
+                { id: 3, name: "500 جوهرة بريميوم", price: 4000, icon: "👑", hot: true },
+                { id: 4, name: "بطاقة شحن 5$", price: 8500, icon: "💳", hot: false }
+            ]
         };
 
         function saveSecureState() {
@@ -614,6 +627,8 @@
             document.getElementById('profileNameDisplay').innerText = appData.userName;
             document.getElementById('profilePhoneDisplay').innerText = `📱 ${appData.userPhone}`;
 
+            renderStore();
+
             const withdrawBtn = document.getElementById('withdrawBtn');
             if (appData.balance >= minWithdrawPoints) {
                 withdrawBtn.disabled = false;
@@ -629,6 +644,71 @@
                 withdrawBtn.innerText = "الرصيد غير كافي 🔒";
             }
             saveSecureState();
+        }
+
+        function renderStore() {
+            let grid = document.getElementById('storeItemsGrid');
+            grid.innerHTML = "";
+            appData.storeProducts.forEach(prod => {
+                let itemHTML = `
+                    <div class="store-item">
+                        ${prod.hot ? '<div class="badge-hot">مميز 🔥</div>' : ''}
+                        <div class="store-icon">${prod.icon}</div>
+                        <div class="store-title">${prod.name}</div>
+                        <div class="store-price">${prod.price.toLocaleString()} نقطة</div>
+                        <button class="buy-btn" onclick="buyItem(${prod.id})">شراء</button>
+                        <button class="delete-prod-btn" onclick="deleteProduct(${prod.id})">حذف 🗑️</button>
+                    </div>
+                `;
+                grid.innerHTML += itemHTML;
+            });
+        }
+
+        function addNewProductFromAdmin() {
+            let name = document.getElementById('newProdName').value.trim();
+            let price = Number(document.getElementById('newProdPrice').value);
+            let icon = document.getElementById('newProdIcon').value.trim() || "💎";
+
+            if (!name || price <= 0) {
+                showAlert("تنبيه", "يرجى إدخال اسم صحيح للمنتج وسعر أكبر من الصفر.", "⚠️");
+                return;
+            }
+
+            let newProd = {
+                id: Date.now(),
+                name: name,
+                price: price,
+                icon: icon,
+                hot: price > 3000
+            };
+
+            appData.storeProducts.push(newProd);
+            document.getElementById('newProdName').value = "";
+            document.getElementById('newProdPrice').value = "";
+            updateUI();
+            showAlert("نجاح الإضافة 🚀", `تم إضافة المنتج "${name}" إلى المتجر بنجاح وتحديث الأسعار!`, "✅");
+        }
+
+        function deleteProduct(id) {
+            appData.storeProducts = appData.storeProducts.filter(p => p.id !== id);
+            updateUI();
+            showAlert("تم الحذف", "تمت إزالة المنتج من المتجر بنجاح.", "🗑️");
+        }
+
+        function buyItem(id) {
+            let prod = appData.storeProducts.find(p => p.id === id);
+            if (!prod) return;
+            if (appData.balance < prod.price) {
+                showAlert("عذراً", "رصيدك غير كافي لإتمام عملية الشراء.", "❌");
+                return;
+            }
+            appData.balance -= prod.price;
+            if (prod.name.includes("جوهرة")) {
+                let extractedNum = parseInt(prod.name) || 50;
+                appData.diamonds += extractedNum;
+            }
+            updateUI();
+            showAlert("مبروك! 🎉", `تم شراء "${prod.name}" بنجاح وإضافة العناصر لحسابك!`, "🛍️");
         }
 
         function switchTab(tabName, btnElement) {
@@ -667,17 +747,6 @@
                     showAlert("نجاح الحماية", `تم إضافة ${amount.toLocaleString()} نقطة بنجاح للمحفظة المشفرة!`, "✅");
                 }
             });
-        }
-
-        function buyItem(itemName, cost) {
-            if (appData.balance < cost) {
-                showAlert("عذراً", "رصيدك غير كافي لإتمام عملية الشراء.", "❌");
-                return;
-            }
-            appData.balance -= cost;
-            if (itemName.includes("جوهرة")) appData.diamonds += itemName.includes("50") ? 50 : 200;
-            updateUI();
-            showAlert("مبروك!", `تم شراء "${itemName}" بنجاح وتأمين المعاملة!`, "🎉");
         }
 
         function openPhoneUpdateModal() {
