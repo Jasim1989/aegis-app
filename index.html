@@ -1078,6 +1078,27 @@ if (typeof originalUpdateUI === 'function') {
         saveAppData();
     };
 }
+// دالة الحفظ الشاملة للبيانات
+function saveAppData() {
+    try {
+        if (typeof appData !== 'undefined') {
+            localStorage.setItem('aegisAppData', JSON.stringify(appData));
+        }
+    } catch (e) {
+        console.error("خطأ في الحفظ", e);
+    }
+}
+
+// مراقبة أي تحديث للواجهة وحفظ البيانات تلقائياً
+const originalUpdateUI = window.updateUI;
+if (typeof originalUpdateUI === 'function') {
+    window.updateUI = function() {
+        originalUpdateUI();
+        saveAppData();
+    };
+}
+
+</script>
 
         </script>
 </body>
