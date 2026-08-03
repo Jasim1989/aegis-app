@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Aegis Mobile App</title>
+  <style>
+    :root { --bg: #0b0f19; --card: #151c2c; --text: #f8fafc; --muted: #94a3b8; --border: #26334d; --primary: #38bdf8; --green: #10b981; }
+    .light { --bg: #f1f5f9; --card: #ffffff; --text: #0f172a; --muted: #64748b; --border: #cbd5e1; --primary: #0284c7; --green: #059669; }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; -webkit-tap-highlight-color: transparent; }
+    html, body { height: 100vh; width: 100vw; overflow: hidden; background: var(--bg); color: var(--text); }
+    
+    .app-viewport { display: flex; flex-direction: column; height: 100vh; max-width: 600px; margin: 0 auto; background: var(--bg); position: relative; }
+    
+    header { background: var(--card); padding: 0.85rem 1rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+    
+    main { flex: 1; overflow-y: auto; padding: 1rem; padding-bottom: 80px; }
+    
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    
+    .card { background: var(--card); border: 1px solid var(--border); padding: 1rem; border-radius: 0.75rem; margin-bottom: 1rem; }
+    .val { font-size: 1.5rem; font-weight: bold; margin-top: 0.3rem; }
+    
+    input, select, button { width: 100%; padding: 0.75rem; margin-top: 0.5rem; background: var(--bg); border: 1px solid var(--border); color: var(--text); border-radius: 0.5rem; font-size: 0.9rem; }
+    button.btn-primary { background: var(--primary); color: #0b0f19; font-weight: bold; border: none; cursor: pointer; }
+    
+    /* شريط تنقل سفلي ثابت 100% */
+    nav.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 65px; background: var(--card); display: flex; justify-content: space-around; align-items: center; border-top: 1px solid var(--border); z-index: 9999; max-width: 600px; margin: 0 auto; }
+    nav button { flex: 1; height: 100%; background: none; border: none; padding: 0; color: var(--muted); cursor: pointer; border-radius: 0; font-size: 0.85rem; font-weight: bold; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; }
+    nav button.active { color: var(--primary); background: rgba(56, 189, 248, 0.08); border-top: 3px solid var(--primary); }
+    
+    table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; font-size: 0.85rem; }
+    th, td { padding: 0.6rem; border-bottom: 1px solid var(--border); text-align: right; }
+  </style>
+</head>
+<body>
+  <div class="app-viewport">
+    <header>
+      <div style="font-weight: bold; color: var(--primary); font-size: 1.1rem;">🛡️ Aegis Mobile</div>
+      <button style="width: auto; padding: 0.3rem 0.6rem; margin: 0;" onclick="document.body.classList.toggle('light')">🌗 المظهر</button>
+    </header>
+
+    <main>
+      <!-- TAB 1 -->
+      <div id="t1" class="tab-content active">
+        <h3 style="color:var(--primary); margin-bottom: 1rem;">📊 الرئيسية | حالة النظام</h3>
+        <div class="card">
+          <div>حالة الخادم</div>
+          <div class="val" style="color:var(--green);">نشط 100%</div>
+        </div>
+        <div class="card">
+          <div>إجمالي الطلبات المنفذة</div>
+          <div class="val" id="cnt">0</div>
+        </div>
+      </div>
+
+      <!-- TAB 2 -->
+      <div id="t2" class="tab-content">
+        <h3 style="color:var(--primary); margin-bottom: 1rem;">📝 تقديم طلب جديد</h3>
+        <div class="card">
+          <form onsubmit="addReq(event)">
+            <label style="font-size:0.85rem; color:var(--muted);">اسم المشترك</label>
+            <input type="text" id="usr" required placeholder="أدخل الاسم...">
+            <label style="margin-top:0.8rem; display:block; font-size:0.85rem; color:var(--muted);">نوع الخدمة</label>
+            <select id="svc">
+              <option>فحص أمني شامل</option>
+              <option>توليد مفتاح API</option>
+              <option>حماية السيرفر</option>
+            </select>
+            <button type="submit" class="btn-primary" style="margin-top:1.2rem;">إرسال الطلب 🚀</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- TAB 3 -->
+      <div id="t3" class="tab-content">
+        <h3 style="color:var(--primary); margin-bottom: 1rem;">⚡ أدوات الحماية</h3>
+        <div class="card">
+          <div>🔑 توليد مفتاح مشفر</div>
+          <button class="btn-primary" onclick="genKey()">توليد مفتاح جديد</button>
+          <input type="text" id="keyOut" readonly style="margin-top:0.8rem; text-align:center; font-family:monospace; color:var(--primary);">
+        </div>
+      </div>
+
+      <!-- TAB 4 -->
+      <div id="t4" class="tab-content">
+        <h3 style="color:var(--primary); margin-bottom: 1rem;">📋 سجل العمليات</h3>
+        <div class="card" style="padding:0.5rem; overflow-x:auto;">
+          <table>
+            <thead>
+              <tr><th>#</th><th>المستخدم</th><th>الخدمة</th></tr>
+            </thead>
+            <tbody id="logs">
+              <tr><td colspan="3" style="text-align:center; color:var(--muted);">لا توجد سجلات بعد.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <nav class="bottom-nav">
+      <button class="active" onclick="tab('t1', this)"><span>📊</span><span>الرئيسية</span></button>
+      <button onclick="tab('t2', this)"><span>📝</span><span>الطلبات</span></button>
+      <button onclick="tab('t3', this)"><span>⚡</span><span>الأدوات</span></button>
+      <button onclick="tab('t4', this)"><span>📋</span><span>السجل</span></button>
+    </nav>
+  </div>
+
+  <script>
+    var total = 0;
+    function tab(id, b) {
+      var tabs = document.querySelectorAll('.tab-content');
+      for(var i=0; i<tabs.length; i++) tabs[i].classList.remove('active');
+      var btns = document.querySelectorAll('nav button');
+      for(var j=0; j<btns.length; j++) btns[j].classList.remove('active');
+      document.getElementById(id).classList.add('active');
+      b.classList.add('active');
+    }
+    function genKey() {
+      var str = 'aegis_' + Math.random().toString(36).substring(2, 12);
+      document.getElementById('keyOut').value = str;
+    }
+    function addReq(e) {
+      e.preventDefault();
+      total++;
+      document.getElementById('cnt').innerText = total;
+      var u = document.getElementById('usr').value;
+      var s = document.getElementById('svc').value;
+      var logs = document.getElementById('logs');
+      if(total === 1) logs.innerHTML = '';
+      logs.innerHTML = '<tr><td>'+total+'</td><td><b>'+u+'</b></td><td>'+s+'</td></tr>' + logs.innerHTML;
+      document.getElementById('usr').value = '';
+      alert('تم إرسال الطلب بنجاح! 🚀');
+    }
+  </script>
+</body>
+</html>
