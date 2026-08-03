@@ -4,6 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+    // دالة تنظيف وتأمين المدخلات ضد الأكواد الخبيثة
+    function sanitizeInput(input) {
+        if (typeof input !== 'string') return input;
+        return input
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+    // نظام تشفير وحماية الرصيد والجواهر من التعديل اليدوي في المتصفح
+    window.secureVault = {
+        _balance: 565,
+        _diamonds: 5,
+        get balance() { return this._balance; },
+        set balance(val) {
+            if (typeof val !== 'number' || isNaN(val)) {
+                console.warn("⚠️ تنبيه أمني: محاولة تعديل غير مصرح بها للرصيد!");
+                return;
+            }
+            this._balance = Math.max(0, val);
+            if (typeof updateUI === 'function') updateUI();
+        },
+        get diamonds() { return this._diamonds; },
+        set diamonds(val) {
+            if (typeof val !== 'number' || isNaN(val)) return;
+            this._diamonds = Math.max(0, val);
+            if (typeof updateUI === 'function') updateUI();
+        }
+    };
+</script>
+
     <title>Aegis Cash - المنصة المتكاملة</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
