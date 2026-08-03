@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" id="htmlRoot">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aegis Cash - المنصة الوردية المتكاملة</title>
+    <title>Aegis Cash - المنصة المتكاملة</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
 
@@ -58,19 +58,29 @@
             box-shadow: 0 4px 6px -1px rgba(236, 72, 153, 0.05);
         }
         .logo {
-            font-size: 19px;
+            font-size: 18px;
             font-weight: 800;
             background: linear-gradient(135deg, #ec4899, #be185d);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 0.5px;
+        }
+        .header-controls { display: flex; gap: 8px; align-items: center; }
+        .lang-select {
+            background: #fdf2f8;
+            color: #be185d;
+            border: 1px solid #fbcfe8;
+            padding: 5px 8px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 12px;
+            cursor: pointer;
         }
         .logout-btn {
             background: #fff1f2;
             color: #e11d48;
             border: 1px solid #fecdd3;
-            padding: 5px 14px;
-            border-radius: 10px;
+            padding: 5px 12px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 12px;
             font-weight: 700;
@@ -117,6 +127,7 @@
         .btn-primary { background: linear-gradient(135deg, #ec4899, #be185d); color: #fff; box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3); margin-top: 10px; }
         .btn-secondary { background: linear-gradient(135deg, #0284c7, #0369a1); color: #fff; box-shadow: 0 8px 20px rgba(2, 132, 199, 0.2); margin-top: 10px; }
         .btn-success { background: linear-gradient(135deg, #10b981, #047857); color: #fff; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2); margin-top: 10px; }
+        .btn-admin { background: linear-gradient(135deg, #7c3aed, #4f46e5); color: #fff; box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3); margin-top: 10px; }
 
         /* Store */
         .store-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 15px; }
@@ -127,7 +138,7 @@
         .store-price { font-size: 12px; color: #be185d; font-weight: 700; margin-bottom: 10px; background: #fdf2f8; padding: 4px; border-radius: 6px; }
         .buy-btn { background: #fdf2f8; color: #be185d; border: 1px solid #fbcfe8; padding: 6px; width: 100%; border-radius: 8px; font-size: 12px; font-weight: 800; cursor: pointer; }
 
-        /* Chat Rooms */
+        /* Chat Rooms & Support */
         .chat-container { display: flex; flex-direction: column; height: 350px; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 16px; overflow: hidden; margin-top: 15px; }
         .chat-tabs { display: flex; background: #f3f4f6; border-bottom: 1px solid #e5e7eb; }
         .chat-tab { flex: 1; padding: 10px; text-align: center; font-size: 12px; font-weight: 700; background: none; border: none; cursor: pointer; color: #6b7280; }
@@ -135,9 +146,16 @@
         .chat-messages { flex: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
         .chat-msg { background: #fff; padding: 8px 12px; border-radius: 12px; font-size: 12px; border: 1px solid #fce7f3; max-width: 85%; }
         .chat-msg.mine { background: #fdf2f8; align-self: flex-end; border-color: #fbcfe8; }
+        .chat-msg.support-badge { border-color: #10b981; background: #ecfdf5; }
         .chat-input-area { display: flex; padding: 10px; background: #fff; border-top: 1px solid #e5e7eb; gap: 8px; }
-        .chat-input { flex: 1; padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 10px; outline: none; font-family: 'Tajawal', sans-serif; font-size: 13px; }
+        .chat-input { flex: 1; padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 10px; outline: none; font-size: 13px; }
         .chat-send-btn { background: #be185d; color: #fff; border: none; padding: 0 16px; border-radius: 10px; font-weight: 700; cursor: pointer; }
+
+        /* Admin Controls */
+        .admin-form-group { margin-bottom: 14px; text-align: right; }
+        .admin-form-group label { display: block; font-size: 13px; font-weight: 700; color: #4b5563; margin-bottom: 6px; }
+        .admin-input { width: 100%; padding: 10px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 13px; font-weight: 700; outline: none; }
+        .admin-input:focus { border-color: #7c3aed; }
 
         /* Profile */
         .profile-avatar { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid #ec4899; margin: 0 auto 12px auto; display: block; box-shadow: 0 5px 15px rgba(236,72,153,0.3); }
@@ -145,10 +163,10 @@
 
         /* Nav Bar */
         .nav-bar {
-            position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); border-top: 1px solid rgba(251, 207, 232, 0.6); display: flex; justify-content: space-around; padding: 10px 0 16px 0; z-index: 100; box-shadow: 0 -4px 20px rgba(0,0,0,0.03);
+            position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); border-top: 1px solid rgba(251, 207, 232, 0.6); display: flex; justify-content: space-around; padding: 8px 0 14px 0; z-index: 100; box-shadow: 0 -4px 20px rgba(0,0,0,0.03);
         }
-        .nav-item { background: none; border: none; color: #9ca3af; font-size: 10px; font-weight: 700; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 3px; transition: 0.3s; width: 16%; }
-        .nav-item span { font-size: 18px; filter: grayscale(100%); opacity: 0.6; }
+        .nav-item { background: none; border: none; color: #9ca3af; font-size: 9px; font-weight: 700; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px; transition: 0.3s; width: 14%; }
+        .nav-item span { font-size: 16px; filter: grayscale(100%); opacity: 0.6; }
         .nav-item.active { color: #be185d; }
         .nav-item.active span { filter: grayscale(0%); opacity: 1; transform: translateY(-2px); }
         
@@ -163,20 +181,20 @@
         .modal-overlay.show .modal-box { transform: scale(1); }
 
         /* Wheel */
-        .wheel-outer-wrapper { position: relative; width: 260px; height: 260px; margin: 0 auto 15px auto; display: flex; justify-content: center; align-items: center; }
+        .wheel-outer-wrapper { position: relative; width: 240px; height: 240px; margin: 0 auto 15px auto; display: flex; justify-content: center; align-items: center; }
         .wheel-border-glow { position: absolute; width: 100%; height: 100%; border-radius: 50%; background: conic-gradient(#f472b6, #be185d, #fbcfe8, #f472b6); padding: 4px; box-shadow: 0 0 25px rgba(236, 72, 153, 0.3); }
         .wheel-inner-container { position: relative; width: 100%; height: 100%; border-radius: 50%; background: #fff; overflow: hidden; }
         #wheelPointer { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-bottom: 26px solid #be185d; z-index: 20; }
         #luckyWheel { width: 100%; height: 100%; border-radius: 50%; }
-        .wheel-center-hub { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 50px; height: 50px; background: radial-gradient(circle, #f472b6, #be185d); border-radius: 50%; border: 3px solid #fff; z-index: 10; display: flex; justify-content: center; align-items: center; font-weight: 800; font-size: 10px; color: #fff; }
+        .wheel-center-hub { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 45px; height: 45px; background: radial-gradient(circle, #f472b6, #be185d); border-radius: 50%; border: 3px solid #fff; z-index: 10; display: flex; justify-content: center; align-items: center; font-weight: 800; font-size: 9px; color: #fff; }
     </style>
 </head>
 <body>
 
     <!-- شريط الإعلانات المتحرك -->
     <div class="ticker-wrap">
-        <div class="ticker-content">
-            🌸 أهلاً بكم في Aegis Cash! | تم تفعيل غرف الدردشة الجديدة 💬 | احصل على لفة مجانية يومية في عجلة الحظ 🎡 | المتجر الرقمي متاح الآن بأسعار مميزة 🔥
+        <div class="ticker-content" id="tickerTextDisplay">
+            🌸 أهلاً بكم في Aegis Cash! | فريق الدعم الفني جاهز للرد على استفساراتكم | احصل على لفة مجانية يومية في عجلة الحظ 🎡
         </div>
     </div>
 
@@ -196,17 +214,24 @@
 
     <header>
         <div class="logo">🌸 Aegis Cash</div>
-        <button class="logout-btn" onclick="showAlert('خروج', 'تم تسجيل الخروج بنجاح', '🚪')">خروج</button>
+        <div class="header-controls">
+            <select class="lang-select" id="langSelector" onchange="changeLanguage(this.value)">
+                <option value="ar">العربية 🇸🇦</option>
+                <option value="en">English 🇺🇸</option>
+                <option value="ku">کوردی 🇮🇶</option>
+            </select>
+            <button class="logout-btn" onclick="showAlert('خروج', 'تم تسجيل الخروج بنجاح', '🚪')">خروج</button>
+        </div>
     </header>
 
     <div class="container">
         
         <!-- المحفظة -->
         <div id="wallet-section" class="section active">
-            <div class="security-banner">🛡️ حماية متكاملة ومشفرة للحساب</div>
+            <div class="security-banner" id="secBannerTxt">🛡️ حماية متكاملة ومشفرة للحساب</div>
 
             <div class="card" style="text-align: center;">
-                <p class="balance-title">إجمالي الرصيد</p>
+                <p class="balance-title" id="lblTotalBalance">إجمالي الرصيد</p>
                 <div class="balance-box" id="userBalance">565 pt</div>
                 
                 <div class="currencies-row">
@@ -214,103 +239,133 @@
                     <span class="currency-badge diamond-value" id="userDiamonds">💎 5 جواهر</span>
                 </div>
 
-                <button class="btn btn-secondary" onclick="convertDiamonds()">🔄 تحويل الجواهر (100💎 = 10pt)</button>
-                <button class="btn btn-success" onclick="openDepositModal()">➕ شحن الرصيد الخارجي</button>
+                <button class="btn btn-secondary" onclick="convertDiamonds()" id="btnConv">🔄 تحويل الجواهر (100💎 = 10pt)</button>
+                <button class="btn btn-success" onclick="openDepositModal()" id="btnDep">➕ شحن الرصيد الخارجي</button>
 
                 <div style="margin-top: 15px; font-size: 13px; font-weight: 700; color: #4b5563;">
-                    التصنيف: <span id="userLevel" style="color: #be185d;">مبتدئ 🌱</span>
+                    <span id="lblRankTitle">التصنيف</span>: <span id="userLevel" style="color: #be185d;">مبتدئ 🌱</span>
                 </div>
             </div>
 
             <div class="card">
-                <h3 style="font-size: 15px; margin-bottom: 6px; color: #be185d; font-weight: 800;">🎁 مكافأة الدخول اليومي</h3>
-                <p style="font-size: 12px; color: #6b7280; margin-bottom: 12px;">50 نقطة + 2 جوهرة مجاناً كل 24 ساعة</p>
-                <button class="btn btn-primary" onclick="claimDaily()">استلام المكافأة ⭐</button>
+                <h3 style="font-size: 15px; margin-bottom: 6px; color: #be185d; font-weight: 800;" id="lblDailyTitle">🎁 مكافأة الدخول اليومي</h3>
+                <p style="font-size: 12px; color: #6b7280; margin-bottom: 12px;" id="lblDailyDesc">50 نقطة + 2 جوهرة مجاناً كل 24 ساعة</p>
+                <button class="btn btn-primary" onclick="claimDaily()" id="btnDaily">استلام المكافأة ⭐</button>
             </div>
         </div>
 
         <!-- المتجر -->
         <div id="store-section" class="section">
             <div class="card">
-                <h3 style="color: #be185d; margin-bottom: 4px; font-size: 17px; text-align: center; font-weight: 800;">🛍️ المتجر الرقمي</h3>
-                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;">اشترِ الجواهر وبطاقات الإنترنت برصيدك</p>
+                <h3 style="color: #be185d; margin-bottom: 4px; font-size: 17px; text-align: center; font-weight: 800;" id="lblStoreTitle">🛍️ المتجر الرقمي</h3>
+                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;" id="lblStoreDesc">اشترِ الجواهر وبطاقات الإنترنت برصيدك</p>
                 
                 <div class="store-grid">
                     <div class="store-item">
                         <div class="store-icon">💎</div>
                         <div class="store-title">50 جوهرة</div>
                         <div class="store-price">500 نقطة</div>
-                        <button class="buy-btn" onclick="buyItem('50 جوهرة', 500)">شراء</button>
+                        <button class="buy-btn" onclick="buyItem('50 جوهرة', 500)" id="buyBtn1">شراء</button>
                     </div>
 
                     <div class="store-item">
-                        <div class="badge-hot">مميز 🔥</div>
+                        <div class="badge-hot" id="badgeHotTxt">مميز 🔥</div>
                         <div class="store-icon">💎</div>
                         <div class="store-title">200 جوهرة</div>
                         <div class="store-price">1,800 نقطة</div>
-                        <button class="buy-btn" onclick="buyItem('200 جوهرة', 1800)">شراء</button>
+                        <button class="buy-btn" onclick="buyItem('200 جوهرة', 1800)" id="buyBtn2">شراء</button>
                     </div>
 
                     <div class="store-item">
                         <div class="store-icon">🌐</div>
                         <div class="store-title">نت 5GB</div>
                         <div class="store-price">2,500 نقطة</div>
-                        <button class="buy-btn" onclick="buyItem('بطاقة إنترنت 5GB', 2500)">شراء</button>
+                        <button class="buy-btn" onclick="buyItem('بطاقة إنترنت 5GB', 2500)" id="buyBtn3">شراء</button>
                     </div>
 
                     <div class="store-item">
                         <div class="store-icon">💳</div>
                         <div class="store-title">رصيد 5$</div>
                         <div class="store-price">5,000 نقطة</div>
-                        <button class="buy-btn" onclick="buyItem('بطاقة رصيد 5$', 5000)">شراء</button>
+                        <button class="buy-btn" onclick="buyItem('بطاقة رصيد 5$', 5000)" id="buyBtn4">شراء</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- غرف الدردشة الجديدة -->
+        <!-- غرف الدردشة ودعم الأعضاء -->
         <div id="chat-section" class="section">
             <div class="card" style="padding: 16px;">
-                <h3 style="color: #be185d; font-size: 17px; font-weight: 800; text-align: center; margin-bottom: 10px;">💬 غرف دردشة الأعضاء</h3>
+                <h3 style="color: #be185d; font-size: 17px; font-weight: 800; text-align: center; margin-bottom: 10px;" id="lblChatTitle">💬 غرف الدردشة ودعم الأعضاء</h3>
+                <p style="font-size: 11px; color: #10b981; text-align: center; font-weight: 700; margin-bottom: 8px;">🛡️ فريق الدعم الفني متواجد للإجابة على أسئلتكم</p>
                 
                 <div class="chat-container">
                     <div class="chat-tabs">
-                        <button class="chat-tab active" onclick="switchChatRoom('general', this)">العامة 🌸</button>
-                        <button class="chat-tab" onclick="switchChatRoom('vip', this)">VIP 👑</button>
-                        <button class="chat-tab" onclick="switchChatRoom('support', this)">الدعم 🛠️</button>
+                        <button class="chat-tab active" onclick="switchChatRoom('general', this)" id="tabGen">العامة 🌸</button>
+                        <button class="chat-tab" onclick="switchChatRoom('vip', this)" id="tabVip">VIP 👑</button>
+                        <button class="chat-tab" onclick="switchChatRoom('support', this)" id="tabSup">الدعم الفني 🛠️</button>
                     </div>
                     
                     <div class="chat-messages" id="chatMessages">
                         <div class="chat-msg"><b>سارة:</b> أهلاً بالجميع في منصة Aegis! 👋</div>
-                        <div class="chat-msg mine"><b>أنت:</b> شكراً سارة، التطبيق رائع جداً! ✨</div>
+                        <div class="chat-msg support-badge"><b>الدعم الفني (أحمد):</b> أهلاً بكم، كيف يمكنني مساعدتكم اليوم؟ 🛠️</div>
                     </div>
                     
                     <div class="chat-input-area">
-                        <input type="text" id="chatInput" class="chat-input" placeholder="اكتب رسالتك هنا..." onkeypress="handleChatKey(event)">
-                        <button class="chat-send-btn" onclick="sendChatMessage()">إرسال</button>
+                        <input type="text" id="chatInput" class="chat-input" placeholder="اكتب استفسارك هنا..." onkeypress="handleChatKey(event)">
+                        <button class="chat-send-btn" onclick="sendChatMessage()" id="btnSendChat">إرسال</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- عجلة الحظ (تعديل اللفة المجانية + 100 جوهرة) -->
+        <!-- عجلة الحظ -->
         <div id="wheel-section" class="section">
             <div class="card" style="text-align: center;">
-                <h2 style="color: #be185d; margin-bottom: 4px; font-size: 18px; font-weight: 800;">🎡 عجلة الحظ اليومية</h2>
+                <h2 style="color: #be185d; margin-bottom: 4px; font-size: 18px; font-weight: 800;" id="lblWheelTitle">🎡 عجلة الحظ اليومية</h2>
                 <p style="font-size: 12px; color: #6b7280; margin-bottom: 15px;" id="wheelSubtitle">لديك لفة مجانية اليوم! (بعدها التكلفة 100 جوهرة)</p>
                 
                 <div class="wheel-outer-wrapper">
                     <div class="wheel-border-glow">
                         <div class="wheel-inner-container">
                             <div id="wheelPointer"></div>
-                            <canvas id="luckyWheel" width="250" height="250"></canvas>
+                            <canvas id="luckyWheel" width="230" height="230"></canvas>
                             <div class="wheel-center-hub">SPIN</div>
                         </div>
                     </div>
                 </div>
 
-                <button class="btn btn-primary" onclick="spinWheel()" style="margin-top: 10px;">تدوير العجلة 🌀</button>
+                <button class="btn btn-primary" onclick="spinWheel()" style="margin-top: 10px;" id="btnSpinWheel">تدوير العجلة 🌀</button>
                 <p id="wheelResult" style="margin-top: 12px; font-size: 14px; font-weight: 800; color: #be185d;"></p>
+            </div>
+        </div>
+
+        <!-- لوحة تحكم الإدارة (Admin Panel) -->
+        <div id="admin-section" class="section">
+            <div class="card">
+                <h3 style="color: #7c3aed; font-size: 18px; font-weight: 800; text-align: center; margin-bottom: 6px;">⚙️ لوحة إدارة التطبيق</h3>
+                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 20px;">التحكم بالإعلانات، الإعدادات، وفريق الدعم</p>
+                
+                <div class="admin-form-group">
+                    <label>📢 نص شريط الإعلانات الفوري</label>
+                    <input type="text" id="adminTickerInput" class="admin-input" value="🌸 أهلاً بكم في Aegis Cash! | فريق الدعم الفني جاهز للرد على استفساراتكم">
+                    <button class="btn btn-admin" style="margin-top: 8px; font-size: 13px; padding: 10px;" onclick="updateAdminTicker()">تحديث شريط الإعلانات ✨</button>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 20px 0;">
+
+                <div class="admin-form-group">
+                    <label>🛠️ إضافة مسؤول دعم جديد</label>
+                    <input type="text" id="adminSupportName" class="admin-input" placeholder="اسم موظف الدعم (مثال: رامي)">
+                    <button class="btn btn-success" style="margin-top: 8px; font-size: 13px; padding: 10px;" onclick="addSupportAgent()">تفعيل حساب الدعم 👨‍💻</button>
+                </div>
+
+                <div style="background: #f3f4f6; padding: 12px; border-radius: 12px; margin-top: 15px; font-size: 12px; color: #4b5563;">
+                    <b>📊 إحصائيات سريعة:</b><br>
+                    - المشتركين النشطين: 1,420<br>
+                    - غرف الدردشة النشطة: 3 غرف<br>
+                    - حالة النظام: آمن ومستقر 🟢
+                </div>
             </div>
         </div>
 
@@ -322,24 +377,24 @@
                 <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;">jasim@aegis-app.com</p>
 
                 <div class="profile-info-group">
-                    <span style="color: #6b7280;">معرف الحساب (ID)</span>
+                    <span style="color: #6b7280;" id="lblIdText">معرف الحساب (ID)</span>
                     <span style="font-weight: 800;">#AEG-84920</span>
                 </div>
                 
                 <div class="profile-info-group">
-                    <span style="color: #6b7280;">حالة التوثيق</span>
+                    <span style="color: #6b7280;" id="lblStatusText">حالة التوثيق</span>
                     <span style="color: #047857; font-weight: 800;">موثق 🛡️</span>
                 </div>
 
-                <button class="btn btn-secondary" style="margin-top: 20px; background: #f3f4f6; color: #374151; box-shadow: none;" onclick="openNameChangeModal()">✏️ تعديل الاسم الشخصي</button>
+                <button class="btn btn-secondary" style="margin-top: 20px; background: #f3f4f6; color: #374151; box-shadow: none;" onclick="openNameChangeModal()" id="btnEditName">✏️ تعديل الاسم الشخصي</button>
             </div>
         </div>
 
         <!-- سحب الأرباح -->
         <div id="withdraw-section" class="section">
             <div class="card" style="text-align: center;">
-                <h3 style="color: #be185d; margin-bottom: 8px; font-size: 17px; font-weight: 800;">💸 بوابة السحب</h3>
-                <p style="font-size: 13px; color: #6b7280; margin-bottom: 15px;">الحد الأدنى للسحب هو <strong style="color:#be185d;">10,000 نقطة</strong></p>
+                <h3 style="color: #be185d; margin-bottom: 8px; font-size: 17px; font-weight: 800;" id="lblWithdrawTitle">💸 بوابة السحب</h3>
+                <p style="font-size: 13px; color: #6b7280; margin-bottom: 15px;" id="lblWithdrawDesc">الحد الأدنى للسحب هو <strong style="color:#be185d;">10,000 نقطة</strong></p>
                 
                 <div style="background: #f9fafb; padding: 15px; border-radius: 14px; margin-bottom: 15px; border: 1px dashed #d1d5db;">
                     <div style="font-size: 20px; font-weight: 800;" id="progressText">565 / 10,000</div>
@@ -356,21 +411,104 @@
 
     <!-- شريط التنقل السفلي -->
     <div class="nav-bar">
-        <button class="nav-item active" onclick="switchTab('wallet', this)"><span>💰</span> محفظتي</button>
-        <button class="nav-item" onclick="switchTab('store', this)"><span>🛍️</span> المتجر</button>
-        <button class="nav-item" onclick="switchTab('chat', this)"><span>💬</span> الدردشة</button>
-        <button class="nav-item" onclick="switchTab('wheel', this)"><span>🎡</span> العجلة</button>
-        <button class="nav-item" onclick="switchTab('profile', this)"><span>👤</span> حسابي</button>
-        <button class="nav-item" onclick="switchTab('withdraw', this)"><span>💸</span> السحب</button>
+        <button class="nav-item active" onclick="switchTab('wallet', this)"><span>💰</span> <span id="navWallet">محفظتي</span></button>
+        <button class="nav-item" onclick="switchTab('store', this)"><span>🛍️</span> <span id="navStore">المتجر</span></button>
+        <button class="nav-item" onclick="switchTab('chat', this)"><span>💬</span> <span id="navChat">الدعم</span></button>
+        <button class="nav-item" onclick="switchTab('wheel', this)"><span>🎡</span> <span id="navWheel">العجلة</span></button>
+        <button class="nav-item" onclick="switchTab('admin', this)"><span>⚙️</span> <span id="navAdmin">الإدارة</span></button>
+        <button class="nav-item" onclick="switchTab('profile', this)"><span>👤</span> <span id="navProfile">حسابي</span></button>
+        <button class="nav-item" onclick="switchTab('withdraw', this)"><span>💸</span> <span id="navWithdraw">السحب</span></button>
     </div>
 
     <script>
         let balance = 565;
         let diamonds = 5;
         let userName = "جاسم العراقي";
-        let hasFreeSpinToday = true; // لفة مجانية يومية واحدة
+        let hasFreeSpinToday = true;
+        let currentLang = 'ar';
         const diamondConversionRate = 10000;
         const minWithdrawPoints = 10000;
+        let supportAgents = ["أحمد (الدعم الفني)", "ساره (خدمة المشتركين)"];
+
+        // قاموس اللغات (يدعم العربية، الإنجليزية، والكردية)
+        const translations = {
+            ar: {
+                totalBal: "إجمالي الرصيد", rank: "التصنيف", dailyTitle: "🎁 مكافأة الدخول اليومي", dailyDesc: "50 نقطة + 2 جوهرة مجاناً كل 24 ساعة",
+                dailyBtn: "استلام المكافأة ⭐", storeTitle: "🛍️ المتجر الرقمي", storeDesc: "اشترِ الجواهر وبطاقات الإنترنت برصيدك",
+                buy: "شراء", chatTitle: "💬 غرف الدردشة ودعم الأعضاء", wheelTitle: "🎡 عجلة الحظ اليومية", wheelSub: "لديك لفة مجانية اليوم! (بعدها التكلفة 100 جوهرة)",
+                spinBtn: "تدوير العجلة 🌀", profileTitle: "✏️ تعديل الاسم الشخصي", withdrawTitle: "💸 بوابة السحب", withdrawDesc: "الحد الأدنى للسحب هو",
+                navW: "محفظتي", navS: "المتجر", navC: "الدعم", navWh: "العجلة", navAd: "الإدارة", navP: "حسابي", navWi: "السحب",
+                convBtn: "🔄 تحويل الجواهر (100💎 = 10pt)", depBtn: "➕ شحن الرصيد الخارجي"
+            },
+            en: {
+                totalBal: "Total Balance", rank: "Rank", dailyTitle: "🎁 Daily Login Bonus", dailyDesc: "50 pts + 2 diamonds free every 24h",
+                dailyBtn: "Claim Bonus ⭐", storeTitle: "🛍️ Digital Store", storeDesc: "Buy diamonds and internet cards with your balance",
+                buy: "Buy", chatTitle: "💬 Chat Rooms & Support", wheelTitle: "🎡 Daily Lucky Wheel", wheelSub: "You have 1 free spin today! (Then 100 diamonds)",
+                spinBtn: "Spin Wheel 🌀", profileTitle: "✏️ Edit Profile Name", withdrawTitle: "💸 Withdrawal Portal", withdrawDesc: "Minimum withdrawal is",
+                navW: "Wallet", navS: "Store", navC: "Support", navWh: "Wheel", navAd: "Admin", navP: "Profile", navWi: "Withdraw",
+                convBtn: "🔄 Convert Diamonds (100💎 = 10pt)", depBtn: "➕ External Deposit"
+            },
+            ku: {
+                totalBal: "کۆی گشتی باڵانس", rank: "پلە", dailyTitle: "🎁 پادشتی ڕۆژانە", dailyDesc: "٥٠ خاڵ + ٢ الماس بەخۆڕایی هەر ٢٤ کاتژمێرێک",
+                dailyBtn: "وەرگرتنی پاداشت ⭐", storeTitle: "🛍️ فرۆشگای دیجیتاڵی", storeDesc: "الماس و کارتی ئینتەرنێت بکڕە بە باڵانست",
+                buy: "کڕین", chatTitle: "💬 ژوورەکانی چات و پشتگیری", wheelTitle: "🎡 سووڕانی بەخت", wheelSub: "یەک سووڕانی خۆڕائیت هەیە ئەمڕۆ! (دواتر ١٠٠ الماس)",
+                spinBtn: "سووڕاندنی چەرخ 🌀", profileTitle: "✏️ گۆڕینی ناوی کەسی", withdrawTitle: "💸 دەروازەی پاشەکشە", withdrawDesc: "کەمترین بڕی پاشەکشە بریتییە لە",
+                navW: "باڵانس", navS: "فرۆشگا", navC: "پشتگیری", navWh: "سووڕان", navAd: "بەڕێوەبردن", navP: "هەژمار", navWi: "کێشانەوە",
+                convBtn: "🔄 گۆڕینەوەی الماس (١٠٠💎 = ١٠خاڵ)", depBtn: "➕ پڕکردنەوەی باڵانس"
+            }
+        };
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+            const root = document.getElementById('htmlRoot');
+            root.dir = (lang === 'en') ? 'ltr' : 'rtl';
+
+            document.getElementById('lblTotalBalance').innerText = t.totalBal;
+            document.getElementById('lblRankTitle').innerText = t.rank;
+            document.getElementById('lblDailyTitle').innerText = t.dailyTitle;
+            document.getElementById('lblDailyDesc').innerText = t.dailyDesc;
+            document.getElementById('btnDaily').innerText = t.dailyBtn;
+            document.getElementById('lblStoreTitle').innerText = t.storeTitle;
+            document.getElementById('lblStoreDesc').innerText = t.storeDesc;
+            document.getElementById('lblChatTitle').innerText = t.chatTitle;
+            document.getElementById('lblWheelTitle').innerText = t.wheelTitle;
+            document.getElementById('wheelSubtitle').innerText = t.wheelSub;
+            document.getElementById('btnSpinWheel').innerText = t.spinBtn;
+            document.getElementById('btnEditName').innerText = t.profileTitle;
+            document.getElementById('lblWithdrawTitle').innerText = t.withdrawTitle;
+            document.getElementById('btnConv').innerText = t.convBtn;
+            document.getElementById('btnDep').innerText = t.depBtn;
+
+            document.getElementById('navWallet').innerText = t.navW;
+            document.getElementById('navStore').innerText = t.navS;
+            document.getElementById('navChat').innerText = t.navC;
+            document.getElementById('navWheel').innerText = t.navWh;
+            document.getElementById('navAdmin').innerText = t.navAd;
+            document.getElementById('navProfile').innerText = t.navP;
+            document.getElementById('navWithdraw').innerText = t.navWi;
+
+            document.querySelectorAll('.buy-btn').forEach(btn => btn.innerText = t.buy);
+        }
+
+        // إداري: تحديث شريط الإعلانات الفوري
+        function updateAdminTicker() {
+            let newText = document.getElementById('adminTickerInput').value;
+            if (newText.trim() !== "") {
+                document.getElementById('tickerTextDisplay').innerText = newText;
+                showAlert("نجاح الإدارة", "تم تحديث شريط الإعلانات بنجاح وظهر للمشتركين فوراُ!", "📢");
+            }
+        }
+
+        // إداري: إضافة شخص لدعم المشتركين
+        function addSupportAgent() {
+            let agentName = document.getElementById('adminSupportName').value.trim();
+            if (agentName !== "") {
+                supportAgents.push(agentName + " (دعم فني)");
+                document.getElementById('adminSupportName').value = "";
+                showAlert("تم التعيين", `تم إضافة "${agentName}" بنجاح لفريق دعم المشتركين وأصبح جاهزاً للرد!`, "🛠️");
+            }
+        }
 
         // Custom Modal Logic
         let modalCallback = null;
@@ -495,12 +633,13 @@
             showAlert("مكافأة", "تمت إضافة 50 نقطة و 2 جوهرة إلى رصيدك!", "🎁");
         }
 
-        // غرف الدردشة
+        // غرف الدردشة ودعم المشتركين
         function switchChatRoom(room, btn) {
             document.querySelectorAll('.chat-tab').forEach(t => t.classList.remove('active'));
             btn.classList.add('active');
             let msgs = document.getElementById('chatMessages');
-            msgs.innerHTML = `<div class="chat-msg"><b>النظام:</b> أهلاً بك في غرفة (${room === 'general' ? 'العامة' : room === 'vip' ? 'VIP' : 'الدعم'}) 🌸</div>`;
+            let roomName = room === 'general' ? 'العامة' : room === 'vip' ? 'VIP' : 'الدعم الفني';
+            msgs.innerHTML = `<div class="chat-msg"><b>النظام:</b> أهلاً بك في غرفة (${roomName}) 🌸 فريق الدعم المتاح حالياً: ${supportAgents.join(', ')}</div>`;
         }
 
         function sendChatMessage() {
@@ -511,6 +650,13 @@
                 msgs.innerHTML += `<div class="chat-msg mine"><b>${userName}:</b> ${text}</div>`;
                 input.value = "";
                 msgs.scrollTop = msgs.scrollHeight;
+
+                // محاكاة رد تلقائي ذكي من فريق الدعم الفني
+                setTimeout(() => {
+                    let randomAgent = supportAgents[Math.floor(Math.random() * supportAgents.length)];
+                    msgs.innerHTML += `<div class="chat-msg support-badge"><b>${randomAgent}:</b> تم استلام استفسارك، نحن نعمل على مساعدتك بكل سرور! 🛠️</div>`;
+                    msgs.scrollTop = msgs.scrollHeight;
+                }, 1200);
             }
         }
 
@@ -538,7 +684,7 @@
         let currentAngle = 0;
 
         function drawWheel() {
-            const radius = 115;
+            const radius = 100;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             let center = canvas.width / 2;
 
@@ -547,7 +693,7 @@
                 ctx.fillStyle = slices[i].color;
                 ctx.beginPath();
                 ctx.arc(center, center, radius, angle, angle + arc, false);
-                ctx.arc(center, center, 20, angle + arc, angle, true);
+                ctx.arc(center, center, 18, angle + arc, angle, true);
                 ctx.fill();
                 ctx.strokeStyle = '#fff';
                 ctx.lineWidth = 2;
@@ -555,9 +701,9 @@
 
                 ctx.save();
                 ctx.fillStyle = slices[i].color === "#be185d" ? "#fff" : "#1f2937";
-                ctx.translate(center + Math.cos(angle + arc / 2) * 75, center + Math.sin(angle + arc / 2) * 75);
+                ctx.translate(center + Math.cos(angle + arc / 2) * 65, center + Math.sin(angle + arc / 2) * 65);
                 ctx.rotate(angle + arc / 2 + Math.PI / 2);
-                ctx.font = "bold 13px Tajawal";
+                ctx.font = "bold 12px Tajawal";
                 ctx.fillText(slices[i].text, -ctx.measureText(slices[i].text).width / 2, 0);
                 ctx.restore();
             }
