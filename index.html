@@ -1001,6 +1001,75 @@ window.addEventListener('load', () => {
         }
     }
 });
+// دالة الحفظ الشاملة للبيانات
+function saveAppData() {
+    try {
+        if (typeof appData !== 'undefined') {
+            localStorage.setItem('aegisAppData', JSON.stringify(appData));
+        }
+    } catch (e) {
+        console.error("خطأ في الحفظ", e);
+    }
+}
+
+// استرجاع البيانات والاسم فور فتح التطبيق وتحديث الواجهة تلقائياً
+window.addEventListener('DOMContentLoaded', () => {
+    // 1. استرجاع بيانات التطبيق العامة (النقاط، الرصيد، إلخ)
+    let savedAppData = localStorage.getItem('aegisAppData');
+    if (savedAppData) {
+        try {
+            let parsed = JSON.parse(savedAppData);
+            if (typeof appData !== 'undefined') {
+                Object.assign(appData, parsed);
+            }
+        } catch (e) {
+            console.error("خطأ في قراءة البيانات", e);
+        }
+    }
+
+    // 2. استرجاع الاسم وعرضه في مكانه الصحيح
+    let savedName = localStorage.getItem('userName');
+    if (savedName) {
+        if (typeof appData !== 'undefined') {
+            appData.userName = savedName;
+        }
+        let nameElement = document.getElementById('profileName');
+        if (nameElement) {
+            nameElement.innerText = savedName;
+        }
+    }
+
+    // تحديث الواجهة لتظهر البيانات المسترجعة
+    if (typeof updateUI === 'function') {
+        updateUI();
+    }
+});
+
+// دالة تغيير وحفظ الاسم الأساسية
+function promptForUserName() {
+    showPrompt("تسجيل اسم المشترك 👤", "الرجاء إدخال اسمك الخاص للمتابعة", "✍️", (enteredName) => {
+        if (enteredName && enteredName.trim() !== "") {
+            let newName = enteredName.trim();
+            if (typeof appData !== 'undefined') {
+                appData.userName = newName;
+            }
+            localStorage.setItem('userName', newName);
+            saveAppData(); // حفظ شامل فوري
+            
+            let nameElement = document.getElementById('profileName');
+            if (nameElement) {
+                nameElement.innerText = newName;
+            }
+            
+            if (typeof updateUI === 'function') {
+                updateUI();
+            }
+            showAlert("تم حفظ اسمك!", `مرحباً بك! 👋 ${newName}`, "✅");
+        } else {
+            showAlert("تنبيه", "يجب إدخال اسم صحيح للمتابعة", "⚠️");
+        }
+    });
+}
 
         </script>
 </body>
