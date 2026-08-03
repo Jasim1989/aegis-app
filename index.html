@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Aegis - مشاهدات وأرباح وآمان</title>
+  <title>Aegis - مشاهدات، أرباح ودعوات</title>
   <style>
     :root { --bg: #0b0f19; --card: #151c2c; --text: #f8fafc; --muted: #94a3b8; --border: #26334d; --primary: #38bdf8; --green: #10b981; --gold: #f59e0b; }
     .light { --bg: #f1f5f9; --card: #ffffff; --text: #0f172a; --muted: #64748b; --border: #cbd5e1; --primary: #0284c7; --green: #059669; --gold: #d97706; }
@@ -56,7 +56,7 @@
     <main>
       <!-- Privacy Assurance Banner -->
       <div class="privacy-badge">
-        🔒 <b>الخصوصية محمية:</b> لا يتم جمع بياناتك الشخصية أو تتبع موقعك الجغرافي.
+        🔒 <b>الخصوصية محمية:</b> بياناتك مشفرة ولا يتم تتبع موقعك أو هويتك الشخصية.
       </div>
 
       <!-- TAB 1: Wallet & Dashboard -->
@@ -75,8 +75,8 @@
             <div class="val" id="todayViews" style="font-size:1.1rem;">0 / 20</div>
           </div>
           <div class="card">
-            <div style="font-size:0.8rem; color:var(--muted);">حالة التشفير</div>
-            <div class="val" style="color:var(--green); font-size:1.1rem;">آمن 100% 🛡️</div>
+            <div style="font-size:0.8rem; color:var(--muted);">الأصدقاء المدعوون</div>
+            <div class="val" id="refCount" style="font-size:1.1rem; color:var(--primary);">0 صديق</div>
           </div>
         </div>
 
@@ -99,9 +99,25 @@
         </div>
       </div>
 
-      <!-- TAB 3: Withdraw & Privacy -->
+      <!-- TAB 3: Referrals & Invite -->
       <div id="t3" class="tab-content">
-        <h3 style="color:var(--gold); margin-bottom: 0.8rem;">💸 سحب الأرباح المشفر</h3>
+        <h3 style="color:var(--gold); margin-bottom: 0.8rem;">👥 نظام الإحالة (ادعُ واربح)</h3>
+        <div class="card">
+          <div style="font-size:0.85rem; color:var(--muted); margin-bottom:0.5rem;">شارك رابطك الخاص مع أصدقائك، واربح <b>100 نقطة</b> عن كل صديق يسجل في التطبيق!</div>
+          <label style="font-size:0.8rem; color:var(--muted);">رابط الدعوة الخاص بك</label>
+          <input type="text" id="refLink" readonly style="font-family:monospace; color:var(--primary); text-align:center;">
+          <button class="btn-gold" style="margin-top:0.8rem;" onclick="copyRefLink()">نسخ رابط الدعوة 📋</button>
+        </div>
+        <div class="card">
+          <div style="font-weight:bold; font-size:0.9rem; margin-bottom:0.4rem;">💡 محاكاة الانضمام عبر دعوة</div>
+          <input type="text" id="simulateRef" placeholder="أدخل كود صديق إن وجد...">
+          <button class="btn-primary" style="margin-top:0.5rem;" onclick="applyRefCode()">تفعيل كود الدعوة 🎁</button>
+        </div>
+      </div>
+
+      <!-- TAB 4: Withdraw & Privacy -->
+      <div id="t4" class="tab-content">
+        <h3 style="color:var(--gold); margin-bottom: 0.8rem;">💸 سحب الأرباح الآمن</h3>
         <div class="card">
           <form onsubmit="requestWithdraw(event)">
             <label style="font-size:0.8rem; color:var(--muted);">طريقة السحب</label>
@@ -111,27 +127,12 @@
               <option>بايبال (PayPal)</option>
               <option>بطاقات Google Play</option>
             </select>
-            <label style="margin-top:0.6rem; display:block; font-size:0.8rem; color:var(--muted);">رقم المحفظة (يتم تشفيره محلياً)</label>
+            <label style="margin-top:0.6rem; display:block; font-size:0.8rem; color:var(--muted);">رقم المحفظة (مشفر محلياً)</label>
             <input type="text" id="payAcc" required placeholder="07XXXXXXXXX">
             <label style="margin-top:0.6rem; display:block; font-size:0.8rem; color:var(--muted);">المبلغ المطلوب ($)</label>
             <input type="number" id="payAmt" min="5" required placeholder="الحد الأدنى 5$">
-            <button type="submit" class="btn-gold" style="margin-top:1rem;">إرسال طلب السحب الآمن 💵</button>
+            <button type="submit" class="btn-gold" style="margin-top:1rem;">إرسال طلب السحب 💵</button>
           </form>
-        </div>
-      </div>
-
-      <!-- TAB 4: History -->
-      <div id="t4" class="tab-content">
-        <h3 style="color:var(--gold); margin-bottom: 0.8rem;">📋 سجل العمليات المشفر</h3>
-        <div class="card" style="padding:0.4rem; overflow-x:auto;">
-          <table>
-            <thead>
-              <tr><th>#</th><th>النوع</th><th>النقاط/المبلغ</th><th>الوقت</th></tr>
-            </thead>
-            <tbody id="logs">
-              <tr><td colspan="4" style="text-align:center; color:var(--muted);">لا توجد عمليات بعد.</td></tr>
-            </tbody>
-          </table>
         </div>
       </div>
     </main>
@@ -139,8 +140,8 @@
     <nav class="bottom-nav">
       <button class="active" onclick="tab('t1', this)"><span>💰</span><span>المحفظة</span></button>
       <button onclick="tab('t2', this)"><span>🎬</span><span>مشاهدة</span></button>
-      <button onclick="tab('t3', this)"><span>💸</span><span>السحب</span></button>
-      <button onclick="tab('t4', this)"><span>📋</span><span>السجل</span></button>
+      <button onclick="tab('t3', this)"><span>👥</span><span>الدعوات</span></button>
+      <button onclick="tab('t4', this)"><span>💸</span><span>السحب</span></button>
     </nav>
   </div>
 
@@ -149,10 +150,18 @@
   <script>
     var points = parseInt(localStorage.getItem('aegis_pts') || '0');
     var views = parseInt(localStorage.getItem('aegis_views') || '0');
-    var logsData = JSON.parse(localStorage.getItem('aegis_earn_logs') || '[]');
+    var refCount = parseInt(localStorage.getItem('aegis_ref_count') || '0');
+    
+    // توليد كود إحالة فريد للمستخدم إذا لم يكن موجوداً
+    var myRefCode = localStorage.getItem('aegis_my_code');
+    if(!myRefCode) {
+      myRefCode = 'AEGIS-' + Math.floor(100000 + Math.random() * 900000);
+      localStorage.setItem('aegis_my_code', myRefCode);
+    }
 
     window.onload = function() {
       updateUI();
+      document.getElementById('refLink').value = "https://aegis-app-iota.vercel.app/?ref=" + myRefCode;
     };
 
     function showToast(m) {
@@ -180,24 +189,7 @@
       var dollar = (points / 1000).toFixed(2);
       document.getElementById('userBalance').innerText = 'الرصيد: $' + dollar;
       document.getElementById('todayViews').innerText = views + ' / 20';
-
-      var logs = document.getElementById('logs');
-      if(logsData.length === 0) {
-        logs.innerHTML = '<tr><td colspan="4" style="text-align:center; color:var(--muted);">لا توجد عمليات بعد.</td></tr>';
-        return;
-      }
-      var html = '';
-      logsData.forEach(function(item) {
-        html += '<tr><td>' + item.id + '</td><td><b>' + item.type + '</b></td><td>' + item.val + '</td><td>' + item.time + '</td></tr>';
-      });
-      logs.innerHTML = html;
-    }
-
-    function addLog(type, val) {
-      var t = new Date().toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
-      logsData.unshift({ id: logsData.length + 1, type: type, val: val, time: t });
-      localStorage.setItem('aegis_earn_logs', JSON.stringify(logsData));
-      updateUI();
+      document.getElementById('refCount').innerText = refCount + ' صديق';
     }
 
     function claimDaily() {
@@ -207,7 +199,7 @@
       points += 50;
       localStorage.setItem('aegis_pts', points);
       localStorage.setItem('aegis_daily_claimed', new Date().toDateString());
-      addLog("مكافأة يومية", "+50 pt");
+      updateUI();
       showToast("مبروك! حصلت على 50 نقطة 🌟");
     }
 
@@ -217,7 +209,7 @@
       var timer = document.getElementById('timer');
       
       btn.disabled = true;
-      status.innerText = "جاري المشاهدة بطريقة آمنة... 📺";
+      status.innerText = "جاري المشاهدة بشكل آمن... 📺";
       timer.style.display = "block";
       
       var sec = 15;
@@ -232,14 +224,39 @@
           views += 1;
           localStorage.setItem('aegis_pts', points);
           localStorage.setItem('aegis_views', views);
-          addLog("مشاهدة إعلان", "+15 pt");
+          updateUI();
           
-          status.innerText = "اكتملت المشاهدة! ✅";
+          status.innerText = "اكتملت المشاهدة بنجاح! ✅";
           timer.style.display = "none";
           btn.disabled = false;
           showToast("تم إضافة 15 نقطة لرصيدك! 🎉");
         }
       }, 1000);
+    }
+
+    function copyRefLink() {
+      var copyText = document.getElementById('refLink');
+      copyText.select();
+      navigator.clipboard.writeText(copyText.value);
+      showToast("تم نسخ رابط الدعوة بنجاح! 📋");
+    }
+
+    function applyRefCode() {
+      var codeInput = document.getElementById('simulateRef').value.trim();
+      if(!codeInput) return showToast("أدخل كود الدعوة أولاً!");
+      if(codeInput === myRefCode) return showToast("لا يمكنك استخدام كود الدعوة الخاص بك!");
+      if(localStorage.getItem('aegis_ref_used') === 'true') {
+        return showToast("لقد استخدمت كود إحالة مسبقاً!");
+      }
+      
+      points += 100;
+      refCount += 1;
+      localStorage.setItem('aegis_pts', points);
+      localStorage.setItem('aegis_ref_count', refCount);
+      localStorage.setItem('aegis_ref_used', 'true');
+      updateUI();
+      showToast("تم تطبيق الكود بنجاح وحصلت على 100 نقطة هدية! 🎁");
+      document.getElementById('simulateRef').value = '';
     }
 
     function requestWithdraw(e) {
@@ -254,7 +271,7 @@
 
       points -= (amt * 1000);
       localStorage.setItem('aegis_pts', points);
-      addLog("طلب سحب", "-$" + amt);
+      updateUI();
       showToast("تم إرسال طلب السحب بنجاح وأمان! 💸");
       document.getElementById('payAcc').value = '';
       document.getElementById('payAmt').value = '';
