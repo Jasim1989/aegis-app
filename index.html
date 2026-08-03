@@ -1070,6 +1070,14 @@ function promptForUserName() {
         }
     });
 }
+// مراقبة أي تحديث للواجهة وحفظ البيانات تلقائياً
+const originalUpdateUI = window.updateUI;
+if (typeof originalUpdateUI === 'function') {
+    window.updateUI = function() {
+        originalUpdateUI();
+        saveAppData();
+    };
+}
 
         </script>
 </body>
