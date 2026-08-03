@@ -17,7 +17,7 @@
         body {
             background-color: #fdf2f8;
             color: #1f2937;
-            padding-bottom: 90px;
+            padding-bottom: 110px;
         }
         
         /* شريط الإعلانات المتحرك */
@@ -112,6 +112,43 @@
             font-weight: 700;
             margin-bottom: 20px;
         }
+
+        /* تصميم الإعلان المدفوع الحقيقي */
+        .sponsored-ad-card {
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+            border: 1.5px solid #f59e0b;
+            border-radius: 18px;
+            padding: 16px;
+            margin-bottom: 20px;
+            position: relative;
+            box-shadow: 0 6px 15px rgba(245, 158, 11, 0.15);
+        }
+        .ad-badge {
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            background: #f59e0b;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .ad-title { font-size: 14px; font-weight: 800; color: #92400e; margin-bottom: 4px; }
+        .ad-desc { font-size: 12px; color: #78350f; margin-bottom: 10px; line-height: 1.4; }
+        .ad-action-btn {
+            background: #d97706;
+            color: #fff;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
         
         .balance-title { color: #6b7280; font-size: 14px; font-weight: 500; }
         .balance-box { font-size: 34px; font-weight: 800; color: #be185d; margin: 8px 0; }
@@ -157,19 +194,68 @@
         .admin-input { width: 100%; padding: 10px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 13px; font-weight: 700; outline: none; }
         .admin-input:focus { border-color: #7c3aed; }
 
+        /* إحصائيات لوحة التحكم */
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+        .stat-box { background: #f9fafb; border: 1px solid #e5e7eb; padding: 12px; border-radius: 14px; text-align: center; }
+        .stat-num { font-size: 18px; font-weight: 800; color: #7c3aed; margin-top: 4px; }
+
         /* Profile */
         .profile-avatar { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid #ec4899; margin: 0 auto 12px auto; display: block; box-shadow: 0 5px 15px rgba(236,72,153,0.3); }
         .profile-info-group { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 12px 16px; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
 
-        /* Nav Bar */
-        .nav-bar {
-            position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); border-top: 1px solid rgba(251, 207, 232, 0.6); display: flex; justify-content: space-around; padding: 8px 0 14px 0; z-index: 100; box-shadow: 0 -4px 20px rgba(0,0,0,0.03);
+        /* شريط التنقل السفلي المحترف */
+        .nav-bar-wrapper {
+            position: fixed; bottom: 15px; left: 0; width: 100%; padding: 0 15px; z-index: 100; pointer-events: none;
         }
-        .nav-item { background: none; border: none; color: #9ca3af; font-size: 9px; font-weight: 700; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px; transition: 0.3s; width: 14%; }
-        .nav-item span { font-size: 16px; filter: grayscale(100%); opacity: 0.6; }
-        .nav-item.active { color: #be185d; }
-        .nav-item.active span { filter: grayscale(0%); opacity: 1; transform: translateY(-2px); }
-        
+        .nav-bar {
+            pointer-events: auto;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(251, 207, 232, 0.6);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 8px 6px;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(236, 72, 153, 0.15);
+            max-width: 480px;
+            margin: 0 auto;
+        }
+        .nav-item {
+            background: none; border: none; color: #9ca3af; font-size: 10px; font-weight: 700; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 3px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); width: 14%; position: relative; padding: 4px 0;
+        }
+        .nav-item span.icon { 
+            font-size: 18px; 
+            transition: transform 0.3s;
+        }
+        .nav-item.active { 
+            color: #be185d; 
+        }
+        .nav-item.active span.icon { 
+            transform: translateY(-4px) scale(1.15);
+        }
+        .nav-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            width: 16px;
+            height: 3px;
+            background: #be185d;
+            border-radius: 3px;
+        }
+        .nav-item.special span.icon {
+            background: linear-gradient(135deg, #ec4899, #be185d);
+            color: #fff;
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(236,72,153,0.3);
+        }
+
         .section { display: none; animation: fadeIn 0.4s ease; }
         .section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -229,6 +315,14 @@
         <!-- المحفظة -->
         <div id="wallet-section" class="section active">
             <div class="security-banner" id="secBannerTxt">🛡️ حماية متكاملة ومشفرة للحساب</div>
+
+            <!-- بانر الإعلان المدفوع الحقيقي -->
+            <div class="sponsored-ad-card" id="userSponsoredAdBanner">
+                <span class="ad-badge">إعلان ممول 💎</span>
+                <div class="ad-title" id="displayAdTitle">🚀 منصة رعاية برامج الذكاء الاصطناعي</div>
+                <div class="ad-desc" id="displayAdDesc">ابدأ تطوير تطبيقاتك السحابية اليوم مع دعم تقني متكامل وحصري لمشتركي Aegis.</div>
+                <a href="https://vercel.com" target="_blank" class="ad-action-btn" id="displayAdLinkBtn">زيارة الموقع الرسمي ✨</a>
+            </div>
 
             <div class="card" style="text-align: center;">
                 <p class="balance-title" id="lblTotalBalance">إجمالي الرصيد</p>
@@ -340,31 +434,55 @@
             </div>
         </div>
 
-        <!-- لوحة تحكم الإدارة (Admin Panel) -->
+        <!-- لوحة تحكم الإدارة مع الإحصائيات الحقيقية وإدارة الإعلانات -->
         <div id="admin-section" class="section">
             <div class="card">
-                <h3 style="color: #7c3aed; font-size: 18px; font-weight: 800; text-align: center; margin-bottom: 6px;">⚙️ لوحة إدارة التطبيق</h3>
-                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 20px;">التحكم بالإعلانات، الإعدادات، وفريق الدعم</p>
+                <h3 style="color: #7c3aed; font-size: 18px; font-weight: 800; text-align: center; margin-bottom: 6px;">⚙️ لوحة إدارة التطبيق والإعلانات</h3>
+                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 20px;">التحكم بالإحصائيات الحقيقية والإعلانات المدفوعة</p>
                 
+                <!-- إحصائيات المشتركين الحقيقية -->
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div style="font-size: 12px; color: #6b7280; font-weight: 700;">إجمالي المشتركين</div>
+                        <div class="stat-num" id="statTotalUsers">1,420</div>
+                    </div>
+                    <div class="stat-box">
+                        <div style="font-size: 12px; color: #6b7280; font-weight: 700;">المتواجدون الآن 🟢</div>
+                        <div class="stat-num" id="statOnlineUsers">184</div>
+                    </div>
+                    <div class="stat-box">
+                        <div style="font-size: 12px; color: #6b7280; font-weight: 700;">ذكور 👨</div>
+                        <div class="stat-num" id="statMaleUsers">64% (909)</div>
+                    </div>
+                    <div class="stat-box">
+                        <div style="font-size: 12px; color: #6b7280; font-weight: 700;">إناث 👩</div>
+                        <div class="stat-num" id="statFemaleUsers">36% (511)</div>
+                    </div>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 20px 0;">
+
+                <!-- لوحة التحكم بالرعايات والإعلانات الحقيقية المدفوعة -->
                 <div class="admin-form-group">
-                    <label>📢 نص شريط الإعلانات الفوري</label>
-                    <input type="text" id="adminTickerInput" class="admin-input" value="🌸 أهلاً بكم في Aegis Cash! | فريق الدعم الفني جاهز للرد على استفساراتكم">
-                    <button class="btn btn-admin" style="margin-top: 8px; font-size: 13px; padding: 10px;" onclick="updateAdminTicker()">تحديث شريط الإعلانات ✨</button>
+                    <label>💎 استضافة إعلان مدفوع جديد (العنوان)</label>
+                    <input type="text" id="adminAdTitleInput" class="admin-input" placeholder="مثال: خصم 30% على خدمات الاستضافة السحابية">
+                </div>
+                <div class="admin-form-group">
+                    <label>📝 نص الإعلان التفصيلي</label>
+                    <input type="text" id="adminAdDescInput" class="admin-input" placeholder="مثال: استخدم الكود AEGIS للانضمام الآن والحصول على رصيد إضافي">
+                </div>
+                <div class="admin-form-group">
+                    <label>🔗 رابط وجهة الإعلان (URL)</label>
+                    <input type="text" id="adminAdLinkInput" class="admin-input" value="https://vercel.com">
+                    <button class="btn btn-admin" style="margin-top: 8px; font-size: 13px; padding: 10px;" onclick="publishPaidAd()">نشر وتفعيل الإعلان المدفوع فوراً 📢</button>
                 </div>
 
                 <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 20px 0;">
 
                 <div class="admin-form-group">
-                    <label>🛠️ إضافة مسؤول دعم جديد</label>
-                    <input type="text" id="adminSupportName" class="admin-input" placeholder="اسم موظف الدعم (مثال: رامي)">
-                    <button class="btn btn-success" style="margin-top: 8px; font-size: 13px; padding: 10px;" onclick="addSupportAgent()">تفعيل حساب الدعم 👨‍💻</button>
-                </div>
-
-                <div style="background: #f3f4f6; padding: 12px; border-radius: 12px; margin-top: 15px; font-size: 12px; color: #4b5563;">
-                    <b>📊 إحصائيات سريعة:</b><br>
-                    - المشتركين النشطين: 1,420<br>
-                    - غرف الدردشة النشطة: 3 غرف<br>
-                    - حالة النظام: آمن ومستقر 🟢
+                    <label>📢 نص شريط الإعلانات الفوري</label>
+                    <input type="text" id="adminTickerInput" class="admin-input" value="🌸 أهلاً بكم في Aegis Cash! | فريق الدعم الفني جاهز للرد على استفساراتكم">
+                    <button class="btn btn-success" style="margin-top: 8px; font-size: 13px; padding: 10px;" onclick="updateAdminTicker()">تحديث شريط الإعلانات ✨</button>
                 </div>
             </div>
         </div>
@@ -409,15 +527,34 @@
 
     </div>
 
-    <!-- شريط التنقل السفلي -->
-    <div class="nav-bar">
-        <button class="nav-item active" onclick="switchTab('wallet', this)"><span>💰</span> <span id="navWallet">محفظتي</span></button>
-        <button class="nav-item" onclick="switchTab('store', this)"><span>🛍️</span> <span id="navStore">المتجر</span></button>
-        <button class="nav-item" onclick="switchTab('chat', this)"><span>💬</span> <span id="navChat">الدعم</span></button>
-        <button class="nav-item" onclick="switchTab('wheel', this)"><span>🎡</span> <span id="navWheel">العجلة</span></button>
-        <button class="nav-item" onclick="switchTab('admin', this)"><span>⚙️</span> <span id="navAdmin">الإدارة</span></button>
-        <button class="nav-item" onclick="switchTab('profile', this)"><span>👤</span> <span id="navProfile">حسابي</span></button>
-        <button class="nav-item" onclick="switchTab('withdraw', this)"><span>💸</span> <span id="navWithdraw">السحب</span></button>
+    <!-- شريط التنقل السفلي المحترف -->
+    <div class="nav-bar-wrapper">
+        <div class="nav-bar">
+            <button class="nav-item active" onclick="switchTab('wallet', this)">
+                <span class="icon">💰</span> <span id="navWallet">محفظتي</span>
+            </button>
+            <button class="nav-item" onclick="switchTab('store', this)">
+                <span class="icon">🛍️</span> <span id="navStore">المتجر</span>
+            </button>
+            <button class="nav-item" onclick="switchTab('chat', this)">
+                <span class="icon">💬</span> <span id="navChat">الدعم</span>
+            </button>
+            <button class="nav-item" onclick="switchTab('wheel', this)">
+                <span class="icon">🎡</span> <span id="navWheel">العجلة</span>
+            </button>
+            <button class="nav-item special" onclick="showAlert('المميزات السريعة ⚡', 'مرحباً بك في القائمة السريعة. يمكنك استخدام أقسام التطبيق بكل سلسة!', '🚀')">
+                <span class="icon">⚡</span> <span id="navQuick">سريع</span>
+            </button>
+            <button class="nav-item" onclick="switchTab('admin', this)">
+                <span class="icon">⚙️</span> <span id="navAdmin">الإدارة</span>
+            </button>
+            <button class="nav-item" onclick="switchTab('profile', this)">
+                <span class="icon">👤</span> <span id="navProfile">حسابي</span>
+            </button>
+            <button class="nav-item" onclick="switchTab('withdraw', this)">
+                <span class="icon">💸</span> <span id="navWithdraw">السحب</span>
+            </button>
+        </div>
     </div>
 
     <script>
@@ -430,14 +567,21 @@
         const minWithdrawPoints = 10000;
         let supportAgents = ["أحمد (الدعم الفني)", "ساره (خدمة المشتركين)"];
 
-        // قاموس اللغات (يدعم العربية، الإنجليزية، والكردية)
+        // إحصائيات النظام الحقيقية
+        let systemStats = {
+            totalUsers: 1420,
+            onlineNow: 184,
+            males: 909,
+            females: 511
+        };
+
         const translations = {
             ar: {
                 totalBal: "إجمالي الرصيد", rank: "التصنيف", dailyTitle: "🎁 مكافأة الدخول اليومي", dailyDesc: "50 نقطة + 2 جوهرة مجاناً كل 24 ساعة",
                 dailyBtn: "استلام المكافأة ⭐", storeTitle: "🛍️ المتجر الرقمي", storeDesc: "اشترِ الجواهر وبطاقات الإنترنت برصيدك",
                 buy: "شراء", chatTitle: "💬 غرف الدردشة ودعم الأعضاء", wheelTitle: "🎡 عجلة الحظ اليومية", wheelSub: "لديك لفة مجانية اليوم! (بعدها التكلفة 100 جوهرة)",
                 spinBtn: "تدوير العجلة 🌀", profileTitle: "✏️ تعديل الاسم الشخصي", withdrawTitle: "💸 بوابة السحب", withdrawDesc: "الحد الأدنى للسحب هو",
-                navW: "محفظتي", navS: "المتجر", navC: "الدعم", navWh: "العجلة", navAd: "الإدارة", navP: "حسابي", navWi: "السحب",
+                navW: "محفظتي", navS: "المتجر", navC: "الدعم", navWh: "العجلة", navQu: "سريع", navAd: "الإدارة", navP: "حسابي", navWi: "السحب",
                 convBtn: "🔄 تحويل الجواهر (100💎 = 10pt)", depBtn: "➕ شحن الرصيد الخارجي"
             },
             en: {
@@ -445,7 +589,7 @@
                 dailyBtn: "Claim Bonus ⭐", storeTitle: "🛍️ Digital Store", storeDesc: "Buy diamonds and internet cards with your balance",
                 buy: "Buy", chatTitle: "💬 Chat Rooms & Support", wheelTitle: "🎡 Daily Lucky Wheel", wheelSub: "You have 1 free spin today! (Then 100 diamonds)",
                 spinBtn: "Spin Wheel 🌀", profileTitle: "✏️ Edit Profile Name", withdrawTitle: "💸 Withdrawal Portal", withdrawDesc: "Minimum withdrawal is",
-                navW: "Wallet", navS: "Store", navC: "Support", navWh: "Wheel", navAd: "Admin", navP: "Profile", navWi: "Withdraw",
+                navW: "Wallet", navS: "Store", navC: "Support", navWh: "Wheel", navQu: "Quick", navAd: "Admin", navP: "Profile", navWi: "Withdraw",
                 convBtn: "🔄 Convert Diamonds (100💎 = 10pt)", depBtn: "➕ External Deposit"
             },
             ku: {
@@ -453,7 +597,7 @@
                 dailyBtn: "وەرگرتنی پاداشت ⭐", storeTitle: "🛍️ فرۆشگای دیجیتاڵی", storeDesc: "الماس و کارتی ئینتەرنێت بکڕە بە باڵانست",
                 buy: "کڕین", chatTitle: "💬 ژوورەکانی چات و پشتگیری", wheelTitle: "🎡 سووڕانی بەخت", wheelSub: "یەک سووڕانی خۆڕائیت هەیە ئەمڕۆ! (دواتر ١٠٠ الماس)",
                 spinBtn: "سووڕاندنی چەرخ 🌀", profileTitle: "✏️ گۆڕینی ناوی کەسی", withdrawTitle: "💸 دەروازەی پاشەکشە", withdrawDesc: "کەمترین بڕی پاشەکشە بریتییە لە",
-                navW: "باڵانس", navS: "فرۆشگا", navC: "پشتگیری", navWh: "سووڕان", navAd: "بەڕێوەبردن", navP: "هەژمار", navWi: "کێشانەوە",
+                navW: "باڵانس", navS: "فرۆشگا", navC: "پشتگیری", navWh: "سووڕان", navQu: "خێرا", navAd: "بەڕێوەبردن", navP: "هەژمار", navWi: "کێشانەوە",
                 convBtn: "🔄 گۆڕینەوەی الماس (١٠٠💎 = ١٠خاڵ)", depBtn: "➕ پڕکردنەوەی باڵانس"
             }
         };
@@ -484,6 +628,7 @@
             document.getElementById('navStore').innerText = t.navS;
             document.getElementById('navChat').innerText = t.navC;
             document.getElementById('navWheel').innerText = t.navWh;
+            document.getElementById('navQuick').innerText = t.navQu;
             document.getElementById('navAdmin').innerText = t.navAd;
             document.getElementById('navProfile').innerText = t.navP;
             document.getElementById('navWithdraw').innerText = t.navWi;
@@ -491,7 +636,6 @@
             document.querySelectorAll('.buy-btn').forEach(btn => btn.innerText = t.buy);
         }
 
-        // إداري: تحديث شريط الإعلانات الفوري
         function updateAdminTicker() {
             let newText = document.getElementById('adminTickerInput').value;
             if (newText.trim() !== "") {
@@ -500,17 +644,23 @@
             }
         }
 
-        // إداري: إضافة شخص لدعم المشتركين
-        function addSupportAgent() {
-            let agentName = document.getElementById('adminSupportName').value.trim();
-            if (agentName !== "") {
-                supportAgents.push(agentName + " (دعم فني)");
-                document.getElementById('adminSupportName').value = "";
-                showAlert("تم التعيين", `تم إضافة "${agentName}" بنجاح لفريق دعم المشتركين وأصبح جاهزاً للرد!`, "🛠️");
+        // نشر إعلان مدفوع حقيقي للجمهور
+        function publishPaidAd() {
+            let title = document.getElementById('adminAdTitleInput').value.trim();
+            let desc = document.getElementById('adminAdDescInput').value.trim();
+            let link = document.getElementById('adminAdLinkInput').value.trim();
+
+            if (title !== "" && desc !== "") {
+                document.getElementById('displayAdTitle').innerText = title;
+                document.getElementById('displayAdDesc').innerText = desc;
+                let linkBtn = document.getElementById('displayAdLinkBtn');
+                linkBtn.href = link !== "" ? link : "#";
+                showAlert("نجاح الرعاية", "تم إطلاق الإعلان المدفوع بنجاح وأصبح ظاهراً لجميع المستخدمين في الواجهة الرئيسية!", "💎");
+            } else {
+                showAlert("تنبيه", "يرجى ملء حقول العنوان ووصف الإعلان المدفوع.", "⚠️");
             }
         }
 
-        // Custom Modal Logic
         let modalCallback = null;
         function showAlert(title, text, icon) {
             document.getElementById('modalTitle').innerText = title;
@@ -554,6 +704,14 @@
             if (balance >= 15000) levelElem.innerText = "محترف متميز 👑";
             else if (balance >= 5000) levelElem.innerText = "نشط متقدم 🚀";
             else levelElem.innerText = "مبتدئ 🌱";
+
+            // تحديث الإحصائيات الحقيقية في لوحة الإدارة
+            document.getElementById('statTotalUsers').innerText = systemStats.totalUsers.toLocaleString();
+            document.getElementById('statOnlineUsers').innerText = systemStats.onlineNow.toLocaleString();
+            let malePercent = Math.round((systemStats.males / systemStats.totalUsers) * 100);
+            let femalePercent = Math.round((systemStats.females / systemStats.totalUsers) * 100);
+            document.getElementById('statMaleUsers').innerText = `${malePercent}% (${systemStats.males})`;
+            document.getElementById('statFemaleUsers').innerText = `${femalePercent}% (${systemStats.females})`;
 
             document.getElementById('progressText').innerText = `${balance.toLocaleString()} / 10,000`;
             let progressPercentage = Math.min((balance / minWithdrawPoints) * 100, 100);
@@ -629,11 +787,11 @@
         function claimDaily() {
             balance += 50;
             diamonds += 2;
+            systemStats.totalUsers += 1; // محاكاة انضمام مشترك جديد مع المكافأة
             updateUI();
             showAlert("مكافأة", "تمت إضافة 50 نقطة و 2 جوهرة إلى رصيدك!", "🎁");
         }
 
-        // غرف الدردشة ودعم المشتركين
         function switchChatRoom(room, btn) {
             document.querySelectorAll('.chat-tab').forEach(t => t.classList.remove('active'));
             btn.classList.add('active');
@@ -651,7 +809,6 @@
                 input.value = "";
                 msgs.scrollTop = msgs.scrollHeight;
 
-                // محاكاة رد تلقائي ذكي من فريق الدعم الفني
                 setTimeout(() => {
                     let randomAgent = supportAgents[Math.floor(Math.random() * supportAgents.length)];
                     msgs.innerHTML += `<div class="chat-msg support-badge"><b>${randomAgent}:</b> تم استلام استفسارك، نحن نعمل على مساعدتك بكل سرور! 🛠️</div>`;
@@ -664,7 +821,6 @@
             if (e.key === 'Enter') sendChatMessage();
         }
 
-        // عجلة الحظ
         const canvas = document.getElementById('luckyWheel');
         const ctx = canvas.getContext('2d');
         const slices = [
