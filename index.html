@@ -44,6 +44,7 @@
         .btn-primary { background: linear-gradient(135deg, #ec4899, #be185d); color: #fff; box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3); margin-top: 10px; }
         .btn-secondary { background: linear-gradient(135deg, #0284c7, #0369a1); color: #fff; box-shadow: 0 8px 20px rgba(2, 132, 199, 0.2); margin-top: 10px; }
         .btn-success { background: linear-gradient(135deg, #10b981, #047857); color: #fff; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2); margin-top: 10px; }
+        .btn:disabled { background: #d1d5db !important; color: #9ca3af !important; box-shadow: none !important; cursor: not-allowed !important; transform: none !important; opacity: 0.7; }
 
         /* Store */
         .store-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 15px; }
@@ -175,8 +176,8 @@
 
             <div class="card">
                 <h3 style="font-size: 15px; margin-bottom: 6px; color: #be185d; font-weight: 800;">🎁 مكافأة الدخول اليومي</h3>
-                <p style="font-size: 12px; color: #6b7280; margin-bottom: 12px;">50 نقطة + 2 جوهرة مجاناً كل 24 ساعة</p>
-                <button class="btn btn-primary" onclick="claimDaily()">استلام المكافأة ⭐</button>
+                <p style="font-size: 12px; color: #6b7280; margin-bottom: 12px;" id="dailySubtitle">50 نقطة + 2 جوهرة مجاناً كل 24 ساعة</p>
+                <button class="btn btn-primary" id="dailyRewardBtn" onclick="claimDaily()">استلام المكافأة ⭐</button>
             </div>
         </div>
 
@@ -340,7 +341,7 @@
         </div>
     </div>
 
-    <!-- شريط التنقل السفلي المحدث ليشمل الأزرار الـ 9 -->
+    <!-- شريط التنقل السفلي -->
     <div class="nav-bar-wrapper">
         <div class="nav-bar">
             <button class="nav-item active" onclick="switchTab('wallet', this)">
@@ -389,7 +390,8 @@
             diamonds: 35,
             userName: "جاسم العراقي",
             userPhone: "+964 780 000 0000",
-            hasFreeSpinToday: true
+            hasFreeSpinToday: true,
+            lastDailyClaimDate: null
         };
 
         // دالة الحفظ الشاملة لجميع بيانات التطبيق
@@ -470,24 +472,52 @@
             
             document.getElementById('profilePhoneDisplay').innerText = `📱 ${appData.userPhone}`;
             
-            const withdrawBtn = document.getElementById('withdrawBtn');
-            if (appData.balance >= minWithdrawPoints) {
-                withdrawBtn.disabled = false;
-                withdrawBtn.style.background = "linear-gradient(135deg, #ec4899, #be185d)";
-                withdrawBtn.style.color = "#fff";
-                withdrawBtn.style.cursor = "pointer";
-                withdrawBtn.innerText = "سحب الأرباح ✨";
+            // التحقق الدقيق من حالة المكافأة اليومية (مرة واحدة كل 24 ساعة)
+            let dailyBtn = document.getElementById('dailyRewardBtn');
+            let dailySub = document.getElementById('dailySubtitle');
+            if (appData.lastDailyClaimDate) {
+                let lastClaim = new Date(appData.lastDailyClaimDate);
+                let now = new Date();
+                let diffHours = (now - lastClaim) / (1000 * 60 * 60);
+                if (diffHours < 24) {
+                    let remainingHours = Math.ceil(24 - diffHours);
+                    dailyBtn.disabled = true;
+                    dailyBtn.innerText = "تم استلام المكافأة اليوم (متاحة لاحقاً) ⏳";
+                    dailySub.innerText = `متبقي حوالي ${remainingHours} ساعة لاستلام المكافأة القادمة`;
+                } else {
+                    dailyBtn.disabled = false;
+                    dailyBtn.innerText = "استلام المكافأة ⭐";
+                    dailySub.innerText = "50 نقطة + 2 جوهرة مجاناً كل 24 ساعة";
+                }
             } else {
-                withdrawBtn.disabled = false;
-                withdrawBtn.style.background = "linear-gradient(135deg, #ec4899, #be185d)";
-                withdrawBtn.style.color = "#fff";
-                withdrawBtn.style.cursor = "pointer";
-                withdrawBtn.innerText = "طلب سحب الأرباح ✨";
+                dailyBtn.disabled = false;
+                dailyBtn.innerText = "استلام المكافأة ⭐";
+                dailySub.innerText = "50 نقطة + 2 جوهرة مجاناً كل 24 ساعة";
             }
+
             saveAppData();
         }
 
-        // دالة تغيير وحفظ الاسم الآمنة
+        // دالة استلام المكافأة اليومية المحمية بدقة (مرة واحدة كل 24 ساعة)
+        function claimDaily() {
+            if (appData.lastDailyClaimDate) {
+                let lastClaim = new Date(appData.lastDailyClaimDate);
+                let now = new Date();
+                let diffHours = (now - lastClaim) / (1000 * 60 * 60);
+                if (diffHours < 24) {
+                    let remainingHours = Math.ceil(24 - diffHours);
+                    showAlert("تنبيه", `لقد قمت بالفعل باستلام مكافئتك اليومية. يمكنك الاستلام مرة كل 24 ساعة (متبقي ${remainingHours} ساعة).`, "⏳");
+                    return;
+                }
+            }
+
+            appData.balance += 50;
+            appData.diamonds += 2;
+            appData.lastDailyClaimDate = new Date().toISOString();
+            updateUI();
+            showAlert("مكافأة يومية", "تمت إضافة 50 نقطة و 2 جوهرة إلى رصيدك المشفر بنجاح!", "🎁");
+        }
+
         function promptForUserName() {
             showPrompt("تسجيل اسم المشترك 👤", "الرجاء إدخال اسمك الخاص للمتابعة", "✍️", (enteredName) => {
                 if (enteredName && enteredName.trim() !== "") {
@@ -509,7 +539,6 @@
             });
         }
 
-        // دالة السحب الآمنة
         function requestWithdrawal() {
             if (appData.balance < minWithdrawPoints) {
                 showAlert("تنبيه", "عذراً رصيدك الحالي أقل من الحد الأدنى للسحب (10,000 نقطة)", "⚠️");
@@ -594,13 +623,6 @@
             appData.balance += 10;
             updateUI();
             showAlert("نجاح", "تم تحويل 100 جوهرة إلى 10 نقاط بأمان!", "💎");
-        }
-
-        function claimDaily() {
-            appData.balance += 50;
-            appData.diamonds += 2;
-            updateUI();
-            showAlert("مكافأة يومية", "تمت إضافة 50 نقطة و 2 جوهرة إلى رصيدك المشفر!", "🎁");
         }
 
         function switchChatRoom(room, btn) {
