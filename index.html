@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aegis Cash - لوحة إدارة التطبيق الشاملة</title>
+    <title>Aegis Cash - لوحة إدارة التطبيق الشاملة (حفظ كامل)</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tajawal', sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -518,7 +518,7 @@
     </div>
 
     <script>
-        const SECURITY_KEY = "AegisSecureToken_9981";
+        const SECURITY_KEY = "AegisSecureToken_Universal_v2";
         let appData = {
             balance: 1315,
             diamonds: 35,
@@ -532,7 +532,7 @@
 
         function saveAppData() {
             try {
-                localStorage.setItem(SECURITY_KEY, btoa(JSON.stringify(appData)));
+                localStorage.setItem(SECURITY_KEY, btoa(encodeURIComponent(JSON.stringify(appData))));
             } catch(e) {}
         }
 
@@ -540,17 +540,13 @@
             try {
                 let saved = localStorage.getItem(SECURITY_KEY);
                 if (saved) {
-                    let parsed = JSON.parse(atob(saved));
+                    let decoded = decodeURIComponent(atob(saved));
+                    let parsed = JSON.parse(decoded);
                     if(parsed && typeof parsed.balance === 'number') {
                         appData = parsed;
                     }
                 }
             } catch(e) {}
-
-            let savedName = localStorage.getItem('userName');
-            if (savedName) {
-                appData.userName = savedName;
-            }
         }
 
         loadAppData();
@@ -687,12 +683,12 @@
             // إذا كان المستهدف هو المستخدم الحالي، قم بزيادة جواهره مباشرة
             if (targetName.includes(appData.userName) || targetName.includes("جاسم")) {
                 appData.diamonds += diamondAmount;
-                updateUI();
             }
 
+            updateUI();
             showAlert(
                 "تم إرسال الدعم بنجاح! 💎", 
-                `تمت عملية الدعم الاستثنائي بنجاح:\n\n• المشترك: ${targetName}\n• كمية الجواهر المفتوحة: +${diamondAmount.toLocaleString()} 💎\n\nتم تحديث الأرصدة وسجلات المنصة فوريًا!`, 
+                `تمت عملية الدعم الاستثنائي بنجاح:\n\n• المشترك: ${targetName}\n• كمية الجواهر المفتوحة: +${diamondAmount.toLocaleString()} 💎\n\nتم تحديث الأرصدة وسجلات المنصة وحفظها فوريًا!`, 
                 "🚀"
             );
 
@@ -729,7 +725,7 @@
                     document.getElementById('newProductName').value = '';
                     document.getElementById('newProductPrice').value = '';
                     imageInput.value = '';
-                    showAlert("نجح الرفع! 🎉", "تم إضافة المنتج بنجاح إلى الباب المحدد في المتجر.", "✅");
+                    showAlert("نجح الرفع والحفظ! 🎉", "تم إضافة المنتج بنجاح وحفظه بشكل دائم في متجرك.", "✅");
                 };
                 reader.readAsDataURL(imageInput.files[0]);
             } else {
@@ -807,7 +803,7 @@
             appData.diamonds += 2;
             appData.lastDailyClaimDate = new Date().toISOString();
             updateUI();
-            showAlert("مكافأة يومية", "تمت إضافة 50 نقطة و 2 جوهرة إلى رصيدك المشفر بنجاح!", "🎁");
+            showAlert("مكافأة يومية", "تمت إضافة 50 نقطة و 2 جوهرة إلى رصيدك وحفظ الموعد بنجاح!", "🎁");
         }
 
         function promptForUserName() {
@@ -815,8 +811,6 @@
                 if (enteredName && enteredName.trim() !== "") {
                     let newName = enteredName.trim();
                     appData.userName = newName;
-                    localStorage.setItem('userName', newName);
-                    saveAppData();
                     updateUI();
                     showAlert("تم حفظ اسمك!", `مرحباً بك! 👋 ${newName}`, "✅");
                 }
@@ -832,7 +826,7 @@
                 if (accountInfo && accountInfo.trim() !== "") {
                     appData.balance = 0;
                     updateUI();
-                    showAlert("تم بنجاح!", "تم تقديم طلب السحب بنجاح! 🚀 سيتم التحويل قريباً.", "✅");
+                    showAlert("تم بنجاح!", "تم تقديم طلب السحب بنجاح وحفظ الحالة! 🚀", "✅");
                 }
             });
         }
@@ -869,7 +863,7 @@
                 if (amount > 0) {
                     appData.balance += amount;
                     updateUI();
-                    showAlert("نجاح الحماية", `تم إضافة ${amount.toLocaleString()} نقطة بنجاح للمحفظة المشفرة!`, "✅");
+                    showAlert("نجاح الحفظ", `تم إضافة ${amount.toLocaleString()} نقطة بنجاح وحفظ الرصيد!`, "✅");
                 }
             });
         }
@@ -882,7 +876,7 @@
             appData.balance -= cost;
             if (itemName.includes("جوهرة")) appData.diamonds += itemName.includes("50") ? 50 : 200;
             updateUI();
-            showAlert("مبروك!", `تم شراء "${itemName}" بنجاح وتأمين المعاملة!`, "🎉");
+            showAlert("مبروك!", `تم شراء "${itemName}" بنجاح وحفظ التغييرات!`, "🎉");
         }
 
         function openPhoneUpdateModal() {
@@ -890,7 +884,7 @@
                 if (val && val.trim() !== "") {
                     appData.userPhone = val.trim();
                     updateUI();
-                    showAlert("تم التوثيق", "تم ربط وتأمين رقم الهاتف الجديد بنجاح عبر نظام الحماية OTP.", "✅");
+                    showAlert("تم الحفظ والتوثيق", "تم ربط وحفظ رقم الهاتف الجديد بنجاح عبر نظام الأمان.", "✅");
                 }
             });
         }
@@ -903,7 +897,7 @@
             appData.diamonds -= 100;
             appData.balance += 10;
             updateUI();
-            showAlert("نجاح", "تم تحويل 100 جوهرة إلى 10 نقاط بأمان!", "💎");
+            showAlert("نجاح الحفظ", "تم تحويل 100 جوهرة إلى 10 نقاط وحفظ الأرصدة بنجاح!", "💎");
         }
 
         function switchChatRoom(room, btn) {
@@ -1002,10 +996,10 @@
                 let winItem = slices[winningIndex];
                 if (winItem.type === "pts") {
                     appData.balance += winItem.value;
-                    document.getElementById('wheelResult').innerText = `🎉 ربحت ${winItem.value} نقطة!`;
+                    document.getElementById('wheelResult').innerText = `🎉 ربحت ${winItem.value} نقطة وجرى حفظها!`;
                 } else {
                     appData.diamonds += winItem.value;
-                    document.getElementById('wheelResult').innerText = `💎 ربحت ${winItem.value} جوهرة!`;
+                    document.getElementById('wheelResult').innerText = `💎 ربحت ${winItem.value} جوهرة وجرى حفظها!`;
                 }
                 updateUI();
             }, 5000);
