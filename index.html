@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aegis Cash - المنصة المتكاملة ومتجر الأبواب</title>
+    <title>Aegis Cash - لوحة إدارة التطبيق الشاملة</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tajawal', sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -44,6 +44,7 @@
         .btn-primary { background: linear-gradient(135deg, #ec4899, #be185d); color: #fff; box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3); margin-top: 10px; }
         .btn-secondary { background: linear-gradient(135deg, #0284c7, #0369a1); color: #fff; box-shadow: 0 8px 20px rgba(2, 132, 199, 0.2); margin-top: 10px; }
         .btn-success { background: linear-gradient(135deg, #10b981, #047857); color: #fff; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2); margin-top: 10px; }
+        .btn-warning { background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; box-shadow: 0 8px 20px rgba(245, 158, 11, 0.2); margin-top: 10px; }
         .btn:disabled { background: #d1d5db !important; color: #9ca3af !important; box-shadow: none !important; cursor: not-allowed !important; transform: none !important; opacity: 0.7; }
 
         /* Store Multi-Doors Styles */
@@ -88,10 +89,12 @@
         .chat-input { flex: 1; padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 10px; outline: none; font-size: 13px; }
         .chat-send-btn { background: #be185d; color: #fff; border: none; padding: 0 16px; border-radius: 10px; font-weight: 700; cursor: pointer; }
 
-        /* Admin */
-        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
-        .stat-box { background: #f9fafb; border: 1px solid #e5e7eb; padding: 12px; border-radius: 14px; text-align: center; }
-        .stat-num { font-size: 18px; font-weight: 800; color: #7c3aed; margin-top: 4px; }
+        /* Admin Pro Styles */
+        .admin-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+        .admin-stat-card { background: #f9fafb; border: 1px solid #e5e7eb; padding: 14px; border-radius: 16px; text-align: center; }
+        .admin-stat-num { font-size: 20px; font-weight: 800; color: #be185d; margin-top: 4px; }
+        .member-row { display: flex; justify-content: space-between; align-items: center; background: #fdf2f8; padding: 10px 14px; border-radius: 12px; margin-bottom: 8px; border: 1px solid #fbcfe8; font-size: 13px; }
+        .support-diamond-box { background: linear-gradient(135deg, #e0f2fe, #bae6fd); border: 2px solid #0284c7; border-radius: 18px; padding: 16px; margin-top: 15px; }
 
         /* Profile */
         .profile-avatar { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid #ec4899; margin: 0 auto 12px auto; display: block; box-shadow: 0 5px 15px rgba(236,72,153,0.3); }
@@ -130,7 +133,7 @@
     <!-- شريط الإعلانات المتحرك -->
     <div class="ticker-wrap">
         <div class="ticker-content">
-            🌸 أهلاً بكم في Aegis Cash! | نظام حماية متطور وتوثيق رسمي | استمتع بالعجلة وغرف الدردشة الفورية ودعوة الأصدقاء
+            🌸 أهلاً بكم في Aegis Cash! | لوحة الإدارة الفورية ومتتبع الأرباح (50/50) وحقل الدعم المفتوح بالأسفل 💎
         </div>
     </div>
 
@@ -219,13 +222,12 @@
             </div>
         </div>
 
-        <!-- قسم مشاهدة الفيديوهات المطور (مع عداد متزامن تلقائياً وتقاسم الأرباح 50/50) -->
+        <!-- قسم مشاهدة الفيديوهات (مع عداد متزامن وتقاسم الأرباح 50/50) -->
         <div id="videos-section" class="section">
             <div class="card" style="padding: 16px;">
                 <h3 style="color: #be185d; font-size: 17px; font-weight: 800; text-align: center; margin-bottom: 6px;">🎬 مشاهدة الفيديوهات والمواقع المربحة</h3>
-                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;">اختر مقطعاً ليبدأ العد التنازلي للمشاهدة فوراً وتقاسم الأرباح (50% لكل طرف)! 🎁</p>
+                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;">اختر مقطعاً ليبدأ العد التنازلي للمشاهدة وتقاسم الأرباح بالتساوي (50% لك و50% للمنصة)! 🎁</p>
                 
-                <!-- خيارات الفيديوهات والمواقع المتاحة -->
                 <div class="video-options-list" id="videoOptionsList">
                     <div class="video-option-card selected" onclick="selectVideoOption(0, this)">
                         <div>
@@ -250,7 +252,6 @@
                     </div>
                 </div>
 
-                <!-- مشغل الفيديو والعداد المتزامن تلقائياً -->
                 <div class="video-card">
                     <div class="video-container">
                         <iframe id="activeVideoFrame" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
@@ -387,20 +388,58 @@
             </div>
         </div>
 
-        <!-- لوحة تحكم الإدارة -->
+        <!-- لوحة تحكم الإدارة المطورة والشاملة -->
         <div id="admin-section" class="section">
-            <div class="card">
-                <h3 style="color: #7c3aed; font-size: 18px; font-weight: 800; text-align: center; margin-bottom: 6px;">⚙️ لوحة إدارة التطبيق والحماية</h3>
-                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 20px;">التحكم بالإحصائيات، الأمان، ورقم الهاتف المرتبط</p>
-                <div class="stats-grid">
-                    <div class="stat-box">
-                        <div style="font-size: 12px; color: #6b7280; font-weight: 700;">إجمالي المشتركين</div>
-                        <div class="stat-num">1,420</div>
+            <div class="card" style="padding: 18px;">
+                <h3 style="color: #7c3aed; font-size: 18px; font-weight: 800; text-align: center; margin-bottom: 4px;">⚙️ لوحة إدارة التطبيق والحماية</h3>
+                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 16px;">متابعة الأرباح المباشرة، الأعضاء المتواجدون والمتفاعلون</p>
+                
+                <!-- الإحصائيات الأساسية -->
+                <div class="admin-stats-grid">
+                    <div class="admin-stat-card">
+                        <div style="font-size: 11px; color: #6b7280; font-weight: 700;">إجمالي المشتركين</div>
+                        <div class="admin-stat-num" id="adminTotalUsers">1,420</div>
                     </div>
-                    <div class="stat-box">
-                        <div style="font-size: 12px; color: #6b7280; font-weight: 700;">المتواجدون الآن 🟢</div>
-                        <div class="stat-num">184</div>
+                    <div class="admin-stat-card">
+                        <div style="font-size: 11px; color: #6b7280; font-weight: 700;">المتواجدون الآن 🟢</div>
+                        <div class="admin-stat-num" id="adminOnlineUsers">184</div>
                     </div>
+                    <div class="admin-stat-card">
+                        <div style="font-size: 11px; color: #6b7280; font-weight: 700;">أرباح المنصة (50%)</div>
+                        <div class="admin-stat-num" id="adminPlatformRevenue" style="color: #047857;">4,850 pt</div>
+                    </div>
+                    <div class="admin-stat-card">
+                        <div style="font-size: 11px; color: #6b7280; font-weight: 700;">الأعضاء المتفاعلون</div>
+                        <div class="admin-stat-num" id="adminActiveUsersCount" style="color: #0284c7;">312</div>
+                    </div>
+                </div>
+
+                <!-- قائمة الأعضاء المتفاعلين والمتواجدين -->
+                <div style="margin-top: 15px;">
+                    <h4 style="font-size: 14px; font-weight: 800; color: #be185d; margin-bottom: 8px;">👥 الأعضاء النشطون والمتواجدون الآن</h4>
+                    <div id="activeMembersListContainer">
+                        <div class="member-row">
+                            <span><b>جاسم العراقي</b> (#AEG-84920)</span>
+                            <span style="color: #10b981; font-weight: 700;">متواجد 🟢</span>
+                        </div>
+                        <div class="member-row">
+                            <span><b>سارة أحمد</b> (#AEG-91234)</span>
+                            <span style="color: #10b981; font-weight: 700;">متواجد 🟢</span>
+                        </div>
+                        <div class="member-row">
+                            <span><b>محمد الرفاعي</b> (#AEG-10492)</span>
+                            <span style="color: #6b7280; font-weight: 700;">متفاعل بالأمس</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- حقل دعم الأعضاء بالجواهر المفتوحة (غير المحددة) -->
+                <div class="support-diamond-box">
+                    <h4 style="font-size: 14px; font-weight: 800; color: #0369a1; margin-bottom: 6px;">💎 حقل دعم الأعضاء الاستثنائي (أرقام مفتوحة)</h4>
+                    <p style="font-size: 11px; color: #0c4a6e; margin-bottom: 10px;">أدخل اسم أو معرف المشترك وكمية الجواهر المفتوحة لدعمه مباشرة:</p>
+                    <input type="text" id="supportMemberTarget" class="form-input" placeholder="اسم أو معرف المشترك (مثال: جاسم)..." style="border-color: #bae6fd;">
+                    <input type="number" id="supportDiamondAmount" class="form-input" placeholder="أدخل عدد الجواهر المفتوحة (مثال: 500 أو 5000)..." style="border-color: #bae6fd;">
+                    <button class="btn btn-warning" onclick="adminSupportMemberWithDiamonds()" style="margin-top: 4px; padding: 10px; font-size: 13px;">إرسال الدعم المباشر للأعضاء 🚀</button>
                 </div>
             </div>
         </div>
@@ -483,6 +522,7 @@
         let appData = {
             balance: 1315,
             diamonds: 35,
+            platformRevenue: 4850,
             userName: "جاسم العراقي",
             userPhone: "+964 780 000 0000",
             hasFreeSpinToday: true,
@@ -520,7 +560,6 @@
         let supportAgents = ["أحمد (الدعم الفني والتوثيق)", "ساره (خدمة الأمان والمشتركين)"];
         let modalCallback = null;
 
-        // إعدادات خيارات الفيديوهات والمواقع المربحة مع وقت مشاهدة تلقائي وتقاسم الأرباح 50/50
         const videoOptionsData = [
             { title: "مقدمة في تطوير التطبيقات السحابية", duration: 15, reward: 30, url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
             { title: "موقع ترويج رقمي مدفوع (CPA)", duration: 30, reward: 60, url: "https://www.youtube.com/embed/3JZ_D3ELwOQ" },
@@ -576,34 +615,13 @@
             
             document.getElementById('profilePhoneDisplay').innerText = `📱 ${appData.userPhone}`;
             
+            // تحديث لوحة الإدارة
+            document.getElementById('adminPlatformRevenue').innerText = appData.platformRevenue.toLocaleString() + ' pt';
+
             renderCustomProducts();
-
-            let dailyBtn = document.getElementById('dailyRewardBtn');
-            let dailySub = document.getElementById('dailySubtitle');
-            if (appData.lastDailyClaimDate) {
-                let lastClaim = new Date(appData.lastDailyClaimDate);
-                let now = new Date();
-                let diffHours = (now - lastClaim) / (1000 * 60 * 60);
-                if (diffHours < 24) {
-                    let remainingHours = Math.ceil(24 - diffHours);
-                    dailyBtn.disabled = true;
-                    dailyBtn.innerText = "تم استلام المكافأة اليوم (متاحة لاحقاً) ⏳";
-                    dailySub.innerText = `متبقي حوالي ${remainingHours} ساعة لاستلام المكافأة القادمة`;
-                } else {
-                    dailyBtn.disabled = false;
-                    dailyBtn.innerText = "استلام المكافأة ⭐";
-                    dailySub.innerText = "50 نقطة + 2 جوهرة مجاناً كل 24 ساعة";
-                }
-            } else {
-                dailyBtn.disabled = false;
-                dailyBtn.innerText = "استلام المكافأة ⭐";
-                dailySub.innerText = "50 نقطة + 2 جوهرة مجاناً كل 24 ساعة";
-            }
-
             saveAppData();
         }
 
-        // اختيار فيديو أو موقع وبدء العد التنازلي للمشاهدة فوراً بشكل متزامن
         function selectVideoOption(index, element) {
             document.querySelectorAll('.video-option-card').forEach(card => card.classList.remove('selected'));
             element.classList.add('selected');
@@ -614,7 +632,6 @@
             document.getElementById('activeVideoFrame').src = vData.url;
             document.getElementById('claimVideoBtn').style.display = 'none';
 
-            // تشغيل العداد التنازلي تلقائياً عند الاختيار
             startAutomaticVideoTimer(vData.duration);
         }
 
@@ -637,7 +654,6 @@
             }, 1000);
         }
 
-        // استلام المكافأة وتقسيم الأرباح بالتساوي (50% للمشترك و 50% للمنصة)
         function claimVideoRewardWithSplit() {
             let vData = videoOptionsData[currentSelectedVideoIndex];
             let totalReward = vData.reward;
@@ -645,6 +661,7 @@
             let ownerShare = totalReward - userShare; // 50% للمنصة
 
             appData.balance += userShare;
+            appData.platformRevenue += ownerShare;
             updateUI();
 
             showAlert(
@@ -654,11 +671,35 @@
             );
 
             document.getElementById('claimVideoBtn').style.display = 'none';
-            // إعادة تفعيل العد التنازلي تلقائياً للمشاهدة التالية إذا رغب المستخدم
             startAutomaticVideoTimer(vData.duration);
         }
 
-        // التبديل بين أبواب المتجر
+        // دعم الأعضاء بحقل الجواهر المفتوحة من لوحة الإدارة
+        function adminSupportMemberWithDiamonds() {
+            let targetName = document.getElementById('supportMemberTarget').value.trim();
+            let diamondAmount = Number(document.getElementById('supportDiamondAmount').value);
+
+            if (!targetName || !diamondAmount || diamondAmount <= 0) {
+                showAlert("تنبيه الإدارة", "يرجى كتابة اسم أو معرف المشترك وتحديد كمية جواهر صحيحة.", "⚠️");
+                return;
+            }
+
+            // إذا كان المستهدف هو المستخدم الحالي، قم بزيادة جواهره مباشرة
+            if (targetName.includes(appData.userName) || targetName.includes("جاسم")) {
+                appData.diamonds += diamondAmount;
+                updateUI();
+            }
+
+            showAlert(
+                "تم إرسال الدعم بنجاح! 💎", 
+                `تمت عملية الدعم الاستثنائي بنجاح:\n\n• المشترك: ${targetName}\n• كمية الجواهر المفتوحة: +${diamondAmount.toLocaleString()} 💎\n\nتم تحديث الأرصدة وسجلات المنصة فوريًا!`, 
+                "🚀"
+            );
+
+            document.getElementById('supportMemberTarget').value = '';
+            document.getElementById('supportDiamondAmount').value = '';
+        }
+
         function switchStoreDoor(doorId, btnElement) {
             document.querySelectorAll('.door-section').forEach(sec => sec.classList.remove('active'));
             document.querySelectorAll('.store-door-tab').forEach(t => t.classList.remove('active'));
@@ -666,7 +707,6 @@
             btnElement.classList.add('active');
         }
 
-        // رفع منتج جديد مع صورة وسعر وتوجيهه للباب المحدد
         function addNewProductToStore() {
             let door = document.getElementById('newProductDoor').value;
             let name = document.getElementById('newProductName').value.trim();
@@ -804,7 +844,6 @@
             btnElement.classList.add('active');
             if(tabName === 'wheel') drawWheel();
             if(tabName === 'videos') {
-                // بدء العداد التنازلي تلقائياً عند فتح تبويب الفيديوهات
                 startAutomaticVideoTimer(videoOptionsData[currentSelectedVideoIndex].duration);
             } else {
                 if (videoTimerInterval) clearInterval(videoTimerInterval);
@@ -974,7 +1013,7 @@
 
         drawWheel();
         updateUI();
-        startAutomaticVideoTimer(videoOptionsData[0].duration);
+        startAutomaticVideoTimer(videoOptionsData[currentSelectedVideoIndex].duration);
     </script>
 </body>
 </html>
