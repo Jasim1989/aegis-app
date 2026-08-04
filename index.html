@@ -61,17 +61,19 @@
         .store-price { font-size: 12px; color: #be185d; font-weight: 700; margin-bottom: 8px; background: #fdf2f8; padding: 4px; border-radius: 6px; }
         .buy-btn { background: #fdf2f8; color: #be185d; border: 1px solid #fbcfe8; padding: 6px; width: 100%; border-radius: 8px; font-size: 12px; font-weight: 800; cursor: pointer; }
         
-        /* نموذج إضافة منتج جديد */
         .add-product-box { background: #fdf2f8; border: 2px dashed #fbcfe8; border-radius: 18px; padding: 16px; margin-top: 20px; }
         .form-input { width: 100%; padding: 10px; border: 1px solid #fbcfe8; border-radius: 10px; margin-bottom: 10px; font-size: 13px; outline: none; background: #fff; }
 
-        /* Videos Section */
+        /* Videos Section Updated Styles */
+        .video-options-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; }
+        .video-option-card { background: #f9fafb; border: 2px solid #fce7f3; border-radius: 16px; padding: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.2s; }
+        .video-option-card.selected { border-color: #be185d; background: #fdf2f8; }
         .video-card { background: #fff; border: 1px solid #fce7f3; border-radius: 16px; overflow: hidden; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(236,72,153,0.05); }
         .video-container { position: relative; width: 100%; padding-top: 56.25%; background: #000; }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-        .video-info { padding: 12px; display: flex; justify-content: space-between; align-items: center; }
-        .video-title { font-size: 13px; font-weight: 800; color: #1f2937; }
-        .watch-reward-btn { background: #10b981; color: #fff; border: none; padding: 6px 12px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer; }
+        .video-info { padding: 14px; text-align: center; }
+        .timer-display { font-size: 16px; font-weight: 800; color: #be185d; margin: 10px 0; background: #fdf2f8; padding: 8px; border-radius: 10px; border: 1px solid #fbcfe8; }
+        .revenue-share-badge { font-size: 11px; background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; padding: 4px 8px; border-radius: 6px; display: inline-block; margin-top: 6px; font-weight: 700; }
 
         /* Chat Rooms */
         .chat-container { display: flex; flex-direction: column; height: 350px; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 16px; overflow: hidden; margin-top: 15px; }
@@ -217,33 +219,59 @@
             </div>
         </div>
 
-        <!-- الفيديوهات -->
+        <!-- قسم مشاهدة الفيديوهات المطور (خيارات، عداد زمني، وتقاسم الأرباح) -->
         <div id="videos-section" class="section">
             <div class="card" style="padding: 16px;">
-                <h3 style="color: #be185d; font-size: 17px; font-weight: 800; text-align: center; margin-bottom: 6px;">🎬 قسم مشاهدة الفيديوهات</h3>
-                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;">شاهد الفيديوهات واكسب النقاط الفورية لحسابك 🎁</p>
+                <h3 style="color: #be185d; font-size: 17px; font-weight: 800; text-align: center; margin-bottom: 6px;">🎬 قسم مشاهدة الفيديوهات والمواقع المربحة</h3>
+                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;">اختر مقطعاً أو موقعاً، أكمل وقت المشاهدة، واحصل على أرباحك المقسمة تلقائياً! 🎁</p>
+                
+                <!-- خيارات الفيديوهات والمواقع المتاحة -->
+                <div class="video-options-list" id="videoOptionsList">
+                    <div class="video-option-card selected" onclick="selectVideoOption(0, this)">
+                        <div>
+                            <div style="font-size: 13px; font-weight: 800;">🎥 فيديو: مقدمة التطبيقات السحابية</div>
+                            <div style="font-size: 11px; color: #6b7280; margin-top: 2px;">المدة: 15 ثانية | المكافأة: 30 نقطة</div>
+                        </div>
+                        <span style="font-size: 12px; font-weight: 800; color: #be185d;">اختر</span>
+                    </div>
+                    <div class="video-option-card" onclick="selectVideoOption(1, this)">
+                        <div>
+                            <div style="font-size: 13px; font-weight: 800;">🌐 موقع ترويج رقمي مدفوع (CPA)</div>
+                            <div style="font-size: 11px; color: #6b7280; margin-top: 2px;">المدة: 30 ثانية | المكافأة: 60 نقطة</div>
+                        </div>
+                        <span style="font-size: 12px; font-weight: 800; color: #be185d;">اختر</span>
+                    </div>
+                    <div class="video-option-card" onclick="selectVideoOption(2, this)">
+                        <div>
+                            <div style="font-size: 13px; font-weight: 800;">💎 فيديو: أسرار العملات الرقمية</div>
+                            <div style="font-size: 11px; color: #6b7280; margin-top: 2px;">المدة: 20 ثانية | المكافأة: 45 نقطة</div>
+                        </div>
+                        <span style="font-size: 12px; font-weight: 800; color: #be185d;">اختر</span>
+                    </div>
+                </div>
+
+                <!-- مشغل الفيديو والعداد التنازلي -->
                 <div class="video-card">
                     <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                        <iframe id="activeVideoFrame" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
                     </div>
                     <div class="video-info">
-                        <div>
-                            <div class="video-title">مقدمة في تطوير التطبيقات السحابية</div>
-                            <div style="font-size: 11px; color: #10b981; font-weight: 700; margin-top: 2px;">المكافأة: +30 نقطة 🎁</div>
-                        </div>
-                        <button class="watch-reward-btn" onclick="claimVideoReward(30)">استلام المكافأة</button>
+                        <div id="activeVideoTitle" style="font-size: 13px; font-weight: 800; color: #1f2937;">مقدمة في تطوير التطبيقات السحابية</div>
+                        <div class="timer-display" id="videoTimerDisplay">⏳ يرجى البدء للمشاهدة (15 ثانية)</div>
+                        <div class="revenue-share-badge" id="revenueShareText">📊 تقاسم الأرباح: 70% للمشترك | 30% للمنصة</div>
+                        <button class="btn btn-primary" id="startWatchBtn" onclick="startVideoTimer()" style="margin-top: 10px;">بدء المشاهدة وبدء العداد ⏱️</button>
+                        <button class="btn btn-success" id="claimVideoBtn" onclick="claimVideoRewardWithSplit()" style="margin-top: 8px; display:none;">استلام المكافأة المقسمة ⭐</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- المتجر الرقمي المتعدد الأبواب ومع رفع المنتجات -->
+        <!-- المتجر الرقمي متعدد الأبواب ومع رفع المنتجات -->
         <div id="store-section" class="section">
             <div class="card" style="padding: 16px;">
                 <h3 style="color: #be185d; margin-bottom: 4px; font-size: 17px; text-align: center; font-weight: 800;">🛍️ المتجر الرقمي متعدد الأبواب</h3>
                 <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 12px;">تصفح الأبواب المختلفة أو أضف منتجك الخاص مع صورة وسعر</p>
                 
-                <!-- أزرار تبديل الأبواب -->
                 <div class="store-doors-tabs">
                     <button class="store-door-tab active" onclick="switchStoreDoor('door1', this)">💎 باب الجواهر</button>
                     <button class="store-door-tab" onclick="switchStoreDoor('door2', this)">🚀 الخدمات الرقمية</button>
@@ -251,7 +279,6 @@
                     <button class="store-door-tab" onclick="switchStoreDoor('doorCustom', this)">✨ باب الأعضاء</button>
                 </div>
 
-                <!-- محتوى الأبواب -->
                 <div id="door1" class="door-section active">
                     <div class="store-grid">
                         <div class="store-item">
@@ -300,12 +327,9 @@
                 </div>
 
                 <div id="doorCustom" class="door-section">
-                    <div class="store-grid" id="grid-doorCustom">
-                        <!-- المنتجات المضافة بواسطة المستخدم ستظهر هنا -->
-                    </div>
+                    <div class="store-grid" id="grid-doorCustom"></div>
                 </div>
 
-                <!-- نموذج رفع منتج جديد مع صورة وسعر -->
                 <div class="add-product-box">
                     <h4 style="font-size: 14px; font-weight: 800; color: #be185d; margin-bottom: 8px;">➕ إضافة منتج جديد لمتجرك</h4>
                     <select id="newProductDoor" class="form-input">
@@ -464,17 +488,15 @@
             userPhone: "+964 780 000 0000",
             hasFreeSpinToday: true,
             lastDailyClaimDate: null,
-            customProducts: [] // لتخزين المنتجات المضافة مع الصور
+            customProducts: []
         };
 
-        // دالة الحفظ الشاملة لجميع بيانات التطبيق
         function saveAppData() {
             try {
                 localStorage.setItem(SECURITY_KEY, btoa(JSON.stringify(appData)));
             } catch(e) {}
         }
 
-        // استرجاع كافة البيانات والاسم عند فتح التطبيق وتحديث الواجهة
         function loadAppData() {
             try {
                 let saved = localStorage.getItem(SECURITY_KEY);
@@ -498,6 +520,16 @@
         const minWithdrawPoints = 10000;
         let supportAgents = ["أحمد (الدعم الفني والتوثيق)", "ساره (خدمة الأمان والمشتركين)"];
         let modalCallback = null;
+
+        // إعدادات خيارات الفيديوهات والمواقع المربحة مع وقت ومشاهدة وتقاسم الأرباح
+        const videoOptionsData = [
+            { title: "مقدمة في تطوير التطبيقات السحابية", duration: 15, reward: 30, url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+            { title: "موقع ترويج رقمي مدفوع (CPA)", duration: 30, reward: 60, url: "https://www.youtube.com/embed/3JZ_D3ELwOQ" },
+            { title: "أسرار التداول والعملات الرقمية", duration: 20, reward: 45, url: "https://www.youtube.com/embed/kJQP7kiw5Fk" }
+        ];
+        let currentSelectedVideoIndex = 0;
+        let videoTimerInterval = null;
+        let timeLeft = 0;
 
         function showAlert(title, text, icon) {
             document.getElementById('modalTitle').innerText = title;
@@ -547,7 +579,6 @@
             
             renderCustomProducts();
 
-            // التحقق الدقيق من حالة المكافأة اليومية
             let dailyBtn = document.getElementById('dailyRewardBtn');
             let dailySub = document.getElementById('dailySubtitle');
             if (appData.lastDailyClaimDate) {
@@ -571,6 +602,72 @@
             }
 
             saveAppData();
+        }
+
+        // اختيار فيديو أو موقع من القائمة المحدثة
+        function selectVideoOption(index, element) {
+            document.querySelectorAll('.video-option-card').forEach(card => card.classList.remove('selected'));
+            element.classList.add('selected');
+            currentSelectedVideoIndex = index;
+            let vData = videoOptionsData[index];
+
+            document.getElementById('activeVideoTitle').innerText = vData.title;
+            document.getElementById('activeVideoFrame').src = vData.url;
+            document.getElementById('timer-display') || (document.getElementById('videoTimerDisplay').innerText = `⏳ يرجى البدء للمشاهدة (${vData.duration} ثانية)`);
+            document.getElementById('startWatchBtn').style.display = 'block';
+            document.getElementById('claimVideoBtn').style.display = 'none';
+
+            if (videoTimerInterval) clearInterval(videoTimerInterval);
+        }
+
+        // بدء العداد التنازلي للمشاهدة
+        function startVideoTimer() {
+            let vData = videoOptionsData[currentSelectedVideoIndex];
+            timeLeft = vData.duration;
+            let startBtn = document.getElementById('startWatchBtn');
+            let timerDisp = document.getElementById('videoTimerDisplay');
+            let claimBtn = document.getElementById('claimVideoBtn');
+
+            startBtn.disabled = true;
+            startBtn.innerText = "جاري احتساب وقت المشاهدة... ⏱️";
+
+            if (videoTimerInterval) clearInterval(videoTimerInterval);
+
+            videoTimerInterval = setInterval(() => {
+                timeLeft--;
+                timerDisp.innerText = `⏳ متبقي على انتهاء المشاهدة: ${timeLeft} ثانية`;
+                if (timeLeft <= 0) {
+                    clearInterval(videoTimerInterval);
+                    timerDisp.innerText = "✅ اكتملت المشاهدة بنجاح!";
+                    startBtn.style.display = 'none';
+                    claimBtn.style.display = 'block';
+                }
+            }, 1000);
+        }
+
+        // استلام المكافأة وتقسيم الأرباح بين المشترك (70%) ومالك التطبيق (30%)
+        function claimVideoRewardWithSplit() {
+            let vData = videoOptionsData[currentSelectedVideoIndex];
+            let totalReward = vData.reward;
+            let userShare = Math.round(totalReward * 0.70); // 70% للمشترك
+            let ownerShare = totalReward - userShare; // 30% لمالك التطبيق
+
+            appData.balance += userShare;
+            updateUI();
+
+            showAlert(
+                "نجاح تقاسم الأرباح! 💰", 
+                `تمت إضافتك لأرباح المشاهدة بنجاح:\n\n• حصتك (70%): +${userShare} نقطة\n• حصة المنصة (30%): +${ownerShare} نقطة\n\nشكراً لتفاعلكم المستمر! ✨`, 
+                "🎉"
+            );
+
+            // إعادة تعيين أزرار القسم
+            let startBtn = document.getElementById('startWatchBtn');
+            startBtn.disabled = false;
+            startBtn.innerText = "بدء المشاهدة وبدء العداد ⏱️";
+            startBtn.style.display = 'block';
+            document.getElementById('claimVideoBtn').style.display = 'none';
+            document.getElementById('videoTimerDisplay').innerText = `⏳ يرجى البدء للمشاهدة (${vData.duration} ثانية)`;
         }
 
         // التبديل بين أبواب المتجر
@@ -601,7 +698,6 @@
                     saveAppData();
                     updateUI();
                     
-                    // إعادة تعيين الحقول
                     document.getElementById('newProductName').value = '';
                     document.getElementById('newProductPrice').value = '';
                     imageInput.value = '';
@@ -613,13 +709,11 @@
             }
         }
 
-        // عرض المنتجات المضافة في أبوابها
         function renderCustomProducts() {
             let door2Grid = document.getElementById('grid-door2');
             let door3Grid = document.getElementById('grid-door3');
             let doorCustomGrid = document.getElementById('grid-doorCustom');
 
-            // الاحتفاظ بالمنتجات الافتراضية وإضافة المرفوعة
             let defaultDoor2 = `
                 <div class="store-item">
                     <div>
@@ -669,7 +763,6 @@
             }
         }
 
-        // دالة استلام المكافأة اليومية
         function claimDaily() {
             if (appData.lastDailyClaimDate) {
                 let lastClaim = new Date(appData.lastDailyClaimDate);
@@ -735,12 +828,6 @@
             let link = document.getElementById('inviteLinkInput').value;
             let text = encodeURIComponent(`انضم إلي الآن في منصة Aegis Cash واكسب النقاط والجواهر مجاناً عبر هذا الرابط: ${link}`);
             window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
-        }
-
-        function claimVideoReward(points) {
-            appData.balance += points;
-            updateUI();
-            showAlert("مبروك! 🎉", `تمت إضافة ${points} نقطة بنجاح إلى رصيدك بعد إتمام المشاهدة!`, "🎬");
         }
 
         function openDepositModal() {
