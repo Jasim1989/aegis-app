@@ -1,278 +1,1013 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" id="htmlRoot">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aegis Cash | عجلة صناديق الهدايا</title>
+    <title>Aegis Cash - لوحة إدارة التطبيق الشاملة (حفظ كامل)</title>
     <style>
-        :root {
-            --primary-pink: #e91e63;
-            --light-pink: #fce4ec;
-            --white: #ffffff;
-            --gray-text: #666;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tajawal', sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background-color: #fdf2f8; color: #1f2937; padding-bottom: 110px; }
+        
+        /* شريط الإعلانات المتحرك */
+        .ticker-wrap { background: linear-gradient(135deg, #be185d, #ec4899); color: #fff; padding: 8px 12px; font-size: 13px; font-weight: 700; overflow: hidden; white-space: nowrap; position: sticky; top: 0; z-index: 101; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .ticker-content { display: inline-block; animation: marquee 25s linear infinite; }
+        @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Tahoma', sans-serif;
-            background-color: var(--light-pink);
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+        /* Header */
+        header { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(251, 207, 232, 0.5); position: sticky; top: 36px; z-index: 100; box-shadow: 0 4px 6px -1px rgba(236, 72, 153, 0.05); }
+        .logo { font-size: 18px; font-weight: 800; background: linear-gradient(135deg, #ec4899, #be185d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .header-controls { display: flex; gap: 8px; align-items: center; }
+        .lang-select { background: #fdf2f8; color: #be185d; border: 1px solid #fbcfe8; padding: 5px 8px; border-radius: 8px; font-weight: 700; font-size: 12px; cursor: pointer; }
+        .logout-btn { background: #fff1f2; color: #e11d48; border: 1px solid #fecdd3; padding: 5px 12px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 700; }
 
-        .top-banner {
-            background-color: var(--primary-pink);
-            color: var(--white);
-            padding: 10px 15px;
-            text-align: center;
-            font-size: 14px;
-            font-weight: bold;
-        }
+        .container { padding: 20px; max-width: 480px; margin: 0 auto; }
+        .card { background: #ffffff; border: 1px solid rgba(252, 231, 243, 0.8); border-radius: 24px; padding: 24px; margin-bottom: 20px; box-shadow: 0 10px 30px -5px rgba(236, 72, 153, 0.1); }
+        .security-banner { background: linear-gradient(to left, #f0fdf4, #dcfce7); border: 1px solid #bbf7d0; border-radius: 16px; padding: 12px; text-align: center; font-size: 13px; color: #15803d; font-weight: 700; margin-bottom: 20px; }
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            background: var(--white);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
+        /* تصميم الإعلان المدفوع */
+        .sponsored-ad-card { background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 1.5px solid #f59e0b; border-radius: 18px; padding: 16px; margin-bottom: 20px; position: relative; box-shadow: 0 6px 15px rgba(245, 158, 11, 0.15); }
+        .ad-badge { position: absolute; top: -10px; left: 15px; background: #f59e0b; color: #fff; font-size: 10px; font-weight: 800; padding: 3px 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .ad-title { font-size: 14px; font-weight: 800; color: #92400e; margin-bottom: 4px; }
+        .ad-desc { font-size: 12px; color: #78350f; margin-bottom: 10px; line-height: 1.4; }
+        .ad-action-btn { background: #d97706; color: #fff; border: none; padding: 8px 14px; border-radius: 10px; font-size: 12px; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-block; }
 
-        .logo-area {
-            color: var(--primary-pink);
-            font-size: 20px;
-            font-weight: bold;
-        }
+        .balance-title { color: #6b7280; font-size: 14px; font-weight: 500; }
+        .balance-box { font-size: 34px; font-weight: 800; color: #be185d; margin: 8px 0; }
+        .currencies-row { display: flex; justify-content: center; gap: 12px; margin-bottom: 16px; }
+        .currency-badge { padding: 8px 16px; border-radius: 12px; font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+        .usd-value { color: #047857; background: #d1fae5; border: 1px solid #a7f3d0; }
+        .diamond-value { color: #0369a1; background: #e0f2fe; border: 1px solid #bae6fd; }
 
-        .main-container {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            margin-bottom: 70px;
-        }
+        .btn { border: none; padding: 14px; width: 100%; font-size: 15px; font-weight: 700; border-radius: 14px; cursor: pointer; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; }
+        .btn:active { transform: scale(0.97); }
+        .btn-primary { background: linear-gradient(135deg, #ec4899, #be185d); color: #fff; box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3); margin-top: 10px; }
+        .btn-secondary { background: linear-gradient(135deg, #0284c7, #0369a1); color: #fff; box-shadow: 0 8px 20px rgba(2, 132, 199, 0.2); margin-top: 10px; }
+        .btn-success { background: linear-gradient(135deg, #10b981, #047857); color: #fff; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2); margin-top: 10px; }
+        .btn-warning { background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; box-shadow: 0 8px 20px rgba(245, 158, 11, 0.2); margin-top: 10px; }
+        .btn:disabled { background: #d1d5db !important; color: #9ca3af !important; box-shadow: none !important; cursor: not-allowed !important; transform: none !important; opacity: 0.7; }
 
-        .card {
-            background: var(--white);
-            border-radius: 20px;
-            padding: 25px;
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(233, 30, 99, 0.1);
-        }
+        /* Store Multi-Doors Styles */
+        .store-doors-tabs { display: flex; gap: 6px; margin-bottom: 15px; overflow-x: auto; padding-bottom: 5px; }
+        .store-door-tab { background: #fdf2f8; border: 1px solid #fbcfe8; color: #be185d; padding: 6px 12px; border-radius: 10px; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+        .store-door-tab.active { background: #be185d; color: #fff; border-color: #be185d; }
+        
+        .door-section { display: none; }
+        .door-section.active { display: block; }
 
-        .card-title {
-            color: var(--primary-pink);
-            font-size: 18px;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
+        .store-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 10px; }
+        .store-item { background: #fff; border: 2px solid #fce7f3; border-radius: 20px; padding: 12px; text-align: center; position: relative; display: flex; flex-direction: column; justify-content: space-between; }
+        .store-img { width: 100%; height: 110px; object-fit: cover; border-radius: 12px; margin-bottom: 8px; background: #f9fafb; border: 1px solid #f3f4f6; }
+        .store-title { font-size: 13px; font-weight: 800; color: #1f2937; margin-bottom: 4px; }
+        .store-price { font-size: 12px; color: #be185d; font-weight: 700; margin-bottom: 8px; background: #fdf2f8; padding: 4px; border-radius: 6px; }
+        .buy-btn { background: #fdf2f8; color: #be185d; border: 1px solid #fbcfe8; padding: 6px; width: 100%; border-radius: 8px; font-size: 12px; font-weight: 800; cursor: pointer; }
+        
+        .add-product-box { background: #fdf2f8; border: 2px dashed #fbcfe8; border-radius: 18px; padding: 16px; margin-top: 20px; }
+        .form-input { width: 100%; padding: 10px; border: 1px solid #fbcfe8; border-radius: 10px; margin-bottom: 10px; font-size: 13px; outline: none; background: #fff; }
 
-        .card-subtitle {
-            color: var(--gray-text);
-            font-size: 13px;
-            margin-bottom: 20px;
-        }
+        /* Videos Section Styles */
+        .video-options-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; }
+        .video-option-card { background: #f9fafb; border: 2px solid #fce7f3; border-radius: 16px; padding: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.2s; }
+        .video-option-card.selected { border-color: #be185d; background: #fdf2f8; }
+        .video-card { background: #fff; border: 1px solid #fce7f3; border-radius: 16px; overflow: hidden; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(236,72,153,0.05); }
+        .video-container { position: relative; width: 100%; padding-top: 56.25%; background: #000; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        .video-info { padding: 14px; text-align: center; }
+        .timer-display { font-size: 16px; font-weight: 800; color: #be185d; margin: 10px 0; background: #fdf2f8; padding: 8px; border-radius: 10px; border: 1px solid #fbcfe8; }
+        .revenue-share-badge { font-size: 11px; background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; padding: 4px 8px; border-radius: 6px; display: inline-block; margin-top: 6px; font-weight: 700; }
 
-        .wheel-wrapper {
-            position: relative;
-            width: 280px;
-            height: 280px;
-            margin: 0 auto 20px auto;
-        }
+        /* Chat Rooms */
+        .chat-container { display: flex; flex-direction: column; height: 350px; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 16px; overflow: hidden; margin-top: 15px; }
+        .chat-tabs { display: flex; background: #f3f4f6; border-bottom: 1px solid #e5e7eb; }
+        .chat-tab { flex: 1; padding: 10px; text-align: center; font-size: 12px; font-weight: 700; background: none; border: none; cursor: pointer; color: #6b7280; }
+        .chat-tab.active { background: #fff; color: #be185d; border-bottom: 2px solid #be185d; }
+        .chat-messages { flex: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
+        .chat-msg { background: #fff; padding: 8px 12px; border-radius: 12px; font-size: 12px; border: 1px solid #fce7f3; max-width: 85%; }
+        .chat-msg.mine { background: #fdf2f8; align-self: flex-end; border-color: #fbcfe8; }
+        .chat-msg.support-badge { border-color: #10b981; background: #ecfdf5; }
+        .chat-input-area { display: flex; padding: 10px; background: #fff; border-top: 1px solid #e5e7eb; gap: 8px; }
+        .chat-input { flex: 1; padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 10px; outline: none; font-size: 13px; }
+        .chat-send-btn { background: #be185d; color: #fff; border: none; padding: 0 16px; border-radius: 10px; font-weight: 700; cursor: pointer; }
 
-        .wheel {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 6px solid var(--primary-pink);
-            position: relative;
-            overflow: hidden;
-            background: #fff;
-            transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
-        }
+        /* Admin Pro Styles */
+        .admin-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+        .admin-stat-card { background: #f9fafb; border: 1px solid #e5e7eb; padding: 14px; border-radius: 16px; text-align: center; }
+        .admin-stat-num { font-size: 20px; font-weight: 800; color: #be185d; margin-top: 4px; }
+        .member-row { display: flex; justify-content: space-between; align-items: center; background: #fdf2f8; padding: 10px 14px; border-radius: 12px; margin-bottom: 8px; border: 1px solid #fbcfe8; font-size: 13px; }
+        .support-diamond-box { background: linear-gradient(135deg, #e0f2fe, #bae6fd); border: 2px solid #0284c7; border-radius: 18px; padding: 16px; margin-top: 15px; }
 
-        .wheel svg {
-            width: 100%;
-            height: 100%;
-        }
+        /* Profile */
+        .profile-avatar { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid #ec4899; margin: 0 auto 12px auto; display: block; box-shadow: 0 5px 15px rgba(236,72,153,0.3); }
+        .profile-info-group { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 12px 16px; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
 
-        .wheel-center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 50px;
-            height: 50px;
-            background: var(--primary-pink);
-            border-radius: 50%;
-            color: var(--white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: bold;
-            z-index: 10;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
-        }
+        /* Navigation */
+        .nav-bar-wrapper { position: fixed; bottom: 15px; left: 0; width: 100%; padding: 0 10px; z-index: 100; pointer-events: none; }
+        .nav-bar { pointer-events: auto; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(251, 207, 232, 0.8); display: flex; justify-content: space-around; align-items: center; padding: 8px 2px; border-radius: 24px; box-shadow: 0 15px 35px rgba(236, 72, 153, 0.15); max-width: 480px; margin: 0 auto; }
+        .nav-item { background: none; border: none; color: #9ca3af; font-size: 9px; font-weight: 700; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px; transition: all 0.3s ease; flex: 1; position: relative; padding: 4px 0; }
+        .nav-item span.icon { font-size: 16px; transition: transform 0.3s; }
+        .nav-item.active { color: #be185d; }
+        .nav-item.active span.icon { transform: translateY(-3px) scale(1.1); }
+        .nav-item.active::after { content: ''; position: absolute; bottom: 0; width: 12px; height: 3px; background: #be185d; border-radius: 3px; }
 
-        .spin-btn {
-            background: var(--primary-pink);
-            color: var(--white);
-            border: none;
-            padding: 12px 30px;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 30px;
-            cursor: pointer;
-            width: 100%;
-            box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
-            transition: background 0.2s;
-        }
+        .section { display: none; animation: fadeIn 0.4s ease; }
+        .section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .spin-btn:hover {
-            background: #d81b60;
-        }
+        /* Modal */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(17, 24, 39, 0.6); backdrop-filter: blur(4px); z-index: 1000; display: none; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s; }
+        .modal-box { background: #fff; width: 90%; max-width: 340px; border-radius: 24px; padding: 24px; text-align: center; transform: scale(0.9); transition: transform 0.3s; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+        .modal-overlay.show { display: flex; opacity: 1; }
+        .modal-overlay.show .modal-box { transform: scale(1); }
 
-        /* شريط المهام السفلي */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: var(--white);
-            display: flex;
-            justify-content: space-around;
-            padding: 8px 5px;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
-            z-index: 100;
-        }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: var(--gray-text);
-            font-size: 11px;
-        }
-
-        .nav-item.active {
-            color: var(--primary-pink);
-        }
-
-        .nav-icon {
-            font-size: 20px;
-            margin-bottom: 3px;
-        }
+        /* Wheel */
+        .wheel-outer-wrapper { position: relative; width: 240px; height: 240px; margin: 0 auto 15px auto; display: flex; justify-content: center; align-items: center; }
+        .wheel-border-glow { position: absolute; width: 100%; height: 100%; border-radius: 50%; background: conic-gradient(#f472b6, #be185d, #fbcfe8, #f472b6); padding: 4px; box-shadow: 0 0 25px rgba(236, 72, 153, 0.3); }
+        .wheel-inner-container { position: relative; width: 100%; height: 100%; border-radius: 50%; background: #fff; overflow: hidden; }
+        #wheelPointer { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-bottom: 26px solid #be185d; z-index: 20; }
+        #luckyWheel { width: 100%; height: 100%; border-radius: 50%; }
+        .wheel-center-hub { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 45px; height: 45px; background: radial-gradient(circle, #f472b6, #be185d); border-radius: 50%; border: 3px solid #fff; z-index: 10; display: flex; justify-content: center; align-items: center; font-weight: 800; font-size: 9px; color: #fff; }
     </style>
 </head>
 <body>
 
-    <div class="top-banner">
-        🌸 أهلاً بكم في Aegis Cash! | عجلة صناديق 🌸
+    <!-- شريط الإعلانات المتحرك -->
+    <div class="ticker-wrap">
+        <div class="ticker-content">
+            🌸 أهلاً بكم في Aegis Cash! | لوحة الإدارة الفورية ومتتبع الأرباح (50/50) وحقل الدعم المفتوح بالأسفل 💎
+        </div>
     </div>
 
-    <header class="header">
-        <div class="logo-area">Aegis Cash 🌸</div>
-        <div>
-            <button style="background:none; border:1px solid #e91e63; color:#e91e63; padding:5px 15px; border-radius:15px; cursor:pointer;">خروج</button>
+    <!-- Modal مخصص -->
+    <div class="modal-overlay" id="customModal">
+        <div class="modal-box">
+            <div id="modalIcon" style="font-size: 36px; margin-bottom: 10px;">✨</div>
+            <h3 id="modalTitle" style="font-size: 17px; font-weight: 800; margin-bottom: 6px;">تنبيه</h3>
+            <p id="modalText" style="font-size: 13px; color: #6b7280; margin-bottom: 16px; line-height: 1.4;"></p>
+            <input type="text" id="modalInput" style="display:none; width:100%; padding:10px; border:2px solid #fce7f3; border-radius:10px; margin-bottom:15px; text-align:center; font-weight:700;" />
+            <div style="display: flex; gap: 8px;">
+                <button id="modalCancelBtn" style="display:none; flex:1; padding:10px; border-radius:10px; background:#f3f4f6; border:none; font-weight:700; cursor:pointer;" onclick="closeModal()">إلغاء</button>
+                <button id="modalConfirmBtn" style="flex:1; padding:10px; border-radius:10px; background:#be185d; color:#fff; border:none; font-weight:700; cursor:pointer;" onclick="confirmModalAction()">حسناً</button>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="logo">🌸 Aegis Cash</div>
+        <div class="header-controls">
+            <select class="lang-select" id="langSelector" onchange="changeLanguage(this.value)">
+                <option value="ar">العربية 🇸🇦</option>
+                <option value="en">English 🇺🇸</option>
+                <option value="ku">کوردی 🇮🇶</option>
+            </select>
+            <button class="logout-btn" onclick="showAlert('خروج امن', 'تم تأمين وتشفير الجلسة الحالية بنجاح', '🚪')">خروج</button>
         </div>
     </header>
 
-    <div class="main-container">
-        <div class="card">
-            <div class="card-title">🎁 عجلة صناديق الهدايا المفاجئة</div>
-            <div class="card-subtitle">دور العجلة وافتح صندوق الهدايا السحري!</div>
-
-            <div class="wheel-wrapper">
-                <div class="wheel" id="wheel">
-                    <svg viewBox="0 0 100 100">
-                        <circle cx="50" cy="50" r="50" fill="#f8bbd0"/>
-                        <!-- قطاعات العجلة مع أيقونات الصناديق فقط وبدون أي نصوص جانبية -->
-                        <path d="M50,50 L50,0 A50,50 0 0,1 85.35,14.65 Z" fill="#f48fb1"/>
-                        <text x="65" y="30" font-size="9" text-anchor="middle">🎁</text>
-
-                        <path d="M50,50 L85.35,14.65 A50,50 0 0,1 100,50 Z" fill="#f06292"/>
-                        <text x="75" y="53" font-size="9" text-anchor="middle">🎁</text>
-
-                        <path d="M50,50 L100,50 A50,50 0 0,1 85.35,85.35 Z" fill="#f48fb1"/>
-                        <text x="65" y="75" font-size="9" text-anchor="middle">🎁</text>
-
-                        <path d="M50,50 L85.35,85.35 A50,50 0 0,1 50,100 Z" fill="#f06292"/>
-                        <text x="50" y="82" font-size="9" text-anchor="middle">🎁</text>
-
-                        <path d="M50,50 L50,100 A50,50 0 0,1 14.65,85.35 Z" fill="#f48fb1"/>
-                        <text x="35" y="75" font-size="9" text-anchor="middle">🎁</text>
-
-                        <path d="M50,50 L14.65,85.35 A50,50 0 0,1 0,50 Z" fill="#f06292"/>
-                        <text x="25" y="53" font-size="9" text-anchor="middle">🎁</text>
-
-                        <path d="M50,50 L0,50 A50,50 0 0,1 14.65,14.65 Z" fill="#f48fb1"/>
-                        <text x="35" y="30" font-size="9" text-anchor="middle">🎁</text>
-
-                        <path d="M50,50 L14.65,14.65 A50,50 0 0,1 50,0 Z" fill="#f06292"/>
-                        <text x="50" y="20" font-size="9" text-anchor="middle">🎁</text>
-                    </svg>
-                </div>
-                <div class="wheel-center">GIFT</div>
+    <div class="container">
+        <!-- المحفظة -->
+        <div id="wallet-section" class="section active">
+            <div class="security-banner">🛡️ حماية متكاملة ومشفرة ضد الاختراق والتلاعب (نشطة)</div>
+            
+            <div class="sponsored-ad-card">
+                <span class="ad-badge">إعلان ممول 💎</span>
+                <div class="ad-title">🚀 منصة رعاية برامج الذكاء الاصطناعي</div>
+                <div class="ad-desc">ابدأ تطوير تطبيقاتك السحابية اليوم مع دعم تقني متكامل وحصري لمشتركي Aegis.</div>
+                <a href="https://vercel.com" target="_blank" class="ad-action-btn">زيارة الموقع الرسمي ✨</a>
             </div>
 
-            <button class="spin-btn" onclick="spinWheel()">تدوير العجلة الآن 🌀</button>
+            <div class="card" style="text-align: center;">
+                <p class="balance-title">إجمالي الرصيد</p>
+                <div class="balance-box" id="userBalance">pt 1,315</div>
+                <div class="currencies-row">
+                    <span class="currency-badge diamond-value" id="userDiamonds">💎 35 جواهر</span>
+                    <span class="currency-badge usd-value" id="userUsd">💵 $0.00 USD</span>
+                </div>
+                <button class="btn btn-secondary" onclick="convertDiamonds()">🔄 تحويل الجواهر (100💎 = 10pt)</button>
+                <button class="btn btn-success" onclick="openDepositModal()">➕ شحن الرصيد الخارجي</button>
+                <div style="margin-top: 15px; font-size: 13px; font-weight: 700; color: #4b5563;">
+                    التصنيف: <span id="userLevel" style="color: #be185d;">مبتدئ 🌱</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="font-size: 15px; margin-bottom: 6px; color: #be185d; font-weight: 800;">🎁 مكافأة الدخول اليومي</h3>
+                <p style="font-size: 12px; color: #6b7280; margin-bottom: 12px;" id="dailySubtitle">50 نقطة + 2 جوهرة مجاناً كل 24 ساعة</p>
+                <button class="btn btn-primary" id="dailyRewardBtn" onclick="claimDaily()">استلام المكافأة ⭐</button>
+            </div>
+        </div>
+
+        <!-- رابط الدعوة -->
+        <div id="invite-section" class="section">
+            <div class="card" style="text-align: center;">
+                <div style="font-size: 40px; margin-bottom: 8px;">🔗</div>
+                <h3 style="color: #be185d; font-size: 18px; font-weight: 800; margin-bottom: 6px;">دعوة الأصدقاء والأرباح</h3>
+                <p style="font-size: 12px; color: #6b7280; margin-bottom: 20px; line-height: 1.5;">
+                    شارك رابط الدعوة الخاص بك مع أصدقائك، واكسب <strong style="color: #be185d;">100 نقطة + 5 جواهر</strong> عن كل شخص يسجل من خلالك! 🚀
+                </p>
+                <div style="background: #f9fafb; border: 2px dashed #fbcfe8; border-radius: 14px; padding: 12px; margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+                    <input type="text" id="inviteLinkInput" value="https://aegiscash.app/ref?id=AEG-84920" readonly style="background: transparent; border: none; font-size: 11px; font-weight: 700; color: #4b5563; width: 100%; text-align: center; outline: none;">
+                </div>
+                <button class="btn btn-primary" onclick="copyInviteLink()">📋 نسخ رابط الدعوة</button>
+                <button class="btn btn-secondary" style="margin-top: 10px;" onclick="shareOnWhatsApp()">💬 مشاركة عبر واتساب</button>
+                <div style="margin-top: 20px; background: #fdf2f8; border-radius: 14px; padding: 12px; display: flex; justify-content: space-around;">
+                    <div>
+                        <div style="font-size: 11px; color: #6b7280; font-weight: 700;">الأصدقاء المدعوون</div>
+                        <div id="invitedCount" style="font-size: 18px; font-weight: 800; color: #be185d; margin-top: 4px;">4 أشخاص</div>
+                    </div>
+                    <div style="border-left: 1px solid #fbcfe8; padding-left: 20px;">
+                        <div style="font-size: 11px; color: #6b7280; font-weight: 700;">أرباح الدعوات</div>
+                        <div id="invitedEarnings" style="font-size: 18px; font-weight: 800; color: #10b981; margin-top: 4px;">400 pt</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- قسم مشاهدة الفيديوهات (مع عداد متزامن وتقاسم الأرباح 50/50) -->
+        <div id="videos-section" class="section">
+            <div class="card" style="padding: 16px;">
+                <h3 style="color: #be185d; font-size: 17px; font-weight: 800; text-align: center; margin-bottom: 6px;">🎬 مشاهدة الفيديوهات والمواقع المربحة</h3>
+                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;">اختر مقطعاً ليبدأ العد التنازلي للمشاهدة وتقاسم الأرباح بالتساوي (50% لك و50% للمنصة)! 🎁</p>
+                
+                <div class="video-options-list" id="videoOptionsList">
+                    <div class="video-option-card selected" onclick="selectVideoOption(0, this)">
+                        <div>
+                            <div style="font-size: 13px; font-weight: 800;">🎥 فيديو: مقدمة التطبيقات السحابية</div>
+                            <div style="font-size: 11px; color: #6b7280; margin-top: 2px;">المدة: 15 ثانية | المكافأة: 30 نقطة</div>
+                        </div>
+                        <span style="font-size: 12px; font-weight: 800; color: #be185d;">نشط الآن</span>
+                    </div>
+                    <div class="video-option-card" onclick="selectVideoOption(1, this)">
+                        <div>
+                            <div style="font-size: 13px; font-weight: 800;">🌐 موقع ترويج رقمي مدفوع (CPA)</div>
+                            <div style="font-size: 11px; color: #6b7280; margin-top: 2px;">المدة: 30 ثانية | المكافأة: 60 نقطة</div>
+                        </div>
+                        <span style="font-size: 12px; font-weight: 800; color: #be185d;">اختر</span>
+                    </div>
+                    <div class="video-option-card" onclick="selectVideoOption(2, this)">
+                        <div>
+                            <div style="font-size: 13px; font-weight: 800;">💎 فيديو: أسرار العملات الرقمية</div>
+                            <div style="font-size: 11px; color: #6b7280; margin-top: 2px;">المدة: 20 ثانية | المكافأة: 45 نقطة</div>
+                        </div>
+                        <span style="font-size: 12px; font-weight: 800; color: #be185d;">اختر</span>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe id="activeVideoFrame" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <div id="activeVideoTitle" style="font-size: 13px; font-weight: 800; color: #1f2937;">مقدمة في تطوير التطبيقات السحابية</div>
+                        <div class="timer-display" id="videoTimerDisplay">⏳ جاري العد التنازلي للمشاهدة: 15 ثانية</div>
+                        <div class="revenue-share-badge" id="revenueShareText">📊 تقاسم الأرباح: 50% للمشترك | 50% للمنصة</div>
+                        <button class="btn btn-success" id="claimVideoBtn" onclick="claimVideoRewardWithSplit()" style="margin-top: 10px; display:none;">استلام المكافأة المقسمة ⭐</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- المتجر الرقمي متعدد الأبواب ومع رفع المنتجات -->
+        <div id="store-section" class="section">
+            <div class="card" style="padding: 16px;">
+                <h3 style="color: #be185d; margin-bottom: 4px; font-size: 17px; text-align: center; font-weight: 800;">🛍️ المتجر الرقمي متعدد الأبواب</h3>
+                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 12px;">تصفح الأبواب المختلفة أو أضف منتجك الخاص مع صورة وسعر</p>
+                
+                <div class="store-doors-tabs">
+                    <button class="store-door-tab active" onclick="switchStoreDoor('door1', this)">💎 باب الجواهر</button>
+                    <button class="store-door-tab" onclick="switchStoreDoor('door2', this)">🚀 الخدمات الرقمية</button>
+                    <button class="store-door-tab" onclick="switchStoreDoor('door3', this)">🎁 العروض الخاصة</button>
+                    <button class="store-door-tab" onclick="switchStoreDoor('doorCustom', this)">✨ باب الأعضاء</button>
+                </div>
+
+                <div id="door1" class="door-section active">
+                    <div class="store-grid">
+                        <div class="store-item">
+                            <div>
+                                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=300&q=80" class="store-img" alt="جوهرة">
+                                <div class="store-title">50 جوهرة</div>
+                                <div class="store-price">500 نقطة</div>
+                            </div>
+                            <button class="buy-btn" onclick="buyItem('50 جوهرة', 500)">شراء</button>
+                        </div>
+                        <div class="store-item">
+                            <div>
+                                <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=300&q=80" class="store-img" alt="جوهرة">
+                                <div class="store-title">200 جوهرة 🔥</div>
+                                <div class="store-price">1,800 نقطة</div>
+                            </div>
+                            <button class="buy-btn" onclick="buyItem('200 جوهرة', 1800)">شراء</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="door2" class="door-section">
+                    <div class="store-grid" id="grid-door2">
+                        <div class="store-item">
+                            <div>
+                                <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=300&q=80" class="store-img" alt="خدمة">
+                                <div class="store-title">استضافة سحابية</div>
+                                <div class="store-price">3,000 نقطة</div>
+                            </div>
+                            <button class="buy-btn" onclick="buyItem('استضافة سحابية', 3000)">شراء</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="door3" class="door-section">
+                    <div class="store-grid" id="grid-door3">
+                        <div class="store-item">
+                            <div>
+                                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=300&q=80" class="store-img" alt="عرض">
+                                <div class="store-title">بطاقة تفعيل VIP</div>
+                                <div class="store-price">5,000 نقطة</div>
+                            </div>
+                            <button class="buy-btn" onclick="buyItem('بطاقة تفعيل VIP', 5000)">شراء</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="doorCustom" class="door-section">
+                    <div class="store-grid" id="grid-doorCustom"></div>
+                </div>
+
+                <div class="add-product-box">
+                    <h4 style="font-size: 14px; font-weight: 800; color: #be185d; margin-bottom: 8px;">➕ إضافة منتج جديد لمتجرك</h4>
+                    <select id="newProductDoor" class="form-input">
+                        <option value="door2">الباب الثاني: الخدمات الرقمية</option>
+                        <option value="door3">الباب الثالث: العروض الخاصة</option>
+                        <option value="doorCustom">باب الأعضاء المخصص</option>
+                    </select>
+                    <input type="text" id="newProductName" class="form-input" placeholder="اسم المنتج...">
+                    <input type="number" id="newProductPrice" class="form-input" placeholder="السعر بالنقاط (مثال: 500)...">
+                    <div style="font-size: 11px; font-weight: 700; color: #6b7280; margin-bottom: 4px;">اختر صورة المنتج من جهازك:</div>
+                    <input type="file" id="newProductImage" class="form-input" accept="image/*" style="padding: 6px;">
+                    <button class="btn btn-primary" style="margin-top: 4px; padding: 10px; font-size: 13px;" onclick="addNewProductToStore()">رفع ونشر المنتج 🚀</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- غرف الدردشة والدعم -->
+        <div id="chat-section" class="section">
+            <div class="card" style="padding: 16px;">
+                <h3 style="color: #be185d; font-size: 17px; font-weight: 800; text-align: center; margin-bottom: 10px;">💬 غرف الدردشة ودعم الأعضاء</h3>
+                <p style="font-size: 11px; color: #10b981; text-align: center; font-weight: 700; margin-bottom: 8px;">🛡️ فريق الدعم الفني وحماية الحسابات متواجد دائماً</p>
+                <div class="chat-container">
+                    <div class="chat-tabs">
+                        <button class="chat-tab active" onclick="switchChatRoom('general', this)">العامة 🌸</button>
+                        <button class="chat-tab" onclick="switchChatRoom('vip', this)">VIP 👑</button>
+                        <button class="chat-tab" onclick="switchChatRoom('support', this)">الدعم 🛠️</button>
+                    </div>
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="chat-msg"><b>سارة:</b> أهلاً بالجميع في منصة Aegis المحمية! 👋</div>
+                        <div class="chat-msg support-badge"><b>الدعم الفني (أحمد):</b> أهلاً بكم، تم تفعيل التحقق برقم الهاتف بنجاح 🛠️</div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" id="chatInput" class="chat-input" placeholder="اكتب رسالتك هنا..." onkeypress="handleChatKey(event)">
+                        <button class="chat-send-btn" onclick="sendChatMessage()">إرسال</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- عجلة الحظ -->
+        <div id="wheel-section" class="section">
+            <div class="card" style="text-align: center;">
+                <h2 style="color: #be185d; margin-bottom: 4px; font-size: 18px; font-weight: 800;">🎡 عجلة الحظ اليومية</h2>
+                <p style="font-size: 12px; color: #6b7280; margin-bottom: 15px;" id="wheelSubtitle">لديك لفة مجانية اليوم! (بعدها التكلفة 100 جوهرة)</p>
+                <div class="wheel-outer-wrapper">
+                    <div class="wheel-border-glow">
+                        <div class="wheel-inner-container">
+                            <div id="wheelPointer"></div>
+                            <canvas id="luckyWheel" width="230" height="230"></canvas>
+                            <div class="wheel-center-hub">SPIN</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="spinWheel()" style="margin-top: 10px;">تدوير العجلة 🌀</button>
+                <p id="wheelResult" style="margin-top: 12px; font-size: 14px; font-weight: 800; color: #be185d;"></p>
+            </div>
+        </div>
+
+        <!-- لوحة تحكم الإدارة المطورة والشاملة -->
+        <div id="admin-section" class="section">
+            <div class="card" style="padding: 18px;">
+                <h3 style="color: #7c3aed; font-size: 18px; font-weight: 800; text-align: center; margin-bottom: 4px;">⚙️ لوحة إدارة التطبيق والحماية</h3>
+                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 16px;">متابعة الأرباح المباشرة، الأعضاء المتواجدون والمتفاعلون</p>
+                
+                <!-- الإحصائيات الأساسية -->
+                <div class="admin-stats-grid">
+                    <div class="admin-stat-card">
+                        <div style="font-size: 11px; color: #6b7280; font-weight: 700;">إجمالي المشتركين</div>
+                        <div class="admin-stat-num" id="adminTotalUsers">1,420</div>
+                    </div>
+                    <div class="admin-stat-card">
+                        <div style="font-size: 11px; color: #6b7280; font-weight: 700;">المتواجدون الآن 🟢</div>
+                        <div class="admin-stat-num" id="adminOnlineUsers">184</div>
+                    </div>
+                    <div class="admin-stat-card">
+                        <div style="font-size: 11px; color: #6b7280; font-weight: 700;">أرباح المنصة (50%)</div>
+                        <div class="admin-stat-num" id="adminPlatformRevenue" style="color: #047857;">4,850 pt</div>
+                    </div>
+                    <div class="admin-stat-card">
+                        <div style="font-size: 11px; color: #6b7280; font-weight: 700;">الأعضاء المتفاعلون</div>
+                        <div class="admin-stat-num" id="adminActiveUsersCount" style="color: #0284c7;">312</div>
+                    </div>
+                </div>
+
+                <!-- قائمة الأعضاء المتفاعلين والمتواجدين -->
+                <div style="margin-top: 15px;">
+                    <h4 style="font-size: 14px; font-weight: 800; color: #be185d; margin-bottom: 8px;">👥 الأعضاء النشطون والمتواجدون الآن</h4>
+                    <div id="activeMembersListContainer">
+                        <div class="member-row">
+                            <span><b>جاسم العراقي</b> (#AEG-84920)</span>
+                            <span style="color: #10b981; font-weight: 700;">متواجد 🟢</span>
+                        </div>
+                        <div class="member-row">
+                            <span><b>سارة أحمد</b> (#AEG-91234)</span>
+                            <span style="color: #10b981; font-weight: 700;">متواجد 🟢</span>
+                        </div>
+                        <div class="member-row">
+                            <span><b>محمد الرفاعي</b> (#AEG-10492)</span>
+                            <span style="color: #6b7280; font-weight: 700;">متفاعل بالأمس</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- حقل دعم الأعضاء بالجواهر المفتوحة (غير المحددة) -->
+                <div class="support-diamond-box">
+                    <h4 style="font-size: 14px; font-weight: 800; color: #0369a1; margin-bottom: 6px;">💎 حقل دعم الأعضاء الاستثنائي (أرقام مفتوحة)</h4>
+                    <p style="font-size: 11px; color: #0c4a6e; margin-bottom: 10px;">أدخل اسم أو معرف المشترك وكمية الجواهر المفتوحة لدعمه مباشرة:</p>
+                    <input type="text" id="supportMemberTarget" class="form-input" placeholder="اسم أو معرف المشترك (مثال: جاسم)..." style="border-color: #bae6fd;">
+                    <input type="number" id="supportDiamondAmount" class="form-input" placeholder="أدخل عدد الجواهر المفتوحة (مثال: 500 أو 5000)..." style="border-color: #bae6fd;">
+                    <button class="btn btn-warning" onclick="adminSupportMemberWithDiamonds()" style="margin-top: 4px; padding: 10px; font-size: 13px;">إرسال الدعم المباشر للأعضاء 🚀</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- الملف الشخصي -->
+        <div id="profile-section" class="section">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="صورة المستخدم" class="profile-avatar">
+                <h2 style="font-size: 20px; font-weight: 800; text-align: center;" id="profileName">جاسم العراقي</h2>
+                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;" id="profilePhoneDisplay">📱 +964 780 000 0000</p>
+                <div class="profile-info-group">
+                    <span style="color: #6b7280;">معرف الحساب (ID)</span>
+                    <span style="font-weight: 800;">#AEG-84920</span>
+                </div>
+                <button class="btn btn-secondary" style="margin-top: 15px;" onclick="promptForUserName()">✏️ تعديل وتغيير الاسم الآمن</button>
+                <button class="btn btn-primary" style="margin-top: 10px;" onclick="openPhoneUpdateModal()">📱 تحديث رقم الهاتف والأمان</button>
+            </div>
+        </div>
+
+        <!-- سحب الأرباح -->
+        <div id="withdraw-section" class="section">
+            <div class="card" style="text-align: center;">
+                <h3 style="color: #be185d; margin-bottom: 8px; font-size: 17px; font-weight: 800;">💸 بوابة السحب الآمن</h3>
+                <p style="font-size: 13px; color: #6b7280; margin-bottom: 15px;">الحد الأدنى للسحب هو <strong style="color:#be185d;">10,000 نقطة</strong></p>
+                <div style="background: #f9fafb; padding: 15px; border-radius: 14px; margin-bottom: 15px; border: 1px dashed #d1d5db;">
+                    <div style="font-size: 20px; font-weight: 800;" id="progressText">1,315 / 10,000</div>
+                    <div style="width: 100%; background: #e5e7eb; height: 8px; border-radius: 10px; margin-top: 8px; overflow: hidden;">
+                        <div id="progressBar" style="width: 13%; background: #be185d; height: 100%; border-radius: 10px;"></div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="withdrawBtn" onclick="requestWithdrawal()">طلب سحب الأرباح ✨</button>
+            </div>
         </div>
     </div>
 
-    <!-- شريط المهام السفلي مع أيقونة العجلة الصحيحة -->
-    <nav class="bottom-nav">
-        <a href="#" class="nav-item">
-            <span class="nav-icon">💰</span>
-            <span>محفظتي</span>
-        </a>
-        <a href="#" class="nav-item">
-            <span class="nav-icon">🔗</span>
-            <span>الدعوة</span>
-        </a>
-        <a href="#" class="nav-item">
-            <span class="nav-icon">🎬</span>
-            <span>فيديوهات</span>
-        </a>
-        <a href="#" class="nav-item">
-            <span class="nav-icon">🛍️</span>
-            <span>المتجر</span>
-        </a>
-        <a href="#" class="nav-item">
-            <span class="nav-icon">💬</span>
-            <span>الدعم</span>
-        </a>
-        <a href="#" class="nav-item active">
-            <span class="nav-icon">🎡</span>
-            <span>العجلة</span>
-        </a>
-        <a href="#" class="nav-item">
-            <span class="nav-icon">⚙️</span>
-            <span>الإدارة</span>
-        </a>
-        <a href="#" class="nav-item">
-            <span class="nav-icon">👤</span>
-            <span>حسابي</span>
-        </a>
-        <a href="#" class="nav-item">
-            <span class="nav-icon">💳</span>
-            <span>السحب</span>
-        </a>
-    </nav>
+    <!-- شريط التنقل السفلي -->
+    <div class="nav-bar-wrapper">
+        <div class="nav-bar">
+            <button class="nav-item active" onclick="switchTab('wallet', this)">
+                <span class="icon">💰</span>
+                <span>محفظتي</span>
+            </button>
+            <button class="nav-item" onclick="switchTab('invite', this)">
+                <span class="icon">🔗</span>
+                <span>الدعوة</span>
+            </button>
+            <button class="nav-item" onclick="switchTab('videos', this)">
+                <span class="icon">🎬</span>
+                <span>فيديوهات</span>
+            </button>
+            <button class="nav-item" onclick="switchTab('store', this)">
+                <span class="icon">🛍️</span>
+                <span>المتجر</span>
+            </button>
+            <button class="nav-item" onclick="switchTab('chat', this)">
+                <span class="icon">💬</span>
+                <span>الدعم</span>
+            </button>
+            <button class="nav-item" onclick="switchTab('wheel', this)">
+                <span class="icon">🎡</span>
+                <span>العجلة</span>
+            </button>
+            <button class="nav-item" onclick="switchTab('admin', this)">
+                <span class="icon">⚙️</span>
+                <span>الإدارة</span>
+            </button>
+            <button class="nav-item" onclick="switchTab('profile', this)">
+                <span class="icon">👤</span>
+                <span>حسابي</span>
+            </button>
+            <button class="nav-item" onclick="switchTab('withdraw', this)">
+                <span class="icon">💸</span>
+                <span>السحب</span>
+            </button>
+        </div>
+    </div>
 
     <script>
-        function spinWheel() {
-            const wheel = document.getElementById('wheel');
-            const randomDegree = Math.floor(Math.random() * 3600) + 360;
-            wheel.style.transform = `rotate(${randomDegree}deg)`;
+        const SECURITY_KEY = "AegisSecureToken_Universal_v2";
+        let appData = {
+            balance: 1315,
+            diamonds: 35,
+            platformRevenue: 4850,
+            userName: "جاسم العراقي",
+            userPhone: "+964 780 000 0000",
+            hasFreeSpinToday: true,
+            lastDailyClaimDate: null,
+            customProducts: []
+        };
+
+        function saveAppData() {
+            try {
+                localStorage.setItem(SECURITY_KEY, btoa(encodeURIComponent(JSON.stringify(appData))));
+            } catch(e) {}
         }
+
+        function loadAppData() {
+            try {
+                let saved = localStorage.getItem(SECURITY_KEY);
+                if (saved) {
+                    let decoded = decodeURIComponent(atob(saved));
+                    let parsed = JSON.parse(decoded);
+                    if(parsed && typeof parsed.balance === 'number') {
+                        appData = parsed;
+                    }
+                }
+            } catch(e) {}
+        }
+
+        loadAppData();
+
+        const diamondConversionRate = 10000;
+        const minWithdrawPoints = 10000;
+        let supportAgents = ["أحمد (الدعم الفني والتوثيق)", "ساره (خدمة الأمان والمشتركين)"];
+        let modalCallback = null;
+
+        const videoOptionsData = [
+            { title: "مقدمة في تطوير التطبيقات السحابية", duration: 15, reward: 30, url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+            { title: "موقع ترويج رقمي مدفوع (CPA)", duration: 30, reward: 60, url: "https://www.youtube.com/embed/3JZ_D3ELwOQ" },
+            { title: "أسرار التداول والعملات الرقمية", duration: 20, reward: 45, url: "https://www.youtube.com/embed/kJQP7kiw5Fk" }
+        ];
+        let currentSelectedVideoIndex = 0;
+        let videoTimerInterval = null;
+        let timeLeft = 0;
+
+        function showAlert(title, text, icon) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalText').innerText = text;
+            document.getElementById('modalIcon').innerText = icon;
+            document.getElementById('modalInput').style.display = 'none';
+            document.getElementById('modalCancelBtn').style.display = 'none';
+            modalCallback = null;
+            document.getElementById('customModal').classList.add('show');
+        }
+
+        function showPrompt(title, text, icon, callback) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalText').innerText = text;
+            document.getElementById('modalIcon').innerText = icon;
+            let input = document.getElementById('modalInput');
+            input.style.display = 'block';
+            input.value = '';
+            document.getElementById('modalCancelBtn').style.display = 'block';
+            modalCallback = callback;
+            document.getElementById('customModal').classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('customModal').classList.remove('show');
+        }
+
+        function confirmModalAction() {
+            let val = document.getElementById('modalInput').value;
+            closeModal();
+            if (modalCallback) modalCallback(val);
+        }
+
+        function updateUI() {
+            document.getElementById('userBalance').innerText = 'pt ' + appData.balance.toLocaleString();
+            document.getElementById('userDiamonds').innerText = `💎 ${appData.diamonds.toLocaleString()} جواهر`;
+            let usdValue = (appData.diamonds / diamondConversionRate).toFixed(2);
+            document.getElementById('userUsd').innerText = `💵 $${usdValue} USD`;
+            document.getElementById('progressText').innerText = `${appData.balance.toLocaleString()} / 10,000`;
+            let progressPercentage = Math.min((appData.balance / minWithdrawPoints) * 100, 100);
+            document.getElementById('progressBar').style.width = `${progressPercentage}%`;
+            
+            let nameElement = document.getElementById('profileName');
+            if (nameElement) nameElement.innerText = appData.userName;
+            
+            document.getElementById('profilePhoneDisplay').innerText = `📱 ${appData.userPhone}`;
+            
+            // تحديث لوحة الإدارة
+            document.getElementById('adminPlatformRevenue').innerText = appData.platformRevenue.toLocaleString() + ' pt';
+
+            renderCustomProducts();
+            saveAppData();
+        }
+
+        function selectVideoOption(index, element) {
+            document.querySelectorAll('.video-option-card').forEach(card => card.classList.remove('selected'));
+            element.classList.add('selected');
+            currentSelectedVideoIndex = index;
+            let vData = videoOptionsData[index];
+
+            document.getElementById('activeVideoTitle').innerText = vData.title;
+            document.getElementById('activeVideoFrame').src = vData.url;
+            document.getElementById('claimVideoBtn').style.display = 'none';
+
+            startAutomaticVideoTimer(vData.duration);
+        }
+
+        function startAutomaticVideoTimer(duration) {
+            if (videoTimerInterval) clearInterval(videoTimerInterval);
+            timeLeft = duration;
+            let timerDisp = document.getElementById('videoTimerDisplay');
+            let claimBtn = document.getElementById('claimVideoBtn');
+
+            timerDisp.innerText = `⏳ جاري العد التنازلي للمشاهدة: ${timeLeft} ثانية`;
+
+            videoTimerInterval = setInterval(() => {
+                timeLeft--;
+                timerDisp.innerText = `⏳ جاري العد التنازلي للمشاهدة: ${timeLeft} ثانية`;
+                if (timeLeft <= 0) {
+                    clearInterval(videoTimerInterval);
+                    timerDisp.innerText = "✅ اكتملت مشاهدة الفيديو بنجاح!";
+                    claimBtn.style.display = 'block';
+                }
+            }, 1000);
+        }
+
+        function claimVideoRewardWithSplit() {
+            let vData = videoOptionsData[currentSelectedVideoIndex];
+            let totalReward = vData.reward;
+            let userShare = Math.round(totalReward * 0.50); // 50% للمشترك
+            let ownerShare = totalReward - userShare; // 50% للمنصة
+
+            appData.balance += userShare;
+            appData.platformRevenue += ownerShare;
+            updateUI();
+
+            showAlert(
+                "نجاح تقاسم الأرباح (50/50)! 💰", 
+                `تمت إضافتك لأرباح المشاهدة بنجاح:\n\n• حصتك (50%): +${userShare} نقطة\n• حصة المنصة (50%): +${ownerShare} نقطة\n\nشكراً لتفاعلكم المستمر! ✨`, 
+                "🎉"
+            );
+
+            document.getElementById('claimVideoBtn').style.display = 'none';
+            startAutomaticVideoTimer(vData.duration);
+        }
+
+        // دعم الأعضاء بحقل الجواهر المفتوحة من لوحة الإدارة
+        function adminSupportMemberWithDiamonds() {
+            let targetName = document.getElementById('supportMemberTarget').value.trim();
+            let diamondAmount = Number(document.getElementById('supportDiamondAmount').value);
+
+            if (!targetName || !diamondAmount || diamondAmount <= 0) {
+                showAlert("تنبيه الإدارة", "يرجى كتابة اسم أو معرف المشترك وتحديد كمية جواهر صحيحة.", "⚠️");
+                return;
+            }
+
+            // إذا كان المستهدف هو المستخدم الحالي، قم بزيادة جواهره مباشرة
+            if (targetName.includes(appData.userName) || targetName.includes("جاسم")) {
+                appData.diamonds += diamondAmount;
+            }
+
+            updateUI();
+            showAlert(
+                "تم إرسال الدعم بنجاح! 💎", 
+                `تمت عملية الدعم الاستثنائي بنجاح:\n\n• المشترك: ${targetName}\n• كمية الجواهر المفتوحة: +${diamondAmount.toLocaleString()} 💎\n\nتم تحديث الأرصدة وسجلات المنصة وحفظها فوريًا!`, 
+                "🚀"
+            );
+
+            document.getElementById('supportMemberTarget').value = '';
+            document.getElementById('supportDiamondAmount').value = '';
+        }
+
+        function switchStoreDoor(doorId, btnElement) {
+            document.querySelectorAll('.door-section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.store-door-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(doorId).classList.add('active');
+            btnElement.classList.add('active');
+        }
+
+        function addNewProductToStore() {
+            let door = document.getElementById('newProductDoor').value;
+            let name = document.getElementById('newProductName').value.trim();
+            let price = Number(document.getElementById('newProductPrice').value);
+            let imageInput = document.getElementById('newProductImage');
+
+            if (!name || !price || price <= 0) {
+                showAlert("تنبيه", "يرجى كتابة اسم المنتج وتحديد سعر صحيح.", "⚠️");
+                return;
+            }
+
+            if (imageInput.files && imageInput.files[0]) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    let imageUrl = e.target.result;
+                    appData.customProducts.push({ door, name, price, imageUrl });
+                    saveAppData();
+                    updateUI();
+                    
+                    document.getElementById('newProductName').value = '';
+                    document.getElementById('newProductPrice').value = '';
+                    imageInput.value = '';
+                    showAlert("نجح الرفع والحفظ! 🎉", "تم إضافة المنتج بنجاح وحفظه بشكل دائم في متجرك.", "✅");
+                };
+                reader.readAsDataURL(imageInput.files[0]);
+            } else {
+                showAlert("صورة مطلوبة", "يرجى اختيار صورة للمنتج من جهازك.", "🖼️");
+            }
+        }
+
+        function renderCustomProducts() {
+            let door2Grid = document.getElementById('grid-door2');
+            let door3Grid = document.getElementById('grid-door3');
+            let doorCustomGrid = document.getElementById('grid-doorCustom');
+
+            let defaultDoor2 = `
+                <div class="store-item">
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=300&q=80" class="store-img" alt="خدمة">
+                        <div class="store-title">استضافة سحابية</div>
+                        <div class="store-price">3,000 نقطة</div>
+                    </div>
+                    <button class="buy-btn" onclick="buyItem('استضافة سحابية', 3000)">شراء</button>
+                </div>`;
+            
+            let defaultDoor3 = `
+                <div class="store-item">
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=300&q=80" class="store-img" alt="عرض">
+                        <div class="store-title">بطاقة تفعيل VIP</div>
+                        <div class="store-price">5,000 نقطة</div>
+                    </div>
+                    <button class="buy-btn" onclick="buyItem('بطاقة تفعيل VIP', 5000)">شراء</button>
+                </div>`;
+
+            let html2 = defaultDoor2;
+            let html3 = defaultDoor3;
+            let htmlCustom = "";
+
+            appData.customProducts.forEach((prod, index) => {
+                let itemHtml = `
+                    <div class="store-item">
+                        <div>
+                            <img src="${prod.imageUrl}" class="store-img" alt="${prod.name}">
+                            <div class="store-title">${prod.name}</div>
+                            <div class="store-price">${prod.price.toLocaleString()} نقطة</div>
+                        </div>
+                        <button class="buy-btn" onclick="buyItem('${prod.name}', ${prod.price})">شراء</button>
+                    </div>`;
+                
+                if (prod.door === 'door2') html2 += itemHtml;
+                else if (prod.door === 'door3') html3 += itemHtml;
+                else if (prod.door === 'doorCustom') htmlCustom += itemHtml;
+            });
+
+            door2Grid.innerHTML = html2;
+            door3Grid.innerHTML = html3;
+            if (htmlCustom === "") {
+                doorCustomGrid.innerHTML = `<div style="grid-column: span 2; text-align: center; color: #6b7280; font-size: 12px; padding: 20px;">لا توجد منتجات في هذا الباب حالياً. أضف منتجك الأول بالأسفل! ✨</div>`;
+            } else {
+                doorCustomGrid.innerHTML = htmlCustom;
+            }
+        }
+
+        function claimDaily() {
+            if (appData.lastDailyClaimDate) {
+                let lastClaim = new Date(appData.lastDailyClaimDate);
+                let now = new Date();
+                let diffHours = (now - lastClaim) / (1000 * 60 * 60);
+                if (diffHours < 24) {
+                    let remainingHours = Math.ceil(24 - diffHours);
+                    showAlert("تنبيه", `لقد قمت بالفعل باستلام مكافئتك اليومية. يمكنك الاستلام مرة كل 24 ساعة (متبقي ${remainingHours} ساعة).`, "⏳");
+                    return;
+                }
+            }
+
+            appData.balance += 50;
+            appData.diamonds += 2;
+            appData.lastDailyClaimDate = new Date().toISOString();
+            updateUI();
+            showAlert("مكافأة يومية", "تمت إضافة 50 نقطة و 2 جوهرة إلى رصيدك وحفظ الموعد بنجاح!", "🎁");
+        }
+
+        function promptForUserName() {
+            showPrompt("تسجيل اسم المشترك 👤", "الرجاء إدخال اسمك الخاص للمتابعة", "✍️", (enteredName) => {
+                if (enteredName && enteredName.trim() !== "") {
+                    let newName = enteredName.trim();
+                    appData.userName = newName;
+                    updateUI();
+                    showAlert("تم حفظ اسمك!", `مرحباً بك! 👋 ${newName}`, "✅");
+                }
+            });
+        }
+
+        function requestWithdrawal() {
+            if (appData.balance < minWithdrawPoints) {
+                showAlert("تنبيه", "عذراً رصيدك الحالي أقل من الحد الأدنى للسحب (10,000 نقطة)", "⚠️");
+                return;
+            }
+            showPrompt("تأكيد طلب السحب 💳", "أدخل رقم الحساب أو المحفظة المراد التحويل إليها", "🟦", (accountInfo) => {
+                if (accountInfo && accountInfo.trim() !== "") {
+                    appData.balance = 0;
+                    updateUI();
+                    showAlert("تم بنجاح!", "تم تقديم طلب السحب بنجاح وحفظ الحالة! 🚀", "✅");
+                }
+            });
+        }
+
+        function switchTab(tabName, btnElement) {
+            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            document.getElementById(tabName + '-section').classList.add('active');
+            btnElement.classList.add('active');
+            if(tabName === 'wheel') drawWheel();
+            if(tabName === 'videos') {
+                startAutomaticVideoTimer(videoOptionsData[currentSelectedVideoIndex].duration);
+            } else {
+                if (videoTimerInterval) clearInterval(videoTimerInterval);
+            }
+        }
+
+        function copyInviteLink() {
+            let linkInput = document.getElementById('inviteLinkInput');
+            linkInput.select();
+            navigator.clipboard.writeText(linkInput.value);
+            showAlert("تم النسخ بنجاح! 📋", "تم نسخ رابط الدعوة الخاص بك. شاركه الآن مع أصدقائك وابدأ بجمع الأرباح!", "🔗");
+        }
+
+        function shareOnWhatsApp() {
+            let link = document.getElementById('inviteLinkInput').value;
+            let text = encodeURIComponent(`انضم إلي الآن في منصة Aegis Cash واكسب النقاط والجواهر مجاناً عبر هذا الرابط: ${link}`);
+            window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+        }
+
+        function openDepositModal() {
+            showPrompt("شحن المحفظة الآمن 💳", "أدخل عدد النقاط المراد شحنها:", "💳", (val) => {
+                let amount = Number(val);
+                if (amount > 0) {
+                    appData.balance += amount;
+                    updateUI();
+                    showAlert("نجاح الحفظ", `تم إضافة ${amount.toLocaleString()} نقطة بنجاح وحفظ الرصيد!`, "✅");
+                }
+            });
+        }
+
+        function buyItem(itemName, cost) {
+            if (appData.balance < cost) {
+                showAlert("عذراً", "رصيدك غير كافي لإتمام عملية الشراء.", "❌");
+                return;
+            }
+            appData.balance -= cost;
+            if (itemName.includes("جوهرة")) appData.diamonds += itemName.includes("50") ? 50 : 200;
+            updateUI();
+            showAlert("مبروك!", `تم شراء "${itemName}" بنجاح وحفظ التغييرات!`, "🎉");
+        }
+
+        function openPhoneUpdateModal() {
+            showPrompt("تحديث رقم الهاتف 📱", "أدخل رقم هاتفك الجديد (مع الرمز الدولي):", "🔒", (val) => {
+                if (val && val.trim() !== "") {
+                    appData.userPhone = val.trim();
+                    updateUI();
+                    showAlert("تم الحفظ والتوثيق", "تم ربط وحفظ رقم الهاتف الجديد بنجاح عبر نظام الأمان.", "✅");
+                }
+            });
+        }
+
+        function convertDiamonds() {
+            if (appData.diamonds < 100) {
+                showAlert("تنبيه", "يجب أن تمتلك 100 جوهرة على الأقل للتحويل.", "⚠️");
+                return;
+            }
+            appData.diamonds -= 100;
+            appData.balance += 10;
+            updateUI();
+            showAlert("نجاح الحفظ", "تم تحويل 100 جوهرة إلى 10 نقاط وحفظ الأرصدة بنجاح!", "💎");
+        }
+
+        function switchChatRoom(room, btn) {
+            document.querySelectorAll('.chat-tab').forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+            let msgs = document.getElementById('chatMessages');
+            let roomName = room === 'general' ? 'العامة' : room === 'vip' ? 'VIP' : 'الدعم الفني والحماية';
+            msgs.innerHTML = `<div class="chat-msg"><b>النظام الأمني:</b> أهلاً بك في غرفة (${roomName}) 🌸</div>`;
+        }
+
+        function sendChatMessage() {
+            let input = document.getElementById('chatInput');
+            let text = input.value.trim();
+            if (text !== "") {
+                let msgs = document.getElementById('chatMessages');
+                msgs.innerHTML += `<div class="chat-msg mine"><b>${appData.userName}:</b> ${text}</div>`;
+                input.value = "";
+                msgs.scrollTop = msgs.scrollHeight;
+                setTimeout(() => {
+                    let randomAgent = supportAgents[Math.floor(Math.random() * supportAgents.length)];
+                    msgs.innerHTML += `<div class="chat-msg support-badge"><b>${randomAgent}:</b> تم استلام استفسارك وتشفير الرسالة. نحن جاهزون للمساعدة! 🛠️</div>`;
+                    msgs.scrollTop = msgs.scrollHeight;
+                }, 1200);
+            }
+        }
+
+        function handleChatKey(e) {
+            if (e.key === 'Enter') sendChatMessage();
+        }
+
+        const canvas = document.getElementById('luckyWheel');
+        const ctx = canvas.getContext('2d');
+        const slices = [
+            { text: "10 pt", type: "pts", value: 10, color: "#fbcfe8" },
+            { text: "2 💎", type: "dm", value: 2, color: "#f472b6" },
+            { text: "0 pt", type: "pts", value: 0, color: "#fbcfe8" },
+            { text: "50 pt", type: "pts", value: 50, color: "#f472b6" },
+            { text: "5 💎", type: "dm", value: 5, color: "#fbcfe8" },
+            { text: "100 pt", type: "pts", value: 100, color: "#be185d" },
+            { text: "15 pt", type: "pts", value: 15, color: "#f472b6" },
+            { text: "0 pt", type: "pts", value: 0, color: "#fbcfe8" }
+        ];
+        const arc = Math.PI / (slices.length / 2);
+        let startAngle = 0;
+        let spinning = false;
+        let currentAngle = 0;
+
+        function drawWheel() {
+            const radius = 100;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            let center = canvas.width / 2;
+            for (let i = 0; i < slices.length; i++) {
+                const angle = startAngle + i * arc;
+                ctx.fillStyle = slices[i].color;
+                ctx.beginPath();
+                ctx.arc(center, center, radius, angle, angle + arc, false);
+                ctx.arc(center, center, 18, angle + arc, angle, true);
+                ctx.fill();
+                ctx.strokeStyle = '#fff';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.save();
+                ctx.fillStyle = slices[i].color === "#be185d" ? "#fff" : "#1f2937";
+                ctx.translate(center + Math.cos(angle + arc / 2) * 65, center + Math.sin(angle + arc / 2) * 65);
+                ctx.rotate(angle + arc / 2 + Math.PI / 2);
+                ctx.font = "bold 12px Tajawal";
+                ctx.fillText(slices[i].text, -ctx.measureText(slices[i].text).width / 2, 0);
+                ctx.restore();
+            }
+        }
+
+        function spinWheel() {
+            if (spinning) return;
+            if (appData.hasFreeSpinToday) {
+                appData.hasFreeSpinToday = false;
+                document.getElementById('wheelSubtitle').innerText = "تم استهلاك اللفة المجانية (التكلفة: 100 جوهرة)";
+            } else {
+                if (appData.diamonds < 100) {
+                    showAlert("جواهر غير كافية", "تكلفة تدوير العجلة الإضافية هي 100 جوهرة.", "💎");
+                    return;
+                }
+                appData.diamonds -= 100;
+                updateUI();
+            }
+            spinning = true;
+            document.getElementById('wheelResult').innerText = "🌀 جاري تدوير العجلة بأمان...";
+            let randomSpin = Math.floor(Math.random() * 360) + 2880;
+            currentAngle += randomSpin;
+            canvas.style.transition = "transform 5s cubic-bezier(0.2, 0.9, 0.1, 1)";
+            canvas.style.transform = `rotate(${currentAngle}deg)`;
+            setTimeout(() => {
+                spinning = false;
+                let actualDegree = currentAngle % 360;
+                let sliceDegree = 360 / slices.length;
+                let winningIndex = Math.floor((360 - (actualDegree % 360)) / sliceDegree) % slices.length;
+                let winItem = slices[winningIndex];
+                if (winItem.type === "pts") {
+                    appData.balance += winItem.value;
+                    document.getElementById('wheelResult').innerText = `🎉 ربحت ${winItem.value} نقطة وجرى حفظها!`;
+                } else {
+                    appData.diamonds += winItem.value;
+                    document.getElementById('wheelResult').innerText = `💎 ربحت ${winItem.value} جوهرة وجرى حفظها!`;
+                }
+                updateUI();
+            }, 5000);
+        }
+
+        drawWheel();
+        updateUI();
+        startAutomaticVideoTimer(videoOptionsData[currentSelectedVideoIndex].duration);
     </script>
 </body>
 </html>
