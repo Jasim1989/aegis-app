@@ -6,150 +6,32 @@
     <title>Aegis Cash - المنصة المتكاملة</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Tajawal', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-        body {
-            background-color: #fdf2f8;
-            color: #1f2937;
-            padding-bottom: 110px;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tajawal', sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background-color: #fdf2f8; color: #1f2937; padding-bottom: 110px; }
         
         /* شريط الإعلانات المتحرك */
-        .ticker-wrap {
-            background: linear-gradient(135deg, #be185d, #ec4899);
-            color: #fff;
-            padding: 8px 12px;
-            font-size: 13px;
-            font-weight: 700;
-            overflow: hidden;
-            white-space: nowrap;
-            position: sticky;
-            top: 0;
-            z-index: 101;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .ticker-content {
-            display: inline-block;
-            animation: marquee 25s linear infinite;
-        }
-        @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
+        .ticker-wrap { background: linear-gradient(135deg, #be185d, #ec4899); color: #fff; padding: 8px 12px; font-size: 13px; font-weight: 700; overflow: hidden; white-space: nowrap; position: sticky; top: 0; z-index: 101; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .ticker-content { display: inline-block; animation: marquee 25s linear infinite; }
+        @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
         /* Header */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 14px 20px;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(251, 207, 232, 0.5);
-            position: sticky;
-            top: 36px;
-            z-index: 100;
-            box-shadow: 0 4px 6px -1px rgba(236, 72, 153, 0.05);
-        }
-        .logo {
-            font-size: 18px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #ec4899, #be185d);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(251, 207, 232, 0.5); position: sticky; top: 36px; z-index: 100; box-shadow: 0 4px 6px -1px rgba(236, 72, 153, 0.05); }
+        .logo { font-size: 18px; font-weight: 800; background: linear-gradient(135deg, #ec4899, #be185d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .header-controls { display: flex; gap: 8px; align-items: center; }
-        .lang-select {
-            background: #fdf2f8;
-            color: #be185d;
-            border: 1px solid #fbcfe8;
-            padding: 5px 8px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 12px;
-            cursor: pointer;
-        }
-        .logout-btn {
-            background: #fff1f2;
-            color: #e11d48;
-            border: 1px solid #fecdd3;
-            padding: 5px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 700;
-        }
+        .lang-select { background: #fdf2f8; color: #be185d; border: 1px solid #fbcfe8; padding: 5px 8px; border-radius: 8px; font-weight: 700; font-size: 12px; cursor: pointer; }
+        .logout-btn { background: #fff1f2; color: #e11d48; border: 1px solid #fecdd3; padding: 5px 12px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 700; }
 
-        .container {
-            padding: 20px;
-            max-width: 480px;
-            margin: 0 auto;
-        }
-        
-        .card {
-            background: #ffffff;
-            border: 1px solid rgba(252, 231, 243, 0.8);
-            border-radius: 24px;
-            padding: 24px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 30px -5px rgba(236, 72, 153, 0.1);
-        }
-        
-        .security-banner {
-            background: linear-gradient(to left, #f0fdf4, #dcfce7);
-            border: 1px solid #bbf7d0;
-            border-radius: 16px;
-            padding: 12px;
-            text-align: center;
-            font-size: 13px;
-            color: #15803d;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
+        .container { padding: 20px; max-width: 480px; margin: 0 auto; }
+        .card { background: #ffffff; border: 1px solid rgba(252, 231, 243, 0.8); border-radius: 24px; padding: 24px; margin-bottom: 20px; box-shadow: 0 10px 30px -5px rgba(236, 72, 153, 0.1); }
+        .security-banner { background: linear-gradient(to left, #f0fdf4, #dcfce7); border: 1px solid #bbf7d0; border-radius: 16px; padding: 12px; text-align: center; font-size: 13px; color: #15803d; font-weight: 700; margin-bottom: 20px; }
 
         /* تصميم الإعلان المدفوع */
-        .sponsored-ad-card {
-            background: linear-gradient(135deg, #fffbeb, #fef3c7);
-            border: 1.5px solid #f59e0b;
-            border-radius: 18px;
-            padding: 16px;
-            margin-bottom: 20px;
-            position: relative;
-            box-shadow: 0 6px 15px rgba(245, 158, 11, 0.15);
-        }
-        .ad-badge {
-            position: absolute;
-            top: -10px;
-            left: 15px;
-            background: #f59e0b;
-            color: #fff;
-            font-size: 10px;
-            font-weight: 800;
-            padding: 3px 10px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
+        .sponsored-ad-card { background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 1.5px solid #f59e0b; border-radius: 18px; padding: 16px; margin-bottom: 20px; position: relative; box-shadow: 0 6px 15px rgba(245, 158, 11, 0.15); }
+        .ad-badge { position: absolute; top: -10px; left: 15px; background: #f59e0b; color: #fff; font-size: 10px; font-weight: 800; padding: 3px 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .ad-title { font-size: 14px; font-weight: 800; color: #92400e; margin-bottom: 4px; }
         .ad-desc { font-size: 12px; color: #78350f; margin-bottom: 10px; line-height: 1.4; }
-        .ad-action-btn {
-            background: #d97706;
-            color: #fff;
-            border: none;
-            padding: 8px 14px;
-            border-radius: 10px;
-            font-size: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-        }
-        
+        .ad-action-btn { background: #d97706; color: #fff; border: none; padding: 8px 14px; border-radius: 10px; font-size: 12px; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-block; }
+
         .balance-title { color: #6b7280; font-size: 14px; font-weight: 500; }
         .balance-box { font-size: 34px; font-weight: 800; color: #be185d; margin: 8px 0; }
         .currencies-row { display: flex; justify-content: center; gap: 12px; margin-bottom: 16px; }
@@ -157,14 +39,11 @@
         .usd-value { color: #047857; background: #d1fae5; border: 1px solid #a7f3d0; }
         .diamond-value { color: #0369a1; background: #e0f2fe; border: 1px solid #bae6fd; }
 
-        .btn {
-            border: none; padding: 14px; width: 100%; font-size: 15px; font-weight: 700; border-radius: 14px; cursor: pointer; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px;
-        }
+        .btn { border: none; padding: 14px; width: 100%; font-size: 15px; font-weight: 700; border-radius: 14px; cursor: pointer; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; }
         .btn:active { transform: scale(0.97); }
         .btn-primary { background: linear-gradient(135deg, #ec4899, #be185d); color: #fff; box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3); margin-top: 10px; }
         .btn-secondary { background: linear-gradient(135deg, #0284c7, #0369a1); color: #fff; box-shadow: 0 8px 20px rgba(2, 132, 199, 0.2); margin-top: 10px; }
         .btn-success { background: linear-gradient(135deg, #10b981, #047857); color: #fff; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2); margin-top: 10px; }
-        .btn-admin { background: linear-gradient(135deg, #7c3aed, #4f46e5); color: #fff; box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3); margin-top: 10px; }
 
         /* Store */
         .store-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 15px; }
@@ -197,9 +76,6 @@
         .chat-send-btn { background: #be185d; color: #fff; border: none; padding: 0 16px; border-radius: 10px; font-weight: 700; cursor: pointer; }
 
         /* Admin */
-        .admin-form-group { margin-bottom: 14px; text-align: right; }
-        .admin-form-group label { display: block; font-size: 13px; font-weight: 700; color: #4b5563; margin-bottom: 6px; }
-        .admin-input { width: 100%; padding: 10px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 13px; font-weight: 700; outline: none; }
         .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
         .stat-box { background: #f9fafb; border: 1px solid #e5e7eb; padding: 12px; border-radius: 14px; text-align: center; }
         .stat-num { font-size: 18px; font-weight: 800; color: #7c3aed; margin-top: 4px; }
@@ -208,40 +84,14 @@
         .profile-avatar { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid #ec4899; margin: 0 auto 12px auto; display: block; box-shadow: 0 5px 15px rgba(236,72,153,0.3); }
         .profile-info-group { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 12px 16px; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
 
-        /* شريط التنقل السفلي المعدل ليحتوي على الأيقونات الـ 9 بدقة */
-        .nav-bar-wrapper {
-            position: fixed; bottom: 15px; left: 0; width: 100%; padding: 0 10px; z-index: 100; pointer-events: none;
-        }
-        .nav-bar {
-            pointer-events: auto;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(251, 207, 232, 0.8);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding: 8px 2px;
-            border-radius: 24px;
-            box-shadow: 0 15px 35px rgba(236, 72, 153, 0.15);
-            max-width: 480px;
-            margin: 0 auto;
-        }
-        .nav-item {
-            background: none; border: none; color: #9ca3af; font-size: 9px; font-weight: 700; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px; transition: all 0.3s ease; flex: 1; position: relative; padding: 4px 0;
-        }
+        /* Navigation */
+        .nav-bar-wrapper { position: fixed; bottom: 15px; left: 0; width: 100%; padding: 0 10px; z-index: 100; pointer-events: none; }
+        .nav-bar { pointer-events: auto; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(251, 207, 232, 0.8); display: flex; justify-content: space-around; align-items: center; padding: 8px 2px; border-radius: 24px; box-shadow: 0 15px 35px rgba(236, 72, 153, 0.15); max-width: 480px; margin: 0 auto; }
+        .nav-item { background: none; border: none; color: #9ca3af; font-size: 9px; font-weight: 700; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px; transition: all 0.3s ease; flex: 1; position: relative; padding: 4px 0; }
         .nav-item span.icon { font-size: 16px; transition: transform 0.3s; }
         .nav-item.active { color: #be185d; }
         .nav-item.active span.icon { transform: translateY(-3px) scale(1.1); }
-        .nav-item.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            width: 12px;
-            height: 3px;
-            background: #be185d;
-            border-radius: 3px;
-        }
+        .nav-item.active::after { content: ''; position: absolute; bottom: 0; width: 12px; height: 3px; background: #be185d; border-radius: 3px; }
 
         .section { display: none; animation: fadeIn 0.4s ease; }
         .section.active { display: block; }
@@ -298,11 +148,10 @@
     </header>
 
     <div class="container">
-        
         <!-- المحفظة -->
         <div id="wallet-section" class="section active">
             <div class="security-banner">🛡️ حماية متكاملة ومشفرة ضد الاختراق والتلاعب (نشطة)</div>
-
+            
             <div class="sponsored-ad-card">
                 <span class="ad-badge">إعلان ممول 💎</span>
                 <div class="ad-title">🚀 منصة رعاية برامج الذكاء الاصطناعي</div>
@@ -313,15 +162,12 @@
             <div class="card" style="text-align: center;">
                 <p class="balance-title">إجمالي الرصيد</p>
                 <div class="balance-box" id="userBalance">pt 1,315</div>
-                
                 <div class="currencies-row">
                     <span class="currency-badge diamond-value" id="userDiamonds">💎 35 جواهر</span>
                     <span class="currency-badge usd-value" id="userUsd">💵 $0.00 USD</span>
                 </div>
-
                 <button class="btn btn-secondary" onclick="convertDiamonds()">🔄 تحويل الجواهر (100💎 = 10pt)</button>
                 <button class="btn btn-success" onclick="openDepositModal()">➕ شحن الرصيد الخارجي</button>
-
                 <div style="margin-top: 15px; font-size: 13px; font-weight: 700; color: #4b5563;">
                     التصنيف: <span id="userLevel" style="color: #be185d;">مبتدئ 🌱</span>
                 </div>
@@ -334,7 +180,7 @@
             </div>
         </div>
 
-        <!-- رابط الدعوة (القسم الجديد كلياً) -->
+        <!-- رابط الدعوة -->
         <div id="invite-section" class="section">
             <div class="card" style="text-align: center;">
                 <div style="font-size: 40px; margin-bottom: 8px;">🔗</div>
@@ -342,14 +188,11 @@
                 <p style="font-size: 12px; color: #6b7280; margin-bottom: 20px; line-height: 1.5;">
                     شارك رابط الدعوة الخاص بك مع أصدقائك، واكسب <strong style="color: #be185d;">100 نقطة + 5 جواهر</strong> عن كل شخص يسجل من خلالك! 🚀
                 </p>
-
                 <div style="background: #f9fafb; border: 2px dashed #fbcfe8; border-radius: 14px; padding: 12px; margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between; gap: 8px;">
                     <input type="text" id="inviteLinkInput" value="https://aegiscash.app/ref?id=AEG-84920" readonly style="background: transparent; border: none; font-size: 11px; font-weight: 700; color: #4b5563; width: 100%; text-align: center; outline: none;">
                 </div>
-
                 <button class="btn btn-primary" onclick="copyInviteLink()">📋 نسخ رابط الدعوة</button>
                 <button class="btn btn-secondary" style="margin-top: 10px;" onclick="shareOnWhatsApp()">💬 مشاركة عبر واتساب</button>
-
                 <div style="margin-top: 20px; background: #fdf2f8; border-radius: 14px; padding: 12px; display: flex; justify-content: space-around;">
                     <div>
                         <div style="font-size: 11px; color: #6b7280; font-weight: 700;">الأصدقاء المدعوون</div>
@@ -368,7 +211,6 @@
             <div class="card" style="padding: 16px;">
                 <h3 style="color: #be185d; font-size: 17px; font-weight: 800; text-align: center; margin-bottom: 6px;">🎬 قسم مشاهدة الفيديوهات</h3>
                 <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;">شاهد الفيديوهات واكسب النقاط الفورية لحسابك 🎁</p>
-
                 <div class="video-card">
                     <div class="video-container">
                         <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
@@ -389,7 +231,6 @@
             <div class="card">
                 <h3 style="color: #be185d; margin-bottom: 4px; font-size: 17px; text-align: center; font-weight: 800;">🛍️ المتجر الرقمي</h3>
                 <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;">اشترِ الجواهر وبطاقات الإنترنت برصيدك</p>
-                
                 <div class="store-grid">
                     <div class="store-item">
                         <div class="store-icon">💎</div>
@@ -413,19 +254,16 @@
             <div class="card" style="padding: 16px;">
                 <h3 style="color: #be185d; font-size: 17px; font-weight: 800; text-align: center; margin-bottom: 10px;">💬 غرف الدردشة ودعم الأعضاء</h3>
                 <p style="font-size: 11px; color: #10b981; text-align: center; font-weight: 700; margin-bottom: 8px;">🛡️ فريق الدعم الفني وحماية الحسابات متواجد دائماً</p>
-                
                 <div class="chat-container">
                     <div class="chat-tabs">
                         <button class="chat-tab active" onclick="switchChatRoom('general', this)">العامة 🌸</button>
                         <button class="chat-tab" onclick="switchChatRoom('vip', this)">VIP 👑</button>
                         <button class="chat-tab" onclick="switchChatRoom('support', this)">الدعم 🛠️</button>
                     </div>
-                    
                     <div class="chat-messages" id="chatMessages">
                         <div class="chat-msg"><b>سارة:</b> أهلاً بالجميع في منصة Aegis المحمية! 👋</div>
                         <div class="chat-msg support-badge"><b>الدعم الفني (أحمد):</b> أهلاً بكم، تم تفعيل التحقق برقم الهاتف بنجاح 🛠️</div>
                     </div>
-                    
                     <div class="chat-input-area">
                         <input type="text" id="chatInput" class="chat-input" placeholder="اكتب رسالتك هنا..." onkeypress="handleChatKey(event)">
                         <button class="chat-send-btn" onclick="sendChatMessage()">إرسال</button>
@@ -439,7 +277,6 @@
             <div class="card" style="text-align: center;">
                 <h2 style="color: #be185d; margin-bottom: 4px; font-size: 18px; font-weight: 800;">🎡 عجلة الحظ اليومية</h2>
                 <p style="font-size: 12px; color: #6b7280; margin-bottom: 15px;" id="wheelSubtitle">لديك لفة مجانية اليوم! (بعدها التكلفة 100 جوهرة)</p>
-                
                 <div class="wheel-outer-wrapper">
                     <div class="wheel-border-glow">
                         <div class="wheel-inner-container">
@@ -449,7 +286,6 @@
                         </div>
                     </div>
                 </div>
-
                 <button class="btn btn-primary" onclick="spinWheel()" style="margin-top: 10px;">تدوير العجلة 🌀</button>
                 <p id="wheelResult" style="margin-top: 12px; font-size: 14px; font-weight: 800; color: #be185d;"></p>
             </div>
@@ -460,7 +296,6 @@
             <div class="card">
                 <h3 style="color: #7c3aed; font-size: 18px; font-weight: 800; text-align: center; margin-bottom: 6px;">⚙️ لوحة إدارة التطبيق والحماية</h3>
                 <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 20px;">التحكم بالإحصائيات، الأمان، ورقم الهاتف المرتبط</p>
-                
                 <div class="stats-grid">
                     <div class="stat-box">
                         <div style="font-size: 12px; color: #6b7280; font-weight: 700;">إجمالي المشتركين</div>
@@ -478,15 +313,14 @@
         <div id="profile-section" class="section">
             <div class="card">
                 <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="صورة المستخدم" class="profile-avatar">
-                <h2 style="font-size: 20px; font-weight: 800; text-align: center;" id="profileNameDisplay">جاسم العراقي</h2>
+                <h2 style="font-size: 20px; font-weight: 800; text-align: center;" id="profileName">جاسم العراقي</h2>
                 <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;" id="profilePhoneDisplay">📱 +964 780 000 0000</p>
-
                 <div class="profile-info-group">
                     <span style="color: #6b7280;">معرف الحساب (ID)</span>
                     <span style="font-weight: 800;">#AEG-84920</span>
                 </div>
-                
-                <button class="btn btn-secondary" style="margin-top: 15px;" onclick="openPhoneUpdateModal()">📱 تحديث رقم الهاتف والأمان</button>
+                <button class="btn btn-secondary" style="margin-top: 15px;" onclick="promptForUserName()">✏️ تعديل وتغيير الاسم الآمن</button>
+                <button class="btn btn-primary" style="margin-top: 10px;" onclick="openPhoneUpdateModal()">📱 تحديث رقم الهاتف والأمان</button>
             </div>
         </div>
 
@@ -495,49 +329,55 @@
             <div class="card" style="text-align: center;">
                 <h3 style="color: #be185d; margin-bottom: 8px; font-size: 17px; font-weight: 800;">💸 بوابة السحب الآمن</h3>
                 <p style="font-size: 13px; color: #6b7280; margin-bottom: 15px;">الحد الأدنى للسحب هو <strong style="color:#be185d;">10,000 نقطة</strong></p>
-                
                 <div style="background: #f9fafb; padding: 15px; border-radius: 14px; margin-bottom: 15px; border: 1px dashed #d1d5db;">
                     <div style="font-size: 20px; font-weight: 800;" id="progressText">1,315 / 10,000</div>
                     <div style="width: 100%; background: #e5e7eb; height: 8px; border-radius: 10px; margin-top: 8px; overflow: hidden;">
                         <div id="progressBar" style="width: 13%; background: #be185d; height: 100%; border-radius: 10px;"></div>
                     </div>
                 </div>
-
-                <button class="btn" id="withdrawBtn" style="background: #e5e7eb; color: #9ca3af; cursor: not-allowed;" disabled>الرصيد غير كافي 🔒</button>
+                <button class="btn btn-primary" id="withdrawBtn" onclick="requestWithdrawal()">طلب سحب الأرباح ✨</button>
             </div>
         </div>
-
     </div>
 
-    <!-- شريط التنقل السفلي المحدث ليشمل الأزرار الـ 9 بدقة وتناسق -->
+    <!-- شريط التنقل السفلي المحدث ليشمل الأزرار الـ 9 -->
     <div class="nav-bar-wrapper">
         <div class="nav-bar">
             <button class="nav-item active" onclick="switchTab('wallet', this)">
-                <span class="icon">💰</span> <span>محفظتي</span>
+                <span class="icon">💰</span>
+                <span>محفظتي</span>
             </button>
             <button class="nav-item" onclick="switchTab('invite', this)">
-                <span class="icon">🔗</span> <span>الدعوة</span>
+                <span class="icon">🔗</span>
+                <span>الدعوة</span>
             </button>
             <button class="nav-item" onclick="switchTab('videos', this)">
-                <span class="icon">🎬</span> <span>فيديوهات</span>
+                <span class="icon">🎬</span>
+                <span>فيديوهات</span>
             </button>
             <button class="nav-item" onclick="switchTab('store', this)">
-                <span class="icon">🛍️</span> <span>المتجر</span>
+                <span class="icon">🛍️</span>
+                <span>المتجر</span>
             </button>
             <button class="nav-item" onclick="switchTab('chat', this)">
-                <span class="icon">💬</span> <span>الدعم</span>
+                <span class="icon">💬</span>
+                <span>الدعم</span>
             </button>
             <button class="nav-item" onclick="switchTab('wheel', this)">
-                <span class="icon">🎡</span> <span>العجلة</span>
+                <span class="icon">🎡</span>
+                <span>العجلة</span>
             </button>
             <button class="nav-item" onclick="switchTab('admin', this)">
-                <span class="icon">⚙️</span> <span>الإدارة</span>
+                <span class="icon">⚙️</span>
+                <span>الإدارة</span>
             </button>
             <button class="nav-item" onclick="switchTab('profile', this)">
-                <span class="icon">👤</span> <span>حسابي</span>
+                <span class="icon">👤</span>
+                <span>حسابي</span>
             </button>
             <button class="nav-item" onclick="switchTab('withdraw', this)">
-                <span class="icon">💸</span> <span>السحب</span>
+                <span class="icon">💸</span>
+                <span>السحب</span>
             </button>
         </div>
     </div>
@@ -552,26 +392,38 @@
             hasFreeSpinToday: true
         };
 
-        function saveSecureState() {
-            try { localStorage.setItem(SECURITY_KEY, btoa(JSON.stringify(appData))); } catch(e) {}
+        // دالة الحفظ الشاملة لجميع بيانات التطبيق
+        function saveAppData() {
+            try {
+                localStorage.setItem(SECURITY_KEY, btoa(JSON.stringify(appData)));
+            } catch(e) {}
         }
 
-        function loadSecureState() {
+        // استرجاع كافة البيانات والاسم عند فتح التطبيق وتحديث الواجهة
+        function loadAppData() {
             try {
                 let saved = localStorage.getItem(SECURITY_KEY);
                 if (saved) {
                     let parsed = JSON.parse(atob(saved));
-                    if(parsed && typeof parsed.balance === 'number') appData = parsed;
+                    if(parsed && typeof parsed.balance === 'number') {
+                        appData = parsed;
+                    }
                 }
             } catch(e) {}
+
+            let savedName = localStorage.getItem('userName');
+            if (savedName) {
+                appData.userName = savedName;
+            }
         }
-        loadSecureState();
+
+        loadAppData();
 
         const diamondConversionRate = 10000;
         const minWithdrawPoints = 10000;
         let supportAgents = ["أحمد (الدعم الفني والتوثيق)", "ساره (خدمة الأمان والمشتركين)"];
-
         let modalCallback = null;
+
         function showAlert(title, text, icon) {
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalText').innerText = text;
@@ -594,7 +446,10 @@
             document.getElementById('customModal').classList.add('show');
         }
 
-        function closeModal() { document.getElementById('customModal').classList.remove('show'); }
+        function closeModal() {
+            document.getElementById('customModal').classList.remove('show');
+        }
+
         function confirmModalAction() {
             let val = document.getElementById('modalInput').value;
             closeModal();
@@ -606,14 +461,15 @@
             document.getElementById('userDiamonds').innerText = `💎 ${appData.diamonds.toLocaleString()} جواهر`;
             let usdValue = (appData.diamonds / diamondConversionRate).toFixed(2);
             document.getElementById('userUsd').innerText = `💵 $${usdValue} USD`;
-
             document.getElementById('progressText').innerText = `${appData.balance.toLocaleString()} / 10,000`;
             let progressPercentage = Math.min((appData.balance / minWithdrawPoints) * 100, 100);
             document.getElementById('progressBar').style.width = `${progressPercentage}%`;
-
-            document.getElementById('profileNameDisplay').innerText = appData.userName;
+            
+            let nameElement = document.getElementById('profileName');
+            if (nameElement) nameElement.innerText = appData.userName;
+            
             document.getElementById('profilePhoneDisplay').innerText = `📱 ${appData.userPhone}`;
-
+            
             const withdrawBtn = document.getElementById('withdrawBtn');
             if (appData.balance >= minWithdrawPoints) {
                 withdrawBtn.disabled = false;
@@ -622,13 +478,52 @@
                 withdrawBtn.style.cursor = "pointer";
                 withdrawBtn.innerText = "سحب الأرباح ✨";
             } else {
-                withdrawBtn.disabled = true;
-                withdrawBtn.style.background = "#e5e7eb";
-                withdrawBtn.style.color = "#9ca3af";
-                withdrawBtn.style.cursor = "not-allowed";
-                withdrawBtn.innerText = "الرصيد غير كافي 🔒";
+                withdrawBtn.disabled = false;
+                withdrawBtn.style.background = "linear-gradient(135deg, #ec4899, #be185d)";
+                withdrawBtn.style.color = "#fff";
+                withdrawBtn.style.cursor = "pointer";
+                withdrawBtn.innerText = "طلب سحب الأرباح ✨";
             }
-            saveSecureState();
+            saveAppData();
+        }
+
+        // دالة تغيير وحفظ الاسم الآمنة
+        function promptForUserName() {
+            showPrompt("تسجيل اسم المشترك 👤", "الرجاء إدخال اسمك الخاص للمتابعة", "✍️", (enteredName) => {
+                if (enteredName && enteredName.trim() !== "") {
+                    let newName = enteredName.trim();
+                    appData.userName = newName;
+                    localStorage.setItem('userName', newName);
+                    saveAppData();
+                    
+                    let nameElement = document.getElementById('profileName');
+                    if (nameElement) {
+                        nameElement.innerText = newName;
+                    }
+                    
+                    updateUI();
+                    showAlert("تم حفظ اسمك!", `مرحباً بك! 👋 ${newName}`, "✅");
+                } else {
+                    showAlert("تنبيه", "يجب إدخال اسم صحيح للمتابعة", "⚠️");
+                }
+            });
+        }
+
+        // دالة السحب الآمنة
+        function requestWithdrawal() {
+            if (appData.balance < minWithdrawPoints) {
+                showAlert("تنبيه", "عذراً رصيدك الحالي أقل من الحد الأدنى للسحب (10,000 نقطة)", "⚠️");
+                return;
+            }
+            showPrompt("تأكيد طلب السحب 💳", "أدخل رقم الحساب أو المحفظة المراد التحويل إليها", "🟦", (accountInfo) => {
+                if (accountInfo && accountInfo.trim() !== "") {
+                    appData.balance = 0;
+                    updateUI();
+                    showAlert("تم بنجاح!", "تم تقديم طلب السحب بنجاح! 🚀 سيتم التحويل قريباً.", "✅");
+                } else {
+                    showAlert("خطأ", "برجاء إدخال معلومات صحيحة لإتمام السحب", "❌");
+                }
+            });
         }
 
         function switchTab(tabName, btnElement) {
@@ -724,7 +619,6 @@
                 msgs.innerHTML += `<div class="chat-msg mine"><b>${appData.userName}:</b> ${text}</div>`;
                 input.value = "";
                 msgs.scrollTop = msgs.scrollHeight;
-
                 setTimeout(() => {
                     let randomAgent = supportAgents[Math.floor(Math.random() * supportAgents.length)];
                     msgs.innerHTML += `<div class="chat-msg support-badge"><b>${randomAgent}:</b> تم استلام استفسارك وتشفير الرسالة. نحن جاهزون للمساعدة! 🛠️</div>`;
@@ -733,7 +627,9 @@
             }
         }
 
-        function handleChatKey(e) { if (e.key === 'Enter') sendChatMessage(); }
+        function handleChatKey(e) {
+            if (e.key === 'Enter') sendChatMessage();
+        }
 
         const canvas = document.getElementById('luckyWheel');
         const ctx = canvas.getContext('2d');
@@ -747,7 +643,6 @@
             { text: "15 pt", type: "pts", value: 15, color: "#f472b6" },
             { text: "0 pt", type: "pts", value: 0, color: "#fbcfe8" }
         ];
-
         const arc = Math.PI / (slices.length / 2);
         let startAngle = 0;
         let spinning = false;
@@ -757,7 +652,6 @@
             const radius = 100;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             let center = canvas.width / 2;
-
             for (let i = 0; i < slices.length; i++) {
                 const angle = startAngle + i * arc;
                 ctx.fillStyle = slices[i].color;
@@ -768,7 +662,6 @@
                 ctx.strokeStyle = '#fff';
                 ctx.lineWidth = 2;
                 ctx.stroke();
-
                 ctx.save();
                 ctx.fillStyle = slices[i].color === "#be185d" ? "#fff" : "#1f2937";
                 ctx.translate(center + Math.cos(angle + arc / 2) * 65, center + Math.sin(angle + arc / 2) * 65);
@@ -792,23 +685,18 @@
                 appData.diamonds -= 100;
                 updateUI();
             }
-
             spinning = true;
             document.getElementById('wheelResult').innerText = "🌀 جاري تدوير العجلة بأمان...";
-            
             let randomSpin = Math.floor(Math.random() * 360) + 2880;
             currentAngle += randomSpin;
-            
             canvas.style.transition = "transform 5s cubic-bezier(0.2, 0.9, 0.1, 1)";
             canvas.style.transform = `rotate(${currentAngle}deg)`;
-
             setTimeout(() => {
                 spinning = false;
                 let actualDegree = currentAngle % 360;
                 let sliceDegree = 360 / slices.length;
                 let winningIndex = Math.floor((360 - (actualDegree % 360)) / sliceDegree) % slices.length;
                 let winItem = slices[winningIndex];
-
                 if (winItem.type === "pts") {
                     appData.balance += winItem.value;
                     document.getElementById('wheelResult').innerText = `🎉 ربحت ${winItem.value} نقطة!`;
