@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aegis Cash - المنصة المتكاملة</title>
+    <title>Aegis Cash - المنصة المتكاملة ومتجر الأبواب</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tajawal', sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -46,14 +46,24 @@
         .btn-success { background: linear-gradient(135deg, #10b981, #047857); color: #fff; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2); margin-top: 10px; }
         .btn:disabled { background: #d1d5db !important; color: #9ca3af !important; box-shadow: none !important; cursor: not-allowed !important; transform: none !important; opacity: 0.7; }
 
-        /* Store */
-        .store-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 15px; }
-        .store-item { background: #fff; border: 2px solid #fce7f3; border-radius: 20px; padding: 14px; text-align: center; position: relative; }
-        .badge-hot { position: absolute; top: -10px; right: -10px; background: #ef4444; color: #fff; font-size: 10px; font-weight: 800; padding: 3px 7px; border-radius: 8px; }
-        .store-icon { font-size: 32px; margin-bottom: 8px; }
+        /* Store Multi-Doors Styles */
+        .store-doors-tabs { display: flex; gap: 6px; margin-bottom: 15px; overflow-x: auto; padding-bottom: 5px; }
+        .store-door-tab { background: #fdf2f8; border: 1px solid #fbcfe8; color: #be185d; padding: 6px 12px; border-radius: 10px; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+        .store-door-tab.active { background: #be185d; color: #fff; border-color: #be185d; }
+        
+        .door-section { display: none; }
+        .door-section.active { display: block; }
+
+        .store-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 10px; }
+        .store-item { background: #fff; border: 2px solid #fce7f3; border-radius: 20px; padding: 12px; text-align: center; position: relative; display: flex; flex-direction: column; justify-content: space-between; }
+        .store-img { width: 100%; height: 110px; object-fit: cover; border-radius: 12px; margin-bottom: 8px; background: #f9fafb; border: 1px solid #f3f4f6; }
         .store-title { font-size: 13px; font-weight: 800; color: #1f2937; margin-bottom: 4px; }
-        .store-price { font-size: 12px; color: #be185d; font-weight: 700; margin-bottom: 10px; background: #fdf2f8; padding: 4px; border-radius: 6px; }
+        .store-price { font-size: 12px; color: #be185d; font-weight: 700; margin-bottom: 8px; background: #fdf2f8; padding: 4px; border-radius: 6px; }
         .buy-btn { background: #fdf2f8; color: #be185d; border: 1px solid #fbcfe8; padding: 6px; width: 100%; border-radius: 8px; font-size: 12px; font-weight: 800; cursor: pointer; }
+        
+        /* نموذج إضافة منتج جديد */
+        .add-product-box { background: #fdf2f8; border: 2px dashed #fbcfe8; border-radius: 18px; padding: 16px; margin-top: 20px; }
+        .form-input { width: 100%; padding: 10px; border: 1px solid #fbcfe8; border-radius: 10px; margin-bottom: 10px; font-size: 13px; outline: none; background: #fff; }
 
         /* Videos Section */
         .video-card { background: #fff; border: 1px solid #fce7f3; border-radius: 16px; overflow: hidden; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(236,72,153,0.05); }
@@ -227,25 +237,87 @@
             </div>
         </div>
 
-        <!-- المتجر -->
+        <!-- المتجر الرقمي المتعدد الأبواب ومع رفع المنتجات -->
         <div id="store-section" class="section">
-            <div class="card">
-                <h3 style="color: #be185d; margin-bottom: 4px; font-size: 17px; text-align: center; font-weight: 800;">🛍️ المتجر الرقمي</h3>
-                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;">اشترِ الجواهر وبطاقات الإنترنت برصيدك</p>
-                <div class="store-grid">
-                    <div class="store-item">
-                        <div class="store-icon">💎</div>
-                        <div class="store-title">50 جوهرة</div>
-                        <div class="store-price">500 نقطة</div>
-                        <button class="buy-btn" onclick="buyItem('50 جوهرة', 500)">شراء</button>
+            <div class="card" style="padding: 16px;">
+                <h3 style="color: #be185d; margin-bottom: 4px; font-size: 17px; text-align: center; font-weight: 800;">🛍️ المتجر الرقمي متعدد الأبواب</h3>
+                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 12px;">تصفح الأبواب المختلفة أو أضف منتجك الخاص مع صورة وسعر</p>
+                
+                <!-- أزرار تبديل الأبواب -->
+                <div class="store-doors-tabs">
+                    <button class="store-door-tab active" onclick="switchStoreDoor('door1', this)">💎 باب الجواهر</button>
+                    <button class="store-door-tab" onclick="switchStoreDoor('door2', this)">🚀 الخدمات الرقمية</button>
+                    <button class="store-door-tab" onclick="switchStoreDoor('door3', this)">🎁 العروض الخاصة</button>
+                    <button class="store-door-tab" onclick="switchStoreDoor('doorCustom', this)">✨ باب الأعضاء</button>
+                </div>
+
+                <!-- محتوى الأبواب -->
+                <div id="door1" class="door-section active">
+                    <div class="store-grid">
+                        <div class="store-item">
+                            <div>
+                                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=300&q=80" class="store-img" alt="جوهرة">
+                                <div class="store-title">50 جوهرة</div>
+                                <div class="store-price">500 نقطة</div>
+                            </div>
+                            <button class="buy-btn" onclick="buyItem('50 جوهرة', 500)">شراء</button>
+                        </div>
+                        <div class="store-item">
+                            <div>
+                                <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=300&q=80" class="store-img" alt="جوهرة">
+                                <div class="store-title">200 جوهرة 🔥</div>
+                                <div class="store-price">1,800 نقطة</div>
+                            </div>
+                            <button class="buy-btn" onclick="buyItem('200 جوهرة', 1800)">شراء</button>
+                        </div>
                     </div>
-                    <div class="store-item">
-                        <div class="badge-hot">مميز 🔥</div>
-                        <div class="store-icon">💎</div>
-                        <div class="store-title">200 جوهرة</div>
-                        <div class="store-price">1,800 نقطة</div>
-                        <button class="buy-btn" onclick="buyItem('200 جوهرة', 1800)">شراء</button>
+                </div>
+
+                <div id="door2" class="door-section">
+                    <div class="store-grid" id="grid-door2">
+                        <div class="store-item">
+                            <div>
+                                <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=300&q=80" class="store-img" alt="خدمة">
+                                <div class="store-title">استضافة سحابية</div>
+                                <div class="store-price">3,000 نقطة</div>
+                            </div>
+                            <button class="buy-btn" onclick="buyItem('استضافة سحابية', 3000)">شراء</button>
+                        </div>
                     </div>
+                </div>
+
+                <div id="door3" class="door-section">
+                    <div class="store-grid" id="grid-door3">
+                        <div class="store-item">
+                            <div>
+                                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=300&q=80" class="store-img" alt="عرض">
+                                <div class="store-title">بطاقة تفعيل VIP</div>
+                                <div class="store-price">5,000 نقطة</div>
+                            </div>
+                            <button class="buy-btn" onclick="buyItem('بطاقة تفعيل VIP', 5000)">شراء</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="doorCustom" class="door-section">
+                    <div class="store-grid" id="grid-doorCustom">
+                        <!-- المنتجات المضافة بواسطة المستخدم ستظهر هنا -->
+                    </div>
+                </div>
+
+                <!-- نموذج رفع منتج جديد مع صورة وسعر -->
+                <div class="add-product-box">
+                    <h4 style="font-size: 14px; font-weight: 800; color: #be185d; margin-bottom: 8px;">➕ إضافة منتج جديد لمتجرك</h4>
+                    <select id="newProductDoor" class="form-input">
+                        <option value="door2">الباب الثاني: الخدمات الرقمية</option>
+                        <option value="door3">الباب الثالث: العروض الخاصة</option>
+                        <option value="doorCustom">باب الأعضاء المخصص</option>
+                    </select>
+                    <input type="text" id="newProductName" class="form-input" placeholder="اسم المنتج...">
+                    <input type="number" id="newProductPrice" class="form-input" placeholder="السعر بالنقاط (مثال: 500)...">
+                    <div style="font-size: 11px; font-weight: 700; color: #6b7280; margin-bottom: 4px;">اختر صورة المنتج من جهازك:</div>
+                    <input type="file" id="newProductImage" class="form-input" accept="image/*" style="padding: 6px;">
+                    <button class="btn btn-primary" style="margin-top: 4px; padding: 10px; font-size: 13px;" onclick="addNewProductToStore()">رفع ونشر المنتج 🚀</button>
                 </div>
             </div>
         </div>
@@ -391,7 +463,8 @@
             userName: "جاسم العراقي",
             userPhone: "+964 780 000 0000",
             hasFreeSpinToday: true,
-            lastDailyClaimDate: null
+            lastDailyClaimDate: null,
+            customProducts: [] // لتخزين المنتجات المضافة مع الصور
         };
 
         // دالة الحفظ الشاملة لجميع بيانات التطبيق
@@ -472,7 +545,9 @@
             
             document.getElementById('profilePhoneDisplay').innerText = `📱 ${appData.userPhone}`;
             
-            // التحقق الدقيق من حالة المكافأة اليومية (مرة واحدة كل 24 ساعة)
+            renderCustomProducts();
+
+            // التحقق الدقيق من حالة المكافأة اليومية
             let dailyBtn = document.getElementById('dailyRewardBtn');
             let dailySub = document.getElementById('dailySubtitle');
             if (appData.lastDailyClaimDate) {
@@ -498,7 +573,103 @@
             saveAppData();
         }
 
-        // دالة استلام المكافأة اليومية المحمية بدقة (مرة واحدة كل 24 ساعة)
+        // التبديل بين أبواب المتجر
+        function switchStoreDoor(doorId, btnElement) {
+            document.querySelectorAll('.door-section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.store-door-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(doorId).classList.add('active');
+            btnElement.classList.add('active');
+        }
+
+        // رفع منتج جديد مع صورة وسعر وتوجيهه للباب المحدد
+        function addNewProductToStore() {
+            let door = document.getElementById('newProductDoor').value;
+            let name = document.getElementById('newProductName').value.trim();
+            let price = Number(document.getElementById('newProductPrice').value);
+            let imageInput = document.getElementById('newProductImage');
+
+            if (!name || !price || price <= 0) {
+                showAlert("تنبيه", "يرجى كتابة اسم المنتج وتحديد سعر صحيح.", "⚠️");
+                return;
+            }
+
+            if (imageInput.files && imageInput.files[0]) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    let imageUrl = e.target.result;
+                    appData.customProducts.push({ door, name, price, imageUrl });
+                    saveAppData();
+                    updateUI();
+                    
+                    // إعادة تعيين الحقول
+                    document.getElementById('newProductName').value = '';
+                    document.getElementById('newProductPrice').value = '';
+                    imageInput.value = '';
+                    showAlert("نجح الرفع! 🎉", "تم إضافة المنتج بنجاح إلى الباب المحدد في المتجر.", "✅");
+                };
+                reader.readAsDataURL(imageInput.files[0]);
+            } else {
+                showAlert("صورة مطلوبة", "يرجى اختيار صورة للمنتج من جهازك.", "🖼️");
+            }
+        }
+
+        // عرض المنتجات المضافة في أبوابها
+        function renderCustomProducts() {
+            let door2Grid = document.getElementById('grid-door2');
+            let door3Grid = document.getElementById('grid-door3');
+            let doorCustomGrid = document.getElementById('grid-doorCustom');
+
+            // الاحتفاظ بالمنتجات الافتراضية وإضافة المرفوعة
+            let defaultDoor2 = `
+                <div class="store-item">
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=300&q=80" class="store-img" alt="خدمة">
+                        <div class="store-title">استضافة سحابية</div>
+                        <div class="store-price">3,000 نقطة</div>
+                    </div>
+                    <button class="buy-btn" onclick="buyItem('استضافة سحابية', 3000)">شراء</button>
+                </div>`;
+            
+            let defaultDoor3 = `
+                <div class="store-item">
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=300&q=80" class="store-img" alt="عرض">
+                        <div class="store-title">بطاقة تفعيل VIP</div>
+                        <div class="store-price">5,000 نقطة</div>
+                    </div>
+                    <button class="buy-btn" onclick="buyItem('بطاقة تفعيل VIP', 5000)">شراء</button>
+                </div>`;
+
+            let html2 = defaultDoor2;
+            let html3 = defaultDoor3;
+            let htmlCustom = "";
+
+            appData.customProducts.forEach((prod, index) => {
+                let itemHtml = `
+                    <div class="store-item">
+                        <div>
+                            <img src="${prod.imageUrl}" class="store-img" alt="${prod.name}">
+                            <div class="store-title">${prod.name}</div>
+                            <div class="store-price">${prod.price.toLocaleString()} نقطة</div>
+                        </div>
+                        <button class="buy-btn" onclick="buyItem('${prod.name}', ${prod.price})">شراء</button>
+                    </div>`;
+                
+                if (prod.door === 'door2') html2 += itemHtml;
+                else if (prod.door === 'door3') html3 += itemHtml;
+                else if (prod.door === 'doorCustom') htmlCustom += itemHtml;
+            });
+
+            door2Grid.innerHTML = html2;
+            door3Grid.innerHTML = html3;
+            if (htmlCustom === "") {
+                doorCustomGrid.innerHTML = `<div style="grid-column: span 2; text-align: center; color: #6b7280; font-size: 12px; padding: 20px;">لا توجد منتجات في هذا الباب حالياً. أضف منتجك الأول بالأسفل! ✨</div>`;
+            } else {
+                doorCustomGrid.innerHTML = htmlCustom;
+            }
+        }
+
+        // دالة استلام المكافأة اليومية
         function claimDaily() {
             if (appData.lastDailyClaimDate) {
                 let lastClaim = new Date(appData.lastDailyClaimDate);
@@ -525,16 +696,8 @@
                     appData.userName = newName;
                     localStorage.setItem('userName', newName);
                     saveAppData();
-                    
-                    let nameElement = document.getElementById('profileName');
-                    if (nameElement) {
-                        nameElement.innerText = newName;
-                    }
-                    
                     updateUI();
                     showAlert("تم حفظ اسمك!", `مرحباً بك! 👋 ${newName}`, "✅");
-                } else {
-                    showAlert("تنبيه", "يجب إدخال اسم صحيح للمتابعة", "⚠️");
                 }
             });
         }
@@ -549,8 +712,6 @@
                     appData.balance = 0;
                     updateUI();
                     showAlert("تم بنجاح!", "تم تقديم طلب السحب بنجاح! 🚀 سيتم التحويل قريباً.", "✅");
-                } else {
-                    showAlert("خطأ", "برجاء إدخال معلومات صحيحة لإتمام السحب", "❌");
                 }
             });
         }
