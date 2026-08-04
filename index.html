@@ -64,7 +64,7 @@
         .add-product-box { background: #fdf2f8; border: 2px dashed #fbcfe8; border-radius: 18px; padding: 16px; margin-top: 20px; }
         .form-input { width: 100%; padding: 10px; border: 1px solid #fbcfe8; border-radius: 10px; margin-bottom: 10px; font-size: 13px; outline: none; background: #fff; }
 
-        /* Videos Section Updated Styles */
+        /* Videos Section Styles */
         .video-options-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; }
         .video-option-card { background: #f9fafb; border: 2px solid #fce7f3; border-radius: 16px; padding: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.2s; }
         .video-option-card.selected { border-color: #be185d; background: #fdf2f8; }
@@ -219,11 +219,11 @@
             </div>
         </div>
 
-        <!-- قسم مشاهدة الفيديوهات المطور (خيارات، عداد زمني، وتقاسم الأرباح) -->
+        <!-- قسم مشاهدة الفيديوهات المطور (مع عداد متزامن تلقائياً وتقاسم الأرباح 50/50) -->
         <div id="videos-section" class="section">
             <div class="card" style="padding: 16px;">
-                <h3 style="color: #be185d; font-size: 17px; font-weight: 800; text-align: center; margin-bottom: 6px;">🎬 قسم مشاهدة الفيديوهات والمواقع المربحة</h3>
-                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;">اختر مقطعاً أو موقعاً، أكمل وقت المشاهدة، واحصل على أرباحك المقسمة تلقائياً! 🎁</p>
+                <h3 style="color: #be185d; font-size: 17px; font-weight: 800; text-align: center; margin-bottom: 6px;">🎬 مشاهدة الفيديوهات والمواقع المربحة</h3>
+                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;">اختر مقطعاً ليبدأ العد التنازلي للمشاهدة فوراً وتقاسم الأرباح (50% لكل طرف)! 🎁</p>
                 
                 <!-- خيارات الفيديوهات والمواقع المتاحة -->
                 <div class="video-options-list" id="videoOptionsList">
@@ -232,7 +232,7 @@
                             <div style="font-size: 13px; font-weight: 800;">🎥 فيديو: مقدمة التطبيقات السحابية</div>
                             <div style="font-size: 11px; color: #6b7280; margin-top: 2px;">المدة: 15 ثانية | المكافأة: 30 نقطة</div>
                         </div>
-                        <span style="font-size: 12px; font-weight: 800; color: #be185d;">اختر</span>
+                        <span style="font-size: 12px; font-weight: 800; color: #be185d;">نشط الآن</span>
                     </div>
                     <div class="video-option-card" onclick="selectVideoOption(1, this)">
                         <div>
@@ -250,17 +250,16 @@
                     </div>
                 </div>
 
-                <!-- مشغل الفيديو والعداد التنازلي -->
+                <!-- مشغل الفيديو والعداد المتزامن تلقائياً -->
                 <div class="video-card">
                     <div class="video-container">
                         <iframe id="activeVideoFrame" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
                     </div>
                     <div class="video-info">
                         <div id="activeVideoTitle" style="font-size: 13px; font-weight: 800; color: #1f2937;">مقدمة في تطوير التطبيقات السحابية</div>
-                        <div class="timer-display" id="videoTimerDisplay">⏳ يرجى البدء للمشاهدة (15 ثانية)</div>
-                        <div class="revenue-share-badge" id="revenueShareText">📊 تقاسم الأرباح: 70% للمشترك | 30% للمنصة</div>
-                        <button class="btn btn-primary" id="startWatchBtn" onclick="startVideoTimer()" style="margin-top: 10px;">بدء المشاهدة وبدء العداد ⏱️</button>
-                        <button class="btn btn-success" id="claimVideoBtn" onclick="claimVideoRewardWithSplit()" style="margin-top: 8px; display:none;">استلام المكافأة المقسمة ⭐</button>
+                        <div class="timer-display" id="videoTimerDisplay">⏳ جاري العد التنازلي للمشاهدة: 15 ثانية</div>
+                        <div class="revenue-share-badge" id="revenueShareText">📊 تقاسم الأرباح: 50% للمشترك | 50% للمنصة</div>
+                        <button class="btn btn-success" id="claimVideoBtn" onclick="claimVideoRewardWithSplit()" style="margin-top: 10px; display:none;">استلام المكافأة المقسمة ⭐</button>
                     </div>
                 </div>
             </div>
@@ -521,7 +520,7 @@
         let supportAgents = ["أحمد (الدعم الفني والتوثيق)", "ساره (خدمة الأمان والمشتركين)"];
         let modalCallback = null;
 
-        // إعدادات خيارات الفيديوهات والمواقع المربحة مع وقت ومشاهدة وتقاسم الأرباح
+        // إعدادات خيارات الفيديوهات والمواقع المربحة مع وقت مشاهدة تلقائي وتقاسم الأرباح 50/50
         const videoOptionsData = [
             { title: "مقدمة في تطوير التطبيقات السحابية", duration: 15, reward: 30, url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
             { title: "موقع ترويج رقمي مدفوع (CPA)", duration: 30, reward: 60, url: "https://www.youtube.com/embed/3JZ_D3ELwOQ" },
@@ -604,7 +603,7 @@
             saveAppData();
         }
 
-        // اختيار فيديو أو موقع من القائمة المحدثة
+        // اختيار فيديو أو موقع وبدء العد التنازلي للمشاهدة فوراً بشكل متزامن
         function selectVideoOption(index, element) {
             document.querySelectorAll('.video-option-card').forEach(card => card.classList.remove('selected'));
             element.classList.add('selected');
@@ -613,61 +612,50 @@
 
             document.getElementById('activeVideoTitle').innerText = vData.title;
             document.getElementById('activeVideoFrame').src = vData.url;
-            document.getElementById('timer-display') || (document.getElementById('videoTimerDisplay').innerText = `⏳ يرجى البدء للمشاهدة (${vData.duration} ثانية)`);
-            document.getElementById('startWatchBtn').style.display = 'block';
             document.getElementById('claimVideoBtn').style.display = 'none';
 
-            if (videoTimerInterval) clearInterval(videoTimerInterval);
+            // تشغيل العداد التنازلي تلقائياً عند الاختيار
+            startAutomaticVideoTimer(vData.duration);
         }
 
-        // بدء العداد التنازلي للمشاهدة
-        function startVideoTimer() {
-            let vData = videoOptionsData[currentSelectedVideoIndex];
-            timeLeft = vData.duration;
-            let startBtn = document.getElementById('startWatchBtn');
+        function startAutomaticVideoTimer(duration) {
+            if (videoTimerInterval) clearInterval(videoTimerInterval);
+            timeLeft = duration;
             let timerDisp = document.getElementById('videoTimerDisplay');
             let claimBtn = document.getElementById('claimVideoBtn');
 
-            startBtn.disabled = true;
-            startBtn.innerText = "جاري احتساب وقت المشاهدة... ⏱️";
-
-            if (videoTimerInterval) clearInterval(videoTimerInterval);
+            timerDisp.innerText = `⏳ جاري العد التنازلي للمشاهدة: ${timeLeft} ثانية`;
 
             videoTimerInterval = setInterval(() => {
                 timeLeft--;
-                timerDisp.innerText = `⏳ متبقي على انتهاء المشاهدة: ${timeLeft} ثانية`;
+                timerDisp.innerText = `⏳ جاري العد التنازلي للمشاهدة: ${timeLeft} ثانية`;
                 if (timeLeft <= 0) {
                     clearInterval(videoTimerInterval);
-                    timerDisp.innerText = "✅ اكتملت المشاهدة بنجاح!";
-                    startBtn.style.display = 'none';
+                    timerDisp.innerText = "✅ اكتملت مشاهدة الفيديو بنجاح!";
                     claimBtn.style.display = 'block';
                 }
             }, 1000);
         }
 
-        // استلام المكافأة وتقسيم الأرباح بين المشترك (70%) ومالك التطبيق (30%)
+        // استلام المكافأة وتقسيم الأرباح بالتساوي (50% للمشترك و 50% للمنصة)
         function claimVideoRewardWithSplit() {
             let vData = videoOptionsData[currentSelectedVideoIndex];
             let totalReward = vData.reward;
-            let userShare = Math.round(totalReward * 0.70); // 70% للمشترك
-            let ownerShare = totalReward - userShare; // 30% لمالك التطبيق
+            let userShare = Math.round(totalReward * 0.50); // 50% للمشترك
+            let ownerShare = totalReward - userShare; // 50% للمنصة
 
             appData.balance += userShare;
             updateUI();
 
             showAlert(
-                "نجاح تقاسم الأرباح! 💰", 
-                `تمت إضافتك لأرباح المشاهدة بنجاح:\n\n• حصتك (70%): +${userShare} نقطة\n• حصة المنصة (30%): +${ownerShare} نقطة\n\nشكراً لتفاعلكم المستمر! ✨`, 
+                "نجاح تقاسم الأرباح (50/50)! 💰", 
+                `تمت إضافتك لأرباح المشاهدة بنجاح:\n\n• حصتك (50%): +${userShare} نقطة\n• حصة المنصة (50%): +${ownerShare} نقطة\n\nشكراً لتفاعلكم المستمر! ✨`, 
                 "🎉"
             );
 
-            // إعادة تعيين أزرار القسم
-            let startBtn = document.getElementById('startWatchBtn');
-            startBtn.disabled = false;
-            startBtn.innerText = "بدء المشاهدة وبدء العداد ⏱️";
-            startBtn.style.display = 'block';
             document.getElementById('claimVideoBtn').style.display = 'none';
-            document.getElementById('videoTimerDisplay').innerText = `⏳ يرجى البدء للمشاهدة (${vData.duration} ثانية)`;
+            // إعادة تفعيل العد التنازلي تلقائياً للمشاهدة التالية إذا رغب المستخدم
+            startAutomaticVideoTimer(vData.duration);
         }
 
         // التبديل بين أبواب المتجر
@@ -815,6 +803,12 @@
             document.getElementById(tabName + '-section').classList.add('active');
             btnElement.classList.add('active');
             if(tabName === 'wheel') drawWheel();
+            if(tabName === 'videos') {
+                // بدء العداد التنازلي تلقائياً عند فتح تبويب الفيديوهات
+                startAutomaticVideoTimer(videoOptionsData[currentSelectedVideoIndex].duration);
+            } else {
+                if (videoTimerInterval) clearInterval(videoTimerInterval);
+            }
         }
 
         function copyInviteLink() {
@@ -980,6 +974,7 @@
 
         drawWheel();
         updateUI();
+        startAutomaticVideoTimer(videoOptionsData[0].duration);
     </script>
 </body>
 </html>
