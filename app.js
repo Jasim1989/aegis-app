@@ -22,7 +22,6 @@ function updateUI() {
     state.usd = (state.points * 0.001).toFixed(2);
     document.getElementById('userUsd').innerText = '💵 $' + state.usd + ' USD';
     
-    // تحديث لوحة التحكم إن وجدت
     let adminPts = document.getElementById('adminPointsCount');
     if(adminPts) adminPts.innerText = state.points;
     
