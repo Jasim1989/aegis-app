@@ -3,45 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aegis Cash - منصة استضافة الفيديوهات والأرباح</title>
+    <title>Aegis Cash - شبابه تطبيق سنتات</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="ticker-wrap">
         <div class="ticker-content">
-            🌸 أهلاً بكم في Aegis Cash! | استضف فيديوهاتك الآن واحصل على أرباح ونظام عمولة شفاف بالكامل 💎
+            🦋 أهلاً بك في تطبيق Aegis Cash! اجمع النقاط، استضف فيديوهاتك، واربح الجوائز والأجهزة الذكية 💎
         </div>
     </div>
 
     <header>
-        <div class="logo">🌸 Aegis Cash</div>
+        <div class="logo">🦋 Aegis Cash</div>
     </header>
 
     <div class="container">
-        <!-- 1. المحفظة والشفافية -->
+        <!-- 1. المحفظة والجوائز -->
         <div id="wallet-section" class="section active">
             <div class="card" style="text-align: center;">
-                <p class="balance-title">إجمالي الرصيد</p>
-                <div class="balance-box" id="userBalance">pt 1,315</div>
+                <p class="balance-title">رصيد النقاط (سنتات)</p>
+                <div class="balance-box" id="userBalance">pt 2,450</div>
                 <div class="currencies-row">
-                    <span class="currency-badge diamond-value" id="userDiamonds">💎 35 جواهر</span>
-                    <span class="currency-badge usd-value" id="userUsd">💵 $0.00 USD</span>
+                    <span class="currency-badge diamond-value" id="userDiamonds">💎 120 جواهر</span>
+                    <span class="currency-badge usd-value" id="userUsd">💵 $2.45 USD</span>
                 </div>
             </div>
 
+            <!-- زر الفراشة الشهير (مثل سنتات) -->
+            <div class="card" style="text-align: center; background: linear-gradient(135deg, #fdf2f8, #fce7f3);">
+                <h3 style="color: #be185d; font-size: 15px; font-weight: 800; margin-bottom: 6px;">🦋 زر الفراشة السحري</h3>
+                <p style="font-size: 11px; color: #6b7280; margin-bottom: 12px;">اضغط كل فترة لاكتساب نقاط إضافية ومضاعفة رصيدك!</p>
+                <button class="btn btn-primary" onclick="clickButterfly()" style="font-size: 14px; padding: 12px;">اضغط الفراشة واكسب 🦋</button>
+            </div>
+
             <div class="card">
-                <h3 style="color: #be185d; font-size: 14px; font-weight: 800; margin-bottom: 8px; text-align: center;">🛡️ سجل الشفافية والموثوقية</h3>
+                <h3 style="color: #be185d; font-size: 14px; font-weight: 800; margin-bottom: 8px; text-align: center;">🛡️ سجل الأرباح والنشاطات</h3>
                 <div id="transparencyLogList"></div>
             </div>
         </div>
 
-        <!-- 2. قسم الفيديوهات -->
-        <div id="videos-section" class="section">
-            <div class="card" style="text-align: center;">
-                <h3 style="color: #be185d; font-size: 15px; font-weight: 800; margin-bottom: 10px;">🎬 مشاهدة فيديوهات الأعضاء</h3>
-                <p style="font-size: 12px; color: #6b7280; margin-bottom: 15px;">شاهد الفيديوهات المستضافة واكسب أرباحك وعمولاتك بشفافية.</p>
-                <button class="btn btn-primary" onclick="state.points += 30; addLog('مشاهدة فيديو مستضاف', '+30 نقطة'); updateUI(); alert('تمت إضافة 30 نقطة بنجاح!');">مشاهدة فيديو واكتساب أرباح ⏱️</button>
+        <!-- 2. متجر الهدايا والجوائز -->
+        <div id="store-section" class="section">
+            <div class="card">
+                <h3 style="color: #be185d; font-size: 15px; font-weight: 800; margin-bottom: 10px; text-align: center;">🎁 متجر الجوائز والأجهزة</h3>
+                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;">استبدل نقاطك بأجهزة ذكية وبطاقات رقمية بكل شفافية:</p>
+                
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #fdf2f8; padding: 10px; border-radius: 12px; border: 1px solid #fce7f3;">
+                        <span style="font-size: 12px; font-weight: bold;">📱 هاتف ذكي (iPhone / Samsung)</span>
+                        <button class="btn btn-primary" style="width: auto; padding: 6px 12px; font-size: 11px;" onclick="redeemPrize('هاتف ذكي', 50000)">50,000 نقطة</button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #fdf2f8; padding: 10px; border-radius: 12px; border: 1px solid #fce7f3;">
+                        <span style="font-size: 12px; font-weight: bold;">💵 بطاقة هدايا 10 دولار</span>
+                        <button class="btn btn-primary" style="width: auto; padding: 6px 12px; font-size: 11px;" onclick="redeemPrize('بطاقة 10 دولار', 10000)">10,000 نقطة</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -49,21 +66,12 @@
         <div id="hostvideo-section" class="section">
             <div class="card">
                 <h3 style="color: #be185d; font-size: 15px; font-weight: 800; margin-bottom: 12px; text-align: center;">🎥 استضافة فيديوهاتك مقابل عمولة</h3>
-                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;">ارفع أو اربط فيديوهاتك لعرضها على مستخدمي التطبيق بنظام عمولة مباشر وموثوق:</p>
+                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;">ارفع فيديوهاتك لعرضها على مستخدمي التطبيق بنظام عمولة ونقاط عادل:</p>
                 
                 <input type="text" id="videoTitleInput" class="input-field" placeholder="عنوان الفيديو...">
                 <input type="text" id="videoUrlInput" class="input-field" placeholder="رابط الفيديو (يوتيوب أو رابط مباشر)...">
-                <input type="number" id="videoCommissionInput" class="input-field" placeholder="نسبة العمولة أو النقاط لكل مشاهدة...">
+                <input type="number" id="videoCommissionInput" class="input-field" placeholder="النقاط الممنوحة لكل مشاهدة...">
                 <button class="btn btn-primary" onclick="submitVideoHosting()">نشر الفيديو للاستضافة 🚀</button>
-                
-                <div style="margin-top: 20px;">
-                    <h4 style="font-size: 13px; color: #be185d; font-weight: 800; margin-bottom: 8px;">الفيديوهات المستضافة حالياً:</h4>
-                    <div id="hostedVideosList">
-                        <div style="background: #fdf2f8; border: 1px solid #fce7f3; border-radius: 12px; padding: 10px; font-size: 11px; margin-bottom: 6px;">
-                            <strong>فيديو:</strong> مقدمة في الطهي المنزلي (العمولة: 15 نقطة/مشاهدة)
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -71,26 +79,27 @@
         <div id="wheel-section" class="section">
             <div class="card" style="text-align: center;">
                 <h3 style="color: #be185d; font-size: 15px; font-weight: 800; margin-bottom: 10px;">🎡 عجلة الحظ اليومية</h3>
-                <p style="font-size: 12px; color: #6b7280; margin-bottom: 15px;">جرب حظك واربح نقاطاً إضافية بكل شفافية.</p>
+                <p style="font-size: 12px; color: #6b7280; margin-bottom: 15px;">جرب حظك واربح نقاطاً إضافية وجواهر.</p>
                 <button class="btn btn-primary" onclick="spinWheel()">تدوير العجلة الآن 🎲</button>
             </div>
         </div>
 
-        <!-- 5. سحب الأرباح -->
-        <div id="withdraw-section" class="section">
-            <div class="card">
-                <h3 style="color: #be185d; font-size: 15px; font-weight: 800; margin-bottom: 10px; text-align: center;">💸 طلب سحب الأرباح</h3>
-                <input type="text" id="withdrawAccount" class="input-field" placeholder="أدخل رقم الحساب أو المحفظة...">
-                <button class="btn btn-primary" onclick="requestWithdraw()">إرسال طلب السحب 🚀</button>
+        <!-- 5. دعوة الأصدقاء (الإحالة) -->
+        <div id="invite-section" class="section">
+            <div class="card" style="text-align: center;">
+                <h3 style="color: #be185d; font-size: 15px; font-weight: 800; margin-bottom: 10px;">👥 دعوة الأصدقاء</h3>
+                <p style="font-size: 12px; color: #6b7280; margin-bottom: 15px;">شارك كود الإحالة الخاص بك واكسب 500 نقطة عن كل صديق:</p>
+                <div style="background: #fdf2f8; padding: 12px; border-radius: 12px; font-weight: bold; color: #be185d; margin-bottom: 12px; border: 1px solid #fce7f3;">AEGIS-9482</div>
+                <button class="btn btn-primary" onclick="alert('تم نسخ رابط الإحالة بنجاح!')">نسخ رابط الدعوة 🔗</button>
             </div>
         </div>
 
         <!-- 6. لوحة الإدارة -->
         <div id="admin-section" class="section">
             <div class="card">
-                <h3 style="color: #be185d; font-size: 15px; font-weight: 800; margin-bottom: 10px; text-align: center;">⚙️ لوحة إدارة التطبيق</h3>
-                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 10px;">إجمالي النقاط الحالية بالنظام: <span id="adminPointsCount" style="font-weight: bold; color: #be185d;">1315</span></p>
-                <button class="btn btn-primary" onclick="state.points += 500; updateUI(); alert('تمت إضافة 500 نقطة تجريبية عبر الإدارة!');">إضافة رصيد تجريبي للأدمن ➕</button>
+                <h3 style="color: #be185d; font-size: 15px; font-weight: 800; margin-bottom: 10px; text-align: center;">⚙️ لوحة الإدارة</h3>
+                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 10px;">إجمالي النقاط الحالية بالنظام: <span id="adminPointsCount" style="font-weight: bold; color: #be185d;">2450</span></p>
+                <button class="btn btn-primary" onclick="state.points += 1000; updateUI(); alert('تمت إضافة 1000 نقطة تجريبية!');">إضافة رصيد تجريبي للأدمن ➕</button>
             </div>
         </div>
     </div>
@@ -99,10 +108,10 @@
     <div class="nav-bar-wrapper">
         <nav class="nav-bar">
             <button class="nav-item active" onclick="switchTab('wallet', this)">
-                <span class="icon">💰</span> المحفظة
+                <span class="icon">🦋</span> الرئيسية
             </button>
-            <button class="nav-item" onclick="switchTab('videos', this)">
-                <span class="icon">🎬</span> فيديوهات
+            <button class="nav-item" onclick="switchTab('store', this)">
+                <span class="icon">🎁</span> المتجر
             </button>
             <button class="nav-item" onclick="switchTab('hostvideo', this)">
                 <span class="icon">🎥</span> استضافة
@@ -110,8 +119,8 @@
             <button class="nav-item" onclick="switchTab('wheel', this)">
                 <span class="icon">🎡</span> العجلة
             </button>
-            <button class="nav-item" onclick="switchTab('withdraw', this)">
-                <span class="icon">💸</span> السحب
+            <button class="nav-item" onclick="switchTab('invite', this)">
+                <span class="icon">👥</span> الأصدقاء
             </button>
             <button class="nav-item" onclick="switchTab('admin', this)">
                 <span class="icon">⚙️</span> الإدارة
