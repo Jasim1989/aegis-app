@@ -19,10 +19,8 @@
     </header>
 
     <div class="container">
-        <!-- المحفظة والشفافية -->
+        <!-- 1. المحفظة والشفافية -->
         <div id="wallet-section" class="section active">
-            <div class="security-banner">🛡️ نظام حماية وشفافية كاملة (نشط)</div>
-
             <div class="card" style="text-align: center;">
                 <p class="balance-title">إجمالي الرصيد</p>
                 <div class="balance-box" id="userBalance">pt 1,315</div>
@@ -32,34 +30,49 @@
                 </div>
             </div>
 
-            <!-- سجل الشفافية والموثوقية المدمج -->
             <div class="card">
-                <h3 style="color: #be185d; font-size: 15px; font-weight: 800; margin-bottom: 10px; text-align: center;">🛡️ سجل الشفافية والموثوقية</h3>
-                <p style="font-size: 11px; color: #6b7280; text-align: center; margin-bottom: 12px;">
-                    كل نقطة تسجل فوراً وبكل وضوح لضمان مصداقية المنصة أمامك.
-                </p>
-                <div id="transparencyLogList">
-                    <!-- تتعبئ تلقائياً من الـ JS -->
-                </div>
+                <h3 style="color: #be185d; font-size: 14px; font-weight: 800; margin-bottom: 8px; text-align: center;">🛡️ سجل الشفافية والموثوقية</h3>
+                <div id="transparencyLogList"></div>
             </div>
         </div>
 
-        <!-- قسم الفيديوهات النظيفة والموثوقة -->
+        <!-- 2. قسم الفيديوهات -->
         <div id="videos-section" class="section">
+            <div class="card" style="text-align: center;">
+                <h3 style="color: #be185d; font-size: 15px; font-weight: 800; margin-bottom: 10px;">🎬 فيديوهات تعليمية (50/50)</h3>
+                <button class="btn btn-primary" onclick="state.points += 30; addLog('مشاهدة فيديو', '+30 نقطة'); alert('تمت إضافة 30 نقطة بنجاح!');">مشاهدة فيديو واكتساب أرباح ⏱️</button>
+            </div>
+        </div>
+
+        <!-- 3. عجلة الحظ -->
+        <div id="wheel-section" class="section">
+            <div class="card" style="text-align: center;">
+                <h3 style="color: #be185d; font-size: 15px; font-weight: 800; margin-bottom: 10px;">🎡 عجلة الحظ اليومية</h3>
+                <p style="font-size: 12px; color: #6b7280; margin-bottom: 15px;">جرب حظك واربح نقاطاً إضافية بشفافية كاملة.</p>
+                <button class="btn btn-primary" onclick="spinWheel()">تدوير العجلة الآن 🎲</button>
+            </div>
+        </div>
+
+        <!-- 4. سحب الأرباح -->
+        <div id="withdraw-section" class="section">
             <div class="card">
-                <h3 style="color: #be185d; font-size: 16px; font-weight: 800; margin-bottom: 10px; text-align: center;">🎬 فيديوهات تعليمية (نظام 50/50 الشفاف)</h3>
-                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;">
-                    محتوى تقني حقيقي 100% مع توزيع الأرباح بنصف العائد لك وبشفافية كاملة.
-                </p>
-                <div style="background: #fff; border: 1px solid #fce7f3; border-radius: 12px; padding: 12px; text-align: center;">
-                    <h4 style="font-size: 13px; font-weight: 800; margin-bottom: 8px;">مقدمة في البرمجة وتطوير التطبيقات الآمنة</h4>
-                    <button class="btn btn-primary" id="videoBtn" onclick="startCleanVideo(60)">بدء مشاهدة الفيديو واحتساب الأرباح ⏱️</button>
-                </div>
+                <h3 style="color: #be185d; font-size: 15px; font-weight: 800; margin-bottom: 10px; text-align: center;">💸 طلب سحب الأرباح</h3>
+                <input type="text" id="withdrawAccount" class="input-field" placeholder="أدخل رقم الحساب أو المحفظة...">
+                <button class="btn btn-primary" onclick="requestWithdraw()">إرسال طلب السحب 🚀</button>
+            </div>
+        </div>
+
+        <!-- 5. لوحة الإدارة -->
+        <div id="admin-section" class="section">
+            <div class="card">
+                <h3 style="color: #be185d; font-size: 15px; font-weight: 800; margin-bottom: 10px; text-align: center;">⚙️ لوحة إدارة التطبيق</h3>
+                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 10px;">إجمالي النقاط الحالية بالنظام: <span id="adminPointsCount" style="font-weight: bold; color: #be185d;">1315</span></p>
+                <button class="btn btn-primary" onclick="state.points += 500; updateUI(); alert('تمت إضافة 500 نقطة تجريبية عبر الإدارة!');">إضافة رصيد تجريبي للأدمن ➕</button>
             </div>
         </div>
     </div>
 
-    <!-- شريط التنقل السفلي -->
+    <!-- شريط المهام السفلي الكامل -->
     <div class="nav-bar-wrapper">
         <nav class="nav-bar">
             <button class="nav-item active" onclick="switchTab('wallet', this)">
@@ -67,6 +80,15 @@
             </button>
             <button class="nav-item" onclick="switchTab('videos', this)">
                 <span class="icon">🎬</span> فيديوهات
+            </button>
+            <button class="nav-item" onclick="switchTab('wheel', this)">
+                <span class="icon">🎡</span> العجلة
+            </button>
+            <button class="nav-item" onclick="switchTab('withdraw', this)">
+                <span class="icon">💸</span> السحب
+            </button>
+            <button class="nav-item" onclick="switchTab('admin', this)">
+                <span class="icon">⚙️</span> الإدارة
             </button>
         </nav>
     </div>
