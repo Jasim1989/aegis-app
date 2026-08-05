@@ -21,6 +21,11 @@ function updateUI() {
     document.getElementById('userDiamonds').innerText = '💎 ' + state.diamonds + ' جواهر';
     state.usd = (state.points * 0.001).toFixed(2);
     document.getElementById('userUsd').innerText = '💵 $' + state.usd + ' USD';
+    
+    // تحديث لوحة التحكم إن وجدت
+    let adminPts = document.getElementById('adminPointsCount');
+    if(adminPts) adminPts.innerText = state.points;
+    
     renderTransparencyLogs();
 }
 
@@ -34,24 +39,27 @@ function renderTransparencyLogs() {
     let container = document.getElementById('transparencyLogList');
     if (!container) return;
     container.innerHTML = state.transparencyLogs.map(log => `
-        <div style="background: #fdf2f8; padding: 8px 12px; border-radius: 10px; display: flex; justify-content: space-between; font-size: 12px; border: 1px solid #fce7f3; margin-bottom: 5px;">
+        <div style="background: #fdf2f8; padding: 8px 12px; border-radius: 10px; display: flex; justify-content: space-between; font-size: 11px; border: 1px solid #fce7f3; margin-bottom: 5px;">
             <span style="color: #1f2937; font-weight: 700;">${log.text} (${log.time})</span>
             <span style="color: #047857; font-weight: 800;">${log.amount}</span>
         </div>
     `).join('');
 }
 
-function startCleanVideo(pointsReward) {
-    let btn = document.getElementById('videoBtn');
-    btn.disabled = true;
-    btn.innerText = "جاري مشاهدة المحتوى التعليمي...";
-    
-    setTimeout(() => {
-        let userShare = Math.floor(pointsReward / 2); // نظام 50/50 الشفاف
-        state.points += userShare;
-        addLog("📺 مشاهدة فيديو تعليمي (نظام 50/50)", `+${userShare} نقطة`);
-        btn.disabled = false;
-        btn.innerText = "بدء مشاهدة الفيديو واحتساب الأرباح ⏱️";
-        alert(`مبروك! تمت إضافة حصيلتك بشفافية تامّة: ${userShare} نقطة.`);
-    }, 3000);
+function spinWheel() {
+    let rewards = [10, 50, 100, 200, 500, 20];
+    let win = rewards[Math.floor(Math.random() * rewards.length)];
+    state.points += win;
+    addLog("🎡 عجلة الحظ", `+${win} نقطة`);
+    alert(`مبروك! ربحت ${win} نقطة من عجلة الحظ.`);
+}
+
+function requestWithdraw() {
+    let acc = document.getElementById('withdrawAccount').value;
+    if(!acc) {
+        alert("الرجاء إدخال تفاصيل حساب السحب");
+        return;
+    }
+    alert("تم تقديم طلب السحب بنجاح وسيتم معالجته بشفافية قريباً.");
+    document.getElementById('withdrawAccount').value = '';
 }
