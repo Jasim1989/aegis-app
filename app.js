@@ -1,16 +1,7 @@
-// الحالة العامة للتطبيق
+// الحالة العامة لتطبيق الطيران
 const state = {
-    points: 1315,
-    diamonds: 35,
-    usd: 0.00,
-    logs: [
-        { title: "استضافة فيديو جديد", desc: "+150 نقطة", time: "منذ ساعة" },
-        { title: "عمولة مشاهدة فيديو", desc: "+15 نقطة", time: "منذ ساعتين" },
-        { title: "تسجيل الدخول اليومي", desc: "+10 نقاط", time: "اليوم" }
-    ],
-    hostedVideos: [
-        { title: "مقدمة في الطهي المنزلي", url: "#", commission: "15 نقطة" }
-    ]
+    searchHistory: [],
+    bookings: []
 };
 
 function switchTab(tabId, btnElement) {
@@ -19,89 +10,53 @@ function switchTab(tabId, btnElement) {
 
     document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
     btnElement.classList.add('active');
-    updateUI();
 }
 
-function updateUI() {
-    document.getElementById('userBalance').innerText = 'pt ' + state.points.toLocaleString();
-    document.getElementById('userDiamonds').innerText = '💎 ' + state.diamonds + ' جواهر';
-    document.getElementById('userUsd').innerText = '💵 $' + state.usd.toFixed(2) + ' USD';
-    
-    if(document.getElementById('adminPointsCount')) {
-        document.getElementById('adminPointsCount').innerText = state.points.toLocaleString();
-    }
+function searchFlights() {
+    const from = document.getElementById('fromCity').value;
+    const to = document.getElementById('toCity').value;
+    const depart = document.getElementById('departDate').value;
 
-    const logContainer = document.getElementById('transparencyLogList');
-    if(logContainer) {
-        logContainer.innerHTML = state.logs.map(log => `
-            <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #fce7f3; font-size: 11px;">
-                <div>
-                    <strong style="color: #be185d;">${log.title}</strong>
-                    <div style="color: #6b7280; font-size: 10px;">${log.time}</div>
-                </div>
-                <span style="color: #059669; font-weight: bold;">${log.desc}</span>
-            </div>
-        `).join('');
-    }
-}
-
-function addLog(title, desc) {
-    state.logs.unshift({ title, desc, time: "الآن" });
-    updateUI();
-}
-
-function submitVideoHosting() {
-    const titleInput = document.getElementById('videoTitleInput');
-    const urlInput = document.getElementById('videoUrlInput');
-    const commInput = document.getElementById('videoCommissionInput');
-
-    if(!titleInput.value || !urlInput.value || !commInput.value) {
-        alert('الرجاء إدخال كافة بيانات الفيديو والعمولة!');
+    if (!from || !to) {
+        alert('الرجاء إدخال مدينة المغادرة ومدينة الوصول على الأقل!');
         return;
     }
 
-    state.hostedVideos.push({
-        title: titleInput.value,
-        url: urlInput.value,
-        commission: commInput.value + ' نقطة'
-    });
-
-    addLog('استضافة فيديو جديد: ' + titleInput.value, 'عمولة: ' + commInput.value + ' نقطة');
+    const resultsList = document.getElementById('flightsResultsList');
     
-    // تحديث قائمة الفيديوهات المستضافة
-    const listEl = document.getElementById('hostedVideosList');
-    if(listEl) {
-        listEl.innerHTML += `
-            <div style="background: #fdf2f8; border: 1px solid #fce7f3; border-radius: 12px; padding: 10px; font-size: 11px; margin-bottom: 6px;">
-                <strong>فيديو:</strong> ${titleInput.value} (العمولة: ${commInput.value} نقطة/مشاهدة)
-            </div>
-        `;
-    }
-
-    titleInput.value = '';
-    urlInput.value = '';
-    commInput.value = '';
-    alert('تمت إضافة الفيديو بنجاح إلى منصة الاستضافة!');
+    // محاكاة لنتائج بحث حقيقية بناءً على المدخلات
+    resultsList.innerHTML = `
+        <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 12px; padding: 12px; font-size: 11px; margin-bottom: 8px;">
+            <strong>الخطوط الجوية الملكية</strong><br>
+            ${from} ➔ ${to} (${depart || 'غداً'})\br>
+            <span style="color: #0284c7; font-weight: bold;">السعر: $180</span> 
+            <button onclick="bookFlight('${from}', '${to}', '$180')" style="float: left; background: #0284c7; color: white; border: none; padding: 4px 8px; border-radius: 6px; cursor: pointer;">حجز الآن</button>
+        </div>
+        <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 12px; padding: 12px; font-size: 11px; margin-bottom: 8px;">
+            <strong>طيران الشرق الأوسط</strong><br>
+            ${from} ➔ ${to} (${depart || 'غداً'})\br>
+            <span style="color: #0284c7; font-weight: bold;">السعر: $220</span> 
+            <button onclick="bookFlight('${from}', '${to}', '$220')" style="float: left; background: #0284c7; color: white; border: none; padding: 4px 8px; border-radius: 6px; cursor: pointer;">حجز الآن</button>
+        </div>
+    `;
+    
+    alert('تم العثور على الرحلات المتاحة بنجاح!');
 }
 
-function spinWheel() {
-    const reward = Math.floor(Math.random() * 50) + 10;
-    state.points += reward;
-    addLog('عجلة الحظ', '+' + reward + ' نقطة');
-    updateUI();
-    alert('مبروك! ربحت ' + reward + ' نقطة من عجلة الحظ.');
-}
+function bookFlight(from, to, price) {
+    state.bookings.push({ from, to, price, date: new Date().toLocaleDateString() });
+    
+    // تحديث قائمة الحجوزات
+    const myBookingsSection = document.getElementById('mybookings-section');
+    myBookingsSection.querySelector('.card').innerHTML = `
+        <h3 style="color: #0284c7; font-size: 15px; font-weight: 800; margin-bottom: 10px; text-align: center;">🎫 تذاكري والحجوزات المؤكدة</h3>
+        <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 12px; padding: 12px; font-size: 11px;">
+            <strong>رحلة مؤكدة ✅</strong><br>
+            من: ${from} إلى: ${to}<br>
+            السعر المدفوع: ${price}<br>
+            <span style="color: #059669; font-weight: bold;">رقم الحجز: PNR-${Math.floor(Math.random() * 90000 + 10000)}</span>
+        </div>
+    `;
 
-function requestWithdraw() {
-    const acc = document.getElementById('withdrawAccount').value;
-    if(!acc) {
-        alert('الرجاء إدخال رقم الحساب أو المحفظة أولاً!');
-        return;
-    }
-    addLog('طلب سحب أرباح', 'قيد المعالجة');
-    alert('تم إرسال طلب السحب بنجاح وسيتم معالجته قريباً.');
-    document.getElementById('withdrawAccount').value = '';
+    alert('تم حجز التذكرة بنجاح! يمكنك الاطلاع عليها في قسم "حجوزاتي".');
 }
-
-// تهيئة أولية
-updateUI();
