@@ -40,11 +40,40 @@
         <div id="videos-section" class="section">
             <div class="card" style="text-align: center;">
                 <h3 style="color: #be185d; font-size: 15px; font-weight: 800; margin-bottom: 10px;">🎬 فيديوهات تعليمية (50/50)</h3>
-                <button class="btn btn-primary" onclick="state.points += 30; addLog('مشاهدة فيديو', '+30 نقطة'); alert('تمت إضافة 30 نقطة بنجاح!');">مشاهدة فيديو واكتساب أرباح ⏱️</button>
+                <p style="font-size: 12px; color: #6b7280; margin-bottom: 15px;">شاهد المحتوى التعليمي واكسب أرباحك بشفافية تامة.</p>
+                <button class="btn btn-primary" onclick="state.points += 30; addLog('مشاهدة فيديو تعليمي', '+30 نقطة'); alert('تمت إضافة 30 نقطة بنجاح!');">مشاهدة فيديو واكتساب أرباح ⏱️</button>
             </div>
         </div>
 
-        <!-- 3. عجلة الحظ -->
+        <!-- 3. منصات مشاهدة الفيديوهات المدفوعة -->
+        <div id="platforms-section" class="section">
+            <div class="card">
+                <h3 style="color: #be185d; font-size: 15px; font-weight: 800; margin-bottom: 12px; text-align: center;">🌐 منصات موثوقة تدفع مقابل مشاهدة الفيديوهات</h3>
+                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;">قائمة بأبرز المنصات العالمية المعتمدة التي تمنح مكافآت وأرباحاً حقيقية:</p>
+                
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <div style="background: #fdf2f8; border: 1px solid #fce7f3; border-radius: 12px; padding: 12px;">
+                        <h4 style="font-size: 14px; color: #be185d; font-weight: 800; margin-bottom: 4px;">1. Swagbucks</h4>
+                        <p style="font-size: 11px; color: #4b5563; margin-bottom: 8px;">تتيح لك كسب النقاط (SB) من خلال مشاهدة مقاطع الفيديو الترويجية والإعلانية وتحويلها لأموال عبر باي بال.</p>
+                        <a href="https://www.swagbucks.com" target="_blank" style="font-size: 11px; color: #047857; font-weight: bold; text-decoration: none;">زيارة المنصة الرسمية ↗</a>
+                    </div>
+
+                    <div style="background: #fdf2f8; border: 1px solid #fce7f3; border-radius: 12px; padding: 12px;">
+                        <h4 style="font-size: 14px; color: #be185d; font-weight: 800; margin-bottom: 4px;">2. InboxDollars</h4>
+                        <p style="font-size: 11px; color: #4b5563; margin-bottom: 8px;">منصة شهيرة تدفع نقداً مقابل مشاهدة فيديوهات الأخبار، الترفيه، والإعلانات القصيرة.</p>
+                        <a href="https://www.inboxdollars.com" target="_blank" style="font-size: 11px; color: #047857; font-weight: bold; text-decoration: none;">زيارة المنصة الرسمية ↗</a>
+                    </div>
+
+                    <div style="background: #fdf2f8; border: 1px solid #fce7f3; border-radius: 12px; padding: 12px;">
+                        <h4 style="font-size: 14px; color: #be185d; font-weight: 800; margin-bottom: 4px;">3. MyPoints</h4>
+                        <p style="font-size: 11px; color: #4b5563; margin-bottom: 8px;">تقدم مكافآت ونقاط عند مشاهدة تشكيلة واسعة من الفيديوهات اليومية وعروض التسوق.</p>
+                        <a href="https://www.mypoints.com" target="_blank" style="font-size: 11px; color: #047857; font-weight: bold; text-decoration: none;">زيارة المنصة الرسمية ↗</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. عجلة الحظ -->
         <div id="wheel-section" class="section">
             <div class="card" style="text-align: center;">
                 <h3 style="color: #be185d; font-size: 15px; font-weight: 800; margin-bottom: 10px;">🎡 عجلة الحظ اليومية</h3>
@@ -53,7 +82,7 @@
             </div>
         </div>
 
-        <!-- 4. سحب الأرباح -->
+        <!-- 5. سحب الأرباح -->
         <div id="withdraw-section" class="section">
             <div class="card">
                 <h3 style="color: #be185d; font-size: 15px; font-weight: 800; margin-bottom: 10px; text-align: center;">💸 طلب سحب الأرباح</h3>
@@ -62,7 +91,7 @@
             </div>
         </div>
 
-        <!-- 5. لوحة الإدارة -->
+        <!-- 6. لوحة الإدارة -->
         <div id="admin-section" class="section">
             <div class="card">
                 <h3 style="color: #be185d; font-size: 15px; font-weight: 800; margin-bottom: 10px; text-align: center;">⚙️ لوحة إدارة التطبيق</h3>
@@ -72,7 +101,7 @@
         </div>
     </div>
 
-    <!-- شريط المهام السفلي الكامل -->
+    <!-- شريط المهام السفلي المحدث (6 عناصر) -->
     <div class="nav-bar-wrapper">
         <nav class="nav-bar">
             <button class="nav-item active" onclick="switchTab('wallet', this)">
@@ -80,6 +109,9 @@
             </button>
             <button class="nav-item" onclick="switchTab('videos', this)">
                 <span class="icon">🎬</span> فيديوهات
+            </button>
+            <button class="nav-item" onclick="switchTab('platforms', this)">
+                <span class="icon">🌐</span> منصات
             </button>
             <button class="nav-item" onclick="switchTab('wheel', this)">
                 <span class="icon">🎡</span> العجلة
