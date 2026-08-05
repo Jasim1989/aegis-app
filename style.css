@@ -6,37 +6,16 @@
 }
 
 body {
-    background-color: #fff1f2;
+    background-color: #f8fafc;
     color: #1f2937;
     direction: rtl;
-    padding-bottom: 90px;
-}
-
-.ticker-wrap {
-    background: #be185d;
-    color: white;
-    overflow: hidden;
-    white-space: nowrap;
-    padding: 6px 0;
-    font-size: 11px;
-    font-weight: bold;
-}
-
-.ticker-content {
-    display: inline-block;
-    padding-left: 100%;
-    animation: ticker 25s linear infinite;
-}
-
-@keyframes ticker {
-    0% { transform: translate3d(0, 0, 0); }
-    100% { transform: translate3d(-100%, 0, 0); }
+    padding-bottom: 80px;
 }
 
 header {
     background: white;
     padding: 12px 16px;
-    border-bottom: 1px solid #fce7f3;
+    border-bottom: 1px solid #e2e8f0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -45,7 +24,7 @@ header {
 .logo {
     font-size: 16px;
     font-weight: 900;
-    color: #be185d;
+    color: #0284c7;
 }
 
 .container {
@@ -67,53 +46,23 @@ header {
     border-radius: 16px;
     padding: 16px;
     margin-bottom: 14px;
-    box-shadow: 0 4px 12px rgba(190, 24, 93, 0.05);
-    border: 1px solid #fce7f3;
-}
-
-.balance-title {
-    font-size: 11px;
-    color: #6b7280;
-    font-weight: 600;
-    margin-bottom: 6px;
-}
-
-.balance-box {
-    font-size: 26px;
-    font-weight: 900;
-    color: #be185d;
-    margin-bottom: 10px;
-}
-
-.currencies-row {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-}
-
-.currency-badge {
-    background: #fdf2f8;
-    color: #be185d;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 700;
-    border: 1px solid #fce7f3;
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.05);
+    border: 1px solid #e2e8f0;
 }
 
 .input-field {
     width: 100%;
     padding: 10px 14px;
-    border: 1px solid #fce7f3;
+    border: 1px solid #cbd5e1;
     border-radius: 12px;
     font-size: 12px;
     margin-bottom: 10px;
     outline: none;
-    background: #fafafa;
+    background: #f8fafc;
 }
 
 .input-field:focus {
-    border-color: #be185d;
+    border-color: #0284c7;
     background: white;
 }
 
@@ -129,12 +78,12 @@ header {
 }
 
 .btn-primary {
-    background: #be185d;
+    background: #0284c7;
     color: white;
 }
 
 .btn-primary:hover {
-    background: #9d174d;
+    background: #0369a1;
 }
 
 .nav-bar-wrapper {
@@ -143,7 +92,7 @@ header {
     left: 0;
     right: 0;
     background: white;
-    border-top: 1px solid #fce7f3;
+    border-top: 1px solid #e2e8f0;
     padding: 8px 0;
     z-index: 1000;
 }
@@ -162,7 +111,7 @@ header {
     flex-direction: column;
     align-items: center;
     font-size: 10px;
-    color: #6b7280;
+    color: #64748b;
     cursor: pointer;
     font-weight: 600;
 }
@@ -173,5 +122,5 @@ header {
 }
 
 .nav-item.active {
-    color: #be185d;
+    color: #0284c7;
 }
