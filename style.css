@@ -1,4 +1,4 @@
-; @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tajawal', sans-serif; -webkit-tap-highlight-color: transparent; }
 body { background-color: #fdf2f8; color: #1f2937; padding-bottom: 110px; }
 
@@ -27,7 +27,7 @@ header { display: flex; justify-content: space-between; align-items: center; pad
 /* Navigation */
 .nav-bar-wrapper { position: fixed; bottom: 10px; left: 0; width: 100%; padding: 0 10px; z-index: 100; pointer-events: none; }
 .nav-bar { pointer-events: auto; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(251, 207, 232, 0.8); display: flex; justify-content: space-around; align-items: center; padding: 6px 2px; border-radius: 22px; box-shadow: 0 15px 35px rgba(236, 72, 153, 0.15); max-width: 480px; margin: 0 auto; }
-.nav-item { background: none; border: none; color: #9ca3af; font-size: 9px; font-weight: 700; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px; flex: 1; padding: 4px 0; }
+.nav-item { background: none; border: none; color: #9ca3af; font-size: 8.5px; font-weight: 700; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px; flex: 1; padding: 4px 0; }
 .nav-item span.icon { font-size: 15px; }
 .nav-item.active { color: #be185d; }
 
