@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aegis Cash - المنصة الموثوقة</title>
+    <title>Aegis Cash - منصة استضافة الفيديوهات والأرباح</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="ticker-wrap">
         <div class="ticker-content">
-            🌸 أهلاً بكم في Aegis Cash! | منصة شفافة وآمنة بالكامل خالية من أي إعلانات مزيفة 💎
+            🌸 أهلاً بكم في Aegis Cash! | استضف فيديوهاتك الآن واحصل على أرباح ونظام عمولة شفاف بالكامل 💎
         </div>
     </div>
 
@@ -39,35 +39,29 @@
         <!-- 2. قسم الفيديوهات -->
         <div id="videos-section" class="section">
             <div class="card" style="text-align: center;">
-                <h3 style="color: #be185d; font-size: 15px; font-weight: 800; margin-bottom: 10px;">🎬 فيديوهات تعليمية (50/50)</h3>
-                <p style="font-size: 12px; color: #6b7280; margin-bottom: 15px;">شاهد المحتوى التعليمي واكسب أرباحك بشفافية تامة.</p>
-                <button class="btn btn-primary" onclick="state.points += 30; addLog('مشاهدة فيديو تعليمي', '+30 نقطة'); alert('تمت إضافة 30 نقطة بنجاح!');">مشاهدة فيديو واكتساب أرباح ⏱️</button>
+                <h3 style="color: #be185d; font-size: 15px; font-weight: 800; margin-bottom: 10px;">🎬 مشاهدة فيديوهات الأعضاء</h3>
+                <p style="font-size: 12px; color: #6b7280; margin-bottom: 15px;">شاهد الفيديوهات المستضافة واكسب أرباحك وعمولاتك بشفافية.</p>
+                <button class="btn btn-primary" onclick="state.points += 30; addLog('مشاهدة فيديو مستضاف', '+30 نقطة'); updateUI(); alert('تمت إضافة 30 نقطة بنجاح!');">مشاهدة فيديو واكتساب أرباح ⏱️</button>
             </div>
         </div>
 
-        <!-- 3. منصات مشاهدة الفيديوهات المدفوعة -->
-        <div id="platforms-section" class="section">
+        <!-- 3. استضافة الفيديوهات مقابل عمولة -->
+        <div id="hostvideo-section" class="section">
             <div class="card">
-                <h3 style="color: #be185d; font-size: 15px; font-weight: 800; margin-bottom: 12px; text-align: center;">🌐 منصات موثوقة تدفع مقابل مشاهدة الفيديوهات</h3>
-                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;">قائمة بأبرز المنصات العالمية المعتمدة التي تمنح مكافآت وأرباحاً حقيقية:</p>
+                <h3 style="color: #be185d; font-size: 15px; font-weight: 800; margin-bottom: 12px; text-align: center;">🎥 استضافة فيديوهاتك مقابل عمولة</h3>
+                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;">ارفع أو اربط فيديوهاتك لعرضها على مستخدمي التطبيق بنظام عمولة مباشر وموثوق:</p>
                 
-                <div style="display: flex; flex-direction: column; gap: 10px;">
-                    <div style="background: #fdf2f8; border: 1px solid #fce7f3; border-radius: 12px; padding: 12px;">
-                        <h4 style="font-size: 14px; color: #be185d; font-weight: 800; margin-bottom: 4px;">1. Swagbucks</h4>
-                        <p style="font-size: 11px; color: #4b5563; margin-bottom: 8px;">تتيح لك كسب النقاط (SB) من خلال مشاهدة مقاطع الفيديو الترويجية والإعلانية وتحويلها لأموال عبر باي بال.</p>
-                        <a href="https://www.swagbucks.com" target="_blank" style="font-size: 11px; color: #047857; font-weight: bold; text-decoration: none;">زيارة المنصة الرسمية ↗</a>
-                    </div>
-
-                    <div style="background: #fdf2f8; border: 1px solid #fce7f3; border-radius: 12px; padding: 12px;">
-                        <h4 style="font-size: 14px; color: #be185d; font-weight: 800; margin-bottom: 4px;">2. InboxDollars</h4>
-                        <p style="font-size: 11px; color: #4b5563; margin-bottom: 8px;">منصة شهيرة تدفع نقداً مقابل مشاهدة فيديوهات الأخبار، الترفيه، والإعلانات القصيرة.</p>
-                        <a href="https://www.inboxdollars.com" target="_blank" style="font-size: 11px; color: #047857; font-weight: bold; text-decoration: none;">زيارة المنصة الرسمية ↗</a>
-                    </div>
-
-                    <div style="background: #fdf2f8; border: 1px solid #fce7f3; border-radius: 12px; padding: 12px;">
-                        <h4 style="font-size: 14px; color: #be185d; font-weight: 800; margin-bottom: 4px;">3. MyPoints</h4>
-                        <p style="font-size: 11px; color: #4b5563; margin-bottom: 8px;">تقدم مكافآت ونقاط عند مشاهدة تشكيلة واسعة من الفيديوهات اليومية وعروض التسوق.</p>
-                        <a href="https://www.mypoints.com" target="_blank" style="font-size: 11px; color: #047857; font-weight: bold; text-decoration: none;">زيارة المنصة الرسمية ↗</a>
+                <input type="text" id="videoTitleInput" class="input-field" placeholder="عنوان الفيديو...">
+                <input type="text" id="videoUrlInput" class="input-field" placeholder="رابط الفيديو (يوتيوب أو رابط مباشر)...">
+                <input type="number" id="videoCommissionInput" class="input-field" placeholder="نسبة العمولة أو النقاط لكل مشاهدة...">
+                <button class="btn btn-primary" onclick="submitVideoHosting()">نشر الفيديو للاستضافة 🚀</button>
+                
+                <div style="margin-top: 20px;">
+                    <h4 style="font-size: 13px; color: #be185d; font-weight: 800; margin-bottom: 8px;">الفيديوهات المستضافة حالياً:</h4>
+                    <div id="hostedVideosList">
+                        <div style="background: #fdf2f8; border: 1px solid #fce7f3; border-radius: 12px; padding: 10px; font-size: 11px; margin-bottom: 6px;">
+                            <strong>فيديو:</strong> مقدمة في الطهي المنزلي (العمولة: 15 نقطة/مشاهدة)
+                        </div>
                     </div>
                 </div>
             </div>
@@ -77,7 +71,7 @@
         <div id="wheel-section" class="section">
             <div class="card" style="text-align: center;">
                 <h3 style="color: #be185d; font-size: 15px; font-weight: 800; margin-bottom: 10px;">🎡 عجلة الحظ اليومية</h3>
-                <p style="font-size: 12px; color: #6b7280; margin-bottom: 15px;">جرب حظك واربح نقاطاً إضافية بشفافية كاملة.</p>
+                <p style="font-size: 12px; color: #6b7280; margin-bottom: 15px;">جرب حظك واربح نقاطاً إضافية بكل شفافية.</p>
                 <button class="btn btn-primary" onclick="spinWheel()">تدوير العجلة الآن 🎲</button>
             </div>
         </div>
@@ -101,7 +95,7 @@
         </div>
     </div>
 
-    <!-- شريط المهام السفلي المحدث (6 عناصر) -->
+    <!-- شريط المهام السفلي -->
     <div class="nav-bar-wrapper">
         <nav class="nav-bar">
             <button class="nav-item active" onclick="switchTab('wallet', this)">
@@ -110,8 +104,8 @@
             <button class="nav-item" onclick="switchTab('videos', this)">
                 <span class="icon">🎬</span> فيديوهات
             </button>
-            <button class="nav-item" onclick="switchTab('platforms', this)">
-                <span class="icon">🌐</span> منصات
+            <button class="nav-item" onclick="switchTab('hostvideo', this)">
+                <span class="icon">🎥</span> استضافة
             </button>
             <button class="nav-item" onclick="switchTab('wheel', this)">
                 <span class="icon">🎡</span> العجلة
