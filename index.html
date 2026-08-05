@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aegis Cash - لوحة إدارة التطبيق الشاملة (حفظ كامل)</title>
+    <title>Aegis Cash - لوحة إدارة التطبيق الشاملة</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tajawal', sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -25,12 +25,8 @@
         .card { background: #ffffff; border: 1px solid rgba(252, 231, 243, 0.8); border-radius: 24px; padding: 24px; margin-bottom: 20px; box-shadow: 0 10px 30px -5px rgba(236, 72, 153, 0.1); }
         .security-banner { background: linear-gradient(to left, #f0fdf4, #dcfce7); border: 1px solid #bbf7d0; border-radius: 16px; padding: 12px; text-align: center; font-size: 13px; color: #15803d; font-weight: 700; margin-bottom: 20px; }
 
-        /* تصميم الإعلان المدفوع */
-        .sponsored-ad-card { background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 1.5px solid #f59e0b; border-radius: 18px; padding: 16px; margin-bottom: 20px; position: relative; box-shadow: 0 6px 15px rgba(245, 158, 11, 0.15); }
-        .ad-badge { position: absolute; top: -10px; left: 15px; background: #f59e0b; color: #fff; font-size: 10px; font-weight: 800; padding: 3px 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .ad-title { font-size: 14px; font-weight: 800; color: #92400e; margin-bottom: 4px; }
-        .ad-desc { font-size: 12px; color: #78350f; margin-bottom: 10px; line-height: 1.4; }
-        .ad-action-btn { background: #d97706; color: #fff; border: none; padding: 8px 14px; border-radius: 10px; font-size: 12px; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-block; }
+        /* حاوية الإعلان الخارجي المضافة حديثاً */
+        .external-ad-box { background: #ffffff; border: 1.5px dashed #fbcfe8; border-radius: 18px; padding: 14px; margin-bottom: 20px; text-align: center; box-shadow: 0 4px 12px rgba(236, 72, 153, 0.05); }
 
         .balance-title { color: #6b7280; font-size: 14px; font-weight: 500; }
         .balance-box { font-size: 34px; font-weight: 800; color: #be185d; margin: 8px 0; }
@@ -84,7 +80,6 @@
         .chat-messages { flex: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
         .chat-msg { background: #fff; padding: 8px 12px; border-radius: 12px; font-size: 12px; border: 1px solid #fce7f3; max-width: 85%; }
         .chat-msg.mine { background: #fdf2f8; align-self: flex-end; border-color: #fbcfe8; }
-        .chat-msg.support-badge { border-color: #10b981; background: #ecfdf5; }
         .chat-input-area { display: flex; padding: 10px; background: #fff; border-top: 1px solid #e5e7eb; gap: 8px; }
         .chat-input { flex: 1; padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 10px; outline: none; font-size: 13px; }
         .chat-send-btn { background: #be185d; color: #fff; border: none; padding: 0 16px; border-radius: 10px; font-weight: 700; cursor: pointer; }
@@ -168,11 +163,10 @@
         <div id="wallet-section" class="section active">
             <div class="security-banner">🛡️ حماية متكاملة ومشفرة ضد الاختراق والتلاعب (نشطة)</div>
             
-            <div class="sponsored-ad-card">
-                <span class="ad-badge">إعلان ممول 💎</span>
-                <div class="ad-title">🚀 منصة رعاية برامج الذكاء الاصطناعي</div>
-                <div class="ad-desc">ابدأ تطوير تطبيقاتك السحابية اليوم مع دعم تقني متكامل وحصري لمشتركي Aegis.</div>
-                <a href="https://vercel.com" target="_blank" class="ad-action-btn">زيارة الموقع الرسمي ✨</a>
+            <!-- تم دمج كود الإعلان هنا بشكل مباشر وسليم -->
+            <div class="external-ad-box">
+                <script async="async" data-cfasync="false" src="https://pl30689510.effectivecpmnetwork.com/c4a9b98f8481524a1dbe73ebf96f38fe/invoke.js"></script>
+                <div id="container-c4a9b98f8481524a1dbe73ebf96f38fe"></div>
             </div>
 
             <div class="card" style="text-align: center;">
@@ -222,149 +216,114 @@
             </div>
         </div>
 
-        <!-- قسم مشاهدة الفيديوهات (مع عداد متزامن وتقاسم الأرباح 50/50) -->
-        <div id="videos-section" class="section">
-            <div class="card" style="padding: 16px;">
-                <h3 style="color: #be185d; font-size: 17px; font-weight: 800; text-align: center; margin-bottom: 6px;">🎬 مشاهدة الفيديوهات والمواقع المربحة</h3>
-                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;">اختر مقطعاً ليبدأ العد التنازلي للمشاهدة وتقاسم الأرباح بالتساوي (50% لك و50% للمنصة)! 🎁</p>
+        <!-- المتجر -->
+        <div id="store-section" class="section">
+            <div class="card">
+                <h3 style="color: #be185d; font-size: 16px; font-weight: 800; margin-bottom: 12px; text-align: center;">🛍️ متجر الأدوات الذكية</h3>
                 
-                <div class="video-options-list" id="videoOptionsList">
-                    <div class="video-option-card selected" onclick="selectVideoOption(0, this)">
-                        <div>
-                            <div style="font-size: 13px; font-weight: 800;">🎥 فيديو: مقدمة التطبيقات السحابية</div>
-                            <div style="font-size: 11px; color: #6b7280; margin-top: 2px;">المدة: 15 ثانية | المكافأة: 30 نقطة</div>
+                <div class="store-doors-tabs">
+                    <button class="store-door-tab active" onclick="switchStoreDoor(1, this)">🚪 الباب الأول (البرمجيات)</button>
+                    <button class="store-door-tab" onclick="switchStoreDoor(2, this)">🚪 الباب الثاني (الحسابات)</button>
+                    <button class="store-door-tab" onclick="switchStoreDoor(3, this)">🚪 الباب الثالث (الدعم السحابي)</button>
+                </div>
+
+                <!-- Door 1 -->
+                <div id="door-1" class="door-section active">
+                    <div class="store-grid" id="storeGridDoor1">
+                        <div class="store-item">
+                            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=300" class="store-img" alt="item">
+                            <div>
+                                <div class="store-title">كود تطبيق سحابي جاهز</div>
+                                <div class="store-price">500 نقطة</div>
+                            </div>
+                            <button class="buy-btn" onclick="buyItem('كود تطبيق سحابي', 500)">شراء الآن</button>
                         </div>
-                        <span style="font-size: 12px; font-weight: 800; color: #be185d;">نشط الآن</span>
+                        <div class="store-item">
+                            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=300" class="store-img" alt="item">
+                            <div>
+                                <div class="store-title">أداة فحص الثغرات المتقدمة</div>
+                                <div class="store-price">850 نقطة</div>
+                            </div>
+                            <button class="buy-btn" onclick="buyItem('أداة فحص الثغرات', 850)">شراء الآن</button>
+                        </div>
                     </div>
-                    <div class="video-option-card" onclick="selectVideoOption(1, this)">
-                        <div>
-                            <div style="font-size: 13px; font-weight: 800;">🌐 موقع ترويج رقمي مدفوع (CPA)</div>
-                            <div style="font-size: 11px; color: #6b7280; margin-top: 2px;">المدة: 30 ثانية | المكافأة: 60 نقطة</div>
+                </div>
+
+                <!-- Door 2 -->
+                <div id="door-2" class="door-section">
+                    <div class="store-grid" id="storeGridDoor2">
+                        <div class="store-item">
+                            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=300" class="store-img" alt="item">
+                            <div>
+                                <div class="store-title">حساب مطور مميز (VIP)</div>
+                                <div class="store-price">1200 نقطة</div>
+                            </div>
+                            <button class="buy-btn" onclick="buyItem('حساب مطور VIP', 1200)">شراء الآن</button>
                         </div>
-                        <span style="font-size: 12px; font-weight: 800; color: #be185d;">اختر</span>
                     </div>
-                    <div class="video-option-card" onclick="selectVideoOption(2, this)">
-                        <div>
-                            <div style="font-size: 13px; font-weight: 800;">💎 فيديو: أسرار العملات الرقمية</div>
-                            <div style="font-size: 11px; color: #6b7280; margin-top: 2px;">المدة: 20 ثانية | المكافأة: 45 نقطة</div>
+                </div>
+
+                <!-- Door 3 -->
+                <div id="door-3" class="door-section">
+                    <div class="store-grid" id="storeGridDoor3">
+                        <div class="store-item">
+                            <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?w=300" class="store-img" alt="item">
+                            <div>
+                                <div class="store-title">مساحة سحابية 50GB</div>
+                                <div class="store-price">600 نقطة</div>
+                            </div>
+                            <button class="buy-btn" onclick="buyItem('مساحة سحابية 50GB', 600)">شراء الآن</button>
                         </div>
-                        <span style="font-size: 12px; font-weight: 800; color: #be185d;">اختر</span>
+                    </div>
+                </div>
+
+                <div class="add-product-box">
+                    <h4 style="font-size: 13px; font-weight: 800; color: #be185d; margin-bottom: 8px;">➕ إضافة منتج جديد (مدير أو مستخدم)</h4>
+                    <input type="text" id="newProdName" class="form-input" placeholder="اسم المنتج / الخدمة">
+                    <input type="number" id="newProdPrice" class="form-input" placeholder="السعر بالنقاط">
+                    <input type="text" id="newProdImg" class="form-input" placeholder="رابط صورة المنتج (URL)">
+                    <button class="btn btn-primary" style="margin-top:0;" onclick="addNewProductToStore()">نشر في المتجر 🚀</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- مقاطع الفيديو والربح (50/50) -->
+        <div id="videos-section" class="section">
+            <div class="card">
+                <h3 style="color: #be185d; font-size: 16px; font-weight: 800; margin-bottom: 12px; text-align: center;">🎬 نظام مشاهدة الفيديوهات (ربح 50/50)</h3>
+                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;">
+                    اختر الفيديو المناسب، شاهده للنهاية، واكسب النقاط الموزعة بالتساوي بينك وبين المنصة!
+                </p>
+
+                <div class="video-options-list">
+                    <div class="video-option-card selected" onclick="selectVideoSource('dQw4w9WgXcQ', 50, this)">
+                        <div>
+                            <div style="font-weight: 800; font-size: 13px; color: #1f2937;">فيديو ترويجي لشركة تقنية عالمية</div>
+                            <div class="revenue-share-badge">العائد: 50 نقطة (نصيبك: 25pt)</div>
+                        </div>
+                        <span style="font-size: 18px;">📺</span>
+                    </div>
+                    <div class="video-option-card" onclick="selectVideoSource('L_LUpnjgPso', 80, this)">
+                        <div>
+                            <div style="font-weight: 800; font-size: 13px; color: #1f2937;">مراجعة تطبيق الذكاء الاصطناعي الجديد</div>
+                            <div class="revenue-share-badge">العائد: 80 نقطة (نصيبك: 40pt)</div>
+                        </div>
+                        <span style="font-size: 18px;">🎥</span>
                     </div>
                 </div>
 
                 <div class="video-card">
                     <div class="video-container">
-                        <iframe id="activeVideoFrame" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                        <iframe id="activeVideoPlayer" src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1" allow="autoplay"></iframe>
                     </div>
                     <div class="video-info">
-                        <div id="activeVideoTitle" style="font-size: 13px; font-weight: 800; color: #1f2937;">مقدمة في تطوير التطبيقات السحابية</div>
-                        <div class="timer-display" id="videoTimerDisplay">⏳ جاري العد التنازلي للمشاهدة: 15 ثانية</div>
-                        <div class="revenue-share-badge" id="revenueShareText">📊 تقاسم الأرباح: 50% للمشترك | 50% للمنصة</div>
-                        <button class="btn btn-success" id="claimVideoBtn" onclick="claimVideoRewardWithSplit()" style="margin-top: 10px; display:none;">استلام المكافأة المقسمة ⭐</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- المتجر الرقمي متعدد الأبواب ومع رفع المنتجات -->
-        <div id="store-section" class="section">
-            <div class="card" style="padding: 16px;">
-                <h3 style="color: #be185d; margin-bottom: 4px; font-size: 17px; text-align: center; font-weight: 800;">🛍️ المتجر الرقمي متعدد الأبواب</h3>
-                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 12px;">تصفح الأبواب المختلفة أو أضف منتجك الخاص مع صورة وسعر</p>
-                
-                <div class="store-doors-tabs">
-                    <button class="store-door-tab active" onclick="switchStoreDoor('door1', this)">💎 باب الجواهر</button>
-                    <button class="store-door-tab" onclick="switchStoreDoor('door2', this)">🚀 الخدمات الرقمية</button>
-                    <button class="store-door-tab" onclick="switchStoreDoor('door3', this)">🎁 العروض الخاصة</button>
-                    <button class="store-door-tab" onclick="switchStoreDoor('doorCustom', this)">✨ باب الأعضاء</button>
-                </div>
-
-                <div id="door1" class="door-section active">
-                    <div class="store-grid">
-                        <div class="store-item">
-                            <div>
-                                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=300&q=80" class="store-img" alt="جوهرة">
-                                <div class="store-title">50 جوهرة</div>
-                                <div class="store-price">500 نقطة</div>
-                            </div>
-                            <button class="buy-btn" onclick="buyItem('50 جوهرة', 500)">شراء</button>
-                        </div>
-                        <div class="store-item">
-                            <div>
-                                <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=300&q=80" class="store-img" alt="جوهرة">
-                                <div class="store-title">200 جوهرة 🔥</div>
-                                <div class="store-price">1,800 نقطة</div>
-                            </div>
-                            <button class="buy-btn" onclick="buyItem('200 جوهرة', 1800)">شراء</button>
-                        </div>
+                        <div class="timer-display" id="videoTimer">الرجاء الضغط على بدء المشاهدة أدناه</div>
+                        <button class="btn btn-primary" id="startVideoBtn" onclick="startVideoProgress()">بدء مشاهدة الفيديو واحتساب الأرباح ⏱️</button>
                     </div>
                 </div>
 
-                <div id="door2" class="door-section">
-                    <div class="store-grid" id="grid-door2">
-                        <div class="store-item">
-                            <div>
-                                <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=300&q=80" class="store-img" alt="خدمة">
-                                <div class="store-title">استضافة سحابية</div>
-                                <div class="store-price">3,000 نقطة</div>
-                            </div>
-                            <button class="buy-btn" onclick="buyItem('استضافة سحابية', 3000)">شراء</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="door3" class="door-section">
-                    <div class="store-grid" id="grid-door3">
-                        <div class="store-item">
-                            <div>
-                                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=300&q=80" class="store-img" alt="عرض">
-                                <div class="store-title">بطاقة تفعيل VIP</div>
-                                <div class="store-price">5,000 نقطة</div>
-                            </div>
-                            <button class="buy-btn" onclick="buyItem('بطاقة تفعيل VIP', 5000)">شراء</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="doorCustom" class="door-section">
-                    <div class="store-grid" id="grid-doorCustom"></div>
-                </div>
-
-                <div class="add-product-box">
-                    <h4 style="font-size: 14px; font-weight: 800; color: #be185d; margin-bottom: 8px;">➕ إضافة منتج جديد لمتجرك</h4>
-                    <select id="newProductDoor" class="form-input">
-                        <option value="door2">الباب الثاني: الخدمات الرقمية</option>
-                        <option value="door3">الباب الثالث: العروض الخاصة</option>
-                        <option value="doorCustom">باب الأعضاء المخصص</option>
-                    </select>
-                    <input type="text" id="newProductName" class="form-input" placeholder="اسم المنتج...">
-                    <input type="number" id="newProductPrice" class="form-input" placeholder="السعر بالنقاط (مثال: 500)...">
-                    <div style="font-size: 11px; font-weight: 700; color: #6b7280; margin-bottom: 4px;">اختر صورة المنتج من جهازك:</div>
-                    <input type="file" id="newProductImage" class="form-input" accept="image/*" style="padding: 6px;">
-                    <button class="btn btn-primary" style="margin-top: 4px; padding: 10px; font-size: 13px;" onclick="addNewProductToStore()">رفع ونشر المنتج 🚀</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- غرف الدردشة والدعم -->
-        <div id="chat-section" class="section">
-            <div class="card" style="padding: 16px;">
-                <h3 style="color: #be185d; font-size: 17px; font-weight: 800; text-align: center; margin-bottom: 10px;">💬 غرف الدردشة ودعم الأعضاء</h3>
-                <p style="font-size: 11px; color: #10b981; text-align: center; font-weight: 700; margin-bottom: 8px;">🛡️ فريق الدعم الفني وحماية الحسابات متواجد دائماً</p>
-                <div class="chat-container">
-                    <div class="chat-tabs">
-                        <button class="chat-tab active" onclick="switchChatRoom('general', this)">العامة 🌸</button>
-                        <button class="chat-tab" onclick="switchChatRoom('vip', this)">VIP 👑</button>
-                        <button class="chat-tab" onclick="switchChatRoom('support', this)">الدعم 🛠️</button>
-                    </div>
-                    <div class="chat-messages" id="chatMessages">
-                        <div class="chat-msg"><b>سارة:</b> أهلاً بالجميع في منصة Aegis المحمية! 👋</div>
-                        <div class="chat-msg support-badge"><b>الدعم الفني (أحمد):</b> أهلاً بكم، تم تفعيل التحقق برقم الهاتف بنجاح 🛠️</div>
-                    </div>
-                    <div class="chat-input-area">
-                        <input type="text" id="chatInput" class="chat-input" placeholder="اكتب رسالتك هنا..." onkeypress="handleChatKey(event)">
-                        <button class="chat-send-btn" onclick="sendChatMessage()">إرسال</button>
-                    </div>
+                <div style="background: #fdf2f8; border: 1px solid #fbcfe8; border-radius: 14px; padding: 12px; text-align: center; font-size: 12px; color: #be185d; font-weight: 700;">
+                    💡 حصيلة أرباحك من نظام 50/50: <span id="videoEarningsTotal">0</span> نقطة حتى الآن.
                 </div>
             </div>
         </div>
@@ -372,217 +331,201 @@
         <!-- عجلة الحظ -->
         <div id="wheel-section" class="section">
             <div class="card" style="text-align: center;">
-                <h2 style="color: #be185d; margin-bottom: 4px; font-size: 18px; font-weight: 800;">🎡 عجلة الحظ اليومية</h2>
-                <p style="font-size: 12px; color: #6b7280; margin-bottom: 15px;" id="wheelSubtitle">لديك لفة مجانية اليوم! (بعدها التكلفة 100 جوهرة)</p>
+                <h3 style="color: #be185d; font-size: 18px; font-weight: 800; margin-bottom: 6px;">🎡 عجلة الحظ اليومية</h3>
+                <p style="font-size: 12px; color: #6b7280; margin-bottom: 20px;">جرب حظك واحصل على نقاط وجواهر مضاعفة مجاناً!</p>
+                
                 <div class="wheel-outer-wrapper">
                     <div class="wheel-border-glow">
                         <div class="wheel-inner-container">
                             <div id="wheelPointer"></div>
-                            <canvas id="luckyWheel" width="230" height="230"></canvas>
-                            <div class="wheel-center-hub">SPIN</div>
+                            <canvas id="luckyWheel" width="240" height="240"></canvas>
+                            <div class="wheel-center-hub">AEGIS</div>
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-primary" onclick="spinWheel()" style="margin-top: 10px;">تدوير العجلة 🌀</button>
-                <p id="wheelResult" style="margin-top: 12px; font-size: 14px; font-weight: 800; color: #be185d;"></p>
+
+                <button class="btn btn-primary" id="spinWheelBtn" onclick="spinWheel()">تدوير العجلة الآن ✨</button>
             </div>
         </div>
 
-        <!-- لوحة تحكم الإدارة المطورة والشاملة -->
-        <div id="admin-section" class="section">
-            <div class="card" style="padding: 18px;">
-                <h3 style="color: #7c3aed; font-size: 18px; font-weight: 800; text-align: center; margin-bottom: 4px;">⚙️ لوحة إدارة التطبيق والحماية</h3>
-                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 16px;">متابعة الأرباح المباشرة، الأعضاء المتواجدون والمتفاعلون</p>
+        <!-- غرف الدردشة والدعم المباشر -->
+        <div id="chat-section" class="section">
+            <div class="card" style="padding: 16px;">
+                <h3 style="color: #be185d; font-size: 16px; font-weight: 800; margin-bottom: 10px; text-align: center;">💬 غرف الدردشة والتواصل</h3>
                 
-                <!-- الإحصائيات الأساسية -->
+                <div class="chat-container">
+                    <div class="chat-tabs">
+                        <button class="chat-tab active" onclick="switchChatRoom('public', this)">العامة 🌐</button>
+                        <button class="chat-tab" onclick="switchChatRoom('vip', this)">VIP 💎</button>
+                        <button class="chat-tab" onclick="switchChatRoom('support', this)">الدعم الفني 🛡️</button>
+                    </div>
+                    <div class="chat-messages" id="chatMessagesBox">
+                        <div class="chat-msg">مرحباً بالجميع في منصة Aegis Cash الأمنية! ✨</div>
+                        <div class="chat-msg mine">هل تم تفعيل النظام السحابي بنجاح؟</div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" id="chatInputText" class="chat-input" placeholder="اكتب رسالتك هنا...">
+                        <button class="chat-send-btn" onclick="sendChatMessage()">إرسال</button>
+                    </div>
+                </div>
+
+                <!-- حقل الدعم المفتوح بالأسفل -->
+                <div class="support-diamond-box">
+                    <div style="font-size: 13px; font-weight: 800; color: #0369a1; margin-bottom: 6px;">💎 الدعم السحابي المباشر عبر الجواهر</div>
+                    <p style="font-size: 11px; color: #075985; margin-bottom: 10px;">أرسل استفسارك مباشرة للمشرفين مع مكافأة دعم سريعة بالسيستم.</p>
+                    <input type="text" id="diamondSupportInput" class="form-input" style="border-color: #0284c7; background: #fff;" placeholder="اكتب مشكلتك أو استفسارك هنا...">
+                    <button class="btn btn-secondary" style="margin-top: 0; background: #0284c7;" onclick="sendDiamondSupportMessage()">إرسال استفسار للدعم الفني 🚀</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- لوحة التحكم الاحترافية (Admin Pro) -->
+        <div id="admin-section" class="section">
+            <div class="card">
+                <h3 style="color: #be185d; font-size: 16px; font-weight: 800; margin-bottom: 15px; text-align: center;">🛠️ لوحة التحكم الاحترافية (Admin Pro)</h3>
+                
                 <div class="admin-stats-grid">
                     <div class="admin-stat-card">
-                        <div style="font-size: 11px; color: #6b7280; font-weight: 700;">إجمالي المشتركين</div>
-                        <div class="admin-stat-num" id="adminTotalUsers">1,420</div>
+                        <div style="font-size: 11px; color: #6b7280; font-weight: 700;">إجمالي المستخدمين</div>
+                        <div class="admin-stat-num" id="adminTotalUsers">1,492</div>
                     </div>
                     <div class="admin-stat-card">
-                        <div style="font-size: 11px; color: #6b7280; font-weight: 700;">المتواجدون الآن 🟢</div>
-                        <div class="admin-stat-num" id="adminOnlineUsers">184</div>
-                    </div>
-                    <div class="admin-stat-card">
-                        <div style="font-size: 11px; color: #6b7280; font-weight: 700;">أرباح المنصة (50%)</div>
-                        <div class="admin-stat-num" id="adminPlatformRevenue" style="color: #047857;">4,850 pt</div>
-                    </div>
-                    <div class="admin-stat-card">
-                        <div style="font-size: 11px; color: #6b7280; font-weight: 700;">الأعضاء المتفاعلون</div>
-                        <div class="admin-stat-num" id="adminActiveUsersCount" style="color: #0284c7;">312</div>
+                        <div style="font-size: 11px; color: #6b7280; font-weight: 700;">الأرباح الموزعة (50/50)</div>
+                        <div class="admin-stat-num" id="adminTotalRevenue">48.2k pt</div>
                     </div>
                 </div>
 
-                <!-- قائمة الأعضاء المتفاعلين والمتواجدين -->
-                <div style="margin-top: 15px;">
-                    <h4 style="font-size: 14px; font-weight: 800; color: #be185d; margin-bottom: 8px;">👥 الأعضاء النشطون والمتواجدون الآن</h4>
-                    <div id="activeMembersListContainer">
-                        <div class="member-row">
-                            <span><b>جاسم العراقي</b> (#AEG-84920)</span>
-                            <span style="color: #10b981; font-weight: 700;">متواجد 🟢</span>
+                <h4 style="font-size: 13px; font-weight: 800; color: #1f2937; margin-bottom: 10px;">👤 إدارة الأعضاء والنقاط</h4>
+                <div id="adminMembersList">
+                    <div class="member-row">
+                        <div>
+                            <div style="font-weight: 800;">أحمد محمد (Admin)</div>
+                            <div style="font-size: 11px; color: #6b7280;">ID: #AEG-101</div>
                         </div>
-                        <div class="member-row">
-                            <span><b>سارة أحمد</b> (#AEG-91234)</span>
-                            <span style="color: #10b981; font-weight: 700;">متواجد 🟢</span>
+                        <button class="buy-btn" style="width: auto; padding: 4px 10px;" onclick="showAlert('إدارة العضو', 'التحكم برصيد العضو أحمد محمد', '⚙️')">تعديل</button>
+                    </div>
+                    <div class="member-row">
+                        <div>
+                            <div style="font-weight: 800;">سارة علي</div>
+                            <div style="font-size: 11px; color: #6b7280;">ID: #AEG-402</div>
                         </div>
-                        <div class="member-row">
-                            <span><b>محمد الرفاعي</b> (#AEG-10492)</span>
-                            <span style="color: #6b7280; font-weight: 700;">متفاعل بالأمس</span>
-                        </div>
+                        <button class="buy-btn" style="width: auto; padding: 4px 10px;" onclick="showAlert('إدارة العضو', 'التحكم برصيد العضو سارة علي', '⚙️')">تعديل</button>
                     </div>
                 </div>
 
-                <!-- حقل دعم الأعضاء بالجواهر المفتوحة (غير المحددة) -->
-                <div class="support-diamond-box">
-                    <h4 style="font-size: 14px; font-weight: 800; color: #0369a1; margin-bottom: 6px;">💎 حقل دعم الأعضاء الاستثنائي (أرقام مفتوحة)</h4>
-                    <p style="font-size: 11px; color: #0c4a6e; margin-bottom: 10px;">أدخل اسم أو معرف المشترك وكمية الجواهر المفتوحة لدعمه مباشرة:</p>
-                    <input type="text" id="supportMemberTarget" class="form-input" placeholder="اسم أو معرف المشترك (مثال: جاسم)..." style="border-color: #bae6fd;">
-                    <input type="number" id="supportDiamondAmount" class="form-input" placeholder="أدخل عدد الجواهر المفتوحة (مثال: 500 أو 5000)..." style="border-color: #bae6fd;">
-                    <button class="btn btn-warning" onclick="adminSupportMemberWithDiamonds()" style="margin-top: 4px; padding: 10px; font-size: 13px;">إرسال الدعم المباشر للأعضاء 🚀</button>
-                </div>
+                <button class="btn btn-warning" style="margin-top: 15px;" onclick="showAlert('تحديث النظام', 'تم مزامنة إعدادات قاعدة البيانات السحابية بنجاح!', '🔄')">تحديث السيرفرات السحابية ⚡</button>
             </div>
         </div>
 
         <!-- الملف الشخصي -->
         <div id="profile-section" class="section">
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="صورة المستخدم" class="profile-avatar">
-                <h2 style="font-size: 20px; font-weight: 800; text-align: center;" id="profileName">جاسم العراقي</h2>
-                <p style="font-size: 12px; color: #6b7280; text-align: center; margin-bottom: 15px;" id="profilePhoneDisplay">📱 +964 780 000 0000</p>
-                <div class="profile-info-group">
-                    <span style="color: #6b7280;">معرف الحساب (ID)</span>
-                    <span style="font-weight: 800;">#AEG-84920</span>
-                </div>
-                <button class="btn btn-secondary" style="margin-top: 15px;" onclick="promptForUserName()">✏️ تعديل وتغيير الاسم الآمن</button>
-                <button class="btn btn-primary" style="margin-top: 10px;" onclick="openPhoneUpdateModal()">📱 تحديث رقم الهاتف والأمان</button>
-            </div>
-        </div>
-
-        <!-- سحب الأرباح -->
-        <div id="withdraw-section" class="section">
             <div class="card" style="text-align: center;">
-                <h3 style="color: #be185d; margin-bottom: 8px; font-size: 17px; font-weight: 800;">💸 بوابة السحب الآمن</h3>
-                <p style="font-size: 13px; color: #6b7280; margin-bottom: 15px;">الحد الأدنى للسحب هو <strong style="color:#be185d;">10,000 نقطة</strong></p>
-                <div style="background: #f9fafb; padding: 15px; border-radius: 14px; margin-bottom: 15px; border: 1px dashed #d1d5db;">
-                    <div style="font-size: 20px; font-weight: 800;" id="progressText">1,315 / 10,000</div>
-                    <div style="width: 100%; background: #e5e7eb; height: 8px; border-radius: 10px; margin-top: 8px; overflow: hidden;">
-                        <div id="progressBar" style="width: 13%; background: #be185d; height: 100%; border-radius: 10px;"></div>
-                    </div>
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200" class="profile-avatar" alt="Avatar">
+                <h3 style="font-size: 18px; font-weight: 800; color: #1f2937; margin-bottom: 4px;" id="profileUsername">سارة المطور</h3>
+                <p style="font-size: 12px; color: #be185d; font-weight: 700; margin-bottom: 15px;" id="profileEmail">sara.dev@aegiscash.app</p>
+                
+                <div class="profile-info-group">
+                    <span style="color: #6b7280; font-weight: 700;">معرف الحساب (ID):</span>
+                    <strong style="color: #1f2937;">#AEG-84920</strong>
                 </div>
-                <button class="btn btn-primary" id="withdrawBtn" onclick="requestWithdrawal()">طلب سحب الأرباح ✨</button>
+                <div class="profile-info-group">
+                    <span style="color: #6b7280; font-weight: 700;">تاريخ الانضمام:</span>
+                    <strong style="color: #1f2937;">أغسطس 2026</strong>
+                </div>
+                <div class="profile-info-group">
+                    <span style="color: #6b7280; font-weight: 700;">حالة الأمان:</span>
+                    <strong style="color: #10b981;">محمي بالكامل (2FA) ✓</strong>
+                </div>
+
+                <button class="btn btn-primary" onclick="showAlert('تعديل الملف', 'تم فتح إعدادات تعديل الحساب الشخصي بنجاح', '✏️')">تعديل الملف الشخصي ⚙️</button>
             </div>
         </div>
     </div>
 
     <!-- شريط التنقل السفلي -->
     <div class="nav-bar-wrapper">
-        <div class="nav-bar">
+        <nav class="nav-bar">
             <button class="nav-item active" onclick="switchTab('wallet', this)">
-                <span class="icon">💰</span>
-                <span>محفظتي</span>
+                <span class="icon">💰</span> المحفظة
             </button>
             <button class="nav-item" onclick="switchTab('invite', this)">
-                <span class="icon">🔗</span>
-                <span>الدعوة</span>
-            </button>
-            <button class="nav-item" onclick="switchTab('videos', this)">
-                <span class="icon">🎬</span>
-                <span>فيديوهات</span>
+                <span class="icon">🔗</span> الدعوة
             </button>
             <button class="nav-item" onclick="switchTab('store', this)">
-                <span class="icon">🛍️</span>
-                <span>المتجر</span>
+                <span class="icon">🛍️</span> المتجر
             </button>
-            <button class="nav-item" onclick="switchTab('chat', this)">
-                <span class="icon">💬</span>
-                <span>الدعم</span>
+            <button class="nav-item" onclick="switchTab('videos', this)">
+                <span class="icon">🎬</span> فيديوهات
             </button>
             <button class="nav-item" onclick="switchTab('wheel', this)">
-                <span class="icon">🎡</span>
-                <span>العجلة</span>
+                <span class="icon">🎡</span> العجلة
+            </button>
+            <button class="nav-item" onclick="switchTab('chat', this)">
+                <span class="icon">💬</span> الدردشة
             </button>
             <button class="nav-item" onclick="switchTab('admin', this)">
-                <span class="icon">⚙️</span>
-                <span>الإدارة</span>
+                <span class="icon">🛠️</span> الإدارة
             </button>
             <button class="nav-item" onclick="switchTab('profile', this)">
-                <span class="icon">👤</span>
-                <span>حسابي</span>
+                <span class="icon">👤</span> حسابي
             </button>
-            <button class="nav-item" onclick="switchTab('withdraw', this)">
-                <span class="icon">💸</span>
-                <span>السحب</span>
-            </button>
-        </div>
+        </nav>
     </div>
 
-    <script>
-        const SECURITY_KEY = "AegisSecureToken_Universal_v2";
-        let appData = {
-            balance: 1315,
-            diamonds: 35,
-            platformRevenue: 4850,
-            userName: "جاسم العراقي",
-            userPhone: "+964 780 000 0000",
-            hasFreeSpinToday: true,
-            lastDailyClaimDate: null,
-            customProducts: []
+    <!-- كود الجافاسكريبت المدمج مع Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyOj6EHiPjZmG-GsDvDD_BjX1vFmsfc8lg",
+            authDomain: "aegis-cash.firebaseapp.com",
+            projectId: "aegis-cash",
+            storageBucket: "aegis-cash.firebasestorage.app",
+            messagingSenderId: "1065982977576",
+            appId: "1:1065982977576:web:40f7daee0eesfe93a5371d",
+            measurementId: "G-7PBB96PTXR"
         };
 
-        function saveAppData() {
-            try {
-                localStorage.setItem(SECURITY_KEY, btoa(encodeURIComponent(JSON.stringify(appData))));
-            } catch(e) {}
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        window.firebaseDb = db;
+        window.firebaseCollection = collection;
+        window.firebaseAddDoc = addDoc;
+        window.firebaseGetDocs = getDocs;
+
+        console.log("تم ربط قاعدة بيانات Firebase وتفعيل النظام الاحترافي بنجاح!");
+    </script>
+
+    <script>
+        let state = {
+            points: 1315,
+            diamonds: 35,
+            usd: 0.00,
+            invitedCount: 4,
+            invitedEarnings: 400,
+            videoEarningsTotal: 0,
+            lastDailyClaim: 0,
+            activeChatRoom: 'public'
+        };
+
+        function switchTab(tabId, btnElement) {
+            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            
+            document.getElementById(tabId + '-section').classList.add('active');
+            btnElement.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function loadAppData() {
-            try {
-                let saved = localStorage.getItem(SECURITY_KEY);
-                if (saved) {
-                    let decoded = decodeURIComponent(atob(saved));
-                    let parsed = JSON.parse(decoded);
-                    if(parsed && typeof parsed.balance === 'number') {
-                        appData = parsed;
-                    }
-                }
-            } catch(e) {}
-        }
-
-        loadAppData();
-
-        const diamondConversionRate = 10000;
-        const minWithdrawPoints = 10000;
-        let supportAgents = ["أحمد (الدعم الفني والتوثيق)", "ساره (خدمة الأمان والمشتركين)"];
         let modalCallback = null;
-
-        const videoOptionsData = [
-            { title: "مقدمة في تطوير التطبيقات السحابية", duration: 15, reward: 30, url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
-            { title: "موقع ترويج رقمي مدفوع (CPA)", duration: 30, reward: 60, url: "https://www.youtube.com/embed/3JZ_D3ELwOQ" },
-            { title: "أسرار التداول والعملات الرقمية", duration: 20, reward: 45, url: "https://www.youtube.com/embed/kJQP7kiw5Fk" }
-        ];
-        let currentSelectedVideoIndex = 0;
-        let videoTimerInterval = null;
-        let timeLeft = 0;
-
-        function showAlert(title, text, icon) {
+        function showAlert(title, text, icon = '✨', callback = null) {
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalText').innerText = text;
             document.getElementById('modalIcon').innerText = icon;
             document.getElementById('modalInput').style.display = 'none';
             document.getElementById('modalCancelBtn').style.display = 'none';
-            modalCallback = null;
-            document.getElementById('customModal').classList.add('show');
-        }
-
-        function showPrompt(title, text, icon, callback) {
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalText').innerText = text;
-            document.getElementById('modalIcon').innerText = icon;
-            let input = document.getElementById('modalInput');
-            input.style.display = 'block';
-            input.value = '';
-            document.getElementById('modalCancelBtn').style.display = 'block';
+            document.getElementById('modalConfirmBtn').innerText = 'حسناً';
             modalCallback = callback;
             document.getElementById('customModal').classList.add('show');
         }
@@ -592,422 +535,266 @@
         }
 
         function confirmModalAction() {
-            let val = document.getElementById('modalInput').value;
+            if (modalCallback) modalCallback();
             closeModal();
-            if (modalCallback) modalCallback(val);
         }
 
         function updateUI() {
-            document.getElementById('userBalance').innerText = 'pt ' + appData.balance.toLocaleString();
-            document.getElementById('userDiamonds').innerText = `💎 ${appData.diamonds.toLocaleString()} جواهر`;
-            let usdValue = (appData.diamonds / diamondConversionRate).toFixed(2);
-            document.getElementById('userUsd').innerText = `💵 $${usdValue} USD`;
-            document.getElementById('progressText').innerText = `${appData.balance.toLocaleString()} / 10,000`;
-            let progressPercentage = Math.min((appData.balance / minWithdrawPoints) * 100, 100);
-            document.getElementById('progressBar').style.width = `${progressPercentage}%`;
+            document.getElementById('userBalance').innerText = 'pt ' + state.points.toLocaleString();
+            document.getElementById('userDiamonds').innerText = '💎 ' + state.diamonds + ' جواهر';
+            state.usd = (state.points * 0.001).toFixed(2);
+            document.getElementById('userUsd').innerText = '💵 $' + state.usd + ' USD';
+            document.getElementById('invitedCount').innerText = state.invitedCount + ' أشخاص';
+            document.getElementById('invitedEarnings').innerText = state.invitedEarnings + ' pt';
+            document.getElementById('videoEarningsTotal').innerText = state.videoEarningsTotal;
             
-            let nameElement = document.getElementById('profileName');
-            if (nameElement) nameElement.innerText = appData.userName;
-            
-            document.getElementById('profilePhoneDisplay').innerText = `📱 ${appData.userPhone}`;
-            
-            // تحديث لوحة الإدارة
-            document.getElementById('adminPlatformRevenue').innerText = appData.platformRevenue.toLocaleString() + ' pt';
-
-            renderCustomProducts();
-            saveAppData();
-        }
-
-        function selectVideoOption(index, element) {
-            document.querySelectorAll('.video-option-card').forEach(card => card.classList.remove('selected'));
-            element.classList.add('selected');
-            currentSelectedVideoIndex = index;
-            let vData = videoOptionsData[index];
-
-            document.getElementById('activeVideoTitle').innerText = vData.title;
-            document.getElementById('activeVideoFrame').src = vData.url;
-            document.getElementById('claimVideoBtn').style.display = 'none';
-
-            startAutomaticVideoTimer(vData.duration);
-        }
-
-        function startAutomaticVideoTimer(duration) {
-            if (videoTimerInterval) clearInterval(videoTimerInterval);
-            timeLeft = duration;
-            let timerDisp = document.getElementById('videoTimerDisplay');
-            let claimBtn = document.getElementById('claimVideoBtn');
-
-            timerDisp.innerText = `⏳ جاري العد التنازلي للمشاهدة: ${timeLeft} ثانية`;
-
-            videoTimerInterval = setInterval(() => {
-                timeLeft--;
-                timerDisp.innerText = `⏳ جاري العد التنازلي للمشاهدة: ${timeLeft} ثانية`;
-                if (timeLeft <= 0) {
-                    clearInterval(videoTimerInterval);
-                    timerDisp.innerText = "✅ اكتملت مشاهدة الفيديو بنجاح!";
-                    claimBtn.style.display = 'block';
-                }
-            }, 1000);
-        }
-
-        function claimVideoRewardWithSplit() {
-            let vData = videoOptionsData[currentSelectedVideoIndex];
-            let totalReward = vData.reward;
-            let userShare = Math.round(totalReward * 0.50); // 50% للمشترك
-            let ownerShare = totalReward - userShare; // 50% للمنصة
-
-            appData.balance += userShare;
-            appData.platformRevenue += ownerShare;
-            updateUI();
-
-            showAlert(
-                "نجاح تقاسم الأرباح (50/50)! 💰", 
-                `تمت إضافتك لأرباح المشاهدة بنجاح:\n\n• حصتك (50%): +${userShare} نقطة\n• حصة المنصة (50%): +${ownerShare} نقطة\n\nشكراً لتفاعلكم المستمر! ✨`, 
-                "🎉"
-            );
-
-            document.getElementById('claimVideoBtn').style.display = 'none';
-            startAutomaticVideoTimer(vData.duration);
-        }
-
-        // دعم الأعضاء بحقل الجواهر المفتوحة من لوحة الإدارة
-        function adminSupportMemberWithDiamonds() {
-            let targetName = document.getElementById('supportMemberTarget').value.trim();
-            let diamondAmount = Number(document.getElementById('supportDiamondAmount').value);
-
-            if (!targetName || !diamondAmount || diamondAmount <= 0) {
-                showAlert("تنبيه الإدارة", "يرجى كتابة اسم أو معرف المشترك وتحديد كمية جواهر صحيحة.", "⚠️");
-                return;
-            }
-
-            // إذا كان المستهدف هو المستخدم الحالي، قم بزيادة جواهره مباشرة
-            if (targetName.includes(appData.userName) || targetName.includes("جاسم")) {
-                appData.diamonds += diamondAmount;
-            }
-
-            updateUI();
-            showAlert(
-                "تم إرسال الدعم بنجاح! 💎", 
-                `تمت عملية الدعم الاستثنائي بنجاح:\n\n• المشترك: ${targetName}\n• كمية الجواهر المفتوحة: +${diamondAmount.toLocaleString()} 💎\n\nتم تحديث الأرصدة وسجلات المنصة وحفظها فوريًا!`, 
-                "🚀"
-            );
-
-            document.getElementById('supportMemberTarget').value = '';
-            document.getElementById('supportDiamondAmount').value = '';
-        }
-
-        function switchStoreDoor(doorId, btnElement) {
-            document.querySelectorAll('.door-section').forEach(sec => sec.classList.remove('active'));
-            document.querySelectorAll('.store-door-tab').forEach(t => t.classList.remove('active'));
-            document.getElementById(doorId).classList.add('active');
-            btnElement.classList.add('active');
-        }
-
-        function addNewProductToStore() {
-            let door = document.getElementById('newProductDoor').value;
-            let name = document.getElementById('newProductName').value.trim();
-            let price = Number(document.getElementById('newProductPrice').value);
-            let imageInput = document.getElementById('newProductImage');
-
-            if (!name || !price || price <= 0) {
-                showAlert("تنبيه", "يرجى كتابة اسم المنتج وتحديد سعر صحيح.", "⚠️");
-                return;
-            }
-
-            if (imageInput.files && imageInput.files[0]) {
-                let reader = new FileReader();
-                reader.onload = function(e) {
-                    let imageUrl = e.target.result;
-                    appData.customProducts.push({ door, name, price, imageUrl });
-                    saveAppData();
-                    updateUI();
-                    
-                    document.getElementById('newProductName').value = '';
-                    document.getElementById('newProductPrice').value = '';
-                    imageInput.value = '';
-                    showAlert("نجح الرفع والحفظ! 🎉", "تم إضافة المنتج بنجاح وحفظه بشكل دائم في متجرك.", "✅");
-                };
-                reader.readAsDataURL(imageInput.files[0]);
-            } else {
-                showAlert("صورة مطلوبة", "يرجى اختيار صورة للمنتج من جهازك.", "🖼️");
-            }
-        }
-
-        function renderCustomProducts() {
-            let door2Grid = document.getElementById('grid-door2');
-            let door3Grid = document.getElementById('grid-door3');
-            let doorCustomGrid = document.getElementById('grid-doorCustom');
-
-            let defaultDoor2 = `
-                <div class="store-item">
-                    <div>
-                        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=300&q=80" class="store-img" alt="خدمة">
-                        <div class="store-title">استضافة سحابية</div>
-                        <div class="store-price">3,000 نقطة</div>
-                    </div>
-                    <button class="buy-btn" onclick="buyItem('استضافة سحابية', 3000)">شراء</button>
-                </div>`;
-            
-            let defaultDoor3 = `
-                <div class="store-item">
-                    <div>
-                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=300&q=80" class="store-img" alt="عرض">
-                        <div class="store-title">بطاقة تفعيل VIP</div>
-                        <div class="store-price">5,000 نقطة</div>
-                    </div>
-                    <button class="buy-btn" onclick="buyItem('بطاقة تفعيل VIP', 5000)">شراء</button>
-                </div>`;
-
-            let html2 = defaultDoor2;
-            let html3 = defaultDoor3;
-            let htmlCustom = "";
-
-            appData.customProducts.forEach((prod, index) => {
-                let itemHtml = `
-                    <div class="store-item">
-                        <div>
-                            <img src="${prod.imageUrl}" class="store-img" alt="${prod.name}">
-                            <div class="store-title">${prod.name}</div>
-                            <div class="store-price">${prod.price.toLocaleString()} نقطة</div>
-                        </div>
-                        <button class="buy-btn" onclick="buyItem('${prod.name}', ${prod.price})">شراء</button>
-                    </div>`;
-                
-                if (prod.door === 'door2') html2 += itemHtml;
-                else if (prod.door === 'door3') html3 += itemHtml;
-                else if (prod.door === 'doorCustom') htmlCustom += itemHtml;
-            });
-
-            door2Grid.innerHTML = html2;
-            door3Grid.innerHTML = html3;
-            if (htmlCustom === "") {
-                doorCustomGrid.innerHTML = `<div style="grid-column: span 2; text-align: center; color: #6b7280; font-size: 12px; padding: 20px;">لا توجد منتجات في هذا الباب حالياً. أضف منتجك الأول بالأسفل! ✨</div>`;
-            } else {
-                doorCustomGrid.innerHTML = htmlCustom;
-            }
+            let levelText = 'مبتدئ 🌱';
+            if (state.points > 1000) levelText = 'مطور متقدم 🚀';
+            if (state.points > 5000) levelText = 'خبير محترف 💎';
+            document.getElementById('userLevel').innerText = levelText;
         }
 
         function claimDaily() {
-            if (appData.lastDailyClaimDate) {
-                let lastClaim = new Date(appData.lastDailyClaimDate);
-                let now = new Date();
-                let diffHours = (now - lastClaim) / (1000 * 60 * 60);
-                if (diffHours < 24) {
-                    let remainingHours = Math.ceil(24 - diffHours);
-                    showAlert("تنبيه", `لقد قمت بالفعل باستلام مكافئتك اليومية. يمكنك الاستلام مرة كل 24 ساعة (متبقي ${remainingHours} ساعة).`, "⏳");
-                    return;
-                }
-            }
-
-            appData.balance += 50;
-            appData.diamonds += 2;
-            appData.lastDailyClaimDate = new Date().toISOString();
-            updateUI();
-            showAlert("مكافأة يومية", "تمت إضافة 50 نقطة و 2 جوهرة إلى رصيدك وحفظ الموعد بنجاح!", "🎁");
-        }
-
-        function promptForUserName() {
-            showPrompt("تسجيل اسم المشترك 👤", "الرجاء إدخال اسمك الخاص للمتابعة", "✍️", (enteredName) => {
-                if (enteredName && enteredName.trim() !== "") {
-                    let newName = enteredName.trim();
-                    appData.userName = newName;
-                    updateUI();
-                    showAlert("تم حفظ اسمك!", `مرحباً بك! 👋 ${newName}`, "✅");
-                }
-            });
-        }
-
-        function requestWithdrawal() {
-            if (appData.balance < minWithdrawPoints) {
-                showAlert("تنبيه", "عذراً رصيدك الحالي أقل من الحد الأدنى للسحب (10,000 نقطة)", "⚠️");
+            let now = Date.now();
+            if (now - state.lastDailyClaim < 86400000) {
+                showAlert('تنبيه', 'لقد استلمت مكافأتك اليومية مسبقاً! عود غداً للمزيد.', '⏳');
                 return;
             }
-            showPrompt("تأكيد طلب السحب 💳", "أدخل رقم الحساب أو المحفظة المراد التحويل إليها", "🟦", (accountInfo) => {
-                if (accountInfo && accountInfo.trim() !== "") {
-                    appData.balance = 0;
-                    updateUI();
-                    showAlert("تم بنجاح!", "تم تقديم طلب السحب بنجاح وحفظ الحالة! 🚀", "✅");
-                }
-            });
+            state.lastDailyClaim = now;
+            state.points += 50;
+            state.diamonds += 2;
+            updateUI();
+            showAlert('مبروك! 🎉', 'تمت إضافة 50 نقطة + 2 جوهرة إلى رصيدك بنجاح.', '🎁');
         }
 
-        function switchTab(tabName, btnElement) {
-            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-            document.getElementById(tabName + '-section').classList.add('active');
-            btnElement.classList.add('active');
-            if(tabName === 'wheel') drawWheel();
-            if(tabName === 'videos') {
-                startAutomaticVideoTimer(videoOptionsData[currentSelectedVideoIndex].duration);
-            } else {
-                if (videoTimerInterval) clearInterval(videoTimerInterval);
+        function convertDiamonds() {
+            if (state.diamonds < 10) {
+                showAlert('تنبيه', 'يجب أن تمتلك 10 جواهر على الأقل للتحويل!', '💎');
+                return;
             }
+            let convertCount = Math.floor(state.diamonds / 10);
+            let addedPoints = convertCount * 10;
+            state.diamonds %= 10;
+            state.points += addedPoints;
+            updateUI();
+            showAlert('تم التحويل بنجاح! 🔄', `تم تحويل الجواهر وإضافة ${addedPoints} نقطة إلى رصيدك.`, '✨');
+        }
+
+        function openDepositModal() {
+            document.getElementById('modalTitle').innerText = 'شحن الرصيد الخارجي';
+            document.getElementById('modalText').innerText = 'أدخل عدد النقاط أو العملة المراد إضافتها لحسابك:';
+            document.getElementById('modalIcon').innerText = '➕';
+            let inputField = document.getElementById('modalInput');
+            inputField.style.display = 'block';
+            inputField.value = '100';
+            document.getElementById('modalCancelBtn').style.display = 'block';
+            document.getElementById('modalConfirmBtn').innerText = 'تأكيد الشحن';
+            modalCallback = function() {
+                let val = parseInt(inputField.value) || 0;
+                if (val > 0) {
+                    state.points += val;
+                    updateUI();
+                    showAlert('تم الشحن بنجاح!', `تمت إضافة ${val} نقطة إلى محفظتك بنجاح.`, '🚀');
+                }
+            };
+            document.getElementById('customModal').classList.add('show');
         }
 
         function copyInviteLink() {
             let linkInput = document.getElementById('inviteLinkInput');
             linkInput.select();
             navigator.clipboard.writeText(linkInput.value);
-            showAlert("تم النسخ بنجاح! 📋", "تم نسخ رابط الدعوة الخاص بك. شاركه الآن مع أصدقائك وابدأ بجمع الأرباح!", "🔗");
+            showAlert('تم النسخ! 📋', 'تم نسخ رابط الدعوة الخاص بك بنجاح. شاركه مع أصدقائك الآن!', '🔗');
         }
 
         function shareOnWhatsApp() {
-            let link = document.getElementById('inviteLinkInput').value;
-            let text = encodeURIComponent(`انضم إلي الآن في منصة Aegis Cash واكسب النقاط والجواهر مجاناً عبر هذا الرابط: ${link}`);
-            window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+            let text = encodeURIComponent("انضم إلي الآن في تطبيق Aegis Cash واكسب نقاط وأرباح حقيقية! رابط الدعوة: " + document.getElementById('inviteLinkInput').value);
+            window.open('https://api.whatsapp.com/send?text=' + text, '_blank');
         }
 
-        function openDepositModal() {
-            showPrompt("شحن المحفظة الآمن 💳", "أدخل عدد النقاط المراد شحنها:", "💳", (val) => {
-                let amount = Number(val);
-                if (amount > 0) {
-                    appData.balance += amount;
-                    updateUI();
-                    showAlert("نجاح الحفظ", `تم إضافة ${amount.toLocaleString()} نقطة بنجاح وحفظ الرصيد!`, "✅");
-                }
-            });
+        function switchStoreDoor(doorNum, btn) {
+            document.querySelectorAll('.store-door-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.door-section').forEach(d => d.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('door-' + doorNum).classList.add('active');
         }
 
-        function buyItem(itemName, cost) {
-            if (appData.balance < cost) {
-                showAlert("عذراً", "رصيدك غير كافي لإتمام عملية الشراء.", "❌");
+        function buyItem(itemName, price) {
+            if (state.points < price) {
+                showAlert('رصيد غير كافٍ ⚠️', `عذراً، رصيدك الحالي (${state.points} pt) لا يكفي لشراء ${itemName} (${price} pt).`, '🛍️');
                 return;
             }
-            appData.balance -= cost;
-            if (itemName.includes("جوهرة")) appData.diamonds += itemName.includes("50") ? 50 : 200;
+            state.points -= price;
             updateUI();
-            showAlert("مبروك!", `تم شراء "${itemName}" بنجاح وحفظ التغييرات!`, "🎉");
+            showAlert('عملية ناجحة! 🎉', `تم شراء (${itemName}) بنجاح وتم خصم ${price} نقطة من رصيد محفظتك.`, '🎁');
         }
 
-        function openPhoneUpdateModal() {
-            showPrompt("تحديث رقم الهاتف 📱", "أدخل رقم هاتفك الجديد (مع الرمز الدولي):", "🔒", (val) => {
-                if (val && val.trim() !== "") {
-                    appData.userPhone = val.trim();
-                    updateUI();
-                    showAlert("تم الحفظ والتوثيق", "تم ربط وحفظ رقم الهاتف الجديد بنجاح عبر نظام الأمان.", "✅");
-                }
-            });
-        }
-
-        function convertDiamonds() {
-            if (appData.diamonds < 100) {
-                showAlert("تنبيه", "يجب أن تمتلك 100 جوهرة على الأقل للتحويل.", "⚠️");
+        function addNewProductToStore() {
+            let name = document.getElementById('newProdName').value.trim();
+            let price = parseInt(document.getElementById('newProdPrice').value);
+            let img = document.getElementById('newProdImg').value.trim() || 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=300';
+            
+            if (!name || isNaN(price) || price <= 0) {
+                showAlert('خطأ في البيانات', 'الرجاء إدخال اسم صحيح وسعر صالح للمنتج.', '⚠️');
                 return;
             }
-            appData.diamonds -= 100;
-            appData.balance += 10;
-            updateUI();
-            showAlert("نجاح الحفظ", "تم تحويل 100 جوهرة إلى 10 نقاط وحفظ الأرصدة بنجاح!", "💎");
+
+            let grid = document.getElementById('storeGridDoor1');
+            let itemDiv = document.createElement('div');
+            itemDiv.className = 'store-item';
+            itemDiv.innerHTML = `
+                <img src="${img}" class="store-img" alt="item">
+                <div>
+                    <div class="store-title">${name}</div>
+                    <div class="store-price">${price} نقطة</div>
+                </div>
+                <button class="buy-btn" onclick="buyItem('${name}', ${price})">شراء الآن</button>
+            `;
+            grid.appendChild(itemDiv);
+            
+            document.getElementById('newProdName').value = '';
+            document.getElementById('newProdPrice').value = '';
+            document.getElementById('newProdImg').value = '';
+            showAlert('تم النشر بنجاح! 🚀', 'تم إضافة منتجك الجديد إلى المتجر العام بنجاح.', '🛍️');
+        }
+
+        let selectedVideoReward = 50;
+        function selectVideoSource(videoId, reward, cardEl) {
+            document.querySelectorAll('.video-option-card').forEach(c => c.classList.remove('selected'));
+            cardEl.classList.add('selected');
+            document.getElementById('activeVideoPlayer').src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1`;
+            selectedVideoReward = reward;
+        }
+
+        function startVideoProgress() {
+            let btn = document.getElementById('startVideoBtn');
+            let timerDisplay = document.getElementById('videoTimer');
+            btn.disabled = true;
+            let timeLeft = 10;
+            
+            timerDisplay.innerText = `الرجاء مشاهدة الفيديو... متبقي ${timeLeft} ثوانٍ`;
+            let interval = setInterval(() => {
+                timeLeft--;
+                if (timeLeft > 0) {
+                    timerDisplay.innerText = `الرجاء مشاهدة الفيديو... متبقي ${timeLeft} ثوانٍ`;
+                } else {
+                    clearInterval(interval);
+                    let userShare = Math.floor(selectedVideoReward / 2);
+                    state.points += userShare;
+                    state.videoEarningsTotal += userShare;
+                    updateUI();
+                    timerDisplay.innerText = `مبروك! تمت إضافة حصيلتك (${userShare} pt) بنجاح.`;
+                    btn.disabled = false;
+                    
+                    if (window.firebaseDb) {
+                        try {
+                            window.firebaseAddDoc(window.firebaseCollection(window.firebaseDb, "jaa"), {
+                                type: "video_revenue_50_50",
+                                earned: userShare,
+                                timestamp: new Date().toISOString()
+                            });
+                        } catch(e) { console.error(e); }
+                    }
+                }
+            }, 1000);
+        }
+
+        let wheelSpinning = false;
+        function drawWheel() {
+            let canvas = document.getElementById('luckyWheel');
+            let ctx = canvas.getContext('2d');
+            let sectors = ['50pt', '10💎', '20pt', '100pt', '5💎', '10pt'];
+            let colors = ['#f472b6', '#be185d', '#fbcfe8', '#db2777', '#f87171', '#f43f5e'];
+            let numSectors = sectors.length;
+            let arc = (2 * Math.PI) / numSectors;
+            
+            ctx.clearRect(0, 0, 240, 240);
+            for (let i = 0; i < numSectors; i++) {
+                ctx.beginPath();
+                ctx.fillStyle = colors[i];
+                ctx.moveTo(120, 120);
+                ctx.arc(120, 120, 120, i * arc, (i + 1) * arc, false);
+                ctx.lineTo(120, 120);
+                ctx.fill();
+                
+                ctx.save();
+                ctx.translate(120, 120);
+                ctx.rotate(i * arc + arc / 2);
+                ctx.textAlign = 'right';
+                ctx.fillStyle = '#fff';
+                ctx.font = 'bold 12px Tajawal';
+                ctx.fillText(sectors[i], 100, 5);
+                ctx.restore();
+            }
+        }
+        drawWheel();
+
+        function spinWheel() {
+            if (wheelSpinning) return;
+            wheelSpinning = true;
+            let wheel = document.getElementById('luckyWheel');
+            let randomDegree = Math.floor(Math.random() * 360) + 1440;
+            wheel.style.transition = 'transform 4s cubic-bezier(0.15, 0.95, 0.25, 1)';
+            wheel.style.transform = `rotate(${randomDegree}deg)`;
+            
+            setTimeout(() => {
+                wheelSpinning = false;
+                state.points += 30;
+                state.diamonds += 1;
+                updateUI();
+                showAlert('نتيجة عجلة الحظ! 🎡', 'مبروك! ربحت 30 نقطة + 1 جوهرة مجانية من العجلة.', '✨');
+            }, 4000);
         }
 
         function switchChatRoom(room, btn) {
             document.querySelectorAll('.chat-tab').forEach(t => t.classList.remove('active'));
             btn.classList.add('active');
-            let msgs = document.getElementById('chatMessages');
-            let roomName = room === 'general' ? 'العامة' : room === 'vip' ? 'VIP' : 'الدعم الفني والحماية';
-            msgs.innerHTML = `<div class="chat-msg"><b>النظام الأمني:</b> أهلاً بك في غرفة (${roomName}) 🌸</div>`;
+            state.activeChatRoom = room;
+            let box = document.getElementById('chatMessagesBox');
+            box.innerHTML = `<div class="chat-msg">أهلاً بك في غرفة دردشة (${room}). ابدأ الحوار الآن! 💬</div>`;
         }
 
         function sendChatMessage() {
-            let input = document.getElementById('chatInput');
+            let input = document.getElementById('chatInputText');
             let text = input.value.trim();
-            if (text !== "") {
-                let msgs = document.getElementById('chatMessages');
-                msgs.innerHTML += `<div class="chat-msg mine"><b>${appData.userName}:</b> ${text}</div>`;
-                input.value = "";
-                msgs.scrollTop = msgs.scrollHeight;
-                setTimeout(() => {
-                    let randomAgent = supportAgents[Math.floor(Math.random() * supportAgents.length)];
-                    msgs.innerHTML += `<div class="chat-msg support-badge"><b>${randomAgent}:</b> تم استلام استفسارك وتشفير الرسالة. نحن جاهزون للمساعدة! 🛠️</div>`;
-                    msgs.scrollTop = msgs.scrollHeight;
-                }, 1200);
+            if (!text) return;
+            
+            let box = document.getElementById('chatMessagesBox');
+            let msgDiv = document.createElement('div');
+            msgDiv.className = 'chat-msg mine';
+            msgDiv.textContent = text;
+            box.appendChild(msgDiv);
+            input.value = '';
+            box.scrollTop = box.scrollHeight;
+        }
+
+        function sendDiamondSupportMessage() {
+            let input = document.getElementById('diamondSupportInput');
+            let text = input.value.trim();
+            if (!text) {
+                showAlert('تنبيه', 'الرجاء كتابة رسالة لدعم الجواهر أولاً.', '💎');
+                return;
             }
+            showAlert('تم إرسال الاستفسار بنجاح! 🛡️', 'تم تحويل رسالتك إلى فريق الدعم السحابي الفوري عبر الجواهر وسيتم الرد قريباً.', '✨');
+            input.value = '';
         }
 
-        function handleChatKey(e) {
-            if (e.key === 'Enter') sendChatMessage();
-        }
-
-        const canvas = document.getElementById('luckyWheel');
-        const ctx = canvas.getContext('2d');
-        const slices = [
-            { text: "10 pt", type: "pts", value: 10, color: "#fbcfe8" },
-            { text: "2 💎", type: "dm", value: 2, color: "#f472b6" },
-            { text: "0 pt", type: "pts", value: 0, color: "#fbcfe8" },
-            { text: "50 pt", type: "pts", value: 50, color: "#f472b6" },
-            { text: "5 💎", type: "dm", value: 5, color: "#fbcfe8" },
-            { text: "100 pt", type: "pts", value: 100, color: "#be185d" },
-            { text: "15 pt", type: "pts", value: 15, color: "#f472b6" },
-            { text: "0 pt", type: "pts", value: 0, color: "#fbcfe8" }
-        ];
-        const arc = Math.PI / (slices.length / 2);
-        let startAngle = 0;
-        let spinning = false;
-        let currentAngle = 0;
-
-        function drawWheel() {
-            const radius = 100;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            let center = canvas.width / 2;
-            for (let i = 0; i < slices.length; i++) {
-                const angle = startAngle + i * arc;
-                ctx.fillStyle = slices[i].color;
-                ctx.beginPath();
-                ctx.arc(center, center, radius, angle, angle + arc, false);
-                ctx.arc(center, center, 18, angle + arc, angle, true);
-                ctx.fill();
-                ctx.strokeStyle = '#fff';
-                ctx.lineWidth = 2;
-                ctx.stroke();
-                ctx.save();
-                ctx.fillStyle = slices[i].color === "#be185d" ? "#fff" : "#1f2937";
-                ctx.translate(center + Math.cos(angle + arc / 2) * 65, center + Math.sin(angle + arc / 2) * 65);
-                ctx.rotate(angle + arc / 2 + Math.PI / 2);
-                ctx.font = "bold 12px Tajawal";
-                ctx.fillText(slices[i].text, -ctx.measureText(slices[i].text).width / 2, 0);
-                ctx.restore();
-            }
-        }
-
-        function spinWheel() {
-            if (spinning) return;
-            if (appData.hasFreeSpinToday) {
-                appData.hasFreeSpinToday = false;
-                document.getElementById('wheelSubtitle').innerText = "تم استهلاك اللفة المجانية (التكلفة: 100 جوهرة)";
+        function changeLanguage(lang) {
+            let root = document.getElementById('htmlRoot');
+            if (lang === 'en') {
+                root.setAttribute('dir', 'ltr');
+                root.setAttribute('lang', 'en');
+                showAlert('Language Changed', 'English interface loaded successfully.', '🇺🇸');
+            } else if (lang === 'ku') {
+                root.setAttribute('dir', 'rtl');
+                root.setAttribute('lang', 'ku');
+                showAlert('گۆڕینی زمان', 'زمانەکە بۆ کوردی گۆڕدرا.', '🇮🇶');
             } else {
-                if (appData.diamonds < 100) {
-                    showAlert("جواهر غير كافية", "تكلفة تدوير العجلة الإضافية هي 100 جوهرة.", "💎");
-                    return;
-                }
-                appData.diamonds -= 100;
-                updateUI();
+                root.setAttribute('dir', 'rtl');
+                root.setAttribute('lang', 'ar');
+                showAlert('تغيير اللغة', 'تم تفعيل اللغة العربية بنجاح.', '🇸🇦');
             }
-            spinning = true;
-            document.getElementById('wheelResult').innerText = "🌀 جاري تدوير العجلة بأمان...";
-            let randomSpin = Math.floor(Math.random() * 360) + 2880;
-            currentAngle += randomSpin;
-            canvas.style.transition = "transform 5s cubic-bezier(0.2, 0.9, 0.1, 1)";
-            canvas.style.transform = `rotate(${currentAngle}deg)`;
-            setTimeout(() => {
-                spinning = false;
-                let actualDegree = currentAngle % 360;
-                let sliceDegree = 360 / slices.length;
-                let winningIndex = Math.floor((360 - (actualDegree % 360)) / sliceDegree) % slices.length;
-                let winItem = slices[winningIndex];
-                if (winItem.type === "pts") {
-                    appData.balance += winItem.value;
-                    document.getElementById('wheelResult').innerText = `🎉 ربحت ${winItem.value} نقطة وجرى حفظها!`;
-                } else {
-                    appData.diamonds += winItem.value;
-                    document.getElementById('wheelResult').innerText = `💎 ربحت ${winItem.value} جوهرة وجرى حفظها!`;
-                }
-                updateUI();
-            }, 5000);
         }
-
-        drawWheel();
-        updateUI();
-        startAutomaticVideoTimer(videoOptionsData[currentSelectedVideoIndex].duration);
     </script>
 </body>
 </html>
