@@ -1,4 +1,13 @@
 // الحالة العامة لتطبيق الطيران
+// جلب الرحلات الحقيقية من السيرفر الخلفي
+fetch('/api/flights')
+  .then(response => response.json())
+  .then(data => {
+    console.log("الرحلات المتاحة:", data);
+    // هنا قُم بتحديث العناصر في صفحة index.html لعرض هذه الرحلات للمستخدم
+  })
+  .catch(error => console.error("خطأ في الاتصال بالسيرفر:", error));
+
 const state = {
     searchHistory: [],
     bookings: []
