@@ -3,138 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aegis Wings - حجز الطيران الذكي</title>
-    <!-- استدعاء Tailwind CSS لتصميم عصري واحترافي -->
+    <title>Aegis Wings | حجز الطيران</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css">
+    <!-- مكتبات Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 </head>
-<body class="bg-slate-900 text-slate-100 pb-24">
-
-    <!-- شريط علوي احترافي -->
-    <header class="bg-slate-800 border-b border-slate-700 py-4 px-6 sticky top-0 z-50 flex justify-between items-center shadow-md">
-        <div class="flex items-center gap-2">
-            <span class="text-2xl">✈️</span>
-            <span class="font-bold text-lg text-sky-400 tracking-wide">Aegis Wings</span>
+<body class="bg-slate-900 text-white p-4">
+    <div id="app" class="max-w-md mx-auto">
+        <h1 class="text-2xl font-bold mb-6 text-center text-sky-400">Aegis Wings</h1>
+        <div id="flightsResultsList" class="space-y-4">
+            <!-- هنا ستظهر الرحلات من Firebase -->
         </div>
-        <div class="text-xs bg-sky-500/10 text-sky-400 px-3 py-1 rounded-full border border-sky-500/20 font-medium">
-            النسخة الاحترافية 🌐
-        </div>
-    </header>
-
-    <main class="max-w-md mx-auto p-4 space-y-4">
-        
-        <!-- قسم البحث -->
-        <div id="search-section" class="section active space-y-4">
-            <!-- بطاقة البحث الرئيسية -->
-            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-5 shadow-xl">
-                <h2 class="text-base font-bold text-sky-400 mb-4 flex items-center gap-2">
-                    <span>🔍</span> البحث عن رحلات الطيران
-                </h2>
-                
-                <div class="space-y-3">
-                    <div>
-                        <label class="text-xs text-slate-400 block mb-1">من مدينة أو مطار</label>
-                        <input type="text" id="fromCity" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500 transition" placeholder="مثلاً: بغداد (BGW)">
-                    </div>
-                    
-                    <div>
-                        <label class="text-xs text-slate-400 block mb-1">إلى مدينة أو مطار</label>
-                        <input type="text" id="toCity" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500 transition" placeholder="مثلاً: دبي (DXB)">
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-3">
-                        <div>
-                            <label class="text-xs text-slate-400 block mb-1">تاريخ الذهاب</label>
-                            <input type="date" id="departDate" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-sky-500">
-                        </div>
-                        <div>
-                            <label class="text-xs text-slate-400 block mb-1">تاريخ العودة</label>
-                            <input type="date" id="returnDate" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-sky-500">
-                        </div>
-                    </div>
-
-                    <button onclick="searchFlights()" class="w-full bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-bold py-3 rounded-xl shadow-lg shadow-sky-500/20 transition text-sm mt-2">
-                        بحث عن الرحلات المتاحة 🚀
-                    </button>
-                </div>
-            </div>
-
-            <!-- نتائج البحث -->
-            <div class="space-y-3">
-                <h3 class="text-xs font-bold text-slate-400 tracking-wider uppercase px-1">الرحلات المقترحة والمتاحة</h3>
-                <div id="flightsResultsList" class="space-y-3">
-                    <!-- بطاقة رحلة تجريبية بتصميم واقعي -->
-                    <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 shadow-lg hover:border-sky-500/50 transition">
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-xs font-bold bg-sky-500/20 text-sky-400 px-2.5 py-1 rounded-lg">الخطوط الملكية</span>
-                            <span class="text-emerald-400 font-extrabold text-base">$185 USD</span>
-                        </div>
-                        <div class="flex justify-between items-center text-sm mb-4">
-                            <div class="text-center">
-                                <span class="font-bold block text-lg">08:00</span>
-                                <span class="text-xs text-slate-400">بغداد</span>
-                            </div>
-                            <div class="flex-1 px-4 text-center">
-                                <span class="text-xs text-slate-500 block">direct (3س 15د)</span>
-                                <div class="border-t border-dashed border-slate-600 my-1 relative">
-                                    <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-slate-800 px-1 text-xs">✈️</span>
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <span class="font-bold block text-lg">11:15</span>
-                                <span class="text-xs text-slate-400">دبي</span>
-                            </div>
-                        </div>
-                        <button onclick="bookFlight('بغداد', 'دبي', '$185')" class="w-full bg-slate-700 hover:bg-sky-600 text-white py-2 rounded-xl text-xs font-bold transition">
-                            اختر هذه الرحلة 🎫
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- قسم الحجوزات -->
-        <div id="mybookings-section" class="section space-y-4">
-            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-5 shadow-xl text-center">
-                <h2 class="text-base font-bold text-sky-400 mb-2">🎫 تذاكري والحجوزات المؤكدة</h2>
-                <p class="text-xs text-slate-400">لا توجد حجوزات مؤكدة حالياً في سجلك.</p>
-            </div>
-        </div>
-
-        <!-- قسم الحساب الشخصي -->
-        <div id="profile-section" class="section space-y-4">
-            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-5 shadow-xl">
-                <h2 class="text-base font-bold text-sky-400 mb-3 text-center">👤 ملف المسافر</h2>
-                <div class="space-y-3 text-xs">
-                    <div class="bg-slate-900 p-3 rounded-xl border border-slate-700 flex justify-between items-center">
-                        <span class="text-slate-400">الاسم الكامل:</span>
-                        <span class="font-bold">أحمد محمد</span>
-                    </div>
-                    <div class="bg-slate-900 p-3 rounded-xl border border-slate-700 flex justify-between items-center">
-                        <span class="text-slate-400">رقم جواز السفر:</span>
-                        <span class="font-bold">A12345678</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </main>
-
-    <!-- شريط التنقل السفلي العصري -->
-    <div class="fixed bottom-0 left-0 right-0 bg-slate-800/90 backdrop-blur-md border-t border-slate-700 py-2 z-50">
-        <nav class="max-w-md mx-auto flex justify-around">
-            <button class="nav-item active flex flex-col items-center text-slate-400 hover:text-sky-400 transition text-xs font-medium" onclick="switchTab('search', this)">
-                <span class="text-xl mb-0.5">✈️</span> البحث
-            </button>
-            <button class="nav-item flex flex-col items-center text-slate-400 hover:text-sky-400 transition text-xs font-medium" onclick="switchTab('mybookings', this)">
-                <span class="text-xl mb-0.5">🎫</span> حجوزاتي
-            </button>
-            <button class="nav-item flex flex-col items-center text-slate-400 hover:text-sky-400 transition text-xs font-medium" onclick="switchTab('profile', this)">
-                <span class="text-xl mb-0.5">👤</span> الحساب
-            </button>
-        </nav>
     </div>
-
     <script src="app.js"></script>
 </body>
 </html>
