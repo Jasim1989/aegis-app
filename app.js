@@ -1,22 +1,39 @@
-// دالة البحث عن الرحلات وتحديث الواجهة برمجياً
+// إعدادات Firebase الخاصة بك
+const firebaseConfig = {
+    apiKey: "AIzaSyDji6EHiPjZmVDo_Bj...", // ضع مفتاحك كاملاً هنا
+    authDomain: "aegis-cash.firebaseapp.com",
+    projectId: "aegis-cash",
+    storageBucket: "aegis-cash.appspot.com",
+    messagingSenderId: "1065982977576",
+    appId: "1:1065982977576:web:40f7daee0eafe93a5371d"
+};
+
+// تهيئة فايربيس
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// دالة البحث وجلب الرحلات من سحابة فايربيس
 async function searchFlights() {
-    const fromCity = document.getElementById('fromCity').value || 'بغداد';
-    const toCity = document.getElementById('toCity').value || 'دبي';
     const resultsContainer = document.getElementById('flightsResultsList');
+    resultsContainer.innerHTML = '<p class="text-center text-slate-400 py-4">جاري تحميل الرحلات الحقيقية...</p>';
 
-    resultsContainer.innerHTML = '<p class="text-center text-slate-400 py-4">جاري استعلام شبكة الطيران...</p>';
+    try {
+        const snapshot = await db.collection('flights').get();
+        let flights = [];
+        
+        snapshot.forEach(doc => {
+            flights.push({ id: doc.id, ...doc.data() });
+        });
 
-    // محاكاة استجابة الخادم الحقيقي برمجياً لمنع خطأ الاتصال
-    setTimeout(() => {
-        const liveFlights = [
-            { id: 'AW-501', airline: 'الخطوط الجوية العراقية', price: 210, time: '08:00', origin: fromCity, destination: toCity },
-            { id: 'AW-502', airline: 'فلاي بغداد', price: 185, time: '11:15', origin: fromCity, destination: toCity },
-            { id: 'AW-503', airline: 'القطرية للخطوط الجوية', price: 340, time: '03:30 PM', origin: fromCity, destination: toCity }
-        ];
+        // إذا كانت القاعدة فارغة، ننشئ رحلات افتراضية أولية تلقائياً
+        if (flights.length === 0) {
+            await db.collection('flights').add({ airline: 'الخطوط الجوية العراقية', price: 210, origin: 'بغداد', destination: 'دبي', time: '08:00' });
+            await db.collection('flights').add({ airline: 'فلاي بغداد', price: 185, origin: 'بغداد', destination: 'دبي', time: '11:15' });
+            return searchFlights();
+        }
 
         resultsContainer.innerHTML = '';
-
-        liveFlights.forEach(flight => {
+        flights.forEach(flight => {
             const card = `
                 <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 shadow-lg hover:border-sky-500/50 transition">
                     <div class="flex justify-between items-center mb-3">
@@ -25,8 +42,8 @@ async function searchFlights() {
                     </div>
                     <div class="flex justify-between items-center text-sm mb-4">
                         <div class="text-center">
-                            <span class="font-bold block text-lg">${flight.time}</span>
-                            <span class="text-xs text-slate-400">${flight.origin}</span>
+                            <span class="font-bold block text-lg">${flight.time || '08:00'}</span>
+                            <span class="text-xs text-slate-400">${flight.origin || 'بغداد'}</span>
                         </div>
                         <div class="flex-1 px-4 text-center">
                             <span class="text-xs text-slate-500 block">direct</span>
@@ -36,19 +53,33 @@ async function searchFlights() {
                         </div>
                         <div class="text-center">
                             <span class="font-bold block text-lg">مؤكد</span>
-                            <span class="text-xs text-slate-400">${flight.destination}</span>
+                            <span class="text-xs text-slate-400">${flight.destination || 'دبي'}</span>
                         </div>
                     </div>
-                    <button onclick="bookFlight('${flight.id}', '${flight.price}', '${flight.airline}')" class="w-full bg-slate-700 hover:bg-sky-600 text-white py-2 rounded-xl text-xs font-bold transition">
+                    <button onclick="bookFlight('${flight.airline}', '${flight.price}')" class="w-full bg-slate-700 hover:bg-sky-600 text-white py-2 rounded-xl text-xs font-bold transition">
                         اختر هذه الرحلة 🎫
                     </button>
                 </div>
             `;
             resultsContainer.innerHTML += card;
         });
-    }, 1000);
+
+    } catch (error) {
+        console.error(error);
+        resultsContainer.innerHTML = '<p class="text-center text-red-400 py-4">فشل الاتصال بقاعدة البيانات.</p>';
+    }
 }
 
-function bookFlight(id, price, airline) {
-    alert(`تم بنجاح حجز الرحلة (${airline}) برمز (${id}) بسعر $${price}!`);
+// دالة لحفظ الحجز حقيقياً في قاعدة البيانات
+async function bookFlight(airline, price) {
+    try {
+        await db.collection('bookings').add({
+            airline: airline,
+            price: price,
+            date: new Date().toLocaleDateString()
+        });
+        alert(`تم حجز الرحلة بنجاح على متن (${airline}) وتم حفظها في قاعدة البيانات السحابية!`);
+    } catch (e) {
+        alert("حدث خطأ أثناء الحجز.");
+    }
 }
