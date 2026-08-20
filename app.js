@@ -44,3 +44,14 @@ window.onload = async () => {
         container.innerHTML = `<p class="text-center text-red-500">خطأ: ${e.message}</p>`;
     }
 };
+// أضف هذه الدالة مرة واحدة ثم احذفها بعد أن تتم إضافتها لقاعدة البيانات
+async function addNewFlight() {
+    await db.collection('flights').add({
+        airline: 'فلاي أربيل',
+        price: 195,
+        origin: 'أربيل',
+        destination: 'دبي',
+        time: '18:00'
+    });
+}
+// addNewFlight(); // قم بإزالة التعليق عنها لتنفيذها لمرة واحدة
